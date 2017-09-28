@@ -372,6 +372,43 @@ public class MenuAsignarSkills extends JFrame {
 		buttonMore2.setBounds(118, 217, 34, 25);
 		contentPane.add(buttonMore2);
 		
+final JButton buttonRestart = new JButton("Reiniciar");
+		
+		ImageIcon icono_restart = new ImageIcon("recursos//botonMenu.png");
+		buttonRestart.setHorizontalTextPosition(SwingConstants.CENTER);
+		buttonRestart.setHorizontalTextPosition(SwingConstants.CENTER);
+		buttonRestart.setFont(new Font("Arial", Font.PLAIN, 15));
+		buttonRestart.setForeground(Color.WHITE);
+		buttonRestart.setIcon(icono_restart);
+		buttonRestart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int personaje_puntos = puntosFuerza + puntosDestreza + puntosInteligencia; // Puntos totales segun nivel.
+				puntosFuerza = 0;
+				puntosDestreza = 0;
+				puntosInteligencia = 0;
+				puntosAsignar = personaje_puntos;
+				
+				labelFuerza.setText(String.valueOf(puntosFuerza));
+				labelDestreza.setText(String.valueOf(puntosDestreza));
+				labelInteligencia.setText(String.valueOf(puntosInteligencia));
+				labelPuntos.setText(String.valueOf(puntosAsignar));
+				try {
+					cliente.getSalida().writeObject(gson.toJson(cliente.getPaquetePersonaje()));
+				} catch (IOException e1) {
+					JOptionPane.showMessageDialog(null, "Error al actualizar stats.");
+
+				}
+				buttonConfirm.setEnabled(true);
+				buttonMinus.setEnabled(false);
+				buttonMinus1.setEnabled(false);
+				buttonMinus2.setEnabled(false);
+				JOptionPane.showMessageDialog(null, "Se reiniciaron los stats.");
+				buttonRestart.setEnabled(false);
+			}
+		});
+		buttonRestart.setBounds(176, 78, 97, 25);
+		contentPane.add(buttonRestart);
+		
 		final JLabel imageLabel = new JLabel(new ImageIcon("recursos//background.jpg")); 
 		imageLabel.setBounds(0, 0, 298, 294);
 		imageLabel.setVisible(true);
