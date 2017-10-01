@@ -42,7 +42,7 @@ public class MenuAsignarSkills extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuAsignarSkills(final Cliente cliente) {
-		puntosAsignarInicial = 3;
+		puntosAsignarInicial = cliente.getPaquetePersonaje().getPuntosSkill(); //Se le asignan los puntos que tenga en el momento.
 		puntosFuerzaInicial = cliente.getPaquetePersonaje().getFuerza();
 		puntosDestrezaInicial = cliente.getPaquetePersonaje().getDestreza();
 		puntosInteligenciaInicial = cliente.getPaquetePersonaje().getInteligencia();
@@ -127,24 +127,23 @@ public class MenuAsignarSkills extends JFrame {
 		lblFuerza.setBounds(50, 72, 56, 16);
 		contentPane.add(lblFuerza);
 		
-		final JButton buttonReiniciar = new JButton("Reiniciar");
-		ImageIcon icono_R = new ImageIcon("recursos//botonMenu.png");
-		buttonReiniciar.setHorizontalTextPosition(SwingConstants.CENTER);
-		buttonReiniciar.setHorizontalTextPosition(SwingConstants.CENTER);
-		buttonReiniciar.setFont(new Font("Arial", Font.PLAIN, 15));
-		buttonReiniciar.setForeground(Color.WHITE);
-		buttonReiniciar.setIcon(icono_R);
-		buttonReiniciar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			//CODIGO A EJECUTAR
-				dispose();
-			}
-		});
-		buttonReiniciar.setBounds(176, 112, 97, 25);
-		contentPane.add(buttonReiniciar);
-		
-		
+		/**
+		 * Declaracion de Botones.
+		 */
 		final JButton buttonConfirm = new JButton("Confirmar");
+		final JButton buttonCancel = new JButton("Cancelar");
+		final JButton buttonRestart = new JButton("Reiniciar");
+		final JButton buttonMinus = new JButton("");
+		final JButton buttonMinus1 = new JButton("");
+		final JButton buttonMinus2 = new JButton("");
+		final JButton buttonMore = new JButton("");
+		final JButton buttonMore1 = new JButton("");
+		final JButton buttonMore2 = new JButton("");
+		buttonMinus.setEnabled(false);
+		buttonMinus1.setEnabled(false);
+		buttonMinus2.setEnabled(false);
+		
+		
 		ImageIcon icono_confirm = new ImageIcon("recursos//botonConfirmar.png");
 		buttonConfirm.setIcon(icono_confirm);
 		buttonConfirm.setEnabled(false);
@@ -170,7 +169,6 @@ public class MenuAsignarSkills extends JFrame {
 		buttonConfirm.setBounds(176, 112, 97, 25);
 		contentPane.add(buttonConfirm);
 		
-		final JButton buttonCancel = new JButton("Cancelar");
 		ImageIcon icono_c = new ImageIcon("recursos//botonCancelar.png");
 		buttonCancel.setIcon(icono_c);
 		buttonCancel.addActionListener(new ActionListener() {
@@ -182,15 +180,53 @@ public class MenuAsignarSkills extends JFrame {
 		buttonCancel.setBounds(176, 146, 97, 25);
 		contentPane.add(buttonCancel);
 		
-		final JButton buttonMinus = new JButton("");
-		final JButton buttonMinus1 = new JButton("");
-		final JButton buttonMinus2 = new JButton("");
-		final JButton buttonMore = new JButton("");
-		final JButton buttonMore1 = new JButton("");
-		final JButton buttonMore2 = new JButton("");
-		buttonMinus.setEnabled(false);
-		buttonMinus1.setEnabled(false);
-		buttonMinus2.setEnabled(false);
+		/*El boton de restart se encarga de colocar los puntos de skill determinados
+		 * dependiendo del nivel que posea el personaje y de la Casta.
+		 * Ademas se encarga de obtener los puntos de Skill correspondientes para poder
+		 * volverlos a asigar.
+		 */
+			ImageIcon icono_restart = new ImageIcon("recursos//botonMenu.png");
+			buttonRestart.setHorizontalTextPosition(SwingConstants.CENTER);
+			buttonRestart.setHorizontalTextPosition(SwingConstants.CENTER);
+			buttonRestart.setFont(new Font("Arial", Font.PLAIN, 15));
+			buttonRestart.setForeground(Color.WHITE);
+			buttonRestart.setIcon(icono_restart);
+			buttonRestart.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					puntosFuerzaInicial = 10;
+					puntosDestrezaInicial = 10;
+					puntosInteligenciaInicial = 10;
+					switch (cliente.getPaquetePersonaje().getCasta()) {
+					case "Guerrero":
+						puntosFuerzaInicial += 5;
+						break;
+
+					case "Hechicero":
+						puntosInteligenciaInicial+= 5;
+						break;
+						
+					default:
+						puntosDestrezaInicial += 5;
+						break;
+					}
+					
+					labelPuntos.setText(cliente.getPaquetePersonaje().getNivel() * 3); // Multiplico por 3 ya que otorga 3 por cada nivel.
+					labelFuerza.setText(String.valueOf(puntosFuerzaInicial));
+					labelDestreza.setText(String.valueOf(puntosDestrezaInicial));
+					labelInteligencia.setText(String.valueOf(puntosInteligenciaInicial));
+					buttonConfirm.setEnabled(true);
+					buttonMinus.setEnabled(false);
+					buttonMinus1.setEnabled(false);
+					buttonMinus2.setEnabled(false);
+					buttonMore.setEnabled(true);
+					buttonMore1.setEnabled(true);
+					buttonMore2.setEnabled(true);
+					
+					
+				}
+			});
+			buttonRestart.setBounds(176, 78, 97, 25);
+			contentPane.add(buttonRestart);
 		
 		ImageIcon icono_1 = new ImageIcon("recursos//botonMenoss.png");
 		buttonMinus.setIcon(icono_1);
@@ -308,9 +344,9 @@ public class MenuAsignarSkills extends JFrame {
 					labelFuerza.setText(String.valueOf(puntosFuerza));
 					buttonMinus.setEnabled(true);
 					if(puntosAsignar == 0){
-							buttonMore.setEnabled(false);
-							buttonMore1.setEnabled(false);
-							buttonMore2.setEnabled(false);
+						buttonMore.setEnabled(false);
+						buttonMore1.setEnabled(false);
+						buttonMore2.setEnabled(false);
 					}
 				}
 				if(puntosAsignar == 0 || labelFuerza.getText().equals("200")){
@@ -322,8 +358,7 @@ public class MenuAsignarSkills extends JFrame {
 		buttonMore.setIcon(icono_2);
 		buttonMore.setBounds(118, 92, 34, 25);
 		contentPane.add(buttonMore);
-		
-		
+			
 		buttonMore1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(puntosAsignar != 0 && !labelDestreza.getText().equals("200")){
@@ -370,44 +405,7 @@ public class MenuAsignarSkills extends JFrame {
 		});
 		buttonMore2.setIcon(icono_2);
 		buttonMore2.setBounds(118, 217, 34, 25);
-		contentPane.add(buttonMore2);
-		
-final JButton buttonRestart = new JButton("Reiniciar");
-		
-		ImageIcon icono_restart = new ImageIcon("recursos//botonMenu.png");
-		buttonRestart.setHorizontalTextPosition(SwingConstants.CENTER);
-		buttonRestart.setHorizontalTextPosition(SwingConstants.CENTER);
-		buttonRestart.setFont(new Font("Arial", Font.PLAIN, 15));
-		buttonRestart.setForeground(Color.WHITE);
-		buttonRestart.setIcon(icono_restart);
-		buttonRestart.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int personaje_puntos = puntosFuerza + puntosDestreza + puntosInteligencia; // Puntos totales segun nivel.
-				puntosFuerza = 0;
-				puntosDestreza = 0;
-				puntosInteligencia = 0;
-				puntosAsignar = personaje_puntos;
-				
-				labelFuerza.setText(String.valueOf(puntosFuerza));
-				labelDestreza.setText(String.valueOf(puntosDestreza));
-				labelInteligencia.setText(String.valueOf(puntosInteligencia));
-				labelPuntos.setText(String.valueOf(puntosAsignar));
-				try {
-					cliente.getSalida().writeObject(gson.toJson(cliente.getPaquetePersonaje()));
-				} catch (IOException e1) {
-					JOptionPane.showMessageDialog(null, "Error al actualizar stats.");
-
-				}
-				buttonConfirm.setEnabled(true);
-				buttonMinus.setEnabled(false);
-				buttonMinus1.setEnabled(false);
-				buttonMinus2.setEnabled(false);
-				JOptionPane.showMessageDialog(null, "Se reiniciaron los stats.");
-				buttonRestart.setEnabled(false);
-			}
-		});
-		buttonRestart.setBounds(176, 78, 97, 25);
-		contentPane.add(buttonRestart);
+		contentPane.add(buttonMore2);		
 		
 		final JLabel imageLabel = new JLabel(new ImageIcon("recursos//background.jpg")); 
 		imageLabel.setBounds(0, 0, 298, 294);
