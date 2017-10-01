@@ -197,6 +197,35 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 		}
 	}
 	
+	/** Metodo que retorna un entero.
+	 *  Dependiendo del skill se calcula el stat de skill base.
+	 *  @param el skill el cual quiero calcular.
+	 *@return Retorna el skill base dependiendo de los items.
+	 */
+	
+	public final int getStatSkill(String skill){
+		int skillBase = 0;
+		
+		switch (skill) {
+		case "Fuerza":
+			for (Item item : items) {
+				skillBase += item.getBonusFuerza();
+			}
+			break;
+		case "Destreza":
+			for (Item item : items) {
+				skillBase += item.getBonusDestreza();
+			}
+		default:
+			for (Item item : items) {
+				skillBase += item.getBonusInteligencia();
+
+			}
+			break;
+		}
+		return skillBase;
+	}
+	
 	public final void removerBonus() {
 		//Intente usar un iterator y por alguna razón no andaba..
 		int i = 0;

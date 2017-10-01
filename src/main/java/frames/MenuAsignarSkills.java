@@ -39,6 +39,19 @@ public class MenuAsignarSkills extends JFrame {
 	private final Gson gson = new Gson();
 
 	/**
+	 * Declaracion de Botones.
+	 */
+	final JButton buttonConfirm = new JButton("Confirmar");
+	final JButton buttonCancel = new JButton("Cancelar");
+	final JButton buttonRestart = new JButton("Reiniciar");
+	final JButton buttonMinus = new JButton("");
+	final JButton buttonMinus1 = new JButton("");
+	final JButton buttonMinus2 = new JButton("");
+	final JButton buttonMore = new JButton("");
+	final JButton buttonMore1 = new JButton("");
+	final JButton buttonMore2 = new JButton("");
+	
+	/**
 	 * Create the frame.
 	 */
 	public MenuAsignarSkills(final Cliente cliente) {
@@ -50,6 +63,16 @@ public class MenuAsignarSkills extends JFrame {
 		puntosFuerza = puntosFuerzaInicial;
 		puntosDestreza = puntosDestrezaInicial;
 		puntosInteligencia = puntosInteligenciaInicial;
+		
+		buttonMinus.setEnabled(false);
+		buttonMinus1.setEnabled(false);
+		buttonMinus2.setEnabled(false);
+		
+		if (puntosAsignar == 0){
+			buttonMore.setEnabled(false);
+			buttonMore1.setEnabled(false);
+			buttonMore2.setEnabled(false);
+		}
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -127,21 +150,6 @@ public class MenuAsignarSkills extends JFrame {
 		lblFuerza.setBounds(50, 72, 56, 16);
 		contentPane.add(lblFuerza);
 		
-		/**
-		 * Declaracion de Botones.
-		 */
-		final JButton buttonConfirm = new JButton("Confirmar");
-		final JButton buttonCancel = new JButton("Cancelar");
-		final JButton buttonRestart = new JButton("Reiniciar");
-		final JButton buttonMinus = new JButton("");
-		final JButton buttonMinus1 = new JButton("");
-		final JButton buttonMinus2 = new JButton("");
-		final JButton buttonMore = new JButton("");
-		final JButton buttonMore1 = new JButton("");
-		final JButton buttonMore2 = new JButton("");
-		buttonMinus.setEnabled(false);
-		buttonMinus1.setEnabled(false);
-		buttonMinus2.setEnabled(false);
 		
 		
 		ImageIcon icono_confirm = new ImageIcon("recursos//botonConfirmar.png");
@@ -153,6 +161,7 @@ public class MenuAsignarSkills extends JFrame {
 				int bonusF = puntosFuerza-puntosFuerzaInicial;
 				int bonusD = puntosDestreza-puntosDestrezaInicial;
 				int bonusI = puntosInteligencia-puntosInteligenciaInicial;
+				cliente.getPaquetePersonaje().setPuntosSkill(puntosAsignar);
 				cliente.getPaquetePersonaje().useBonus(0, 0, bonusF, bonusD, bonusI);
 				cliente.getPaquetePersonaje().removerBonus();
 				cliente.getPaquetePersonaje().setComando(Comando.ACTUALIZARPERSONAJELV);
@@ -163,6 +172,7 @@ public class MenuAsignarSkills extends JFrame {
 
 				}
 				JOptionPane.showMessageDialog(null,"Se han actualizado tus atributos.");
+				Pantalla.menuAsignar = null;
 				dispose();
 			}
 		});
@@ -193,36 +203,43 @@ public class MenuAsignarSkills extends JFrame {
 			buttonRestart.setIcon(icono_restart);
 			buttonRestart.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					puntosFuerzaInicial = 10;
-					puntosDestrezaInicial = 10;
-					puntosInteligenciaInicial = 10;
+				int fuerzaBase = 10;
+					int destrezaBase = 10;
+					int inteligenciaBase = 10;
 					switch (cliente.getPaquetePersonaje().getCasta()) {
 					case "Guerrero":
-						puntosFuerzaInicial += 5;
+						fuerzaBase += 5;
 						break;
 
 					case "Hechicero":
-						puntosInteligenciaInicial+= 5;
+						inteligenciaBase += 5;
 						break;
 						
 					default:
-						puntosDestrezaInicial += 5;
+						destrezaBase += 5;
 						break;
 					}
 					
-					labelPuntos.setText(cliente.getPaquetePersonaje().getNivel() * 3); // Multiplico por 3 ya que otorga 3 por cada nivel.
-					labelFuerza.setText(String.valueOf(puntosFuerzaInicial));
-					labelDestreza.setText(String.valueOf(puntosDestrezaInicial));
-					labelInteligencia.setText(String.valueOf(puntosInteligenciaInicial));
+					puntosAsignar = (cliente.getPaquetePersonaje().getNivel()-1) * 3;
+					puntosFuerza = cliente.getPaquetePersonaje().getStatSkill("Fuerza") + fuerzaBase;
+					puntosDestreza = cliente.getPaquetePersonaje().getStatSkill("Destreza") + destrezaBase;
+					puntosInteligencia = cliente.getPaquetePersonaje().getStatSkill("Inteligencia") + inteligenciaBase;
+
+					labelPuntos.setText(String.valueOf(puntosAsignar)); // Multiplico por 3 ya que otorga 3 por cada nivel.
+					labelFuerza.setText(String.valueOf(puntosFuerza));
+					labelDestreza.setText(String.valueOf(puntosDestreza));
+					labelInteligencia.setText(String.valueOf(puntosInteligencia));
+					
 					buttonConfirm.setEnabled(true);
 					buttonMinus.setEnabled(false);
 					buttonMinus1.setEnabled(false);
 					buttonMinus2.setEnabled(false);
-					buttonMore.setEnabled(true);
-					buttonMore1.setEnabled(true);
-					buttonMore2.setEnabled(true);
 					
-					
+					if (puntosAsignar != 0){
+						buttonMore.setEnabled(true);
+						buttonMore1.setEnabled(true);
+						buttonMore2.setEnabled(true);
+					}
 				}
 			});
 			buttonRestart.setBounds(176, 78, 97, 25);

@@ -119,6 +119,7 @@ public class Juego implements Runnable {
 		g.dispose();
 	}
 
+	
 	@Override
 	public void run() { // Hilo principal del juego
 

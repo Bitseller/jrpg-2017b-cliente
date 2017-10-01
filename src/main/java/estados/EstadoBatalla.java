@@ -149,6 +149,7 @@ public class EstadoBatalla extends Estado {
 						if(personaje.ganarExperiencia(enemigo.getNivel() * 40)){
 							juego.getPersonaje().setNivel(personaje.getNivel());
 							juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.menuSubirNivel);
+							juego.getPersonaje().setPuntosSkill(personaje.getPuntosSkill() + 3); // Actualiza los puntos del personaje.
 						}
 						paqueteFinalizarBatalla.setGanadorBatalla(juego.getPersonaje().getId());
 						finalizarBatalla();
