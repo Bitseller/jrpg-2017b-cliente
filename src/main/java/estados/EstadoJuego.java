@@ -22,6 +22,7 @@ import juego.Pantalla;
 import mensajeria.Comando;
 import mensajeria.PaqueteMovimiento;
 import mensajeria.PaquetePersonaje;
+import mensajeria.PaqueteDeNPC;
 import mundo.Mundo;
 import recursos.Recursos;
 
@@ -32,6 +33,8 @@ public class EstadoJuego extends Estado {
 	private Mundo mundo;
 	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
 	private Map<Integer, PaquetePersonaje> personajesConectados;
+	private Map<Integer, PaqueteMovimiento> ubicacionNPCs;
+	private Map<Integer, PaqueteDeNPC> NPCs;
 	private boolean haySolicitud;
 	private int tipoSolicitud;
 
@@ -70,7 +73,7 @@ public class EstadoJuego extends Estado {
 		g.drawImage(Recursos.background, 0, 0, juego.getAncho(), juego.getAlto(), null);
 		mundo.graficar(g);
 		//entidadPersonaje.graficar(g);
-		graficarPersonajes(g);
+		graficarPersonajesYNPCs(g);
 		mundo.graficarObstaculos(g);
 		entidadPersonaje.graficarNombre(g);
 		g.drawImage(Recursos.marco, 0, 0, juego.getAncho(), juego.getAlto(), null);
@@ -83,7 +86,7 @@ public class EstadoJuego extends Estado {
 
 	}
 
-	public void graficarPersonajes(Graphics g) {
+	public void graficarPersonajesYNPCs(Graphics g) {
 
 		if(juego.getPersonajesConectados() != null){
 			personajesConectados = new HashMap(juego.getPersonajesConectados());
@@ -99,6 +102,24 @@ public class EstadoJuego extends Estado {
 				if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId() && personajesConectados.get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
 						Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10), personajesConectados.get(actual.getIdPersonaje()).getNombre());
 						g.drawImage(Recursos.personaje.get(personajesConectados.get(actual.getIdPersonaje()).getRaza()).get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara().getxOffset() ), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
+				}
+			}
+		}
+		
+		if(juego.getNPCs() != null){
+			NPCs = new HashMap(juego.getNPCs());
+			ubicacionNPCs = new HashMap(juego.getUbicacionNPCs());
+			Iterator<Integer> it = NPCs.keySet().iterator();
+			int key;
+			PaqueteMovimiento actual;
+			g.setColor(Color.WHITE);
+			g.setFont(new Font("Book Antiqua", Font.PLAIN, 15));
+			while (it.hasNext()) {
+				key = it.next();
+				actual = ubicacionNPCs.get(key);
+				if (actual != null) {
+						Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10), NPCs.get(actual.getIdPersonaje()).getNombre());
+						g.drawImage( Recursos.mochila, (int) (actual.getPosX() - juego.getCamara().getxOffset() ), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
 				}
 			}
 		}
