@@ -73,7 +73,8 @@ public class EstadoJuego extends Estado {
 		g.drawImage(Recursos.background, 0, 0, juego.getAncho(), juego.getAlto(), null);
 		mundo.graficar(g);
 		//entidadPersonaje.graficar(g);
-		graficarPersonajesYNPCs(g);
+		graficarPersonajes(g);
+		graficarNPCs(g);
 		mundo.graficarObstaculos(g);
 		entidadPersonaje.graficarNombre(g);
 		g.drawImage(Recursos.marco, 0, 0, juego.getAncho(), juego.getAlto(), null);
@@ -86,7 +87,7 @@ public class EstadoJuego extends Estado {
 
 	}
 
-	public void graficarPersonajesYNPCs(Graphics g) {
+	public void graficarPersonajes(Graphics g) {
 
 		if(juego.getPersonajesConectados() != null){
 			personajesConectados = new HashMap(juego.getPersonajesConectados());
@@ -105,6 +106,9 @@ public class EstadoJuego extends Estado {
 				}
 			}
 		}
+	}
+	
+	public void graficarNPCs(Graphics g) {
 		
 		if(juego.getNPCs() != null){
 			NPCs = new HashMap(juego.getNPCs());
@@ -119,12 +123,12 @@ public class EstadoJuego extends Estado {
 				actual = ubicacionNPCs.get(key);
 				if (actual != null) {
 						Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset() + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20 ), 0, 10), NPCs.get(actual.getIdPersonaje()).getNombre());
-						g.drawImage( Recursos.mochila, (int) (actual.getPosX() - juego.getCamara().getxOffset() ), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
+						g.drawImage( Recursos.monstruo, (int) (actual.getPosX() - juego.getCamara().getxOffset() ), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
 				}
 			}
 		}
-	}
-
+	}	
+	
 	public Entidad getPersonaje() {
 		return entidadPersonaje;
 	}
