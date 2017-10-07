@@ -52,7 +52,7 @@ public class EstadoBatallaNPC extends Estado {
 	private Gson gson = new Gson();
 
 	private BufferedImage miniaturaPersonaje;
-	private BufferedImage miniaturaEnemigo;
+	private BufferedImage miniaturaNPC;
 
 	private MenuBatalla menuBatalla;
 
@@ -71,7 +71,7 @@ public class EstadoBatallaNPC extends Estado {
 
 		menuBatalla = new MenuBatalla(miTurno, personaje);
 
-	  //miniaturaEnemigo = Recursos.Ogro.png;
+		miniaturaNPC = Recursos.monstruo;
 		miniaturaPersonaje = Recursos.personaje.get(personaje.getNombreRaza()).get(5)[0];
 
 		paqueteFinalizarBatalla = new PaqueteFinalizarBatalla();
@@ -212,7 +212,7 @@ public class EstadoBatallaNPC extends Estado {
 		mundo.graficar(g);
 
 		g.drawImage(Recursos.personaje.get(paquetePersonaje.getRaza()).get(3)[0], 0, 175, 256, 256, null);
-	    g.drawImage(Recursos.personaje.get(paquetePersonaje.getRaza()).get(7)[0], 550, 75, 256, 256, null);
+	    g.drawImage(Recursos.monstruo, 550, 75, 256, 256, null);
 
 		mundo.graficarObstaculos(g);
 		menuBatalla.graficar(g);
@@ -220,7 +220,7 @@ public class EstadoBatallaNPC extends Estado {
 		g.setColor(Color.GREEN);
 
 		EstadoDePersonaje.dibujarEstadoDePersonaje(g, 25, 5, personaje, miniaturaPersonaje);
-		 EstadoDeNPC.dibujarEstadoDeNPC(g, 550, 5, enemigo,  miniaturaPersonaje);
+		EstadoDeNPC.dibujarEstadoDeNPC(g, 550, 5, enemigo,  miniaturaNPC);
 	}
 
 	private void crearPersonajes() 
