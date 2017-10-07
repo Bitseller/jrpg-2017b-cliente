@@ -11,6 +11,8 @@ import mensajeria.PaqueteDeNPC;
 import mensajeria.PaquetePersonaje;
 import recursos.Recursos;
 
+import dominio.Personaje;
+
 public class EstadoDeNPC {
 
 	private static final int ANCHOBARRA = 122;
@@ -72,21 +74,16 @@ public class EstadoDeNPC {
 
 		g.drawImage(miniaturaNPC, x + 10, y + 9, ANCHOMINIATURA, ALTOMINIATURA, null);
 
-		g.setColor(Color.WHITE);
-		g.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		g.drawImage(Recursos.barraSalud, x + 80, y + 26, ANCHOBARRA, ALTOSALUD, null);
-		g.drawString(String.valueOf(npc.getSalud()) + " / " + String.valueOf(npc.getSaludTope()), x + 132, y + 37);
-
-		//g.drawImage(Recursos.barraEnergia, x + 80, y + 42, ANCHOBARRA, ALTOENERGIA, null);
-		//g.drawString(String.valueOf(npc.getEnergia()) + " / " + String.valueOf(npc.getEnergia()), x + 132, y + 52);
-
-		/*
-		if(personaje.getExperiencia() == Personaje.getTablaDeNiveles()[personaje.getNivel() + 1]) {
+		if(npc.getSalud() == npc.getSaludTope()) {
 			drawBarra = ANCHOBARRA;
 		} else {
-			drawBarra = (personaje.getExperiencia() * ANCHOBARRA) / Personaje.getTablaDeNiveles()[personaje.getNivel() + 1];
+			drawBarra = (npc.getSalud() * ANCHOBARRA) / npc.getSaludTope();
 		}
-		*/
+	
+		g.setColor(Color.WHITE);
+		g.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		g.drawImage(Recursos.barraSalud, x + 80, y + 26, drawBarra, ALTOSALUD, null);
+		g.drawString(String.valueOf(npc.getSalud()) + " / " + String.valueOf(npc.getSaludTope()), x + 132, y + 37);
 
 		g.setFont(new Font("Tahoma", Font.PLAIN, 8));
 		g.drawImage(Recursos.barraExperiencia, x + 77, y + 65, drawBarra, ALTOEXPERIENCIA, null);

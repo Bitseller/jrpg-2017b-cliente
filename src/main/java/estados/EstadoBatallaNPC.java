@@ -57,9 +57,7 @@ public class EstadoBatallaNPC extends Estado {
 	private MenuBatalla menuBatalla;
 
 	public EstadoBatallaNPC(Juego juego, PaqueteBatalla paqueteBatalla) 
-	{
-		// El paquete de batalla va a tener la id del jugador
-		
+	{	
 		super(juego);
 		mundo = new Mundo(juego, "recursos/mundoBatalla.txt", "recursos/mundoBatallaCapaDos.txt");
 		miTurno = true;
@@ -81,7 +79,6 @@ public class EstadoBatallaNPC extends Estado {
 
 		juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.menuGanarBatalla);
 
-		// limpio la accion del mouse
 		juego.getHandlerMouse().setNuevoClick(false);
 
 	}
@@ -151,7 +148,7 @@ public class EstadoBatallaNPC extends Estado {
 
 				if (haySpellSeleccionada && seRealizoAccion) 
 				{
-					if (!enemigo.estaVivo())  // EL NPC MUERE
+					if (!enemigo.estaVivo()) 
 					{
 						juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.menuGanarBatalla);
 						if(personaje.ganarExperiencia(enemigo.getNivel() * 40))
@@ -161,9 +158,6 @@ public class EstadoBatallaNPC extends Estado {
 							juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.menuSubirNivel);
 						}
 						
-						//juego.getNpcManager().despawnNpc(paqueteEnemigo.getId());
-
-
 						finalizarBatalla();
 						
 						
@@ -172,10 +166,9 @@ public class EstadoBatallaNPC extends Estado {
 					}
 					else 
 					{
-						// BATALLAR VS NPC
 						enemigo.atacar(personaje);
 						
-						if(!personaje.estaVivo()) // EL PERSONAJE MUERE
+						if(!personaje.estaVivo())
 						{
 							juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.menuPerderBatalla);
 							
@@ -183,18 +176,12 @@ public class EstadoBatallaNPC extends Estado {
 							
 							paqueteFinalizarBatalla.setGanadorBatalla( -1 );
 							
-							
-							//paqueteFinalizarBatalla.setGanadorBatalla( enemigo.getId() );
 							finalizarBatalla();
 						}
 						
 						setMiTurno(true);
-						/*paqueteAtacar = new PaqueteAtacar(paquetePersonaje.getId(), paqueteEnemigo.getId(), personaje.getSalud(), personaje.getEnergia(), enemigo.getSalud(), enemigo.getEnergia(), personaje.getDefensa(), enemigo.getDefensa(), personaje.getCasta().getProbabilidadEvitarDaño(), enemigo.getCasta().getProbabilidadEvitarDaño());
-						enviarAtaque(paqueteAtacar);
-						miTurno = false;
-						menuBatalla.setHabilitado(false);*/
-					}
-				} else if(haySpellSeleccionada && !seRealizoAccion){
+						
+				}} else if(haySpellSeleccionada && !seRealizoAccion){
 					JOptionPane.showMessageDialog(null, "No posees la energía suficiente para realizar esta habilidad.");
 				}
 
@@ -246,18 +233,6 @@ public class EstadoBatallaNPC extends Estado {
 			JOptionPane.showMessageDialog(null, "Error al crear la batalla");
 		}
 		
-		/*nombre = paqueteEnemigo.getNombre();
-		salud = paqueteEnemigo.getSaludTope();
-		energia = paqueteEnemigo.getEnergiaTope();
-		fuerza = paqueteEnemigo.getFuerza();
-		destreza = paqueteEnemigo.getDestreza();
-		inteligencia = paqueteEnemigo.getInteligencia();
-		experiencia = paqueteEnemigo.getExperiencia();
-		nivel = paqueteEnemigo.getNivel();
-		id = paqueteEnemigo.getId();*/
-		
-		// Esto hay que modificarlo una vez tengamos más npcs...
-		// Pero por ahora, el npc más primitivo posible:
 		enemigo = new NonPlayableCharacter(paqueteEnemigo.getNombre(), paqueteEnemigo.getNivel(), paqueteEnemigo.getNivel());
 	}
 
@@ -282,10 +257,6 @@ public class EstadoBatallaNPC extends Estado {
 			paquetePersonaje.setComando(Comando.ACTUALIZARPERSONAJE);
 			juego.getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
 			
-			//estadoJuego = new EstadoJuego( );
-			//Estado.setEstado(estadoJuego);
-			//pantalla.mostrar();
-	
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor :C");
 		}
