@@ -333,11 +333,6 @@ public class TestCliente {
 		}
 	}
 	
-
-	@Test
-	public void test() throws IOException {
-		PropiedadesComunicacion.restaurarArchivoDeConfiguracion();
-	}
 }
 
 

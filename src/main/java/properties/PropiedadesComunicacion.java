@@ -11,10 +11,10 @@ import java.util.Properties;
  * 	.Tambien con singleton nos evitamos ensuciar el codigo que necesita acceder a las propiedades instanciando esta clase.
  * */
 public class PropiedadesComunicacion {
-	private final static String RUTA_PROPIEDADES = "properties/config.properties";
+	private final String RUTA_PROPIEDADES = "properties/comunicacion.properties";
 	
-	private final static String KEY_PORT = "Servidor.PORT";
-	private final static String KEY_IP = "Servidor.IP";
+	private final String KEY_PORT = "Servidor.PORT";
+	private final String KEY_IP = "Servidor.IP";
 	
 	private static PropiedadesComunicacion propiedades = null;
 
@@ -22,15 +22,18 @@ public class PropiedadesComunicacion {
 	private String ip;
 	
 	public static String getIpServidor() throws IOException {
-		if(propiedades == null)
-			propiedades = new PropiedadesComunicacion();
+		getInstancia();
 		return propiedades.ip;
 	}
 
 	public static int getPuertoServidor() throws IOException {
+		getInstancia();
+		return propiedades.puerto;
+	}
+	
+	private static void getInstancia() throws IOException {
 		if(propiedades == null)
 			propiedades = new PropiedadesComunicacion();
-		return propiedades.puerto;
 	}
 	
     private PropiedadesComunicacion() throws IOException{
@@ -49,21 +52,5 @@ public class PropiedadesComunicacion {
         }
     }
     
-    public static void restaurarArchivoDeConfiguracion() {
-        	Properties propiedades = new Properties();
-        	
-        	 try{
-     	        
-             	InputStream stream = ClassLoader.getSystemResourceAsStream(RUTA_PROPIEDADES);
-     	        propiedades.load(stream);
-     	        propiedades.setProperty(KEY_PORT, "550501");
-     	        propiedades.setProperty(KEY_IP, "localHost");
-     	        
-     	        stream.close();
-             }catch(IOException ex){         
- 				ex.printStackTrace();
-             }
-        	
-    }
     
 }
