@@ -22,6 +22,7 @@ import mensajeria.Comando;
 import mensajeria.Paquete;
 import mensajeria.PaquetePersonaje;
 import mensajeria.PaqueteUsuario;
+import properties.PropiedadesComunicacion;
 
 public class TestCliente {
 
@@ -41,7 +42,7 @@ public class TestCliente {
 			@Override
 			public void run() {
 				try {
-					server = new ServerSocket(55050);
+					server = new ServerSocket(PropiedadesComunicacion.getPuertoServidor());
 					Socket cliente = server.accept();
 					salida = new ObjectOutputStream(cliente.getOutputStream());
 					entrada = new ObjectInputStream(cliente.getInputStream());
@@ -78,12 +79,12 @@ public class TestCliente {
 	}
 
 	@Test
-	public void testConexionConElServidor() {
+	public void testConexionConElServidor() throws IOException {
 		Queue<Paquete> queue = new LinkedList<Paquete>();
 		
 		queue.add(new Paquete());
 		testServer(queue);
-		Cliente cliente = new Cliente("localhost",55050);
+		Cliente cliente = new Cliente(PropiedadesComunicacion.getIpServidor(),PropiedadesComunicacion.getPuertoServidor());
 
 		// Pasado este punto la conexión entre el cliente y el servidor resulto exitosa
 		Assert.assertEquals(1, 1);
@@ -107,7 +108,7 @@ public class TestCliente {
 
 	
 	@Test
-	public void testRegistro() {
+	public void testRegistro() throws IOException {
 		
 		Queue<Paquete> queue = new LinkedList<Paquete>();
 		// Registro el usuario
@@ -119,7 +120,7 @@ public class TestCliente {
 		queue.add(new Paquete());
 		queue.add(pu);
 		testServer(queue);
-		Cliente cliente = new Cliente("localhost",55050);
+		Cliente cliente = new Cliente(PropiedadesComunicacion.getIpServidor(),PropiedadesComunicacion.getPuertoServidor());
 
 		try {
 
@@ -148,7 +149,7 @@ public class TestCliente {
 	
 	@Test
 
-	public void testRegistroFallido() {
+	public void testRegistroFallido() throws IOException {
 		
 		Queue<Paquete> queue = new LinkedList<Paquete>();
 
@@ -162,7 +163,7 @@ public class TestCliente {
 		queue.add(pu);
 		testServer(queue);
 
-		Cliente cliente = new Cliente("localhost",55050);
+		Cliente cliente = new Cliente(PropiedadesComunicacion.getIpServidor(),PropiedadesComunicacion.getPuertoServidor());
 		try {
 
 			// Envio el paquete para registrarme
@@ -213,7 +214,7 @@ public class TestCliente {
 		queue.add(pu);
 		queue.add(pp);
 		testServer(queue);
-		Cliente cliente = new Cliente("localhost",55050);
+		Cliente cliente = new Cliente(PropiedadesComunicacion.getIpServidor(),PropiedadesComunicacion.getPuertoServidor());
 		try {
 
 			// Envio el paquete de registro de usuario
@@ -260,7 +261,7 @@ public class TestCliente {
 		
 		
 		testServer(queue);
-		Cliente cliente = new Cliente("localhost",55050);
+		Cliente cliente = new Cliente(PropiedadesComunicacion.getIpServidor(),PropiedadesComunicacion.getPuertoServidor());
 
 		try {
 
@@ -306,7 +307,7 @@ public class TestCliente {
 		pp.setSaludTope(10000);
 		queue.add(pp);
 		testServer(queue);
-		Cliente cliente = new Cliente("localhost",55050);
+		Cliente cliente = new Cliente(PropiedadesComunicacion.getIpServidor(),PropiedadesComunicacion.getPuertoServidor());
 		try {
 
 			// Envio el paquete de actualizacion de personaje
@@ -330,6 +331,12 @@ public class TestCliente {
 		} catch (IOException | JsonSyntaxException | ClassNotFoundException e) {
 			JOptionPane.showMessageDialog(null, "Falló");
 		}
+	}
+	
+
+	@Test
+	public void test() throws IOException {
+		PropiedadesComunicacion.restaurarArchivoDeConfiguracion();
 	}
 }
 

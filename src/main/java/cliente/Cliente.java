@@ -21,6 +21,7 @@ import mensajeria.PaqueteComerciar;
 import mensajeria.PaqueteMensaje;
 import mensajeria.PaquetePersonaje;
 import mensajeria.PaqueteUsuario;
+import properties.PropiedadesComunicacion;
 
 /**
  * La clase Cliente tiene como función ejecutar el cliente.
@@ -49,7 +50,7 @@ public class Cliente extends Thread {
 
 	// Ip y puerto
 	private String ip;
-	private final int puerto = 55050;
+	private int puerto;
 
 	/**
 	 * Pide la accion
@@ -75,8 +76,11 @@ public class Cliente extends Thread {
 
 	/**
 	 * Constructor del Cliente
+	 * @throws IOException 
 	 */
-	public Cliente() {
+	public Cliente() throws IOException {
+		//puerto = 55050
+		puerto = PropiedadesComunicacion.getPuertoServidor();
 
 		ip = JOptionPane.showInputDialog("Ingrese IP del servidor: (default localhost)");
 		if (ip == null) {
@@ -96,6 +100,7 @@ public class Cliente extends Thread {
 
 	public Cliente(String ip, int puerto) {
 		try {
+			puerto = PropiedadesComunicacion.getPuertoServidor();
 			cliente = new Socket(ip, puerto);
 			miIp = cliente.getInetAddress().getHostAddress();
 			entrada = new ObjectInputStream(cliente.getInputStream());

@@ -18,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 import cliente.Cliente;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 public class MenuInicio extends JFrame {
 
@@ -28,8 +29,14 @@ public class MenuInicio extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					Cliente cliente = new Cliente();
-					cliente.start();
+					Cliente cliente;
+					try {
+						cliente = new Cliente();
+						cliente.start();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					dispose();
 				}
 			}
@@ -85,8 +92,14 @@ public class MenuInicio extends JFrame {
 		btnRegistrar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Cliente cliente = new Cliente();
-				cliente.start();
+				Cliente cliente;
+				try {
+					cliente = new Cliente();
+					cliente.start();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				dispose();
 			}
 		});
