@@ -96,7 +96,7 @@ public class Recursos {
 
 	// Se cargan todos los recursos del juego una sola vez al inicio
 
-	public static void cargar(MenuCarga menuCarga) throws NumberFormatException, IOException {
+	public static void cargar(final MenuCarga menuCarga) throws NumberFormatException, IOException {
 		
 		int elementosCargados = 0;
 		
@@ -466,7 +466,7 @@ public class Recursos {
 		// Fin Batalla
 	}
 
-	private static void actualizarBarraDeCarga(int elementosCargados, MenuCarga menuCarga) {
+	private static void actualizarBarraDeCarga(final int elementosCargados,final MenuCarga menuCarga) {
 		menuCarga.setBarraCargando(elementosCargados * ANCHOBARRA / ELEMENTOS);
 	}
 }

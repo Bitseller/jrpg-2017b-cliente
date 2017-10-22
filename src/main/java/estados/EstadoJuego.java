@@ -44,7 +44,7 @@ public class EstadoJuego extends Estado {
 
 	MenuInfoPersonaje menuEnemigo;
 
-	public EstadoJuego(Juego juego) {
+	public EstadoJuego(final Juego juego) {
 		super(juego);
 		mundo = new Mundo(juego, "recursos/" + getMundo() + ".txt", "recursos/" + getMundo() + ".txt");
 		paquetePersonaje = juego.getPersonaje();
@@ -69,7 +69,7 @@ public class EstadoJuego extends Estado {
 	}
 
 	@Override
-	public void graficar(Graphics g) {
+	public void graficar(final Graphics g) {
 		g.drawImage(Recursos.background, 0, 0, juego.getAncho(), juego.getAlto(), null);
 		mundo.graficar(g);
 		//entidadPersonaje.graficar(g);
@@ -87,7 +87,7 @@ public class EstadoJuego extends Estado {
 
 	}
 
-	public void graficarPersonajes(Graphics g) {
+	public void graficarPersonajes(final Graphics g) {
 
 		if(juego.getPersonajesConectados() != null){
 			personajesConectados = new HashMap(juego.getPersonajesConectados());
@@ -108,7 +108,7 @@ public class EstadoJuego extends Estado {
 		}
 	}
 	
-	public void graficarNPCs(Graphics g) {
+	public void graficarNPCs(final Graphics g) {
 		
 		if(juego.getNPCs() != null){
 			NPCs = new HashMap(juego.getNPCs());
@@ -147,7 +147,7 @@ public class EstadoJuego extends Estado {
 		return null;
 	}
 
-	public void setHaySolicitud(boolean b, PaquetePersonaje enemigo, int tipoSolicitud) {
+	public void setHaySolicitud(final boolean b,final  PaquetePersonaje enemigo,final  int tipoSolicitud) {
 		haySolicitud = b;
 		// menu que mostrara al enemigo
 		menuEnemigo = new MenuInfoPersonaje(300, 50, enemigo);

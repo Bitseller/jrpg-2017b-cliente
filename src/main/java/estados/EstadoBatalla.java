@@ -52,7 +52,7 @@ public class EstadoBatalla extends Estado {
 
 	private MenuBatalla menuBatalla;
 
-	public EstadoBatalla(Juego juego, PaqueteBatalla paqueteBatalla) {
+	public EstadoBatalla(final Juego juego,final  PaqueteBatalla paqueteBatalla) {
 		super(juego);
 		mundo = new Mundo(juego, "recursos/mundoBatalla.txt", "recursos/mundoBatallaCapaDos.txt");
 		miTurno = paqueteBatalla.isMiTurno();
@@ -182,7 +182,7 @@ public class EstadoBatalla extends Estado {
 	}
 
 	@Override
-	public void graficar(Graphics g) {
+	public void graficar(final Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, juego.getAncho(), juego.getAlto());
 		mundo.graficar(g);

@@ -98,9 +98,9 @@ public class Cliente extends Thread {
 		}
 	}
 
-	public Cliente(String ip, int puerto) {
+	public Cliente(final String ip,final int puerto) {
 		try {
-			puerto = PropiedadesComunicacion.getPuertoServidor();
+			this.puerto = PropiedadesComunicacion.getPuertoServidor();
 			cliente = new Socket(ip, puerto);
 			miIp = cliente.getInetAddress().getHostAddress();
 			entrada = new ObjectInputStream(cliente.getInputStream());
@@ -309,7 +309,7 @@ public class Cliente extends Thread {
 		return menuCarga;
 	}
 
-	public void actualizarItems(PaquetePersonaje paqueteActualizado) {
+	public void actualizarItems(final PaquetePersonaje paqueteActualizado) {
 		if (paquetePersonaje.getCantItems() != 0
 				&& paquetePersonaje.getCantItems() != paqueteActualizado.getCantItems()) {
 			paquetePersonaje.anadirItem(paqueteActualizado.getItems().get(paqueteActualizado.getItems().size() - 1));
@@ -320,7 +320,7 @@ public class Cliente extends Thread {
 		return ip;
 	}
 
-	public void actualizarPersonaje(PaquetePersonaje pP) {
+	public void actualizarPersonaje(final PaquetePersonaje pP) {
 		paquetePersonaje = pP;
 	}
 
@@ -336,11 +336,11 @@ public class Cliente extends Thread {
 		return puerto;
 	}
 
-	public void setPaqueteUsuario(PaqueteUsuario paqueteUsuario) {
+	public void setPaqueteUsuario(final PaqueteUsuario paqueteUsuario) {
 		this.paqueteUsuario = paqueteUsuario;
 	}
 
-	public void setPaquetePersonaje(PaquetePersonaje paquetePersonaje) {
+	public void setPaquetePersonaje(final PaquetePersonaje paquetePersonaje) {
 		this.paquetePersonaje = paquetePersonaje;
 	}
 
@@ -348,7 +348,7 @@ public class Cliente extends Thread {
 		this.ip = ip;
 	}
 
-	public void setMenuCarga(MenuCarga menuCarga) {
+	public void setMenuCarga(final MenuCarga menuCarga) {
 		this.menuCarga = menuCarga;
 	}
 
@@ -364,7 +364,7 @@ public class Cliente extends Thread {
 		return paqueteComercio;
 	}
 
-	public void setPaqueteComercio(PaqueteComerciar paqueteComercio) {
+	public void setPaqueteComercio(final PaqueteComerciar paqueteComercio) {
 		this.paqueteComercio = paqueteComercio;
 	}
 
@@ -372,7 +372,7 @@ public class Cliente extends Thread {
 		return paqueteMensaje;
 	}
 
-	public void setPaqueteMensaje(PaqueteMensaje paqueteMensaje) {
+	public void setPaqueteMensaje(final PaqueteMensaje paqueteMensaje) {
 		this.paqueteMensaje = paqueteMensaje;
 	}
 }

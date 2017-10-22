@@ -16,15 +16,15 @@ public abstract class Estado {
 
 	protected Juego juego;
 
-	public Estado(Juego juego) {
+	public Estado(final  Juego juego) {
 		this.juego = juego;
 	}
 
 	public abstract void actualizar();
 
-	public abstract void graficar(Graphics g);
+	public abstract void graficar(final Graphics g);
 
-	public static void setEstado(Estado estado) {
+	public static void setEstado(final Estado estado) {
 		estadoActual = estado;
 	}
 

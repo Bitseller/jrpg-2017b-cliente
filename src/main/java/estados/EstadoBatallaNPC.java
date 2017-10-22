@@ -56,7 +56,7 @@ public class EstadoBatallaNPC extends Estado {
 
 	private MenuBatalla menuBatalla;
 
-	public EstadoBatallaNPC(Juego juego, PaqueteBatalla paqueteBatalla) 
+	public EstadoBatallaNPC(final Juego juego,final  PaqueteBatalla paqueteBatalla) 
 	{	
 		super(juego);
 		mundo = new Mundo(juego, "recursos/mundoBatalla.txt", "recursos/mundoBatallaCapaDos.txt");
@@ -192,7 +192,7 @@ public class EstadoBatallaNPC extends Estado {
 	}
 
 	@Override
-	public void graficar(Graphics g) 
+	public void graficar(final Graphics g) 
 	{
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, juego.getAncho(), juego.getAlto());

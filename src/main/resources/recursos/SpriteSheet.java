@@ -6,11 +6,11 @@ public class SpriteSheet {
 
 	private BufferedImage sprite;
 	
-	public SpriteSheet(BufferedImage sprite) {
+	public SpriteSheet(final BufferedImage sprite) {
 		this.sprite = sprite;
 	}
 	
-	public BufferedImage getTile(int x, int y, int ancho, int alto) {
+	public BufferedImage getTile(final int x,final int y,final int ancho,final int alto) {
 		return sprite.getSubimage(x, y, ancho, alto);
 	}
 }

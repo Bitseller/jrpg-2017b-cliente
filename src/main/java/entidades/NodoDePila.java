@@ -24,7 +24,7 @@ public class NodoDePila {
 	/**Setea el siguiente
 	 * @param nodo nuevo nodo a setear
 	 */
-	public void establecerSiguiente(NodoDePila nodo) {
+	public void establecerSiguiente(final  NodoDePila nodo) {
 		ptrSiguiente = nodo;
 	}
 	/**Pide el valor de X 
