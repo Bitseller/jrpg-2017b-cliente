@@ -21,22 +21,22 @@ public class PropiedadesComunicacion {
 	private int puerto;
 	private String ip;
 	
-	public static String getIpServidor() throws IOException {
+	public static String getIpServidor() throws Exception {
 		getInstancia();
 		return propiedades.ip;
 	}
 
-	public static int getPuertoServidor() throws IOException {
+	public static int getPuertoServidor() throws Exception {
 		getInstancia();
 		return propiedades.puerto;
 	}
 	
-	private static void getInstancia() throws IOException {
+	private static void getInstancia() throws Exception {
 		if(propiedades == null)
 			propiedades = new PropiedadesComunicacion();
 	}
 	
-    private PropiedadesComunicacion() throws IOException{
+    private PropiedadesComunicacion() throws Exception{
         try{
 	        
         	Properties propiedades = new Properties();
@@ -47,10 +47,32 @@ public class PropiedadesComunicacion {
 	        ip= propiedades.getProperty(KEY_IP);
 	        
 	        stream.close();
-        }catch(IOException ex){            
+	        if(!validarIP(ip))
+	        	throw new Exception("Error de direccion ip del servidor");
+	        if(!validarPuerto(puerto))
+	        	throw new Exception("Error de direccion ip del servidor");
+        }catch(Exception ex){            
             throw ex;
         }
     }
+    
+    
+    public static boolean validarIP(final String ip) {
+	    String PATTERN = "^((0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)\\.){3}(0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)$";
+	    return ip.matches(PATTERN);
+	}
+	
+	public static boolean validarPuerto(final int puerto) {
+		try{
+			if(puerto> 0 && puerto< 65535 )
+				return true;
+			
+		}
+		catch(Exception ex){
+			return false;
+		}
+		return false;
+	}
     
     
 }

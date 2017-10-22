@@ -33,7 +33,8 @@ public class MenuInicio extends JFrame {
 					try {
 						cliente = new Cliente();
 						cliente.start();
-					} catch (IOException e1) {
+					
+					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -96,7 +97,7 @@ public class MenuInicio extends JFrame {
 				try {
 					cliente = new Cliente();
 					cliente.start();
-				} catch (IOException e1) {
+				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}

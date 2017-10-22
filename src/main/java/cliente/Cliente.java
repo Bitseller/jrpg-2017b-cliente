@@ -78,7 +78,7 @@ public class Cliente extends Thread {
 	 * Constructor del Cliente
 	 * @throws IOException 
 	 */
-	public Cliente() throws IOException {
+	public Cliente() throws Exception {
 		//puerto = 55050
 		puerto = PropiedadesComunicacion.getPuertoServidor();
 
@@ -105,7 +105,7 @@ public class Cliente extends Thread {
 			miIp = cliente.getInetAddress().getHostAddress();
 			entrada = new ObjectInputStream(cliente.getInputStream());
 			salida = new ObjectOutputStream(cliente.getOutputStream());
-		} catch (IOException e) {
+		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null,
 					"Fallo al iniciar la aplicación. " + "Revise la conexión con el servidor.");
 			System.exit(1);

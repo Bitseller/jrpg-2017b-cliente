@@ -63,6 +63,9 @@ public class TestCliente {
 				} catch (IOException | ClassNotFoundException e) {
 					JOptionPane.showMessageDialog(null, "Falló");
 
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				} finally {
 					try {
 						server.close();
@@ -79,7 +82,7 @@ public class TestCliente {
 	}
 
 	@Test
-	public void testConexionConElServidor() throws IOException {
+	public void testConexionConElServidor() throws Exception {
 		Queue<Paquete> queue = new LinkedList<Paquete>();
 		
 		queue.add(new Paquete());
@@ -108,7 +111,7 @@ public class TestCliente {
 
 	
 	@Test
-	public void testRegistro() throws IOException {
+	public void testRegistro() throws Exception {
 		
 		Queue<Paquete> queue = new LinkedList<Paquete>();
 		// Registro el usuario
@@ -149,7 +152,7 @@ public class TestCliente {
 	
 	@Test
 
-	public void testRegistroFallido() throws IOException {
+	public void testRegistroFallido() throws Exception {
 		
 		Queue<Paquete> queue = new LinkedList<Paquete>();
 
@@ -187,7 +190,7 @@ public class TestCliente {
 	}
 
 	@Test
-	public void testRegistrarPersonaje() throws IOException {
+	public void testRegistrarPersonaje() throws Exception {
 		Queue<Paquete> queue = new LinkedList<Paquete>();
 
 
@@ -247,7 +250,7 @@ public class TestCliente {
 	}
 
 	@Test
-	public void testIniciarSesion() throws IOException {
+	public void testIniciarSesion() throws Exception {
 		Queue<Paquete> queue = new LinkedList<Paquete>();
 
 
@@ -289,7 +292,7 @@ public class TestCliente {
 	}
 
 	@Test
-	public void testActualizarPersonaje() throws IOException {
+	public void testActualizarPersonaje() throws Exception {
 		
 		Queue<Paquete> queue = new LinkedList<Paquete>();
 
