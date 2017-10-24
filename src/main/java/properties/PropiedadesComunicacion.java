@@ -3,7 +3,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-/**
+/** 
  * Clase que nos permite acceder a las propiedades de comunicacion.
  * Se aplica el patron singleton por las siguientes motivos.
  * 	.Prentendemos encapsular el acceso al archivos de propiedaes cada vez que queremos  conocer algun valor de alguna propiedad por ejemplo el puerto
