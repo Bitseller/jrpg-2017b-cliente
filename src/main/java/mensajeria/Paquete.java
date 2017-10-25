@@ -12,6 +12,7 @@ public class Paquete implements Serializable, Cloneable {
 	private String mensaje;
 	private String ip;
 	private int comando;
+
 	public Paquete() {
 
 	}
@@ -47,7 +48,6 @@ public class Paquete implements Serializable, Cloneable {
 		return mensaje;
 	}
 
-
 	public String getIp() {
 		return ip;
 	}
@@ -67,27 +67,32 @@ public class Paquete implements Serializable, Cloneable {
 		}
 		return obj;
 	}
-	
+
 	public Comando getObjeto(String nombrePaquete) {
+		Comando c = null;
 		try {
-			Comando c;
 			c = (Comando) Class.forName(nombrePaquete + "." + Comando.CLASSNAMES[comando]).newInstance();
 			return c;
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-			return null;
+			JOptionPane.showMessageDialog(null, "Error al seleccionar orden");
+			//Si no encuentra la ordne apropiada, enseño mensaje de error y retorno el Comando inicializado en null;
+
 		}
 
+		return c;
+
 	}
+
 	public static Comando getObjetoSet(String nombrePaquete, int accion) {
+		Comando c = null;
 		try {
-			Comando c;
 			c = (Comando) Class.forName(nombrePaquete + "." + Comando.CLASSNAMESBIS[accion]).newInstance();
 			return c;
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-			return null;
+			JOptionPane.showMessageDialog(null, "Error al seleccionar orden");
+			//Si no encuentra la ordne apropiada, enseño mensaje de error y retorno el Comando inicializado en null;
 		}
-
+		return c;
 	}
-
 
 }

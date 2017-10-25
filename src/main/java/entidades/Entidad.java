@@ -47,6 +47,8 @@ public class Entidad {
 	private float y;
 	private float dx;
 	private float dy;
+	private LinkedList<Double> movX;
+	private LinkedList<Double> movY;
 	private float xInicial;
 	private float yInicial;
 	private float xFinal;
@@ -60,27 +62,27 @@ public class Entidad {
 
 	// Movimiento Actual
 	private final LinkedList<Integer> movimientos;
-	private static final int horizontalDer = 4;
 	private static final int horizontalIzq = 0;
+	private static final int horizontalDer = 4;
 	private static final int verticalSup = 2;
+	private static final int diagonalSupIzq = 1;
+	private static final int diagonalSupDer = 3;
 	private static final int verticalInf = 6;
 	private static final int diagonalInfIzq = 7;
 	private static final int diagonalInfDer = 5;
-	private static final int diagonalSupIzq = 1;
-	private static final int diagonalSupDer = 3;
 	private int movimientoHacia = 6;
 	private boolean enMovimiento;
 
 	// Animaciones
 	private final LinkedList<Animacion> patronAnimaciones;
 	private final Animacion moverIzq;
-	private final Animacion moverArribaIzq;
-	private final Animacion moverArriba;
-	private final Animacion moverArribaDer;
 	private final Animacion moverDer;
+	private final Animacion moverArriba;
+	private final Animacion moverArribaIzq;
 	private final Animacion moverAbajoDer;
 	private final Animacion moverAbajo;
 	private final Animacion moverAbajoIzq;
+	private final Animacion moverArribaDer;
 
 	private final Gson gson = new Gson();
 	private int intervaloEnvio = 0;
@@ -135,6 +137,31 @@ public class Entidad {
 		yOffset = alto / 2;
 		x = (int) (spawnX / 64) * 64;
 		y = (int) (spawnY / 32) * 32;
+
+		double paso = 1;
+
+		movX = new LinkedList<Double>();
+		movY = new LinkedList<Double>();
+
+		// Cargo una lista con los movimientos de dx.
+		movX.add(paso * -1);
+		movX.add(paso);
+		movX.add(paso * 0);
+		movX.add(paso * -1);
+		movX.add(paso);
+		movX.add(paso * 0);
+		movX.add(paso * -1);
+		movX.add(paso);
+
+		// Cargo una lista con los movimientos de dy.
+		movY.add(paso * 0);
+		movY.add(paso * 0);
+		movY.add(paso * -1);
+		movY.add((paso / 2) * -1);
+		movY.add((paso / 2) * -1);
+		movY.add(paso);
+		movY.add(paso / 2);
+		movY.add(paso / 2);
 
 		movimientos = new LinkedList<Integer>();
 		patronAnimaciones = new LinkedList<Animacion>();
@@ -243,8 +270,8 @@ public class Entidad {
 						}
 						// pregunto si el menu emergente es de tipo batalla
 						if (juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.menuBatallar) {
-							// ME FIJO SI CON EL QUE QUIERO BATALLAR ESTA EN LA
-							// ZONA DE COMERCIO
+							// Me fijo si con el que quiero batallar se
+							// encuentre en la zona de comercio.
 							if (!((int) comercio[0] >= 44 && (int) comercio[0] <= 71 && (int) comercio[1] >= 0
 									&& (int) comercio[1] <= 29)) {
 								juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.menuBatallar);
@@ -265,7 +292,8 @@ public class Entidad {
 										"El otro usuario se encuentra " + "dentro de la zona de comercio");
 							}
 						} else {
-							// PREGUNTO SI EL MENU EMERGENTE ES DE TIPO COMERCIO
+							// Pregunto si el menu emergente es de tipo
+							// Comercio.
 							if (juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.menuComerciar) {
 								if ((int) comercio[0] >= 44 && (int) comercio[0] <= 71 && (int) comercio[1] >= 0
 										&& (int) comercio[1] <= 29) {
@@ -319,18 +347,17 @@ public class Entidad {
 						if (tileMoverme[0] == tilePersonajes[0] && tileMoverme[1] == tilePersonajes[1]) {
 							idEnemigo = actual.getIdPersonaje();
 							float XY[] = Mundo.isoA2D(x, y);
-							// ESTA ESTE PARA NO MOVERME HASTA EL LUGAR.
+							// Controlo la posicion para no moverme hasta el
+							// lugar.
 							if (XY[0] >= 44 && XY[0] <= 71 && XY[1] >= 0 && XY[1] <= 29) {
-								// SI ESTOY DENTRO DE LA ZONA DE COMERCIO SETEO
-								// QUE SE ABRA EL MENU
-								// DE COMERCIO
+								// Si me encuentro dentro de la zona de
+								// comercio, abro el menu de Comercio.
 								juego.getEstadoJuego().setHaySolicitud(true,
 										juego.getPersonajesConectados().get(idEnemigo),
 										MenuInfoPersonaje.menuComerciar);
 							} else {
-								// SI ESTOY DENTRO DE LA ZONA DE BATALLA SETEO
-								// QUE SE ABRA EL MENU
-								// DE BATALLA
+								// Si estoy dentro de la zona de batalla, abro
+								// el menu de Batalla.
 								juego.getEstadoJuego().setHaySolicitud(true,
 										juego.getPersonajesConectados().get(idEnemigo), MenuInfoPersonaje.menuBatallar);
 							}
@@ -399,15 +426,6 @@ public class Entidad {
 			xFinal = Mundo.dosDaIso(tileFinal[0], tileFinal[1])[0];
 			yFinal = Mundo.dosDaIso(tileFinal[0], tileFinal[1])[1];
 
-			// movimientoHacia = horizontalIzq;
-			// movimientoHacia = horizontalDer;
-			// movimientoHacia = verticalSup;
-			// movimientoHacia = diagonalSupIzq;
-			// movimientoHacia = diagonalSupDer;
-			// movimientoHacia = verticalInf;
-			// movimientoHacia = diagonalInfIzq;
-			// movimientoHacia = diagonalInfDer;
-
 			if (tileFinal[0] == tileActual[0] - 1 && tileFinal[1] == tileActual[1] - 1) {
 				movimientoHacia = verticalSup;
 			}
@@ -443,31 +461,17 @@ public class Entidad {
 
 		dx = 0;
 		dy = 0;
-
-		double paso = 1;
+		int i = 0;
 
 		if (enMovimiento && !(x == xFinal && y == yFinal - 32)) {
-			if (movimientoHacia == verticalSup) {
-				dy -= paso;
-			} else if (movimientoHacia == verticalInf) {
-				dy += paso;
-			} else if (movimientoHacia == horizontalDer) {
-				dx += paso;
-			} else if (movimientoHacia == horizontalIzq) {
-				dx -= paso;
-			} else if (movimientoHacia == diagonalInfDer) {
-				dx += paso;
-				dy += paso / 2;
-			} else if (movimientoHacia == diagonalInfIzq) {
-				dx -= paso;
-				dy += paso / 2;
-			} else if (movimientoHacia == diagonalSupDer) {
-				dx += paso;
-				dy -= paso / 2;
-			} else if (movimientoHacia == diagonalSupIzq) {
-				dx -= paso;
-				dy -= paso / 2;
+			// Si se cumple la condicion busco el movimiento que corresponda.
+			while (movimientoHacia != movimientos.get(i)) {
+				i++;
 			}
+
+			// Realizo la asignacion que corresponda.
+			dx += movX.get(i);
+			dy += movY.get(i);
 
 			x += dx;
 			y += dy;
@@ -699,9 +703,9 @@ public class Entidad {
 	 * @return true or false
 	 */
 	private boolean estanEnDiagonal(final Nodo nodoUno, final Nodo nodoDos) {
-		if (nodoUno.obtenerX() == nodoDos.obtenerX() || nodoUno.obtenerY() == nodoDos.obtenerY())
-			return false;
-		return true;
+
+		return (nodoUno.obtenerX() == nodoDos.obtenerX() || nodoUno.obtenerY() == nodoDos.obtenerY());
+
 	}
 
 	/**
