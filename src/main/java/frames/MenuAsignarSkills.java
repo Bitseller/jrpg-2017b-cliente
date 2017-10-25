@@ -25,7 +25,7 @@ import mensajeria.Comando;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class MenuAsignarSkills extends JFrame {
+public class MenuAsignarSkills extends JFrame implements MenuGenerico {
 
 	private JPanel contentPane;
 	private int puntosAsignarInicial = 10;
@@ -55,16 +55,7 @@ public class MenuAsignarSkills extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuAsignarSkills(final Cliente cliente) {
-		puntosAsignarInicial = cliente.getPaquetePersonaje().getPuntosSkill(); // Se
-																				// le
-																				// asignan
-																				// los
-																				// puntos
-																				// que
-																				// tenga
-																				// en
-																				// el
-																				// momento.
+		puntosAsignarInicial = cliente.getPaquetePersonaje().getPuntosSkill();
 		puntosFuerzaInicial = cliente.getPaquetePersonaje().getFuerza();
 		puntosDestrezaInicial = cliente.getPaquetePersonaje().getDestreza();
 		puntosInteligenciaInicial = cliente.getPaquetePersonaje().getInteligencia();
@@ -246,16 +237,8 @@ public class MenuAsignarSkills extends JFrame {
 					break;
 				}
 
-				puntosAsignar = (cliente.getPaquetePersonaje().getNivel() - 1) * 3; // Multiplico
-																					// por
-																					// 3
-																					// ya
-																					// que
-																					// otorga
-																					// 3
-																					// por
-																					// cada
-																					// nivel
+				puntosAsignar = (cliente.getPaquetePersonaje().getNivel() - 1) * 3;
+				//Multiplico por 3 ya que otorga 3 puntos por cada nivel obtenido.
 				puntosFuerza = cliente.getPaquetePersonaje().getStatSkill("Fuerza") + fuerzaBase;
 				puntosDestreza = cliente.getPaquetePersonaje().getStatSkill("Destreza") + destrezaBase;
 				puntosInteligencia = cliente.getPaquetePersonaje().getStatSkill("Inteligencia") + inteligenciaBase;
@@ -463,5 +446,10 @@ public class MenuAsignarSkills extends JFrame {
 		imageLabel.setBounds(0, 0, 298, 294);
 		imageLabel.setVisible(true);
 		contentPane.add(imageLabel);
+	}
+
+	@Override
+	public JFrame getMenu() {
+		return this;
 	}
 }

@@ -13,7 +13,7 @@ import estados.Estado;
 public class PaquetePersonaje extends Paquete implements Serializable, Cloneable {
 
 	private int id;
-	private int idMapa;
+	private String idMapa;
 	private int estado;
 	private String casta;
 	private String nombre;
@@ -40,11 +40,11 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 		this.estado = estado;
 	}
 
-	public int getMapa() {
+	public String getMapa() {
 		return idMapa;
 	}
 
-	public void setMapa(int mapa) {
+	public void setMapa(String mapa) {
 		idMapa = mapa;
 	}
 

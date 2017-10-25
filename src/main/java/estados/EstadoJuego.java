@@ -90,8 +90,8 @@ public class EstadoJuego extends Estado {
 	public void graficarPersonajes(final Graphics g) {
 
 		if(juego.getPersonajesConectados() != null){
-			personajesConectados = new HashMap(juego.getPersonajesConectados());
-			ubicacionPersonajes = new HashMap(juego.getUbicacionPersonajes());
+			personajesConectados = new HashMap<Integer, PaquetePersonaje>(juego.getPersonajesConectados());
+			ubicacionPersonajes = new HashMap<Integer, PaqueteMovimiento>(juego.getUbicacionPersonajes());
 			Iterator<Integer> it = personajesConectados.keySet().iterator();
 			int key;
 			PaqueteMovimiento actual;
@@ -111,8 +111,8 @@ public class EstadoJuego extends Estado {
 	public void graficarNPCs(final Graphics g) {
 		
 		if(juego.getNPCs() != null){
-			NPCs = new HashMap(juego.getNPCs());
-			ubicacionNPCs = new HashMap(juego.getUbicacionNPCs());
+			NPCs = new HashMap<Integer, PaqueteDeNPC>(juego.getNPCs());
+			ubicacionNPCs = new HashMap<Integer, PaqueteMovimiento>(juego.getUbicacionNPCs());
 			Iterator<Integer> it = NPCs.keySet().iterator();
 			int key;
 			PaqueteMovimiento actual;
@@ -134,17 +134,7 @@ public class EstadoJuego extends Estado {
 	}
 
 	private String getMundo() {
-		int mundo = juego.getPersonaje().getMapa();
-
-		if (mundo == 1) {
-			return "Aubenor";
-		} else if (mundo == 2) {
-			return "Aris";
-		} else if (mundo == 3) {
-			return "Eodrim";
-		}
-
-		return null;
+		return juego.getPersonaje().getMapa();
 	}
 
 	public void setHaySolicitud(final boolean b,final  PaquetePersonaje enemigo,final  int tipoSolicitud) {

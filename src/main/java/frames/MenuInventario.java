@@ -16,7 +16,7 @@ import inventario.Inventario;
 import juego.Pantalla;
 import mensajeria.Comando;
 
-public class MenuInventario extends JFrame {
+public class MenuInventario extends JFrame implements MenuGenerico{
 	private JButton cancelar = new JButton("Exit");
 	
     public MenuInventario(final Cliente cliente) {
@@ -51,5 +51,10 @@ public class MenuInventario extends JFrame {
 		this.setLocation(900,140);
 		this.setResizable(false);
 		this.setVisible(true);
-		}     
+		}
+
+	@Override
+	public JFrame getMenu() {
+		return this;
+	}   
 }

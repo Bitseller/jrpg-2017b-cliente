@@ -163,7 +163,7 @@ public class Cliente extends Thread {
 				wait();
 
 				// Si clickeo en la Cruz al Seleccionar mapas
-				if (paquetePersonaje.getMapa() == 0) {
+				if (paquetePersonaje.getMapa() == "Salir") {
 					paquetePersonaje.setComando(Comando.DESCONECTAR);
 					salida.writeObject(gson.toJson(paquetePersonaje));
 				} else {

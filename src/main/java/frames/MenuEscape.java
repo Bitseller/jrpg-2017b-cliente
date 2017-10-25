@@ -24,7 +24,7 @@ import juego.Pantalla;
 import mensajeria.Comando;
 import mensajeria.Paquete;
 
-public class MenuEscape extends JFrame {
+public class MenuEscape extends JFrame implements MenuGenerico{
 
 	private JPanel contentPane;
 	private final Gson gson = new Gson();
@@ -136,5 +136,10 @@ public class MenuEscape extends JFrame {
 		JLabel background = new JLabel(new ImageIcon(imagenFondo.getScaledInstance(200, 350, Image.SCALE_DEFAULT)));
 		background.setBounds(0, 0, 186, 273);
 		contentPane.add(background);
+	}
+	
+	@Override
+	public JFrame getMenu() {
+		return this;
 	}
 }

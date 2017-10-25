@@ -24,7 +24,7 @@ import cliente.Cliente;
 import juego.Pantalla;
 import mensajeria.PaquetePersonaje;
 
-public class MenuStats extends JFrame {
+public class MenuStats extends JFrame implements MenuGenerico {
 
 		private JPanel contentPane;
 		private PaquetePersonaje paquetePersonaje;
@@ -240,5 +240,10 @@ public class MenuStats extends JFrame {
 
 		private int calcularAtaque(final int fuerza) {
 			return (int) (fuerza*mod);
+		}
+
+		@Override
+		public JFrame getMenu() {
+			return this;
 		}
 }

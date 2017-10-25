@@ -9,8 +9,6 @@ public class Mundo {
 	private Juego juego;
 	private int ancho;
 	private int alto;
-	private int spawnX;
-	private int spawnY;
 	private int xOffset;
 	private int yOffset;
 
@@ -49,16 +47,17 @@ public class Mundo {
 			for (int j = 0; j < ancho; j++) {
 				iso = dosDaIso(j, i);
 				if ((iso[0] >= xMinimo && iso[0] <= xMaximo) && (iso[1] >= yMinimo && iso[1] <= yMaximo)) {
-					int map = juego.getPersonaje().getMapa();
-					if (map == 1) {
+					String map = juego.getPersonaje().getMapa();
+					if (map == "Aubenor") {
 						Tile.aubenor[Tile.aubenorBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
 								(int) (iso[1] - juego.getCamara().getyOffset() - 32),64,64);
-					} else if (map == 2) {
+					} else if (map == "Aris") {
 						Tile.aris[Tile.arisBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
 								(int) (iso[1] - juego.getCamara().getyOffset() - 32),64,64);
-					} else if (map == 3) {
-						Tile.aubenor[Tile.aubenorBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
-								(int) (iso[1] - juego.getCamara().getyOffset() - 32),64,64);
+					} else if (map == "Eodrim") {
+						//Falta implementar Eodrim.
+						//Tile.aubenor[Tile.aubenorBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
+						//		(int) (iso[1] - juego.getCamara().getyOffset() - 32),64,64);
 					}
 					if(!getTile(j,i).esSolido())
 						getTile(j,i).graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
@@ -96,13 +95,14 @@ public class Mundo {
 	public Tile getTile(int x, int y) {
 		Tile t = Tile.tiles[tiles[x][y]];
 		if (t == null) {
-			int map = juego.getPersonaje().getMapa();
-			if (map == 1) {
+			String map = juego.getPersonaje().getMapa();
+			if (map == "Aubenor") {
 				return Tile.aubenor[Tile.aubenorBase];
-			} else if (map == 2) {
+			} else if (map == "Aris") {
 				return Tile.aris[Tile.arisBase];
-			} else if (map == 3) {
-				return Tile.aubenor[Tile.aubenorBase];
+			} else if (map == "Eodrim") {
+				//Falta implementar el mapa.
+				//return Tile.aubenor[Tile.aubenorBase];
 			}
 		}
 		return t;
@@ -113,8 +113,8 @@ public class Mundo {
 		String[] tokens = archivo.split("\\s+");
 		ancho = Utilitarias.parseInt(tokens[0]);
 		alto = Utilitarias.parseInt(tokens[1]);
-		spawnX = Utilitarias.parseInt(tokens[2]);
-		spawnY = Utilitarias.parseInt(tokens[3]);
+		Utilitarias.parseInt(tokens[2]);
+		Utilitarias.parseInt(tokens[3]);
 
 		tiles = new int[ancho][alto];
 		tilesInv = new int[alto][ancho];
