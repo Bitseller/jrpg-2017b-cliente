@@ -27,151 +27,188 @@ import cliente.Cliente;
 import estados.Estado;
 import frames.MenuAsignarSkills;
 import frames.MenuEscape;
-import frames.MenuGenerico;
 import frames.MenuInventario;
 import frames.MenuJugar;
 import frames.MenuStats;
 import mensajeria.Comando;
 import mensajeria.Paquete;
 
+/**
+ * The Class Pantalla.
+ */
 public class Pantalla {
 
-	private JFrame pantalla;
-	private Canvas canvas;
+    private JFrame pantalla;
+    private Canvas canvas;
 
-	private final LinkedList<Integer> keys;
+    private final LinkedList<Integer> keys;
 
-	// Menus
-	public static LinkedList<JFrame> menues;
-	public static MenuInventario menuInventario;
-	public static MenuAsignarSkills menuAsignar;
-	public static MenuStats menuStats;
-	public static MenuEscape menuEscp;
-	public static VentanaContactos ventContac;
+    // Menus
+    public static LinkedList<JFrame> menues;
+    public static MenuInventario menuInventario;
+    public static MenuAsignarSkills menuAsignar;
+    public static MenuStats menuStats;
+    public static MenuEscape menuEscp;
+    public static VentanaContactos ventContac;
 
-	private final Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
-	public Pantalla(final String NOMBRE, final int ANCHO, final int ALTO, final Cliente cliente) {
+    /**
+     * Instantiates a new pantalla.
+     *
+     * @param nombre
+     *            the nombre
+     * @param ancho
+     *            the ancho
+     * @param alto
+     *            the alto
+     * @param cliente
+     *            the cliente
+     */
+    public Pantalla(final String nombre, final int ancho, final int alto, final Cliente cliente) {
 
-		pantalla = new JFrame(NOMBRE);
-		pantalla.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
-		pantalla.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-				new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(), new Point(0, 0),
-				"custom cursor"));
+        pantalla = new JFrame(nombre);
+        pantalla.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
+        pantalla.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
+                new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(), new Point(0, 0),
+                "custom cursor"));
 
-		pantalla.setSize(ANCHO, ALTO);
-		pantalla.setResizable(false);
-		pantalla.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-		pantalla.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent evt) {
-				try {
-					Paquete p = new Paquete();
-					p.setComando(Comando.DESCONECTAR);
-					p.setIp(cliente.getMiIp());
-					cliente.getSalida().writeObject(gson.toJson(p));
-					cliente.getEntrada().close();
-					cliente.getSalida().close();
-					cliente.getSocket().close();
-					System.exit(0);
-				} catch (IOException e) {
-					JOptionPane.showMessageDialog(null, "Fallo al intentar cerrar la aplicación.");
-					System.exit(1);
-				}
-			}
-		});
+        pantalla.setSize(ancho, alto);
+        pantalla.setResizable(false);
+        pantalla.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        pantalla.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(final WindowEvent evt) {
+                try {
+                    Paquete p = new Paquete();
+                    p.setComando(Comando.DESCONECTAR);
+                    p.setIp(cliente.getMiIp());
+                    cliente.getSalida().writeObject(gson.toJson(p));
+                    cliente.getEntrada().close();
+                    cliente.getSalida().close();
+                    cliente.getSocket().close();
+                    System.exit(0);
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(null, "Fallo al intentar cerrar la aplicación.");
+                    System.exit(1);
+                }
+            }
+        });
 
-		keys = new LinkedList<Integer>();
-		// Cargo los KeyEvents en una lista
-		keys.add(KeyEvent.VK_I);
-		keys.add(KeyEvent.VK_A);
-		keys.add(KeyEvent.VK_S);
-		keys.add(KeyEvent.VK_ESCAPE);
-		keys.add(KeyEvent.VK_C);
+        keys = new LinkedList<Integer>();
+        // Cargo los KeyEvents en una lista
+        keys.add(KeyEvent.VK_I);
+        keys.add(KeyEvent.VK_A);
+        keys.add(KeyEvent.VK_S);
+        keys.add(KeyEvent.VK_ESCAPE);
+        keys.add(KeyEvent.VK_C);
 
-		menues = new LinkedList<JFrame>();
-		// Cargo los menues en una lista
-		menues.add(menuInventario);
-		menues.add(menuAsignar);
-		menues.add(menuStats);
-		menues.add(menuEscp);
-		menues.add(ventContac);
+        menues = new LinkedList<JFrame>();
+        // Cargo los menues en una lista
+        menues.add(menuInventario);
+        menues.add(menuAsignar);
+        menues.add(menuStats);
+        menues.add(menuEscp);
+        menues.add(ventContac);
 
-		pantalla.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyReleased(KeyEvent e) {
+        pantalla.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(final KeyEvent e) {
 
-				int i = 0;
+                int i = 0;
 
-				while (i < keys.size() && e.getKeyCode() != keys.get(i)) {
-					i++;
-				}
+                while (i < keys.size() && e.getKeyCode() != keys.get(i)) {
+                    i++;
+                }
 
-				if (i < keys.size()) {
+                if (i < keys.size()) {
 
-					//Como se que ambas listas estan sincronizadas, el mismo indice me indica que menu es el que debo verificar.
-					if (Estado.getEstado().esEstadoDeJuego() && menues.get(i) == null) {
-						switch (i) {
-						case 1:
-							menuInventario = new MenuInventario(cliente);
-							break;
-						case 2:
-							menuAsignar = new MenuAsignarSkills(cliente);
-							break;
-						case 3:
-							menuStats = new MenuStats(cliente);
-							break;
-						case 4:
-							menuEscp = new MenuEscape(cliente);
-							break;
-						}
-					}
-				} else {
-					ventContac = new VentanaContactos(cliente.getJuego());
-				}
+                    //Como se que ambas listas estan sincronizadas, el mismo indice me indica que menu es el que debo verificar.
+                    if (Estado.getEstado().esEstadoDeJuego() && menues.get(i) == null) {
+                        switch (i) {
+                        case 1:
+                            menuInventario = new MenuInventario(cliente);
+                            break;
+                        case 2:
+                            menuAsignar = new MenuAsignarSkills(cliente);
+                            break;
+                        case 3:
+                            menuStats = new MenuStats(cliente);
+                            break;
+                        case 4:
+                            menuEscp = new MenuEscape(cliente);
+                            break;
+                        }
+                    }
+                } else {
+                    ventContac = new VentanaContactos(cliente.getJuego());
+                }
 
-				menues.get(i).setVisible(true);
+                menues.get(i).setVisible(true);
 
-			}
-		});
+            }
+        });
 
-		pantalla.setLocationRelativeTo(null);
-		pantalla.setVisible(false);
+        pantalla.setLocationRelativeTo(null);
+        pantalla.setVisible(false);
 
-		canvas = new Canvas();
-		canvas.setPreferredSize(new Dimension(ANCHO, ALTO));
-		canvas.setMaximumSize(new Dimension(ANCHO, ALTO));
-		canvas.setMinimumSize(new Dimension(ANCHO, ALTO));
-		canvas.setFocusable(false);
+        canvas = new Canvas();
+        canvas.setPreferredSize(new Dimension(ancho, alto));
+        canvas.setMaximumSize(new Dimension(ancho, alto));
+        canvas.setMinimumSize(new Dimension(ancho, alto));
+        canvas.setFocusable(false);
 
-		pantalla.add(canvas);
-		pantalla.pack();
-	}
+        pantalla.add(canvas);
+        pantalla.pack();
+    }
 
-	public Canvas getCanvas() {
-		return canvas;
-	}
+    /**
+     * Gets the canvas.
+     *
+     * @return the canvas
+     */
+    public Canvas getCanvas() {
+        return canvas;
+    }
 
-	public JFrame getFrame() {
-		return pantalla;
-	}
+    /**
+     * Gets the frame.
+     *
+     * @return the frame
+     */
+    public JFrame getFrame() {
+        return pantalla;
+    }
 
-	public void mostrar() {
-		pantalla.setVisible(true);
-	}
+    /**
+     * Mostrar la pantalla
+     */
+    public void mostrar() {
+        pantalla.setVisible(true);
+    }
 
-	public static void centerString(Graphics g, Rectangle r, String s) {
-		FontRenderContext frc = new FontRenderContext(null, true, true);
+    /**
+     * Center string en pantalla
+     *
+     * @param g
+     *            grafico
+     * @param r
+     *            rectangulo
+     * @param s
+     *            string
+     */
+    public static void centerString(final Graphics g, final Rectangle r, final String s) {
+        FontRenderContext frc = new FontRenderContext(null, true, true);
 
-		Rectangle2D r2D = g.getFont().getStringBounds(s, frc);
-		int rWidth = (int) Math.round(r2D.getWidth());
-		int rHeight = (int) Math.round(r2D.getHeight());
-		int rX = (int) Math.round(r2D.getX());
-		int rY = (int) Math.round(r2D.getY());
+        Rectangle2D r2D = g.getFont().getStringBounds(s, frc);
+        int rWidth = (int) Math.round(r2D.getWidth());
+        int rHeight = (int) Math.round(r2D.getHeight());
+        int rX = (int) Math.round(r2D.getX());
+        int rY = (int) Math.round(r2D.getY());
 
-		int a = (r.width / 2) - (rWidth / 2) - rX;
-		int b = (r.height / 2) - (rHeight / 2) - rY;
+        int a = (r.width / 2) - (rWidth / 2) - rX;
+        int b = (r.height / 2) - (rHeight / 2) - rY;
 
-		g.drawString(s, r.x + a, r.y + b);
-	}
+        g.drawString(s, r.x + a, r.y + b);
+    }
 }

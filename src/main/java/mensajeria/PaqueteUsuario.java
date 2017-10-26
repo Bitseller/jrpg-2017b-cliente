@@ -2,62 +2,120 @@ package mensajeria;
 
 import java.io.Serializable;
 
+/**
+ * The Class PaqueteUsuario.
+ */
 public class PaqueteUsuario extends Paquete implements Serializable, Cloneable {
 
-	private int idPj;
-	private String username;
-	private String password;
-	private boolean inicioSesion;
+    private int idPj;
+    private String username;
+    private String password;
+    private boolean inicioSesion;
 
-	public PaqueteUsuario(){
+    /**
+     * Instantiates a new paquete usuario.
+     */
+    public PaqueteUsuario() {
 
-	}
+    }
 
-	public PaqueteUsuario(int pj, String user, String pw){
-		idPj = pj;
-		username = user;
-		password = pw;
-		inicioSesion = false;
-	}
+    /**
+     * Instantiates a new paquete usuario.
+     *
+     * @param pj
+     *            ID
+     * @param user
+     *            usuario
+     * @param pw
+     *            contraseña
+     */
+    public PaqueteUsuario(final int pj, final String user, final String pw) {
+        idPj = pj;
+        username = user;
+        password = pw;
+        inicioSesion = false;
+    }
 
-	public int getIdPj() {
-		return idPj;
-	}
+    /**
+     * Gets the id personaje.
+     *
+     * @return ID
+     */
+    public int getIdPj() {
+        return idPj;
+    }
 
-	public void setIdPj(int idPj) {
-		this.idPj = idPj;
-	}
+    /**
+     * Sets the id personaje.
+     *
+     * @param idPj
+     *            ID
+     */
+    public void setIdPj(final int idPj) {
+        this.idPj = idPj;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    /**
+     * Gets the username.
+     *
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    /**
+     * Sets the username.
+     *
+     * @param username
+     *            the new username
+     */
+    public void setUsername(final String username) {
+        this.username = username;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    /**
+     * Gets the password.
+     *
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    /**
+     * Sets the password.
+     *
+     * @param password
+     *            the new password
+     */
+    public void setPassword(final String password) {
+        this.password = password;
+    }
 
-	public boolean isInicioSesion() {
-		return inicioSesion;
-	}
+    /**
+     * Checks if is inicio sesion.
+     *
+     * @return true, if is inicio sesion
+     */
+    public boolean isInicioSesion() {
+        return inicioSesion;
+    }
 
-	public void setInicioSesion(boolean inicioSesion) {
-		this.inicioSesion = inicioSesion;
-	}
+    /**
+     * Sets the inicio sesion.
+     *
+     * @param inicioSesion
+     *            boolean
+     */
+    public void setInicioSesion(final boolean inicioSesion) {
+        this.inicioSesion = inicioSesion;
+    }
 
-	@Override
-	public Object clone() {
-		Object obj = null;
-		obj = super.clone();
-		return obj;
-	}
-
-
+    @Override
+    public Object clone() {
+        Object obj = null;
+        obj = super.clone();
+        return obj;
+    }
 }
