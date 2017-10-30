@@ -28,351 +28,453 @@ import properties.PropiedadesComunicacion;
  */
 public class Cliente extends Thread {
 
-	private Socket cliente;
-	private String miIp;
-	private ObjectInputStream entrada;
-	private ObjectOutputStream salida;
+    private static final int CLIENTE_ALTO = 600;
+    private static final int CLIENTE_ANCHO = 800;
+    private Socket cliente;
+    private String miIp;
+    private ObjectInputStream entrada;
+    private ObjectOutputStream salida;
 
-	// Objeto gson
-	private final Gson gson = new Gson();
+    // Objeto gson
+    private final Gson gson = new Gson();
 
-	// Paquete usuario y paquete personaje
-	private PaqueteUsuario paqueteUsuario;
-	private PaquetePersonaje paquetePersonaje;
-	private PaqueteComerciar paqueteComercio;
-	private PaqueteMensaje paqueteMensaje = new PaqueteMensaje();
+    // Paquete usuario y paquete personaje
+    private PaqueteUsuario paqueteUsuario;
+    private PaquetePersonaje paquetePersonaje;
+    private PaqueteComerciar paqueteComercio;
+    private PaqueteMensaje paqueteMensaje = new PaqueteMensaje();
 
-	// Acciones que realiza el usuario
-	private int accion;
+    // Acciones que realiza el usuario
+    private int accion;
 
-	// MENU COMERCIAR
-	private MenuComerciar m1;
+    // MENU COMERCIAR
+    private MenuComerciar m1;
 
-	// Ip y puerto
-	private String ip;
-	private int puerto;
+    // Ip y puerto
+    private String ip;
+    private int puerto;
 
-	/**
-	 * Pide la accion
-	 * 
-	 * @return Devuelve la accion
-	 */
-	public int getAccion() {
-		return accion;
-	}
+    /**
+     * Pide la accion.
+     *
+     * @return Devuelve la accion
+     */
+    public int getAccion() {
+        return accion;
+    }
 
-	/**
-	 * Setea la accion
-	 * 
-	 * @param accion
-	 *            accion a setear
-	 */
-	public void setAccion(final int accion) {
-		this.accion = accion;
-	}
+    /**
+     * Setea la accion.
+     *
+     * @param accion
+     *            accion a setear
+     */
+    public void setAccion(final int accion) {
+        this.accion = accion;
+    }
 
-	private Juego wome;
-	private MenuCarga menuCarga;
+    private Juego wome;
+    private MenuCarga menuCarga;
 
-	/**
-	 * Constructor del Cliente
-	 * @throws IOException 
-	 */
-	public Cliente() throws Exception {
-		//puerto = 55050
-		puerto = PropiedadesComunicacion.getPuertoServidor();
+    /**
+     * Constructor del Cliente.
+     *
+     * @throws Exception
+     *             the exception
+     */
+    public Cliente() throws Exception {
+        //puerto = 55050
+        puerto = PropiedadesComunicacion.getPuertoServidor();
 
-		ip = JOptionPane.showInputDialog("Ingrese IP del servidor: (default localhost)");
-		if (ip == null) {
-			ip = "localhost";
-		}
-		try {
-			cliente = new Socket(ip, puerto);
-			miIp = cliente.getInetAddress().getHostAddress();
-			entrada = new ObjectInputStream(cliente.getInputStream());
-			salida = new ObjectOutputStream(cliente.getOutputStream());
-		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null,
-					"Fallo al iniciar la aplicación. " + "Revise la conexión con el servidor.");
-			System.exit(1);
-		}
-	}
+        ip = JOptionPane.showInputDialog("Ingrese IP del servidor: (default localhost)");
+        if (ip == null) {
+            ip = "localhost";
+        }
+        try {
+            cliente = new Socket(ip, puerto);
+            miIp = cliente.getInetAddress().getHostAddress();
+            entrada = new ObjectInputStream(cliente.getInputStream());
+            salida = new ObjectOutputStream(cliente.getOutputStream());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,
+                    "Fallo al iniciar la aplicación. " + "Revise la conexión con el servidor.");
+            System.exit(1);
+        }
+    }
 
-	public Cliente(final String ip,final int puerto) {
-		try {
-			this.puerto = PropiedadesComunicacion.getPuertoServidor();
-			cliente = new Socket(ip, puerto);
-			miIp = cliente.getInetAddress().getHostAddress();
-			entrada = new ObjectInputStream(cliente.getInputStream());
-			salida = new ObjectOutputStream(cliente.getOutputStream());
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null,
-					"Fallo al iniciar la aplicación. " + "Revise la conexión con el servidor.");
-			System.exit(1);
-		}
-	}
+    /**
+     * Instantiates a new cliente.
+     *
+     * @param ip
+     *            the ip
+     * @param puerto
+     *            the puerto
+     */
+    public Cliente(final String ip, final int puerto) {
+        try {
+            this.puerto = PropiedadesComunicacion.getPuertoServidor();
+            cliente = new Socket(ip, puerto);
+            miIp = cliente.getInetAddress().getHostAddress();
+            entrada = new ObjectInputStream(cliente.getInputStream());
+            salida = new ObjectOutputStream(cliente.getOutputStream());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,
+                    "Fallo al iniciar la aplicación. " + "Revise la conexión con el servidor.");
+            System.exit(1);
+        }
+    }
 
-	@Override
-	public void run() {
-		synchronized (this) {
-			try {
-				ComandosCliente comand;
-				// Creo el paquete que le voy a enviar al servidor
-				paqueteUsuario = new PaqueteUsuario();
-				MenuJugar menuJugar = null;
-				while (!paqueteUsuario.isInicioSesion()) {
+    @Override
+    public void run() {
+        synchronized (this) {
+            try {
+                ComandosCliente comand;
+                // Creo el paquete que le voy a enviar al servidor
+                paqueteUsuario = new PaqueteUsuario();
+                MenuJugar menuJugar = null;
+                while (!paqueteUsuario.isInicioSesion()) {
 
-					// Muestro el menú principal
-					if (menuJugar == null) {
-						menuJugar = new MenuJugar(this);
-						menuJugar.setVisible(true);
+                    // Muestro el menú principal
+                    if (menuJugar == null) {
+                        menuJugar = new MenuJugar(this);
+                        menuJugar.setVisible(true);
 
-						// Creo los paquetes que le voy a enviar al servidor
-						paqueteUsuario = new PaqueteUsuario();
-						paquetePersonaje = new PaquetePersonaje();
+                        // Creo los paquetes que le voy a enviar al servidor
+                        paqueteUsuario = new PaqueteUsuario();
+                        paquetePersonaje = new PaquetePersonaje();
 
-						// Espero a que el usuario seleccione alguna accion
-						wait();
+                        // Espero a que el usuario seleccione alguna accion
+                        wait();
 
-						comand = (ComandosCliente) Paquete.getObjetoSet(Comando.NOMBREPAQUETE, getAccion());
-						comand.setCadena(null);
-						comand.setCliente(this);
-						comand.ejecutar();
+                        comand = (ComandosCliente) Paquete.getObjetoSet(Comando.NOMBREPAQUETE, getAccion());
+                        comand.setCadena(null);
+                        comand.setCliente(this);
+                        comand.ejecutar();
 
-						// Le envio el paquete al servidor
-						salida.writeObject(gson.toJson(paqueteUsuario));
-					}
-					// Recibo el paquete desde el servidor
-					String cadenaLeida = (String) entrada.readObject();
-					Paquete paquete = gson.fromJson(cadenaLeida, Paquete.class);
+                        // Le envio el paquete al servidor
+                        salida.writeObject(gson.toJson(paqueteUsuario));
+                    }
+                    // Recibo el paquete desde el servidor
+                    String cadenaLeida = (String) entrada.readObject();
+                    Paquete paquete = gson.fromJson(cadenaLeida, Paquete.class);
 
-					comand = (ComandosCliente) paquete.getObjeto(Comando.NOMBREPAQUETE);
-					comand.setCadena(cadenaLeida);
-					comand.setCliente(this);
-					comand.ejecutar();
-				}
+                    comand = (ComandosCliente) paquete.getObjeto(Comando.NOMBREPAQUETE);
+                    comand.setCadena(cadenaLeida);
+                    comand.setCliente(this);
+                    comand.ejecutar();
+                }
 
-				// Creo un paquete con el comando mostrar mapas
-				paquetePersonaje.setComando(Comando.MOSTRARMAPAS);
+                // Creo un paquete con el comando mostrar mapas
+                paquetePersonaje.setComando(Comando.MOSTRARMAPAS);
 
-				// Abro el menu de eleccion del mapa
-				MenuMapas menuElegirMapa = new MenuMapas(this);
-				menuElegirMapa.setVisible(true);
+                // Abro el menu de eleccion del mapa
+                MenuMapas menuElegirMapa = new MenuMapas(this);
+                menuElegirMapa.setVisible(true);
 
-				// Espero a que el usuario elija el mapa
-				wait();
+                // Espero a que el usuario elija el mapa
+                wait();
 
-				// Si clickeo en la Cruz al Seleccionar mapas
-				if (paquetePersonaje.getMapa() == "Salir") {
-					paquetePersonaje.setComando(Comando.DESCONECTAR);
-					salida.writeObject(gson.toJson(paquetePersonaje));
-				} else {
-					// Establezco el mapa en el paquete personaje
-					paquetePersonaje.setIp(miIp);
+                // Si clickeo en la Cruz al Seleccionar mapas
+                if (paquetePersonaje.getMapa() == "Salir") {
+                    paquetePersonaje.setComando(Comando.DESCONECTAR);
+                    salida.writeObject(gson.toJson(paquetePersonaje));
+                } else {
+                    // Establezco el mapa en el paquete personaje
+                    paquetePersonaje.setIp(miIp);
 
-					// Le envio el paquete con el mapa seleccionado
-					salida.writeObject(gson.toJson(paquetePersonaje));
+                    // Le envio el paquete con el mapa seleccionado
+                    salida.writeObject(gson.toJson(paquetePersonaje));
 
-					// Instancio el juego y cargo los recursos
-					wome = new Juego("World Of the Middle Earth", 800, 600, this, paquetePersonaje);
+                    // Instancio el juego y cargo los recursos
+                    wome = new Juego("World Of the Middle Earth", CLIENTE_ANCHO, CLIENTE_ALTO, this, paquetePersonaje);
 
-					// Muestro el menu de carga
-					menuCarga = new MenuCarga(this);
-					menuCarga.setVisible(true);
+                    // Muestro el menu de carga
+                    menuCarga = new MenuCarga(this);
+                    menuCarga.setVisible(true);
 
-					// Espero que se carguen todos los recursos
-					wait();
+                    // Espero que se carguen todos los recursos
+                    wait();
 
-					// Inicio el juego
-					wome.start();
+                    // Inicio el juego
+                    wome.start();
 
-					// Finalizo el menu de carga
-					menuCarga.dispose();
-				}
-			} catch (IOException | InterruptedException | ClassNotFoundException e) {
-				JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor durante el inicio de sesión.");
-				System.exit(1);
-			}
-		}
+                    // Finalizo el menu de carga
+                    menuCarga.dispose();
+                }
+            } catch (IOException | InterruptedException | ClassNotFoundException e) {
+                JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor durante el inicio de sesión.");
+                System.exit(1);
+            }
+        }
 
-	}
+    }
 
-	/**
-	 * Pide el cliente
-	 * 
-	 * @return Devuelve el cliente
-	 */
-	public Socket getSocket() {
-		return cliente;
-	}
+    /**
+     * Pide el cliente.
+     *
+     * @return Devuelve el cliente
+     */
+    public Socket getSocket() {
+        return cliente;
+    }
 
-	/**
-	 * Setea el cliente
-	 * 
-	 * @param cliente
-	 *            cliente a setear
-	 */
-	public void setSocket(final Socket cliente) {
-		this.cliente = cliente;
-	}
+    /**
+     * Setea el cliente.
+     *
+     * @param cliente
+     *            cliente a setear
+     */
+    public void setSocket(final Socket cliente) {
+        this.cliente = cliente;
+    }
 
-	/**
-	 * Pide la ip
-	 * 
-	 * @return Devuelve la ip
-	 */
-	public String getMiIp() {
-		return miIp;
-	}
+    /**
+     * Pide la ip.
+     *
+     * @return Devuelve la ip
+     */
+    public String getMiIp() {
+        return miIp;
+    }
 
-	/**
-	 * Setea la ip
-	 * 
-	 * @param miIp
-	 *            ip a setear
-	 */
-	public void setMiIp(final String miIp) {
-		this.miIp = miIp;
-	}
+    /**
+     * Setea la ip.
+     *
+     * @param miIp
+     *            ip a setear
+     */
+    public void setMiIp(final String miIp) {
+        this.miIp = miIp;
+    }
 
-	/**
-	 * Pide la entrada
-	 * 
-	 * @return Devuelve la entrada
-	 */
-	public ObjectInputStream getEntrada() {
-		return entrada;
-	}
+    /**
+     * Pide la entrada.
+     *
+     * @return Devuelve la entrada
+     */
+    public ObjectInputStream getEntrada() {
+        return entrada;
+    }
 
-	/**
-	 * Setea la entrada
-	 * 
-	 * @param entrada
-	 *            entrada a setear
-	 */
-	public void setEntrada(final ObjectInputStream entrada) {
-		this.entrada = entrada;
-	}
+    /**
+     * Setea la entrada.
+     *
+     * @param entrada
+     *            entrada a setear
+     */
+    public void setEntrada(final ObjectInputStream entrada) {
+        this.entrada = entrada;
+    }
 
-	/**
-	 * Pide la salida
-	 * 
-	 * @return Devuelve la salida
-	 */
-	public ObjectOutputStream getSalida() {
-		return salida;
-	}
+    /**
+     * Pide la salida.
+     *
+     * @return Devuelve la salida
+     */
+    public ObjectOutputStream getSalida() {
+        return salida;
+    }
 
-	/**
-	 * Setea la salida
-	 * 
-	 * @param salida
-	 *            salida a setear
-	 */
-	public void setSalida(final ObjectOutputStream salida) {
-		this.salida = salida;
-	}
+    /**
+     * Setea la salida.
+     *
+     * @param salida
+     *            salida a setear
+     */
+    public void setSalida(final ObjectOutputStream salida) {
+        this.salida = salida;
+    }
 
-	/**
-	 * Pide el paquete usuario
-	 * 
-	 * @return Devuelve el paquete usuario
-	 */
-	public PaqueteUsuario getPaqueteUsuario() {
-		return paqueteUsuario;
-	}
+    /**
+     * Pide el paquete usuario.
+     *
+     * @return Devuelve el paquete usuario
+     */
+    public PaqueteUsuario getPaqueteUsuario() {
+        return paqueteUsuario;
+    }
 
-	/**
-	 * Pide el paquete personaje
-	 * 
-	 * @return Devuelve el paquete personaje
-	 */
-	public PaquetePersonaje getPaquetePersonaje() {
-		return paquetePersonaje;
-	}
+    /**
+     * Pide el paquete personaje.
+     *
+     * @return Devuelve el paquete personaje
+     */
+    public PaquetePersonaje getPaquetePersonaje() {
+        return paquetePersonaje;
+    }
 
-	/**
-	 * Pide el juego
-	 * 
-	 * @return Devuelve el juego
-	 */
-	public Juego getJuego() {
-		return wome;
-	}
+    /**
+     * Pide el juego.
+     *
+     * @return Devuelve el juego
+     */
+    public Juego getJuego() {
+        return wome;
+    }
 
-	/**
-	 * Pide el menu de carga
-	 * 
-	 * @return Devuelve el menu de carga
-	 */
-	public MenuCarga getMenuCarga() {
-		return menuCarga;
-	}
+    /**
+     * Pide el menu de carga.
+     *
+     * @return Devuelve el menu de carga
+     */
+    public MenuCarga getMenuCarga() {
+        return menuCarga;
+    }
 
-	public void actualizarItems(final PaquetePersonaje paqueteActualizado) {
-		if (paquetePersonaje.getCantItems() != 0
-				&& paquetePersonaje.getCantItems() != paqueteActualizado.getCantItems()) {
-			paquetePersonaje.anadirItem(paqueteActualizado.getItems().get(paqueteActualizado.getItems().size() - 1));
-		}
-	}
+    /**
+     * Actualizar items.
+     *
+     * @param paqueteActualizado
+     *            the paquete actualizado
+     */
+    public void actualizarItems(final PaquetePersonaje paqueteActualizado) {
+        if (paquetePersonaje.getCantItems() != 0
+                && paquetePersonaje.getCantItems() != paqueteActualizado.getCantItems()) {
+            paquetePersonaje.anadirItem(paqueteActualizado.getItems().get(paqueteActualizado.getItems().size() - 1));
+        }
+    }
 
-	public String getIp() {
-		return ip;
-	}
+    /**
+     * Gets the ip.
+     *
+     * @return the ip
+     */
+    public String getIp() {
+        return ip;
+    }
 
-	public void actualizarPersonaje(final PaquetePersonaje pP) {
-		paquetePersonaje = pP;
-	}
+    /**
+     * Actualizar personaje.
+     *
+     * @param pP
+     *            the p P
+     */
+    public void actualizarPersonaje(final PaquetePersonaje pP) {
+        paquetePersonaje = pP;
+    }
 
-	public Juego getWome() {
-		return wome;
-	}
+    /**
+     * Gets the wome.
+     *
+     * @return the wome
+     */
+    public Juego getWome() {
+        return wome;
+    }
 
-	public void setWome(Juego wome) {
-		this.wome = wome;
-	}
+    /**
+     * Sets the wome.
+     *
+     * @param wome
+     *            the new wome
+     */
+    public void setWome(final Juego wome) {
+        this.wome = wome;
+    }
 
-	public int getPuerto() {
-		return puerto;
-	}
+    /**
+     * Gets the puerto.
+     *
+     * @return the puerto
+     */
+    public int getPuerto() {
+        return puerto;
+    }
 
-	public void setPaqueteUsuario(final PaqueteUsuario paqueteUsuario) {
-		this.paqueteUsuario = paqueteUsuario;
-	}
+    /**
+     * Sets the paquete usuario.
+     *
+     * @param paqueteUsuario
+     *            the new paquete usuario
+     */
+    public void setPaqueteUsuario(final PaqueteUsuario paqueteUsuario) {
+        this.paqueteUsuario = paqueteUsuario;
+    }
 
-	public void setPaquetePersonaje(final PaquetePersonaje paquetePersonaje) {
-		this.paquetePersonaje = paquetePersonaje;
-	}
+    /**
+     * Sets the paquete personaje.
+     *
+     * @param paquetePersonaje
+     *            the new paquete personaje
+     */
+    public void setPaquetePersonaje(final PaquetePersonaje paquetePersonaje) {
+        this.paquetePersonaje = paquetePersonaje;
+    }
 
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
+    /**
+     * Sets the ip.
+     *
+     * @param ip
+     *            the new ip
+     */
+    public void setIp(final String ip) {
+        this.ip = ip;
+    }
 
-	public void setMenuCarga(final MenuCarga menuCarga) {
-		this.menuCarga = menuCarga;
-	}
+    /**
+     * Sets the menu carga.
+     *
+     * @param menuCarga
+     *            the new menu carga
+     */
+    public void setMenuCarga(final MenuCarga menuCarga) {
+        this.menuCarga = menuCarga;
+    }
 
-	public MenuComerciar getM1() {
-		return m1;
-	}
+    /**
+     * Gets the m1.
+     *
+     * @return the m1
+     */
+    public MenuComerciar getM1() {
+        return m1;
+    }
 
-	public void setM1(MenuComerciar m1) {
-		this.m1 = m1;
-	}
+    /**
+     * Sets the m1.
+     *
+     * @param m1
+     *            the new m1
+     */
+    public void setM1(final MenuComerciar m1) {
+        this.m1 = m1;
+    }
 
-	public PaqueteComerciar getPaqueteComercio() {
-		return paqueteComercio;
-	}
+    /**
+     * Gets the paquete comercio.
+     *
+     * @return the paquete comercio
+     */
+    public PaqueteComerciar getPaqueteComercio() {
+        return paqueteComercio;
+    }
 
-	public void setPaqueteComercio(final PaqueteComerciar paqueteComercio) {
-		this.paqueteComercio = paqueteComercio;
-	}
+    /**
+     * Sets the paquete comercio.
+     *
+     * @param paqueteComercio
+     *            the new paquete comercio
+     */
+    public void setPaqueteComercio(final PaqueteComerciar paqueteComercio) {
+        this.paqueteComercio = paqueteComercio;
+    }
 
-	public PaqueteMensaje getPaqueteMensaje() {
-		return paqueteMensaje;
-	}
+    /**
+     * Gets the paquete mensaje.
+     *
+     * @return the paquete mensaje
+     */
+    public PaqueteMensaje getPaqueteMensaje() {
+        return paqueteMensaje;
+    }
 
-	public void setPaqueteMensaje(final PaqueteMensaje paqueteMensaje) {
-		this.paqueteMensaje = paqueteMensaje;
-	}
+    /**
+     * Sets the paquete mensaje.
+     *
+     * @param paqueteMensaje
+     *            the new paquete mensaje
+     */
+    public void setPaqueteMensaje(final PaqueteMensaje paqueteMensaje) {
+        this.paqueteMensaje = paqueteMensaje;
+    }
 }

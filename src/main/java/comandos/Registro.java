@@ -5,38 +5,37 @@ import javax.swing.JOptionPane;
 import frames.MenuCreacionPj;
 import mensajeria.Paquete;
 
+/**
+ * The Class Registro.
+ */
 public class Registro extends ComandosCliente {
 
-	@Override
-	public void ejecutar() {
-		synchronized (this) {
-			
-		
-			Paquete paquete = (Paquete) gson.fromJson(cadenaLeida, Paquete.class);
-			if (paquete.getMensaje().equals(Paquete.msjExito)) {
+    @Override
+    public void ejecutar() {
+        synchronized (this) {
 
-				// Abro el menu para la creaci�n del personaje
-				MenuCreacionPj menuCreacionPJ = new MenuCreacionPj(cliente, cliente.getPaquetePersonaje(),gson);
-				menuCreacionPJ.setVisible(true);
+            Paquete paquete = gson.fromJson(cadenaLeida, Paquete.class);
+            if (paquete.getMensaje().equals(Paquete.msjExito)) {
 
-				// Espero a que el usuario cree el personaje
+                // Abro el menu para la creaci�n del personaje
+                MenuCreacionPj menuCreacionPJ = new MenuCreacionPj(cliente, cliente.getPaquetePersonaje(), gson);
+                menuCreacionPJ.setVisible(true);
 
-				// Recibo el paquete personaje con los datos (la id incluida)
+                // Espero a que el usuario cree el personaje
 
-				
+                // Recibo el paquete personaje con los datos (la id incluida)
 
-				// Indico que el usuario ya inicio sesion
-				
+                // Indico que el usuario ya inicio sesion
 
-			} else {
-				if (paquete.getMensaje().equals(Paquete.msjFracaso)) {
-					JOptionPane.showMessageDialog(null, "No se pudo registrar.");
-				}
-				// El usuario no pudo iniciar sesión
-				cliente.getPaqueteUsuario().setInicioSesion(false);
-			}
+            } else {
+                if (paquete.getMensaje().equals(Paquete.msjFracaso)) {
+                    JOptionPane.showMessageDialog(null, "No se pudo registrar.");
+                }
+                // El usuario no pudo iniciar sesión
+                cliente.getPaqueteUsuario().setInicioSesion(false);
+            }
 
-		}
-	}
+        }
+    }
 
 }

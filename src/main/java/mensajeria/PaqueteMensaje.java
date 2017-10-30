@@ -2,42 +2,73 @@ package mensajeria;
 
 import java.io.Serializable;
 
+/**
+ * The Class PaqueteMensaje.
+ */
 public class PaqueteMensaje extends Paquete implements Serializable, Cloneable {
-	
-		private String userEmisor;
-		private String userReceptor;
-		private String msj;
 
-		public PaqueteMensaje(){
-		}
+    private String userEmisor;
+    private String userReceptor;
+    private String msj;
 
-		public String getMensaje() {
-			return msj;
-		}
+    /**
+     * Instantiates a new paquete mensaje.
+     */
+    public PaqueteMensaje() {
+    }
 
-		public void setMensaje(String mensaje) {
-			this.msj = mensaje;
-		}
+    @Override
+    public String getMensaje() {
+        return msj;
+    }
 
-		public String getUserEmisor() {
-			return userEmisor;
-		}
+    @Override
+    public void setMensaje(final String mensaje) {
+        this.msj = mensaje;
+    }
 
-		public void setUserEmisor(String idEmisor) {
-			this.userEmisor = idEmisor;
-		}
+    /**
+     * Gets the user emisor.
+     *
+     * @return the user emisor
+     */
+    public String getUserEmisor() {
+        return userEmisor;
+    }
 
-		public String getUserReceptor() {
-			return userReceptor;
-		}
+    /**
+     * Sets the user emisor.
+     *
+     * @param idEmisor
+     *            the new user emisor
+     */
+    public void setUserEmisor(final String idEmisor) {
+        this.userEmisor = idEmisor;
+    }
 
-		public void setUserReceptor(String idReceptor){
-			this.userReceptor = idReceptor;
-		}
-		
-		public Object clone() {
-			Object obj = null;
-			obj = super.clone();
-			return obj;
-		}
+    /**
+     * Gets the user receptor.
+     *
+     * @return the user receptor
+     */
+    public String getUserReceptor() {
+        return userReceptor;
+    }
+
+    /**
+     * Sets the user receptor.
+     *
+     * @param idReceptor
+     *            the new user receptor
+     */
+    public void setUserReceptor(final String idReceptor) {
+        this.userReceptor = idReceptor;
+    }
+
+    @Override
+    public Object clone() {
+        Object obj = null;
+        obj = super.clone();
+        return obj;
+    }
 }

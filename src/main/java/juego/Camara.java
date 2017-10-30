@@ -2,41 +2,90 @@ package juego;
 
 import entidades.Entidad;
 
+/**
+ * The Class Camara.
+ */
 public class Camara {
 
-	private Juego juego;
-	private float yOffset;
-	private float xOffset;
+    private Juego juego;
+    private float yOffset;
+    private float xOffset;
 
-	public Camara(Juego juego, float xOffset, float yOffset) {
-		this.juego = juego;
-		this.xOffset = xOffset;
-		this.yOffset = yOffset;
-	}
+    /**
+     * Instantiates a new camara.
+     *
+     * @param juego
+     *            the juego
+     * @param xOffset
+     *            the x offset
+     * @param yOffset
+     *            the y offset
+     */
+    public Camara(final Juego juego, final float xOffset, final float yOffset) {
+        this.juego = juego;
+        this.xOffset = xOffset;
+        this.yOffset = yOffset;
+    }
 
-	public void Centrar(Entidad e) {
-		xOffset = e.getX() - juego.getAncho() / 2 + e.getAncho() / 2;
-		yOffset = e.getY() - juego.getAlto() / 2 + e.getAlto() / 2;
-	}
+    /**
+     * Centra la camara
+     *
+     * @param e
+     *            una entidad
+     */
+    public void centrar(final Entidad e) {
+        xOffset = e.getX() - juego.getAncho() / 2 + e.getAncho() / 2;
+        yOffset = e.getY() - juego.getAlto() / 2 + e.getAlto() / 2;
+    }
 
-	public void mover(float dx, float dy) {
-		xOffset += dx;
-		yOffset += dy;
-	}
+    /**
+     * Mueve la camara
+     *
+     * @param dx
+     *            offset x
+     * @param dy
+     *            offset y
+     */
+    public void mover(final float dx, final float dy) {
+        xOffset += dx;
+        yOffset += dy;
+    }
 
-	public float getyOffset() {
-		return yOffset;
-	}
+    /**
+     * Gets the y offset.
+     *
+     * @return the y offset
+     */
+    public float getyOffset() {
+        return yOffset;
+    }
 
-	public void setyOffset(float yOffset) {
-		this.yOffset = yOffset;
-	}
+    /**
+     * Sets the y offset.
+     *
+     * @param yOffset
+     *            the new y offset
+     */
+    public void setyOffset(final float yOffset) {
+        this.yOffset = yOffset;
+    }
 
-	public float getxOffset() {
-		return xOffset;
-	}
+    /**
+     * Gets the x offset.
+     *
+     * @return the x offset
+     */
+    public float getxOffset() {
+        return xOffset;
+    }
 
-	public void setxOffset(float xOffset) {
-		this.xOffset = xOffset;
-	}
+    /**
+     * Sets the x offset.
+     *
+     * @param xOffset
+     *            the new x offset
+     */
+    public void setxOffset(final float xOffset) {
+        this.xOffset = xOffset;
+    }
 }

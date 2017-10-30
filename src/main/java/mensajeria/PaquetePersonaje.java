@@ -10,308 +10,608 @@ import javax.swing.JOptionPane;
 import dominio.Item;
 import estados.Estado;
 
+/**
+ * The Class PaquetePersonaje.
+ */
 public class PaquetePersonaje extends Paquete implements Serializable, Cloneable {
 
-	private int id;
-	private String idMapa;
-	private int estado;
-	private String casta;
-	private String nombre;
-	private String raza;
-	private int saludTope;
-	private int energiaTope;
-	private int fuerza;
-	private int destreza;
-	private int inteligencia;
-	private int nivel = 1;
-	private int experiencia;
-	private int puntosSkill;
-	private ArrayList<Item> items = new ArrayList<Item>();
+    private int id;
+    private String idMapa;
+    private int estado;
+    private String casta;
+    private String nombre;
+    private String raza;
+    private int saludTope;
+    private int energiaTope;
+    private int fuerza;
+    private int destreza;
+    private int inteligencia;
+    private int nivel = 1;
+    private int experiencia;
+    private int puntosSkill;
+    private ArrayList<Item> items = new ArrayList<Item>();
 
-	public PaquetePersonaje() throws IOException {
-		estado = Estado.estadoOffline;
-	}
+    /**
+     * Instantiates a new paquete personaje.
+     *
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
+    public PaquetePersonaje() throws IOException {
+        estado = Estado.estadoOffline;
+    }
 
-	public int getEstado() {
-		return estado;
-	}
+    /**
+     * Gets the estado.
+     *
+     * @return the estado
+     */
+    public int getEstado() {
+        return estado;
+    }
 
-	public void setEstado(int estado) {
-		this.estado = estado;
-	}
+    /**
+     * Sets the estado.
+     *
+     * @param estado
+     *            the new estado
+     */
+    public void setEstado(final int estado) {
+        this.estado = estado;
+    }
 
-	public String getMapa() {
-		return idMapa;
-	}
+    /**
+     * Gets the mapa.
+     *
+     * @return the mapa
+     */
+    public String getMapa() {
+        return idMapa;
+    }
 
-	public void setMapa(String mapa) {
-		idMapa = mapa;
-	}
+    /**
+     * Sets the mapa.
+     *
+     * @param mapa
+     *            the new mapa
+     */
+    public void setMapa(final String mapa) {
+        idMapa = mapa;
+    }
 
-	public int getNivel() {
-		return nivel;
-	}
+    /**
+     * Gets the nivel.
+     *
+     * @return the nivel
+     */
+    public int getNivel() {
+        return nivel;
+    }
 
-	public void setNivel(int nivel) {
-		this.nivel = nivel;
-	}
+    /**
+     * Sets the nivel.
+     *
+     * @param nivel
+     *            the new nivel
+     */
+    public void setNivel(final int nivel) {
+        this.nivel = nivel;
+    }
 
-	public int getExperiencia() {
-		return experiencia;
-	}
+    /**
+     * Gets the experiencia.
+     *
+     * @return the experiencia
+     */
+    public int getExperiencia() {
+        return experiencia;
+    }
 
-	public void setExperiencia(int experiencia) {
-		this.experiencia = experiencia;
-	}
+    /**
+     * Sets the experiencia.
+     *
+     * @param experiencia
+     *            the new experiencia
+     */
+    public void setExperiencia(final int experiencia) {
+        this.experiencia = experiencia;
+    }
 
-	public int getId() {
-		return id;
-	}
+    /**
+     * Gets the id.
+     *
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    /**
+     * Sets the id.
+     *
+     * @param id
+     *            the new id
+     */
+    public void setId(final int id) {
+        this.id = id;
+    }
 
-	public String getCasta() {
-		return casta;
-	}
+    /**
+     * Gets the casta.
+     *
+     * @return the casta
+     */
+    public String getCasta() {
+        return casta;
+    }
 
-	public void setCasta(String casta) {
-		this.casta = casta;
-	}
+    /**
+     * Sets the casta.
+     *
+     * @param casta
+     *            the new casta
+     */
+    public void setCasta(final String casta) {
+        this.casta = casta;
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    /**
+     * Gets the nombre.
+     *
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    /**
+     * Sets the nombre.
+     *
+     * @param nombre
+     *            the new nombre
+     */
+    public void setNombre(final String nombre) {
+        this.nombre = nombre;
+    }
 
-	public String getRaza() {
-		return raza;
-	}
+    /**
+     * Gets the raza.
+     *
+     * @return the raza
+     */
+    public String getRaza() {
+        return raza;
+    }
 
-	public void setRaza(String raza) {
-		this.raza = raza;
-	}
+    /**
+     * Sets the raza.
+     *
+     * @param raza
+     *            the new raza
+     */
+    public void setRaza(final String raza) {
+        this.raza = raza;
+    }
 
-	public int getSaludTope() {
-		return saludTope;
-	}
+    /**
+     * Gets the salud tope.
+     *
+     * @return the salud tope
+     */
+    public int getSaludTope() {
+        return saludTope;
+    }
 
-	public void setSaludTope(int saludTope) {
-		this.saludTope = saludTope;
-	}
+    /**
+     * Sets the salud tope.
+     *
+     * @param saludTope
+     *            the new salud tope
+     */
+    public void setSaludTope(final int saludTope) {
+        this.saludTope = saludTope;
+    }
 
-	public int getEnergiaTope() {
-		return energiaTope;
-	}
+    /**
+     * Gets the energia tope.
+     *
+     * @return the energia tope
+     */
+    public int getEnergiaTope() {
+        return energiaTope;
+    }
 
-	public void setEnergiaTope(int energiaTope) {
-		this.energiaTope = energiaTope;
-	}
+    /**
+     * Sets the energia tope.
+     *
+     * @param energiaTope
+     *            the new energia tope
+     */
+    public void setEnergiaTope(final int energiaTope) {
+        this.energiaTope = energiaTope;
+    }
 
-	public int getFuerza() {
-		return fuerza;
-	}
+    /**
+     * Gets the fuerza.
+     *
+     * @return the fuerza
+     */
+    public int getFuerza() {
+        return fuerza;
+    }
 
-	public void setFuerza(int fuerza) {
-		this.fuerza = fuerza;
-	}
+    /**
+     * Sets the fuerza.
+     *
+     * @param fuerza
+     *            the new fuerza
+     */
+    public void setFuerza(final int fuerza) {
+        this.fuerza = fuerza;
+    }
 
-	public int getDestreza() {
-		return destreza;
-	}
+    /**
+     * Gets the destreza.
+     *
+     * @return the destreza
+     */
+    public int getDestreza() {
+        return destreza;
+    }
 
-	public void setDestreza(int destreza) {
-		this.destreza = destreza;
-	}
+    /**
+     * Sets the destreza.
+     *
+     * @param destreza
+     *            the new destreza
+     */
+    public void setDestreza(final int destreza) {
+        this.destreza = destreza;
+    }
 
-	public int getInteligencia() {
-		return inteligencia;
-	}
+    /**
+     * Gets the inteligencia.
+     *
+     * @return the inteligencia
+     */
+    public int getInteligencia() {
+        return inteligencia;
+    }
 
-	public void setInteligencia(int inteligencia) {
-		this.inteligencia = inteligencia;
-	}
+    /**
+     * Sets the inteligencia.
+     *
+     * @param inteligencia
+     *            the new inteligencia
+     */
+    public void setInteligencia(final int inteligencia) {
+        this.inteligencia = inteligencia;
+    }
 
-	public int getPuntosSkill() {
-		return puntosSkill;
-	}
+    /**
+     * Gets the puntos skill.
+     *
+     * @return the puntos skill
+     */
+    public int getPuntosSkill() {
+        return puntosSkill;
+    }
 
-	public void setPuntosSkill(int puntosSkill) {
-		this.puntosSkill = puntosSkill;
-	}
+    /**
+     * Sets the puntos skill.
+     *
+     * @param puntosSkill
+     *            the new puntos skill
+     */
+    public void setPuntosSkill(final int puntosSkill) {
+        this.puntosSkill = puntosSkill;
+    }
 
-	@Override
-	public Object clone() {
-		Object obj = null;
-		obj = super.clone();
-		return obj;
-	}
+    @Override
+    public Object clone() {
+        Object obj = null;
+        obj = super.clone();
+        return obj;
+    }
 
-	public final void anadirItem(Item i) {
-		items.add(i);
-	}
+    /**
+     * Anadir item.
+     *
+     * @param i
+     *            the i
+     */
+    public final void anadirItem(final Item i) {
+        items.add(i);
+    }
 
-	public final void removerItem(Item i) {
-		items.remove(i);
-	}
+    /**
+     * Remover item.
+     *
+     * @param i
+     *            the i
+     */
+    public final void removerItem(final Item i) {
+        items.remove(i);
+    }
 
-	public ArrayList<Item> getItems() {
-		return new ArrayList<Item>(items);
-	}
+    /**
+     * Gets the items.
+     *
+     * @return the items
+     */
+    public ArrayList<Item> getItems() {
+        return new ArrayList<Item>(items);
+    }
 
-	public final void setItems(ArrayList<Item> items) {
-		this.items = items;
-	}
+    /**
+     * Sets the items.
+     *
+     * @param items
+     *            the new items
+     */
+    public final void setItems(final ArrayList<Item> items) {
+        this.items = items;
+    }
 
-	public final int getItemID(int index) {
-		return items.get(index).getIdItem();
-	}
+    /**
+     * Gets the item ID.
+     *
+     * @param index
+     *            the index
+     * @return the item ID
+     */
+    public final int getItemID(final int index) {
+        return items.get(index).getIdItem();
+    }
 
-	public final void anadirItem(int idItem, String nombre, int wearLocation, int bonusSalud, int bonusEnergia,
-			int bonusAtaque, int bonusDefensa, int bonusMagia, String foto, String fotoEquipado) {
-		try {
-			items.add(new Item(idItem, nombre, wearLocation, bonusSalud, bonusEnergia, bonusAtaque, bonusDefensa,
-					bonusMagia, foto, fotoEquipado));
-			useBonus(bonusSalud, bonusEnergia, bonusAtaque, bonusDefensa, bonusMagia);
-		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Falló al añadir item");
+    /**
+     * Anadir item.
+     *
+     * @param idItem
+     *            the id item
+     * @param nombre
+     *            the nombre
+     * @param wearLocation
+     *            the wear location
+     * @param bonusSalud
+     *            the bonus salud
+     * @param bonusEnergia
+     *            the bonus energia
+     * @param bonusAtaque
+     *            the bonus ataque
+     * @param bonusDefensa
+     *            the bonus defensa
+     * @param bonusMagia
+     *            the bonus magia
+     * @param foto
+     *            the foto
+     * @param fotoEquipado
+     *            the foto equipado
+     */
+    public final void anadirItem(final int idItem, final String nombre, final int wearLocation, final int bonusSalud,
+        final int bonusEnergia,
+        final int bonusAtaque, final int bonusDefensa, final int bonusMagia, final String foto,
+        final String fotoEquipado) {
+        try {
+            items.add(new Item(idItem, nombre, wearLocation, bonusSalud, bonusEnergia, bonusAtaque, bonusDefensa,
+                bonusMagia, foto, fotoEquipado));
+            useBonus(bonusSalud, bonusEnergia, bonusAtaque, bonusDefensa, bonusMagia);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Falló al añadir item");
 
-		}
-	}
+        }
+    }
 
-	/**
-	 * Metodo que retorna un entero. Dependiendo del skill se calcula el stat de
-	 * skill base.
-	 * 
-	 * @param el
-	 *            skill el cual quiero calcular.
-	 * @return Retorna el skill base dependiendo de los items.
-	 */
+    /**
+     * Metodo que retorna un entero. Dependiendo del skill se calcula el stat de
+     * skill base.
+     *
+     * @param skill
+     *            the skill
+     * @return Retorna el skill base dependiendo de los items.
+     */
 
-	public final int getStatSkill(String skill) {
-		int skillBase = 0;
+    public final int getStatSkill(final String skill) {
+        int skillBase = 0;
 
-		switch (skill) {
-		case "Fuerza":
-			for (Item item : items) {
-				skillBase += item.getBonusFuerza();
-			}
-			break;
-		case "Destreza":
-			for (Item item : items) {
-				skillBase += item.getBonusDestreza();
-			}
-		default:
-			for (Item item : items) {
-				skillBase += item.getBonusInteligencia();
+        switch (skill) {
+            case "Fuerza":
+                for (Item item : items) {
+                    skillBase += item.getBonusFuerza();
+                }
+                break;
+            case "Destreza":
+                for (Item item : items) {
+                    skillBase += item.getBonusDestreza();
+                }
+            default:
+                for (Item item : items) {
+                    skillBase += item.getBonusInteligencia();
 
-			}
-			break;
-		}
-		return skillBase;
-	}
+                }
+                break;
+        }
+        return skillBase;
+    }
 
-	public final void removerBonus() {
-		// Intente usar un iterator y por alguna razón no andaba..
-		int i = 0;
-		while (i < items.size()) {
-			sacarBonus(items.get(i).getBonusSalud(), items.get(i).getBonusEnergia(), items.get(i).getBonusFuerza(),
-					items.get(i).getBonusDestreza(), items.get(i).getBonusInteligencia());
-			i++;
-		}
-	}
+    /**
+     * Remover bonus.
+     */
+    public final void removerBonus() {
+        // Intente usar un iterator y por alguna razón no andaba..
+        int i = 0;
+        while (i < items.size()) {
+            sacarBonus(items.get(i).getBonusSalud(), items.get(i).getBonusEnergia(), items.get(i).getBonusFuerza(),
+                items.get(i).getBonusDestreza(), items.get(i).getBonusInteligencia());
+            i++;
+        }
+    }
 
-	public final void sacarBonus(int bonusSalud, int bonusEnergia, int bonusAtaque, int bonusDefensa, int bonusMagia) {
-		saludTope -= bonusSalud;
-		energiaTope -= bonusEnergia;
-		fuerza -= bonusAtaque;
-		destreza -= bonusDefensa;
-		inteligencia -= bonusMagia;
-	}
+    /**
+     * Sacar bonus.
+     *
+     * @param bonusSalud
+     *            the bonus salud
+     * @param bonusEnergia
+     *            the bonus energia
+     * @param bonusAtaque
+     *            the bonus ataque
+     * @param bonusDefensa
+     *            the bonus defensa
+     * @param bonusMagia
+     *            the bonus magia
+     */
+    public final void sacarBonus(final int bonusSalud, final int bonusEnergia, final int bonusAtaque,
+        final int bonusDefensa, final int bonusMagia) {
+        saludTope -= bonusSalud;
+        energiaTope -= bonusEnergia;
+        fuerza -= bonusAtaque;
+        destreza -= bonusDefensa;
+        inteligencia -= bonusMagia;
+    }
 
-	public final void ponerBonus() {
-		// Intente usar un iterator y por alguna razón no andaba..
-		int i = 0;
-		while (i < items.size()) {
-			useBonus(items.get(i).getBonusSalud(), items.get(i).getBonusEnergia(), items.get(i).getBonusFuerza(),
-					items.get(i).getBonusDestreza(), items.get(i).getBonusInteligencia());
-			i++;
-		}
-	}
+    /**
+     * Poner bonus.
+     */
+    public final void ponerBonus() {
+        // Intente usar un iterator y por alguna razón no andaba..
+        int i = 0;
+        while (i < items.size()) {
+            useBonus(items.get(i).getBonusSalud(), items.get(i).getBonusEnergia(), items.get(i).getBonusFuerza(),
+                items.get(i).getBonusDestreza(), items.get(i).getBonusInteligencia());
+            i++;
+        }
+    }
 
-	public void useBonus(int bonusSalud, int bonusEnergia, int bonusAtaque, int bonusDefensa, int bonusMagia) {
-		saludTope += bonusSalud;
-		energiaTope += bonusEnergia;
-		fuerza += bonusAtaque;
-		destreza += bonusDefensa;
-		inteligencia += bonusMagia;
-	}
+    /**
+     * Use bonus.
+     *
+     * @param bonusSalud
+     *            the bonus salud
+     * @param bonusEnergia
+     *            the bonus energia
+     * @param bonusAtaque
+     *            the bonus ataque
+     * @param bonusDefensa
+     *            the bonus defensa
+     * @param bonusMagia
+     *            the bonus magia
+     */
+    public void useBonus(final int bonusSalud, final int bonusEnergia, final int bonusAtaque, final int bonusDefensa,
+        final int bonusMagia) {
+        saludTope += bonusSalud;
+        energiaTope += bonusEnergia;
+        fuerza += bonusAtaque;
+        destreza += bonusDefensa;
+        inteligencia += bonusMagia;
+    }
 
-	public int getCantItems() {
-		return items.size();
-	}
+    /**
+     * Gets the cant items.
+     *
+     * @return the cant items
+     */
+    public int getCantItems() {
+        return items.size();
+    }
 
-	public void anadirItem(int idItem) {
-		try {
-			items.add(new Item(idItem, null, 0, 0, 0, 0, 0, 0, null, null));
-		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Falló al añadir item");
-		}
+    /**
+     * Anadir item.
+     *
+     * @param idItem
+     *            the id item
+     */
+    public void anadirItem(final int idItem) {
+        try {
+            items.add(new Item(idItem, null, 0, 0, 0, 0, 0, 0, null, null));
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Falló al añadir item");
+        }
 
-	}
+    }
 
-	public Iterator<Item> getIterator() {
-		// TODO Auto-generated method stub
-		return items.iterator();
-	}
+    /**
+     * Gets the iterator.
+     *
+     * @return the iterator
+     */
+    public Iterator<Item> getIterator() {
+        // TODO Auto-generated method stub
+        return items.iterator();
+    }
 
-	public void removerUltimoItem() {
-		items.remove(items.size() - 1);
+    /**
+     * Remover ultimo item.
+     */
+    public void removerUltimoItem() {
+        items.remove(items.size() - 1);
 
-	}
+    }
 
-	public boolean nuevoItem() {
-		return items.get(items.size() - 1).getNombre() == null;
-	}
+    /**
+     * Nuevo item.
+     *
+     * @return true, if successful
+     */
+    public boolean nuevoItem() {
+        return items.get(items.size() - 1).getNombre() == null;
+    }
 
-	public void ponerBonus(int cantItems) {
-		int i = 0;
-		while (i < cantItems) {
-			useBonus(items.get(i).getBonusSalud(), items.get(i).getBonusEnergia(), items.get(i).getBonusFuerza(),
-					items.get(i).getBonusDestreza(), items.get(i).getBonusInteligencia());
-			i++;
-		}
-	}
+    /**
+     * Poner bonus.
+     *
+     * @param cantItems
+     *            the cant items
+     */
+    public void ponerBonus(final int cantItems) {
+        int i = 0;
+        while (i < cantItems) {
+            useBonus(items.get(i).getBonusSalud(), items.get(i).getBonusEnergia(), items.get(i).getBonusFuerza(),
+                items.get(i).getBonusDestreza(), items.get(i).getBonusInteligencia());
+            i++;
+        }
+    }
 
-	public void sacarUltimoItem() {
-		int i = items.size() - 1;
-		if (i >= 0) {
-			sacarBonus(items.get(i).getBonusSalud(), items.get(i).getBonusEnergia(), items.get(i).getBonusFuerza(),
-					items.get(i).getBonusDestreza(), items.get(i).getBonusInteligencia());
-		}
-	}
+    /**
+     * Sacar ultimo item.
+     */
+    public void sacarUltimoItem() {
+        int i = items.size() - 1;
+        if (i >= 0) {
+            sacarBonus(items.get(i).getBonusSalud(), items.get(i).getBonusEnergia(), items.get(i).getBonusFuerza(),
+                items.get(i).getBonusDestreza(), items.get(i).getBonusInteligencia());
+        }
+    }
 
-	public void ponerUltimoItem() {
-		int i = items.size() - 1;
-		if (i >= 0) {
-			useBonus(items.get(i).getBonusSalud(), items.get(i).getBonusEnergia(), items.get(i).getBonusFuerza(),
-					items.get(i).getBonusDestreza(), items.get(i).getBonusInteligencia());
-		}
-	}
+    /**
+     * Poner ultimo item.
+     */
+    public void ponerUltimoItem() {
+        int i = items.size() - 1;
+        if (i >= 0) {
+            useBonus(items.get(i).getBonusSalud(), items.get(i).getBonusEnergia(), items.get(i).getBonusFuerza(),
+                items.get(i).getBonusDestreza(), items.get(i).getBonusInteligencia());
+        }
+    }
 
-	public void eliminarItems() {
-		items.removeAll(items);
-	}
+    /**
+     * Eliminar items.
+     */
+    public void eliminarItems() {
+        items.removeAll(items);
+    }
 
-	public void actualizarTrueque(ArrayList<Item> items) {
-		this.items.removeAll(this.items);
-		for (Item item : items) {
-			this.items.add(item);
-		}
-	}
+    /**
+     * Actualizar trueque.
+     *
+     * @param items
+     *            the items
+     */
+    public void actualizarTrueque(final ArrayList<Item> items) {
+        this.items.removeAll(this.items);
+        for (Item item : items) {
+            this.items.add(item);
+        }
+    }
 
 }
