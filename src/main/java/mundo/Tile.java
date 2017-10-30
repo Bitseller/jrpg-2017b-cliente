@@ -57,7 +57,7 @@ public class Tile {
      * @param alto
      *            the alto
      */
-    public Tile(final BufferedImage textura, final int id, boolean esSolido, final int ancho, final int alto) {
+    public Tile(final BufferedImage textura, final int id, final boolean esSolido, final int ancho, final int alto) {
         this.textura = textura;
         this.id = id;
         tiles[id] = this;
@@ -101,7 +101,7 @@ public class Tile {
      * @param height
      *            alto
      */
-    public void graficar(final Graphics g, final int x, final int y, int width, final int height) {
+    public void graficar(final Graphics g, final int x, final int y, final int width, final int height) {
         g.drawImage(textura, x, y, width, height, null);
     }
 
@@ -111,7 +111,7 @@ public class Tile {
      * @param solidez
      *            si e solido o no
      */
-    public void setSolido(boolean solidez) {
+    public void setSolido(final boolean solidez) {
         esSolido = solidez;
     }
 

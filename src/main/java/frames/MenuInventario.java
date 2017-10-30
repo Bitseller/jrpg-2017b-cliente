@@ -20,7 +20,7 @@ import mensajeria.Comando;
  * The Class MenuInventario.
  */
 public class MenuInventario extends JFrame implements MenuGenerico {
-    private static final int POS_MENU_INVENTARIO = 600;
+    private static final int FRAME_SIZE = 600;
     private JButton cancelar = new JButton("Exit");
 
     /**
@@ -55,10 +55,10 @@ public class MenuInventario extends JFrame implements MenuGenerico {
             JOptionPane.showMessageDialog(null, "Falló al iniciar el inventario");
 
         }
-        this.setBounds(POS_MENU_INVENTARIO, POS_MENU_INVENTARIO, POS_MENU_INVENTARIO, POS_MENU_INVENTARIO);
+        this.setSize(FRAME_SIZE, FRAME_SIZE);
         this.pack();
         this.setLocationRelativeTo(null);
-        this.setLocation(900, 140);
+        //this.setLocation(900, 140);
         this.setResizable(false);
         this.setVisible(true);
     }

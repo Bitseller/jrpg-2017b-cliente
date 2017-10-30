@@ -70,8 +70,8 @@ public class Pantalla {
         pantalla = new JFrame(nombre);
         pantalla.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
         pantalla.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-                new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(), new Point(0, 0),
-                "custom cursor"));
+            new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(), new Point(0, 0),
+            "custom cursor"));
 
         pantalla.setSize(ancho, alto);
         pantalla.setResizable(false);
@@ -123,21 +123,24 @@ public class Pantalla {
 
                 if (i < keys.size()) {
 
-                    //Como se que ambas listas estan sincronizadas, el mismo indice me indica que menu es el que debo verificar.
+                    //Como se que ambas listas estan sincronizadas, 
+                    //el mismo indice me indica que menu es el que debo verificar.
                     if (Estado.getEstado().esEstadoDeJuego() && menues.get(i) == null) {
                         switch (i) {
-                        case 1:
-                            menuInventario = new MenuInventario(cliente);
-                            break;
-                        case 2:
-                            menuAsignar = new MenuAsignarSkills(cliente);
-                            break;
-                        case 3:
-                            menuStats = new MenuStats(cliente);
-                            break;
-                        case 4:
-                            menuEscp = new MenuEscape(cliente);
-                            break;
+                            case 1:
+                                menuInventario = new MenuInventario(cliente);
+                                break;
+                            case 2:
+                                menuAsignar = new MenuAsignarSkills(cliente);
+                                break;
+                            case 3:
+                                menuStats = new MenuStats(cliente);
+                                break;
+                            case 4:
+                                menuEscp = new MenuEscape(cliente);
+                                break;
+                            default:
+                                break;
                         }
                     }
                 } else {

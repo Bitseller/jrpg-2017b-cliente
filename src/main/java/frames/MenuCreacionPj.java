@@ -10,6 +10,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -20,7 +22,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
-import javax.swing.border.EmptyBorder;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -29,232 +30,334 @@ import cliente.Cliente;
 import mensajeria.Comando;
 import mensajeria.PaquetePersonaje;
 
+/**
+ * The Class MenuCreacionPj.
+ */
 public class MenuCreacionPj extends JFrame {
 
-	private JPanel contentPane;
-	private JTextField nombre;
-	private JLabel destreza;
-	private JLabel fuerza;
-	private JLabel inteligencia;
-	private JLabel salud;
-	private JLabel energia;
+    private JPanel contentPane;
+    private JTextField nombre;
+    private JLabel destreza;
+    private JLabel fuerza;
+    private JLabel inteligencia;
+    private JLabel salud;
+    private JLabel energia;
 
-	private JComboBox<String> cbxCasta;
-	private JComboBox<String> cbxRaza;
+    private JComboBox<String> cbxCasta;
+    private JComboBox<String> cbxRaza;
 
-	public MenuCreacionPj(final Cliente cliente, final PaquetePersonaje personaje, final Gson gson) {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
-		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-				new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
-				new Point(0,0),"custom cursor"));
+    /**
+     * Instantiates a new menu creacion pj.
+     *
+     * @param cliente
+     *            the cliente
+     * @param personaje
+     *            the personaje
+     * @param gson
+     *            the gson
+     */
+    public MenuCreacionPj(final Cliente cliente, final PaquetePersonaje personaje, final Gson gson) {
+        setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
+        setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
+            new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
+            new Point(0, 0), "custom cursor"));
 
-		final String vecSalud[] = { "55", "50", "60" };
-		final String vecEnergia[] = { "55", "60", "50" };
-		final String vecFuerza[] = { "15", "10", "10" };
-		final String vecDestreza[] = { "10", "10", "15" };
-		final String vecInteligencia[] = { "10", "15", "10" };
+        final String vecSalud[] = { "55", "50", "60" };
+        final String vecEnergia[] = { "55", "60", "50" };
+        final String vecFuerza[] = { "15", "10", "10" };
+        final String vecDestreza[] = { "10", "10", "15" };
+        final String vecInteligencia[] = { "10", "15", "10" };
 
-		// En caso de cerrar
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				personaje.setNombre(nombre.getText());
-				if (nombre.getText().equals(""))
-					personaje.setNombre("nameless");
-				personaje.setRaza((String) cbxRaza.getSelectedItem());
-				personaje.setSaludTope(Integer.parseInt(vecSalud[cbxRaza.getSelectedIndex()]));
-				personaje.setEnergiaTope(Integer.parseInt(vecEnergia[cbxRaza.getSelectedIndex()]));
-				personaje.setCasta((String) cbxCasta.getSelectedItem());
-				personaje.setFuerza(Integer.parseInt(vecFuerza[cbxCasta.getSelectedIndex()]));
-				personaje.setDestreza(Integer.parseInt(vecDestreza[cbxCasta.getSelectedIndex()]));
-				personaje.setInteligencia(Integer.parseInt(vecInteligencia[cbxCasta.getSelectedIndex()]));
-				synchronized (cliente) {
-					cliente.notify();
-				}
-				dispose();
-			}
-		});
+        // En caso de cerrar
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                personaje.setNombre(nombre.getText());
+                if (nombre.getText().equals(""))
+                    personaje.setNombre("nameless");
+                personaje.setRaza((String) cbxRaza.getSelectedItem());
+                personaje.setSaludTope(Integer.parseInt(vecSalud[cbxRaza.getSelectedIndex()]));
+                personaje.setEnergiaTope(Integer.parseInt(vecEnergia[cbxRaza.getSelectedIndex()]));
+                personaje.setCasta((String) cbxCasta.getSelectedItem());
+                personaje.setFuerza(Integer.parseInt(vecFuerza[cbxCasta.getSelectedIndex()]));
+                personaje.setDestreza(Integer.parseInt(vecDestreza[cbxCasta.getSelectedIndex()]));
+                personaje.setInteligencia(Integer.parseInt(vecInteligencia[cbxCasta.getSelectedIndex()]));
+                synchronized (cliente) {
+                    cliente.notify();
+                }
+                dispose();
+            }
+        });
 
-		setTitle("WOME - Crear personaje");
-		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		setResizable(false);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		setLocationRelativeTo(null);
+        setTitle("WOME - Crear personaje");
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
+        setSize(450, 300);
+        contentPane = new JPanel();
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+        setLocationRelativeTo(null);
 
-		JLayeredPane layeredPane = new JLayeredPane();
-		layeredPane.setBounds(0, 0, 444, 271);
-		contentPane.add(layeredPane);
+        JLayeredPane layeredPane = new JLayeredPane();
+        layeredPane.setSize(450, 300);
+        contentPane.add(layeredPane);
 
-		JLabel lblNewLabel_5 = new JLabel("Fuerza");
-		lblNewLabel_5.setBounds(33, 100, 46, 14);
-		layeredPane.add(lblNewLabel_5, new Integer(1));
-		lblNewLabel_5.setForeground(Color.WHITE);
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        JLabel lblNewLabel_5 = new JLabel("Fuerza");
+        lblNewLabel_5.setForeground(Color.WHITE);
+        lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 13));
 
-		fuerza = new JLabel("15");
-		fuerza.setBounds(110, 102, 22, 14);
-		layeredPane.add(fuerza, new Integer(1));
-		fuerza.setForeground(Color.GREEN);
+        fuerza = new JLabel("15");
+        fuerza.setForeground(Color.GREEN);
 
-		JLabel lblDestreza = new JLabel("Destreza");
-		lblDestreza.setBounds(33, 126, 60, 14);
-		layeredPane.add(lblDestreza, new Integer(1));
-		lblDestreza.setForeground(Color.WHITE);
-		lblDestreza.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        JLabel lblDestreza = new JLabel("Destreza");
+        lblDestreza.setForeground(Color.WHITE);
+        lblDestreza.setFont(new Font("Tahoma", Font.PLAIN, 13));
 
-		destreza = new JLabel("10");
-		destreza.setBounds(110, 127, 22, 14);
-		layeredPane.add(destreza, new Integer(1));
-		destreza.setForeground(Color.GREEN);
+        destreza = new JLabel("10");
+        destreza.setForeground(Color.GREEN);
 
-		JLabel lblInteligencia = new JLabel("Inteligencia");
-		lblInteligencia.setBounds(33, 151, 66, 22);
-		layeredPane.add(lblInteligencia, new Integer(1));
-		lblInteligencia.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblInteligencia.setForeground(Color.WHITE);
+        JLabel lblInteligencia = new JLabel("Inteligencia");
+        lblInteligencia.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        lblInteligencia.setForeground(Color.WHITE);
 
-		inteligencia = new JLabel("10");
-		inteligencia.setBounds(110, 156, 22, 14);
-		layeredPane.add(inteligencia, new Integer(1));
-		inteligencia.setForeground(Color.GREEN);
+        inteligencia = new JLabel("10");
+        inteligencia.setForeground(Color.GREEN);
 
-		JLabel lblSalud = new JLabel("Salud");
-		lblSalud.setBounds(33, 183, 46, 14);
-		layeredPane.add(lblSalud, new Integer(1));
-		lblSalud.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblSalud.setForeground(Color.WHITE);
+        JLabel lblSalud = new JLabel("Salud");
+        lblSalud.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        lblSalud.setForeground(Color.WHITE);
 
-		salud = new JLabel("55");
-		salud.setBounds(110, 183, 22, 14);
-		layeredPane.add(salud, new Integer(1));
-		salud.setForeground(Color.GREEN);
+        salud = new JLabel("55");
+        salud.setForeground(Color.GREEN);
 
-		JLabel lblEnergia = new JLabel("Energia");
-		lblEnergia.setBounds(33, 204, 46, 20);
-		layeredPane.add(lblEnergia, new Integer(1));
-		lblEnergia.setForeground(Color.WHITE);
-		lblEnergia.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        JLabel lblEnergia = new JLabel("Energia");
+        lblEnergia.setForeground(Color.WHITE);
+        lblEnergia.setFont(new Font("Tahoma", Font.PLAIN, 13));
 
-		energia = new JLabel("55");
-		energia.setBounds(110, 208, 22, 14);
-		layeredPane.add(energia, new Integer(1));
-		energia.setForeground(Color.GREEN);
+        energia = new JLabel("55");
+        energia.setForeground(Color.GREEN);
 
-		JLabel lblNewLabel_4 = new JLabel("Nombre");
-		lblNewLabel_4.setBounds(207, 125, 60, 14);
-		layeredPane.add(lblNewLabel_4, new Integer(1));
-		lblNewLabel_4.setForeground(Color.WHITE);
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        JLabel lblNewLabel_4 = new JLabel("Nombre");
+        lblNewLabel_4.setForeground(Color.WHITE);
+        lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-		nombre = new JTextField();
-		nombre.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				crearPj(cliente, personaje, gson, vecSalud, vecEnergia, vecFuerza, vecDestreza, vecInteligencia);
-			}
-		});
-		nombre.setBounds(277, 122, 122, 20);
-		layeredPane.add(nombre, new Integer(1));
-		nombre.setColumns(10);
+        nombre = new JTextField();
+        nombre.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                crearPj(cliente, personaje, gson, vecSalud, vecEnergia, vecFuerza, vecDestreza, vecInteligencia);
+            }
+        });
+        nombre.setColumns(10);
 
-		JLabel lblAceptar = new JLabel("Aceptar");
-		lblAceptar.setBounds(280, 173, 50, 24);
-		layeredPane.add(lblAceptar, new Integer(2));
-		lblAceptar.setForeground(Color.WHITE);
-		lblAceptar.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        JLabel lblAceptar = new JLabel("Aceptar");
+        layeredPane.setLayer(lblAceptar, 1);
+        lblAceptar.setForeground(Color.WHITE);
+        lblAceptar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-		// En caso de apretar el boton aceptar
-		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(230, 174, 153, 23);
-		layeredPane.add(btnAceptar, new Integer(1));
-		btnAceptar.setFocusable(false);
-		btnAceptar.setIcon(new ImageIcon(MenuCreacionPj.class.getResource("/frames/BotonMenu.png")));
+        // En caso de apretar el boton aceptar
+        JButton btnAceptar = new JButton("Aceptar");
+        btnAceptar.setFocusable(false);
+        btnAceptar.setIcon(new ImageIcon(MenuCreacionPj.class.getResource("/frames/BotonMenu.png")));
 
-		btnAceptar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				crearPj(cliente, personaje, gson, vecSalud, vecEnergia, vecFuerza, vecDestreza, vecInteligencia);
+        btnAceptar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                crearPj(cliente, personaje, gson, vecSalud, vecEnergia, vecFuerza, vecDestreza, vecInteligencia);
 
-				
-			}
+            }
 
+        });
 
-		});
+        JLabel lblNewLabel = new JLabel("Raza");
+        lblNewLabel.setForeground(Color.WHITE);
+        lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-		JLabel lblNewLabel = new JLabel("Raza");
-		lblNewLabel.setBounds(33, 23, 46, 14);
-		layeredPane.add(lblNewLabel, new Integer(1));
-		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        JLabel lblCasta = new JLabel("Casta");
+        lblCasta.setForeground(Color.WHITE);
+        lblCasta.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-		JLabel lblCasta = new JLabel("Casta");
-		lblCasta.setBounds(161, 23, 46, 14);
-		layeredPane.add(lblCasta, new Integer(1));
-		lblCasta.setForeground(Color.WHITE);
-		lblCasta.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        cbxCasta = new JComboBox<>();
+        cbxCasta.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fuerza.setText(vecFuerza[cbxCasta.getSelectedIndex()]);
+                destreza.setText(vecDestreza[cbxCasta.getSelectedIndex()]);
+                inteligencia.setText(vecInteligencia[cbxCasta.getSelectedIndex()]);
+            }
+        });
+        cbxCasta.addItem("Guerrero");
+        cbxCasta.addItem("Hechicero");
+        cbxCasta.addItem("Asesino");
 
-		cbxCasta = new JComboBox<>();
-		cbxCasta.setBounds(161, 48, 76, 20);
-		layeredPane.add(cbxCasta, new Integer(1));
-		cbxCasta.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				fuerza.setText(vecFuerza[cbxCasta.getSelectedIndex()]);
-				destreza.setText(vecDestreza[cbxCasta.getSelectedIndex()]);
-				inteligencia.setText(vecInteligencia[cbxCasta.getSelectedIndex()]);
-			}
-		});
-		cbxCasta.addItem("Guerrero");
-		cbxCasta.addItem("Hechicero");
-		cbxCasta.addItem("Asesino");
+        cbxRaza = new JComboBox<>();
+        cbxRaza.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                salud.setText(vecSalud[cbxRaza.getSelectedIndex()]);
+                energia.setText(vecEnergia[cbxRaza.getSelectedIndex()]);
+            }
+        });
+        cbxRaza.addItem("Humano");
+        cbxRaza.addItem("Elfo");
+        cbxRaza.addItem("Orco");
 
-		cbxRaza = new JComboBox<>();
-		cbxRaza.setBounds(32, 48, 76, 20);
-		layeredPane.add(cbxRaza, new Integer(1));
-		cbxRaza.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				salud.setText(vecSalud[cbxRaza.getSelectedIndex()]);
-				energia.setText(vecEnergia[cbxRaza.getSelectedIndex()]);
-			}
-		});
-		cbxRaza.addItem("Humano");
-		cbxRaza.addItem("Elfo");
-		cbxRaza.addItem("Orco");
+        JLabel lblBackground = new JLabel("");
+        lblBackground.setIcon(new ImageIcon(MenuCreacionPj.class.getResource("/frames/menuBackground.jpg")));
+        GroupLayout gl_layeredPane = new GroupLayout(layeredPane);
+        gl_layeredPane.setHorizontalGroup(
+            gl_layeredPane.createParallelGroup(Alignment.LEADING)
+                .addGroup(gl_layeredPane.createSequentialGroup()
+                    .addGap(33)
+                    .addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
+                .addGroup(gl_layeredPane.createSequentialGroup()
+                    .addGap(32)
+                    .addComponent(cbxRaza, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
+                    .addGap(53)
+                    .addComponent(cbxCasta, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE))
+                .addGroup(gl_layeredPane.createSequentialGroup()
+                    .addGap(33)
+                    .addComponent(lblNewLabel_5, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
+                .addGroup(gl_layeredPane.createSequentialGroup()
+                    .addGap(33)
+                    .addComponent(lblDestreza, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+                    .addGap(17)
+                    .addComponent(destreza, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+                    .addGap(75)
+                    .addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+                    .addGap(10)
+                    .addComponent(nombre, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE))
+                .addGroup(gl_layeredPane.createSequentialGroup()
+                    .addGap(33)
+                    .addComponent(lblInteligencia, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
+                    .addGap(11)
+                    .addComponent(inteligencia, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))
+                .addGroup(gl_layeredPane.createSequentialGroup()
+                    .addGap(33)
+                    .addComponent(lblSalud, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+                    .addGap(31)
+                    .addComponent(salud, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+                    .addGap(98)
+                    .addComponent(btnAceptar, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE))
+                .addGroup(gl_layeredPane.createSequentialGroup()
+                    .addGap(110)
+                    .addComponent(energia, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))
+                .addGroup(gl_layeredPane.createSequentialGroup()
+                    .addGap(161)
+                    .addComponent(lblCasta, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
+                .addGroup(gl_layeredPane.createSequentialGroup()
+                    .addGap(280)
+                    .addComponent(lblAceptar))
+                .addGroup(gl_layeredPane.createSequentialGroup()
+                    .addGap(33)
+                    .addComponent(lblEnergia, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
+                .addGroup(gl_layeredPane.createSequentialGroup()
+                    .addGap(110)
+                    .addComponent(fuerza, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblBackground, GroupLayout.PREFERRED_SIZE, 444, GroupLayout.PREFERRED_SIZE)
+        );
+        gl_layeredPane.setVerticalGroup(
+            gl_layeredPane.createParallelGroup(Alignment.LEADING)
+                .addGroup(gl_layeredPane.createSequentialGroup()
+                    .addGap(23)
+                    .addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
+                    .addGap(11)
+                    .addGroup(gl_layeredPane.createParallelGroup(Alignment.LEADING)
+                        .addComponent(cbxRaza, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+                            GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbxCasta, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+                            GroupLayout.PREFERRED_SIZE))
+                    .addGap(32)
+                    .addComponent(lblNewLabel_5, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
+                    .addGap(8)
+                    .addGroup(gl_layeredPane.createParallelGroup(Alignment.LEADING)
+                        .addGroup(gl_layeredPane.createSequentialGroup()
+                            .addGap(4)
+                            .addComponent(lblDestreza, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+                        .addGroup(gl_layeredPane.createSequentialGroup()
+                            .addGap(5)
+                            .addComponent(destreza))
+                        .addGroup(gl_layeredPane.createSequentialGroup()
+                            .addGap(3)
+                            .addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+                        .addComponent(nombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+                            GroupLayout.PREFERRED_SIZE))
+                    .addGap(9)
+                    .addGroup(gl_layeredPane.createParallelGroup(Alignment.LEADING)
+                        .addComponent(lblInteligencia, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+                        .addGroup(gl_layeredPane.createSequentialGroup()
+                            .addGap(5)
+                            .addComponent(inteligencia)))
+                    .addGap(1)
+                    .addGroup(gl_layeredPane.createParallelGroup(Alignment.LEADING)
+                        .addGroup(gl_layeredPane.createSequentialGroup()
+                            .addGap(9)
+                            .addComponent(lblSalud, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+                        .addGroup(gl_layeredPane.createSequentialGroup()
+                            .addGap(9)
+                            .addComponent(salud))
+                        .addComponent(btnAceptar, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+                    .addGap(11)
+                    .addComponent(energia))
+                .addGroup(gl_layeredPane.createSequentialGroup()
+                    .addGap(23)
+                    .addComponent(lblCasta, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+                .addGroup(gl_layeredPane.createSequentialGroup()
+                    .addGap(173)
+                    .addComponent(lblAceptar, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
+                .addGroup(gl_layeredPane.createSequentialGroup()
+                    .addGap(204)
+                    .addComponent(lblEnergia, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
+                .addGroup(gl_layeredPane.createSequentialGroup()
+                    .addGap(102)
+                    .addComponent(fuerza))
+                .addComponent(lblBackground, GroupLayout.PREFERRED_SIZE, 271, GroupLayout.PREFERRED_SIZE)
+        );
+        layeredPane.setLayout(gl_layeredPane);
+    }
 
-		JLabel lblBackground = new JLabel("");
-		lblBackground.setBounds(0, 0, 444, 271);
-		layeredPane.add(lblBackground, new Integer(0));
-		lblBackground.setIcon(new ImageIcon(MenuCreacionPj.class.getResource("/frames/menuBackground.jpg")));
-	}
+    /**
+     * Crear pj.
+     *
+     * @param cliente
+     *            the cliente
+     * @param personaje
+     *            the personaje
+     * @param gson
+     *            the gson
+     * @param vecSalud
+     *            the vec salud
+     * @param vecEnergia
+     *            the vec energia
+     * @param vecFuerza
+     *            the vec fuerza
+     * @param vecDestreza
+     *            the vec destreza
+     * @param vecInteligencia
+     *            the vec inteligencia
+     */
+    protected void crearPj(Cliente cliente, PaquetePersonaje personaje, Gson gson, String[] vecSalud,
+        String[] vecEnergia, String[] vecFuerza, String[] vecDestreza, String[] vecInteligencia) {
 
-	protected void crearPj(Cliente cliente, PaquetePersonaje personaje, Gson gson, String[] vecSalud,
-			String[] vecEnergia, String[] vecFuerza, String[] vecDestreza, String[] vecInteligencia) {
-		
-			personaje.setNombre(nombre.getText());
-			if (nombre.getText().equals(""))
-				personaje.setNombre("nameless");
-			personaje.setRaza((String) cbxRaza.getSelectedItem());
-			personaje.setSaludTope(Integer.parseInt(vecSalud[cbxRaza.getSelectedIndex()]));
-			personaje.setEnergiaTope(Integer.parseInt(vecEnergia[cbxRaza.getSelectedIndex()]));
-			personaje.setCasta((String) cbxCasta.getSelectedItem());
-			personaje.setFuerza(Integer.parseInt(vecFuerza[cbxCasta.getSelectedIndex()]));
-			personaje.setDestreza(Integer.parseInt(vecDestreza[cbxCasta.getSelectedIndex()]));
-			personaje.setInteligencia(Integer.parseInt(vecInteligencia[cbxCasta.getSelectedIndex()]));
-			try {
-				
+        personaje.setNombre(nombre.getText());
+        if (nombre.getText().equals(""))
+            personaje.setNombre("nameless");
+        personaje.setRaza((String) cbxRaza.getSelectedItem());
+        personaje.setSaludTope(Integer.parseInt(vecSalud[cbxRaza.getSelectedIndex()]));
+        personaje.setEnergiaTope(Integer.parseInt(vecEnergia[cbxRaza.getSelectedIndex()]));
+        personaje.setCasta((String) cbxCasta.getSelectedItem());
+        personaje.setFuerza(Integer.parseInt(vecFuerza[cbxCasta.getSelectedIndex()]));
+        personaje.setDestreza(Integer.parseInt(vecDestreza[cbxCasta.getSelectedIndex()]));
+        personaje.setInteligencia(Integer.parseInt(vecInteligencia[cbxCasta.getSelectedIndex()]));
+        try {
 
-				// Le envio los datos al servidor
-				cliente.getPaquetePersonaje().setComando(Comando.CREACIONPJ);
-				cliente.getSalida().writeObject(gson.toJson(cliente.getPaquetePersonaje()));
-				dispose();
-			} catch (JsonSyntaxException | IOException esd) {
-				JOptionPane.showMessageDialog(null, "Error al crear personaje");
+            // Le envio los datos al servidor
+            cliente.getPaquetePersonaje().setComando(Comando.CREACIONPJ);
+            cliente.getSalida().writeObject(gson.toJson(cliente.getPaquetePersonaje()));
+            dispose();
+        } catch (JsonSyntaxException | IOException esd) {
+            JOptionPane.showMessageDialog(null, "Error al crear personaje");
 
-			}
-		}
-		
+        }
+    }
 }

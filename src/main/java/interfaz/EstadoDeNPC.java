@@ -12,7 +12,7 @@ import recursos.Recursos;
 /**
  * The Class EstadoDeNPC.
  */
-public class EstadoDeNPC {
+public final class EstadoDeNPC {
 
     private static final int ANCHOBARRA = 122;
     private static final int ALTOSALUD = 14;
@@ -22,7 +22,7 @@ public class EstadoDeNPC {
     private static final int ANCHOMINIATURA = 64;
 
     /**
-     * Esta clase no se instancia
+     * Esta clase no se instancia.
      */
     private EstadoDeNPC() {
 
@@ -43,7 +43,7 @@ public class EstadoDeNPC {
      *            miniatura personaje
      */
     public static void dibujarEstadoDeNPC(final Graphics g, final int x, final int y, final Personaje personaje,
-            final BufferedImage miniaturaPersonaje) {
+        final BufferedImage miniaturaPersonaje) {
 
         int drawBarra = 0;
 
@@ -61,7 +61,7 @@ public class EstadoDeNPC {
         g.setFont(new Font("Tahoma", Font.PLAIN, 10));
         g.drawImage(Recursos.barraSalud, x + 80, y + 26, drawBarra, ALTOSALUD, null);
         g.drawString(String.valueOf(personaje.getSalud()) + " / " + String.valueOf(personaje.getSaludTope()), x + 132,
-                y + 37);
+            y + 37);
 
         if (personaje.getEnergia() == personaje.getEnergiaTope()) {
             drawBarra = ANCHOBARRA;
@@ -71,19 +71,19 @@ public class EstadoDeNPC {
 
         g.drawImage(Recursos.barraEnergia, x + 80, y + 42, drawBarra, ALTOENERGIA, null);
         g.drawString(String.valueOf(personaje.getEnergia()) + " / " + String.valueOf(personaje.getEnergiaTope()),
-                x + 132, y + 52);
+            x + 132, y + 52);
 
         if (personaje.getExperiencia() == Personaje.getTablaDeNiveles()[personaje.getNivel() + 1]) {
             drawBarra = ANCHOBARRA;
         } else {
             drawBarra = (personaje.getExperiencia() * ANCHOBARRA)
-                    / Personaje.getTablaDeNiveles()[personaje.getNivel() + 1];
+                / Personaje.getTablaDeNiveles()[personaje.getNivel() + 1];
         }
 
         g.setFont(new Font("Tahoma", Font.PLAIN, 8));
         g.drawImage(Recursos.barraExperiencia, x + 77, y + 65, drawBarra, ALTOEXPERIENCIA, null);
         g.drawString(String.valueOf(personaje.getExperiencia()) + " / "
-                + String.valueOf(Personaje.getTablaDeNiveles()[personaje.getNivel() + 1]), x + 132, y + 70);
+            + String.valueOf(Personaje.getTablaDeNiveles()[personaje.getNivel() + 1]), x + 132, y + 70);
         g.setFont(new Font("Tahoma", Font.PLAIN, 10));
         g.setColor(Color.GREEN);
         g.drawString(String.valueOf(personaje.getNivel()), x + 59, y + 70);
@@ -105,7 +105,7 @@ public class EstadoDeNPC {
      *            miniatura NPC
      */
     public static void dibujarEstadoDeNPC(final Graphics g, final int x, final int y, final NonPlayableCharacter npc,
-            final BufferedImage miniaturaNPC) {
+        final BufferedImage miniaturaNPC) {
 
         int drawBarra = 0;
 

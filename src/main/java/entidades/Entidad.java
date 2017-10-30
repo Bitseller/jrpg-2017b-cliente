@@ -32,7 +32,7 @@ import mundo.Nodo;
 import recursos.Recursos;
 
 /**
- * Clase Entidad
+ * Clase Entidad.
  */
 public class Entidad {
 
@@ -62,14 +62,14 @@ public class Entidad {
 
     // Movimiento Actual
     private final LinkedList<Integer> movimientos;
-    private static final int horizontalIzq = 0;
-    private static final int horizontalDer = 4;
-    private static final int verticalSup = 2;
-    private static final int diagonalSupIzq = 1;
-    private static final int diagonalSupDer = 3;
-    private static final int verticalInf = 6;
-    private static final int diagonalInfIzq = 7;
-    private static final int diagonalInfDer = 5;
+    private static final int HORIZONTAL_IZQ = 0;
+    private static final int HORIZONTAL_DER = 4;
+    private static final int VERTICAL_SUP = 2;
+    private static final int DIAGONAL_SUP_IZQ = 1;
+    private static final int DIAGONAL_SUP_DER = 3;
+    private static final int VERTICAL_INF = 6;
+    private static final int DIAGONAL_INF_IZQ = 7;
+    private static final int DIAGONAL_INF_DER = 5;
     private int movimientoHacia = 6;
     private boolean enMovimiento;
 
@@ -104,8 +104,8 @@ public class Entidad {
     private float[] comercio;
 
     /**
-     * Constructor de la clase Entidad
-     * 
+     * Constructor de la clase Entidad.
+     *
      * @param juego
      *            juego con el que se instancia Entidad
      * @param mundo
@@ -126,8 +126,8 @@ public class Entidad {
      *            velocidad de animacion del personaje
      */
     public Entidad(final Juego juego, final Mundo mundo, final int ancho, final int alto, final String nombre,
-            final float spawnX, final float spawnY, final LinkedList<BufferedImage[]> animaciones,
-            final int velAnimacion) {
+        final float spawnX, final float spawnY, final LinkedList<BufferedImage[]> animaciones,
+        final int velAnimacion) {
         this.juego = juego;
         this.ancho = ancho;
         this.alto = alto;
@@ -186,14 +186,14 @@ public class Entidad {
         patronAnimaciones.add(moverAbajoDer);
 
         // Cargo una lista con los movimientos patrones.
-        movimientos.add(horizontalIzq);
-        movimientos.add(horizontalDer);
-        movimientos.add(verticalSup);
-        movimientos.add(diagonalSupIzq);
-        movimientos.add(diagonalSupDer);
-        movimientos.add(verticalInf);
-        movimientos.add(diagonalInfIzq);
-        movimientos.add(diagonalInfDer);
+        movimientos.add(HORIZONTAL_IZQ);
+        movimientos.add(HORIZONTAL_DER);
+        movimientos.add(VERTICAL_SUP);
+        movimientos.add(DIAGONAL_SUP_IZQ);
+        movimientos.add(DIAGONAL_SUP_DER);
+        movimientos.add(VERTICAL_INF);
+        movimientos.add(DIAGONAL_INF_IZQ);
+        movimientos.add(DIAGONAL_INF_DER);
 
         // Informo mi posicion actual
         juego.getUbicacionPersonaje().setPosX(x);
@@ -203,7 +203,7 @@ public class Entidad {
     }
 
     /**
-     * Actualiza el personaje
+     * Actualiza el personaje.
      */
     public void actualizar() {
 
@@ -224,13 +224,15 @@ public class Entidad {
     }
 
     /**
-     * Devuelve la entrada
+     * Devuelve la entrada.
+     *
+     * @return the entrada
      */
     public void getEntrada() {
         posMouseRecorrido = juego.getHandlerMouse().getPosMouseRecorrido();
         posMouse = juego.getHandlerMouse().getPosMouse();
         if (juego.getHandlerMouse().getNuevoClick() && posMouse[0] >= 738 && posMouse[0] <= 797 && posMouse[1] >= 545
-                && posMouse[1] <= 597) {
+            && posMouse[1] <= 597) {
             if (Pantalla.menuInventario == null) {
                 Pantalla.menuInventario = new MenuInventario(juego.getCliente());
                 Pantalla.menuInventario.setVisible(true);
@@ -238,7 +240,7 @@ public class Entidad {
             juego.getHandlerMouse().setNuevoClick(false);
         }
         if (juego.getHandlerMouse().getNuevoClick() && posMouse[0] >= 3 && posMouse[0] <= 105 && posMouse[1] >= 562
-                && posMouse[1] <= 597) {
+            && posMouse[1] <= 597) {
             if (Pantalla.menuEscp == null) {
                 Pantalla.menuEscp = new MenuEscape(juego.getCliente());
                 Pantalla.menuEscp.setVisible(true);
@@ -246,7 +248,7 @@ public class Entidad {
             juego.getHandlerMouse().setNuevoClick(false);
         }
         if (juego.getHandlerMouse().getNuevoClick() && posMouse[0] >= 3 && posMouse[0] <= 105 && posMouse[1] >= 524
-                && posMouse[1] <= 559) {
+            && posMouse[1] <= 559) {
             if (Pantalla.ventContac == null) {
                 Pantalla.ventContac = new VentanaContactos(juego);
                 Pantalla.ventContac.setVisible(true);
@@ -261,26 +263,26 @@ public class Entidad {
                     if (juego.getEstadoJuego().getMenuEnemigo().clickEnBoton(posMouse[0], posMouse[1])) {
                         // Pregunto si menuBatallar o menuComerciar, sino no me
                         // interesa hacer esto
-                        if (juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.menuBatallar
-                                || juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.menuComerciar) {
+                        if (juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.MENU_BATALLAR
+                            || juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.MENU_COMERCIAR) {
                             // Guardo las poss con el que quiero comerciar
                             xComercio = juego.getUbicacionPersonajes().get(idEnemigo).getPosX();
                             yComercio = juego.getUbicacionPersonajes().get(idEnemigo).getPosY();
                             comercio = Mundo.isoA2D(xComercio, yComercio);
                         }
                         // pregunto si el menu emergente es de tipo batalla
-                        if (juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.menuBatallar) {
+                        if (juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.MENU_BATALLAR) {
                             // Me fijo si con el que quiero batallar se
                             // encuentre en la zona de comercio.
                             if (!((int) comercio[0] >= 44 && (int) comercio[0] <= 71 && (int) comercio[1] >= 0
-                                    && (int) comercio[1] <= 29)) {
-                                juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.menuBatallar);
+                                && (int) comercio[1] <= 29)) {
+                                juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.MENU_BATALLAR);
                                 PaqueteBatalla pBatalla = new PaqueteBatalla();
 
                                 pBatalla.setId(juego.getPersonaje().getId());
                                 pBatalla.setIdEnemigo(idEnemigo);
 
-                                juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.menuBatallar);
+                                juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.MENU_BATALLAR);
 
                                 try {
                                     juego.getCliente().getSalida().writeObject(gson.toJson(pBatalla));
@@ -289,14 +291,14 @@ public class Entidad {
                                 }
                             } else {
                                 JOptionPane.showMessageDialog(null,
-                                        "El otro usuario se encuentra " + "dentro de la zona de comercio");
+                                    "El otro usuario se encuentra " + "dentro de la zona de comercio");
                             }
                         } else {
                             // Pregunto si el menu emergente es de tipo
                             // Comercio.
-                            if (juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.menuComerciar) {
+                            if (juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.MENU_COMERCIAR) {
                                 if ((int) comercio[0] >= 44 && (int) comercio[0] <= 71 && (int) comercio[1] >= 0
-                                        && (int) comercio[1] <= 29) {
+                                    && (int) comercio[1] <= 29) {
                                     if (juego.getCliente().getM1() == null) {
                                         juego.getCliente().setPaqueteComercio(new PaqueteComerciar());
                                         juego.getCliente().getPaqueteComercio().setId(juego.getPersonaje().getId());
@@ -304,27 +306,27 @@ public class Entidad {
 
                                         try {
                                             juego.getCliente().getSalida()
-                                                    .writeObject(gson.toJson(juego.getCliente().getPaqueteComercio()));
+                                                .writeObject(gson.toJson(juego.getCliente().getPaqueteComercio()));
                                         } catch (IOException e) {
                                             JOptionPane.showMessageDialog(null,
-                                                    "Fallo la conexión " + "con el servidor");
+                                                "Fallo la conexión " + "con el servidor");
                                         }
                                     } else {
                                         JOptionPane.showMessageDialog(null, "Ya te encuentras comerciando!");
                                     }
                                 } else {
                                     JOptionPane.showMessageDialog(null,
-                                            "El otro usuario no se encuentra " + "dentro de la zona de comercio");
+                                        "El otro usuario no se encuentra " + "dentro de la zona de comercio");
                                 }
                             }
                         }
-                        juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.menuBatallar);
+                        juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.MENU_BATALLAR);
 
                     } else if (juego.getEstadoJuego().getMenuEnemigo().clickEnCerrar(posMouse[0], posMouse[1])) {
-                        juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.menuBatallar);
+                        juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.MENU_BATALLAR);
                     }
                 } else {
-                    juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.menuBatallar);
+                    juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.MENU_BATALLAR);
                 }
             } else
             // Se fija si clickeo alguno de los personajes
@@ -332,7 +334,7 @@ public class Entidad {
                 Iterator<Integer> it = juego.getUbicacionPersonajes().keySet().iterator();
                 int key;
                 int[] tileMoverme = Mundo.mouseATile(posMouse[0] + juego.getCamara().getxOffset() - xOffset,
-                        posMouse[1] + juego.getCamara().getyOffset() - yOffset);
+                    posMouse[1] + juego.getCamara().getyOffset() - yOffset);
                 PaqueteMovimiento actual;
 
                 while (it.hasNext()) {
@@ -340,9 +342,9 @@ public class Entidad {
                     actual = juego.getUbicacionPersonajes().get(key);
                     tilePersonajes = Mundo.mouseATile(actual.getPosX(), actual.getPosY());
                     if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId()
-                            && juego.getPersonajesConectados().get(actual.getIdPersonaje()) != null
-                            && juego.getPersonajesConectados().get(actual.getIdPersonaje())
-                                    .getEstado() == Estado.estadoJuego) {
+                        && juego.getPersonajesConectados().get(actual.getIdPersonaje()) != null
+                        && juego.getPersonajesConectados().get(actual.getIdPersonaje())
+                            .getEstado() == Estado.estadoJuego) {
 
                         if (tileMoverme[0] == tilePersonajes[0] && tileMoverme[1] == tilePersonajes[1]) {
                             idEnemigo = actual.getIdPersonaje();
@@ -353,13 +355,13 @@ public class Entidad {
                                 // Si me encuentro dentro de la zona de
                                 // comercio, abro el menu de Comercio.
                                 juego.getEstadoJuego().setHaySolicitud(true,
-                                        juego.getPersonajesConectados().get(idEnemigo),
-                                        MenuInfoPersonaje.menuComerciar);
+                                    juego.getPersonajesConectados().get(idEnemigo),
+                                    MenuInfoPersonaje.MENU_COMERCIAR);
                             } else {
                                 // Si estoy dentro de la zona de batalla, abro
                                 // el menu de Batalla.
                                 juego.getEstadoJuego().setHaySolicitud(true,
-                                        juego.getPersonajesConectados().get(idEnemigo), MenuInfoPersonaje.menuBatallar);
+                                    juego.getPersonajesConectados().get(idEnemigo), MenuInfoPersonaje.MENU_BATALLAR);
                             }
                             juego.getHandlerMouse().setNuevoClick(false);
                         }
@@ -372,13 +374,13 @@ public class Entidad {
         if (juego.getHandlerMouse().getNuevoRecorrido() && !juego.getEstadoJuego().getHaySolicitud()) {
 
             tileMoverme = Mundo.mouseATile(posMouseRecorrido[0] + juego.getCamara().getxOffset() - xOffset,
-                    posMouseRecorrido[1] + juego.getCamara().getyOffset() - yOffset);
+                posMouseRecorrido[1] + juego.getCamara().getyOffset() - yOffset);
 
             juego.getHandlerMouse().setNuevoRecorrido(false);
 
             pilaMovimiento = null;
 
-            juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.menuBatallar);
+            juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.MENU_BATALLAR);
         }
 
         if (!enMovimiento && tileMoverme != null) {
@@ -388,7 +390,7 @@ public class Entidad {
             tileActual = Mundo.mouseATile(x, y);
 
             if (tileMoverme[0] < 0 || tileMoverme[1] < 0 || tileMoverme[0] >= mundo.obtenerAncho()
-                    || tileMoverme[1] >= mundo.obtenerAlto()) {
+                || tileMoverme[1] >= mundo.obtenerAlto()) {
                 enMovimiento = false;
                 juego.getHandlerMouse().setNuevoRecorrido(false);
                 pilaMovimiento = null;
@@ -397,7 +399,7 @@ public class Entidad {
             }
 
             if (tileMoverme[0] == tileActual[0] && tileMoverme[1] == tileActual[1]
-                    || mundo.getTile(tileMoverme[0], tileMoverme[1]).esSolido()) {
+                || mundo.getTile(tileMoverme[0], tileMoverme[1]).esSolido()) {
                 tileMoverme = null;
                 enMovimiento = false;
                 juego.getHandlerMouse().setNuevoRecorrido(false);
@@ -427,35 +429,35 @@ public class Entidad {
             yFinal = Mundo.dosDaIso(tileFinal[0], tileFinal[1])[1];
 
             if (tileFinal[0] == tileActual[0] - 1 && tileFinal[1] == tileActual[1] - 1) {
-                movimientoHacia = verticalSup;
+                movimientoHacia = VERTICAL_SUP;
             }
             if (tileFinal[0] == tileActual[0] + 1 && tileFinal[1] == tileActual[1] + 1) {
-                movimientoHacia = verticalInf;
+                movimientoHacia = VERTICAL_INF;
             }
             if (tileFinal[0] == tileActual[0] - 1 && tileFinal[1] == tileActual[1] + 1) {
-                movimientoHacia = horizontalIzq;
+                movimientoHacia = HORIZONTAL_IZQ;
             }
             if (tileFinal[0] == tileActual[0] + 1 && tileFinal[1] == tileActual[1] - 1) {
-                movimientoHacia = horizontalDer;
+                movimientoHacia = HORIZONTAL_DER;
             }
             if (tileFinal[0] == tileActual[0] - 1 && tileFinal[1] == tileActual[1]) {
-                movimientoHacia = diagonalSupIzq;
+                movimientoHacia = DIAGONAL_SUP_IZQ;
             }
             if (tileFinal[0] == tileActual[0] + 1 && tileFinal[1] == tileActual[1]) {
-                movimientoHacia = diagonalInfDer;
+                movimientoHacia = DIAGONAL_INF_DER;
             }
             if (tileFinal[0] == tileActual[0] && tileFinal[1] == tileActual[1] - 1) {
-                movimientoHacia = diagonalSupDer;
+                movimientoHacia = DIAGONAL_SUP_DER;
             }
             if (tileFinal[0] == tileActual[0] && tileFinal[1] == tileActual[1] + 1) {
-                movimientoHacia = diagonalInfIzq;
+                movimientoHacia = DIAGONAL_INF_IZQ;
             }
             enMovimiento = true;
         }
     }
 
     /**
-     * Mueve el personaje
+     * Mueve el personaje.
      */
     public void mover() {
 
@@ -490,6 +492,9 @@ public class Entidad {
         }
     }
 
+    /**
+     * Ver si no esta cerca de un NPC.
+     */
     private void verSiNoEstaCercaDeUnNPC() {
         if (juego.getNPCs() != null) {
             boolean esPelea = false;
@@ -529,7 +534,10 @@ public class Entidad {
     }
 
     /**
-     * Grafica el frame del personaje
+     * Grafica el frame del personaje.
+     *
+     * @param g
+     *            the g
      */
     public void graficar(final Graphics g) {
         drawX = (int) (x - juego.getCamara().getxOffset());
@@ -538,7 +546,10 @@ public class Entidad {
     }
 
     /**
-     * Grafica el nombre
+     * Grafica el nombre.
+     *
+     * @param g
+     *            the g
      */
     public void graficarNombre(final Graphics g) {
         g.setColor(Color.WHITE);
@@ -547,7 +558,9 @@ public class Entidad {
     }
 
     /**
-     * Obtiene el frameActual del personaje
+     * Obtiene el frameActual del personaje.
+     *
+     * @return the frame animacion actual
      */
     private BufferedImage getFrameAnimacionActual() {
         int i = 0;
@@ -556,15 +569,16 @@ public class Entidad {
         }
         // Ambas listas entan sincronizadas según sus valores, por lo que el
         // indice i es el mismo para ambas.
-        if (i < movimientos.size())
+        if (i < movimientos.size()) {
             return patronAnimaciones.get(i).getFrameActual();
+        }
 
         return Recursos.orco.get(6)[0];
     }
 
     /**
-     * Pide la direccion donde va
-     * 
+     * Pide la direccion donde va.
+     *
      * @return devuelve el movimiento hacia donde va
      */
     private int getDireccion() {
@@ -572,7 +586,9 @@ public class Entidad {
     }
 
     /**
-     * Obtiene el frame donde esta el personaje
+     * Obtiene el frame donde esta el personaje.
+     *
+     * @return the frame
      */
     private int getFrame() {
         int i = 0;
@@ -581,14 +597,15 @@ public class Entidad {
         }
         // Ambas listas entan sincronizadas según sus valores, por lo que el
         // indice i es el mismo para ambas.
-        if (i < movimientos.size())
+        if (i < movimientos.size()) {
             return patronAnimaciones.get(i).getFrame();
+        }
 
         return 0;
     }
 
     /**
-     * Envia la posicion del personaje
+     * Envia la posicion del personaje.
      */
     private void enviarPosicion() {
         juego.getUbicacionPersonaje().setPosX(x);
@@ -597,15 +614,15 @@ public class Entidad {
         juego.getUbicacionPersonaje().setFrame(getFrame());
         try {
             juego.getCliente().getSalida()
-                    .writeObject(gson.toJson(juego.getUbicacionPersonaje(), PaqueteMovimiento.class));
+                .writeObject(gson.toJson(juego.getUbicacionPersonaje(), PaqueteMovimiento.class));
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor");
         }
     }
 
     /**
-     * Busca el camino más corto a recorrer para llegar a una posición
-     * 
+     * Busca el camino más corto a recorrer para llegar a una posición.
+     *
      * @param xInicial
      *            ubicacion en X inicial
      * @param yInicial
@@ -620,12 +637,12 @@ public class Entidad {
         Grafo grafoLibres = mundo.obtenerGrafoDeTilesNoSolidos();
         // Transformo las coordenadas iniciales y finales en indices
         int nodoInicial = (yInicial - grafoLibres.obtenerNodos()[0].obtenerY())
-                * (int) Math.sqrt(grafoLibres.obtenerCantidadDeNodosTotal()) + xInicial
-                - grafoLibres.obtenerNodos()[0].obtenerX();
+            * (int) Math.sqrt(grafoLibres.obtenerCantidadDeNodosTotal()) + xInicial
+            - grafoLibres.obtenerNodos()[0].obtenerX();
 
         int nodoFinal = (yFinal - grafoLibres.obtenerNodos()[0].obtenerY())
-                * (int) Math.sqrt(grafoLibres.obtenerCantidadDeNodosTotal()) + xFinal
-                - grafoLibres.obtenerNodos()[0].obtenerX();
+            * (int) Math.sqrt(grafoLibres.obtenerCantidadDeNodosTotal()) + xFinal
+            - grafoLibres.obtenerNodos()[0].obtenerX();
 
         // Hago todo
         double[] vecCostos = new double[grafoLibres.obtenerCantidadDeNodosTotal()];
@@ -643,7 +660,7 @@ public class Entidad {
         Nodo[] adyacentes = grafoLibres.obtenerNodos()[nodoInicial].obtenerNodosAdyacentes();
         for (int i = 0; i < grafoLibres.obtenerNodos()[nodoInicial].obtenerCantidadDeAdyacentes(); i++) {
             if (estanEnDiagonal(grafoLibres.obtenerNodos()[nodoInicial],
-                    grafoLibres.obtenerNodos()[adyacentes[i].obtenerIndice()])) {
+                grafoLibres.obtenerNodos()[adyacentes[i].obtenerIndice()])) {
                 vecCostos[adyacentes[i].obtenerIndice()] = 1.5;
             } else {
                 vecCostos[adyacentes[i].obtenerIndice()] = 1;
@@ -673,7 +690,7 @@ public class Entidad {
             for (int i = 0; i < grafoLibres.obtenerNodos()[indiceMinimo].obtenerCantidadDeAdyacentes(); i++) {
                 double valorASumar = 1;
                 if (estanEnDiagonal(grafoLibres.obtenerNodos()[indiceMinimo],
-                        grafoLibres.obtenerNodos()[adyacentes[i].obtenerIndice()])) {
+                    grafoLibres.obtenerNodos()[adyacentes[i].obtenerIndice()])) {
                     valorASumar = 1.5;
                 }
                 if (vecCostos[indiceMinimo] + valorASumar < vecCostos[adyacentes[i].obtenerIndice()]) {
@@ -686,7 +703,7 @@ public class Entidad {
         PilaDeTiles camino = new PilaDeTiles();
         while (nodoFinal != nodoInicial) {
             camino.push(new NodoDePila(grafoLibres.obtenerNodos()[nodoFinal].obtenerX(),
-                    grafoLibres.obtenerNodos()[nodoFinal].obtenerY()));
+                grafoLibres.obtenerNodos()[nodoFinal].obtenerY()));
             nodoFinal = vecPredecesores[nodoFinal];
         }
 
@@ -694,8 +711,8 @@ public class Entidad {
     }
 
     /**
-     * Pregunta si los personajes estan en diagonal
-     * 
+     * Pregunta si los personajes estan en diagonal.
+     *
      * @param nodoUno
      *            personaje 1
      * @param nodoDos
@@ -709,8 +726,8 @@ public class Entidad {
     }
 
     /**
-     * Pide el valor de X
-     * 
+     * Pide el valor de X.
+     *
      * @return devuelve la ubicacion en X
      */
     public float getX() {
@@ -718,8 +735,8 @@ public class Entidad {
     }
 
     /**
-     * Setea el valor de X
-     * 
+     * Setea el valor de X.
+     *
      * @param x
      *            valor nuevo de la ubicacion en X
      */
@@ -728,8 +745,8 @@ public class Entidad {
     }
 
     /**
-     * Pide el valor de Y
-     * 
+     * Pide el valor de Y.
+     *
      * @return devuelve la ubicacion en Y
      */
     public float getY() {
@@ -737,8 +754,8 @@ public class Entidad {
     }
 
     /**
-     * Setea el valor de Y
-     * 
+     * Setea el valor de Y.
+     *
      * @param y
      *            valor nuevo de la ubicacion en Y
      */
@@ -747,8 +764,8 @@ public class Entidad {
     }
 
     /**
-     * Pide el ancho
-     * 
+     * Pide el ancho.
+     *
      * @return devuelve el ancho
      */
     public int getAncho() {
@@ -756,8 +773,8 @@ public class Entidad {
     }
 
     /**
-     * Setea el ancho
-     * 
+     * Setea el ancho.
+     *
      * @param ancho
      *            nuevo ancho a setear
      */
@@ -766,8 +783,8 @@ public class Entidad {
     }
 
     /**
-     * Pide el alto
-     * 
+     * Pide el alto.
+     *
      * @return devuelve el alto
      */
     public int getAlto() {
@@ -775,8 +792,8 @@ public class Entidad {
     }
 
     /**
-     * Setea el alto
-     * 
+     * Setea el alto.
+     *
      * @param alto
      *            nuevo alto a setear
      */
@@ -785,8 +802,8 @@ public class Entidad {
     }
 
     /**
-     * Pide el offset de X
-     * 
+     * Pide el offset de X.
+     *
      * @return devuelve el offset de X
      */
     public int getxOffset() {
@@ -794,8 +811,8 @@ public class Entidad {
     }
 
     /**
-     * Pide el offset de Y
-     * 
+     * Pide el offset de Y.
+     *
      * @return devuelve el offset de Y
      */
     public int getYOffset() {

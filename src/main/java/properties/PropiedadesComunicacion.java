@@ -15,6 +15,8 @@ import java.util.Properties;
  * clase.
  */
 public final class PropiedadesComunicacion {
+    private static final int MAX_PORT = 65535;
+
     private final String RUTA_PROPIEDADES = "properties/comunicacion.properties";
 
     private final String KEY_PORT = "Servidor.PORT";
@@ -51,8 +53,7 @@ public final class PropiedadesComunicacion {
 
     /**
      * Gets the instancia.
-     *
-     * @return the instancia
+     * 
      * @throws Exception
      *             the exception
      */
@@ -79,10 +80,12 @@ public final class PropiedadesComunicacion {
             ip = propiedades.getProperty(KEY_IP);
 
             stream.close();
-            if (!validarIP(ip))
+            if (!validarIP(ip)) {
                 throw new Exception("Error de direccion ip del servidor");
-            if (!validarPuerto(puerto))
+            }
+            if (!validarPuerto(puerto)) {
                 throw new Exception("Error de direccion ip del servidor");
+            }
         } catch (Exception ex) {
             throw ex;
         }
@@ -109,9 +112,9 @@ public final class PropiedadesComunicacion {
      */
     public static boolean validarPuerto(final int puerto) {
         try {
-            if (puerto > 0 && puerto < 65535)
+            if (puerto > 0 && puerto < MAX_PORT) {
                 return true;
-
+            }
         } catch (Exception ex) {
             return false;
         }

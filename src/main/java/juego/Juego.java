@@ -24,15 +24,17 @@ import mensajeria.PaquetePersonaje;
  */
 public class Juego implements Runnable {
 
+    private static final int MICRO_SEGUNDO = 1000000000;
     private Pantalla pantalla;
-    private final String NOMBRE;
-    private final int ANCHO;
-    private final int ALTO;
+    private final String nombre;
+    private final int ancho;
+    private final int alto;
 
     private Thread hilo;
     private boolean corriendo;
 
-    private BufferStrategy bs; // Estrategia para graficar mediante buffers (Primero se "grafica" en el/los buffer/s y finalmente en el canvas)
+    // Estrategia para graficar mediante buffers (Primero se "grafica" en el/los buffer/s y finalmente en el canvas)
+    private BufferStrategy bs;
     private Graphics g;
 
     // Estados
@@ -53,8 +55,8 @@ public class Juego implements Runnable {
     private PaqueteMovimiento ubicacionPersonaje;
     private Map<Integer, PaquetePersonaje> personajesConectados;
     private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
-    private Map<Integer, PaqueteDeNPC> NPCs;
-    private Map<Integer, PaqueteMovimiento> ubicacionNPCs;
+    private Map<Integer, PaqueteDeNPC> npcs;
+    private Map<Integer, PaqueteMovimiento> ubicacionNPCS;
     private Map<String, MiChat> chatsActivos = new HashMap<>();
 
     private CargarRecursos cargarRecursos;
@@ -74,10 +76,10 @@ public class Juego implements Runnable {
      *            the pp
      */
     public Juego(final String nombre, final int ancho, final int alto, final Cliente cliente,
-            final PaquetePersonaje pp) {
-        this.NOMBRE = nombre;
-        this.ALTO = alto;
-        this.ANCHO = ancho;
+        final PaquetePersonaje pp) {
+        this.nombre = nombre;
+        this.alto = alto;
+        this.ancho = ancho;
         this.cliente = cliente;
         this.paquetePersonaje = pp;
 
@@ -103,7 +105,7 @@ public class Juego implements Runnable {
      * Iniciar Juego.
      */
     public void iniciar() { // Carga lo necesario para iniciar el juego
-        pantalla = new Pantalla(NOMBRE, ANCHO, ALTO, cliente);
+        pantalla = new Pantalla(nombre, ancho, alto, cliente);
 
         pantalla.getCanvas().addMouseListener(handlerMouse);
 
@@ -134,7 +136,7 @@ public class Juego implements Runnable {
 
         g = bs.getDrawGraphics(); // Permite graficar el buffer mediante g
 
-        g.clearRect(0, 0, ANCHO, ALTO); // Limpiamos la pantalla
+        g.clearRect(0, 0, ancho, alto); // Limpiamos la pantalla
 
         // Graficado de imagenes
         g.setFont(new Font("Book Antiqua", 1, 15));
@@ -153,7 +155,7 @@ public class Juego implements Runnable {
     public void run() { // Hilo principal del juego
 
         int fps = 60; // Cantidad de actualizaciones por segundo que se desean
-        double tiempoPorActualizacion = 1000000000 / fps; // Cantidad de nanosegundos en FPS deseados
+        double tiempoPorActualizacion = MICRO_SEGUNDO / fps; // Cantidad de nanosegundos en FPS deseados
         double delta = 0;
         long ahora;
         long ultimoTiempo = System.nanoTime();
@@ -162,8 +164,10 @@ public class Juego implements Runnable {
 
         while (corriendo) {
             ahora = System.nanoTime();
-            delta += (ahora - ultimoTiempo) / tiempoPorActualizacion; // Calculo  para determinar cuando realizar la actualizacion y el graficado
-            timer += ahora - ultimoTiempo; // Sumo el tiempo transcurrido hasta que se acumule 1 segundo y mostrar los FPS
+            // Calculo  para determinar cuando realizar la actualizacion y el graficado
+            delta += (ahora - ultimoTiempo) / tiempoPorActualizacion;
+            // Sumo el tiempo transcurrido hasta que se acumule 1 segundo y mostrar los FPS
+            timer += ahora - ultimoTiempo;
             ultimoTiempo = ahora; // Para las proximas corridas del bucle
 
             if (delta >= 1) {
@@ -173,8 +177,9 @@ public class Juego implements Runnable {
                 delta--;
             }
 
-            if (timer >= 1000000000) { // Si paso 1 segundo muestro los FPS
-                pantalla.getFrame().setTitle(NOMBRE + " | " + "FPS: " + actualizaciones);
+            // Si paso 1 segundo muestro los FPS
+            if (timer >= MICRO_SEGUNDO) {
+                pantalla.getFrame().setTitle(nombre + " | " + "FPS: " + actualizaciones);
                 actualizaciones = 0;
                 timer = 0;
             }
@@ -187,8 +192,9 @@ public class Juego implements Runnable {
      * Inicia el juego
      */
     public synchronized void start() { // Inicia el juego
-        if (corriendo)
+        if (corriendo) {
             return;
+        }
 
         estadoJuego = new EstadoJuego(this);
         Estado.setEstado(estadoJuego);
@@ -202,8 +208,9 @@ public class Juego implements Runnable {
      * Detiene el juego
      */
     public synchronized void stop() { // Detiene el juego
-        if (!corriendo)
+        if (!corriendo) {
             return;
+        }
         try {
             corriendo = false;
             hilo.join();
@@ -218,7 +225,7 @@ public class Juego implements Runnable {
      * @return the ancho
      */
     public int getAncho() {
-        return ANCHO;
+        return ancho;
     }
 
     /**
@@ -227,7 +234,7 @@ public class Juego implements Runnable {
      * @return the alto
      */
     public int getAlto() {
-        return ALTO;
+        return alto;
     }
 
     /**
@@ -401,7 +408,7 @@ public class Juego implements Runnable {
      * @return the NPcs
      */
     public Map<Integer, PaqueteDeNPC> getNPCs() {
-        return NPCs;
+        return npcs;
     }
 
     /**
@@ -411,7 +418,7 @@ public class Juego implements Runnable {
      *            the map
      */
     public void setNPCs(final Map<Integer, PaqueteDeNPC> map) {
-        NPCs = map;
+        npcs = map;
     }
 
     /**
@@ -420,7 +427,7 @@ public class Juego implements Runnable {
      * @return the ubicacion NPcs
      */
     public Map<Integer, PaqueteMovimiento> getUbicacionNPCs() {
-        return ubicacionNPCs;
+        return ubicacionNPCS;
     }
 
     /**
@@ -430,6 +437,6 @@ public class Juego implements Runnable {
      *            the ubicacion NPcs
      */
     public void setUbicacionNPCs(final Map<Integer, PaqueteMovimiento> ubicacionNPCs) {
-        this.ubicacionNPCs = ubicacionNPCs;
+        this.ubicacionNPCS = ubicacionNPCs;
     }
 }
