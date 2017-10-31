@@ -71,8 +71,8 @@ public class EstadoBatallaNPC extends Estado {
 
         menuBatalla = new MenuBatalla(miTurno, personaje);
 
-        miniaturaNPC = Recursos.monstruo;
-        miniaturaPersonaje = Recursos.personaje.get(personaje.getNombreRaza()).get(5)[0];
+        miniaturaNPC = Recursos.getMonstruo();
+        miniaturaPersonaje = Recursos.getPersonaje().get(personaje.getNombreRaza()).get(5)[0];
 
         paqueteFinalizarBatalla = new PaqueteFinalizarBatalla();
         paqueteFinalizarBatalla.setId(personaje.getIdPersonaje());
@@ -161,7 +161,7 @@ public class EstadoBatallaNPC extends Estado {
 
                         finalizarBatalla();
 
-                        juego.getPersonaje().setEstado(Estado.estadoJuego);
+                        juego.getPersonaje().setEstado(Estado.getEstadoJuego());
                         Estado.setEstado(juego.getEstadoJuego());
                     } else {
                         enemigo.atacar(personaje);
@@ -170,7 +170,7 @@ public class EstadoBatallaNPC extends Estado {
                             juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(),
                                 MenuInfoPersonaje.MENU_PEDER_BATALLA);
 
-                            juego.getPersonaje().setEstado(Estado.estadoJuego);
+                            juego.getPersonaje().setEstado(Estado.getEstadoJuego());
 
                             paqueteFinalizarBatalla.setGanadorBatalla(-1);
 
@@ -197,8 +197,8 @@ public class EstadoBatallaNPC extends Estado {
         g.fillRect(0, 0, juego.getAncho(), juego.getAlto());
         mundo.graficar(g);
 
-        g.drawImage(Recursos.personaje.get(paquetePersonaje.getRaza()).get(3)[0], 0, 175, 256, 256, null);
-        g.drawImage(Recursos.monstruo, 550, 75, 256, 256, null);
+        g.drawImage(Recursos.getPersonaje().get(paquetePersonaje.getRaza()).get(3)[0], 0, 175, 256, 256, null);
+        g.drawImage(Recursos.getMonstruo(), 550, 75, 256, 256, null);
 
         mundo.graficarObstaculos(g);
         menuBatalla.graficar(g);

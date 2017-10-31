@@ -9,11 +9,7 @@ import javax.swing.JOptionPane;
 /**
  * The Class CargadorImagen.
  */
-public class CargadorImagen {
-
-    private CargadorImagen() {
-
-    }
+public final class CargadorImagen {
 
     /**
      * Carga una imagen.

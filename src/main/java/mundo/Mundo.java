@@ -16,7 +16,7 @@ public class Mundo {
     private int yOffset;
 
     private float[] iso = new float[2];
-    private int[][] tiles;
+    private int[][] tilesLocal;
     private int[][] tilesInv;
 
     private int xMinimo;
@@ -33,6 +33,8 @@ public class Mundo {
      *            the juego
      * @param pathMap
      *            the path map
+     * @param pathObstac
+     * 			  the path obstac
      */
     public Mundo(final Juego juego, final String pathMap, final String pathObstac) {
         this.juego = juego;
@@ -62,24 +64,25 @@ public class Mundo {
         yMinimo = (int) juego.getCamara().getyOffset() + yOffset - 60;
         yMaximo = yMinimo + juego.getAlto() + yOffset + 60;
 
-        // Grafico el el tile base
+        // Grafico en el tile base
         for (int i = 0; i < alto; i++) {
             for (int j = 0; j < ancho; j++) {
                 iso = dosDaIso(j, i);
                 if ((iso[0] >= xMinimo && iso[0] <= xMaximo) && (iso[1] >= yMinimo && iso[1] <= yMaximo)) {
                     String map = juego.getPersonaje().getMapa();
                     if (map == "Aubenor") {
-                        Tile.aubenor[Tile.aubenorBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
+                        Tile.getAubenor()[Tile.getAubenorbase()].graficar(
+                        	g, (int) (iso[0] - juego.getCamara().getxOffset()),
                             (int) (iso[1] - juego.getCamara().getyOffset() - 32), 64, 64);
                     } else if (map == "Aris") {
-                        Tile.aris[Tile.arisBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
+                        Tile.getAris()[Tile.getArisbase()].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
                             (int) (iso[1] - juego.getCamara().getyOffset() - 32), 64, 64);
-                    } else if (map == "Eodrim") {
+                    } //else if (map == "Eodrim") {
                         //Falta implementar Eodrim.
                         //Tile.aubenor[Tile.aubenorBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
                         //		(int) (iso[1] - juego.getCamara().getyOffset() - 32),64,64);
-                    }
-                    if (!getTile(j, i).esSolido()) {
+                    //}
+                    if (!getTile(j, i).isEsSolido()) {
                         getTile(j, i).graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
                             (int) (iso[1] - juego.getCamara().getyOffset() - 32), 64, 64);
                     }
@@ -111,7 +114,7 @@ public class Mundo {
 
                 // Grafico los obstaculos
                 if ((iso[0] >= xMinimo && iso[0] <= xMaximo) && (iso[1] >= yMinimo && iso[1] <= yMaximo)
-                    && getTile(j, i).esSolido()) {
+                    && getTile(j, i).isEsSolido()) {
                     obst = getTile(j, i);
                     obst.graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
                         (int) (iso[1] - juego.getCamara().getyOffset() - obst.getAlto() / 2), obst.getAncho(),
@@ -131,17 +134,17 @@ public class Mundo {
      * @return the tile
      */
     public Tile getTile(final int x, final int y) {
-        Tile t = Tile.tiles[tiles[x][y]];
+        Tile t = Tile.getTiles()[tilesLocal[x][y]];
         if (t == null) {
             String map = juego.getPersonaje().getMapa();
             if (map == "Aubenor") {
-                return Tile.aubenor[Tile.aubenorBase];
+                return Tile.getAubenor()[Tile.getAubenorbase()];
             } else if (map == "Aris") {
-                return Tile.aris[Tile.arisBase];
-            } else if (map == "Eodrim") {
+                return Tile.getAris()[Tile.getArisbase()];
+            } // else if (map == "Eodrim") {
                 //Falta implementar el mapa.
                 //return Tile.aubenor[Tile.aubenorBase];
-            }
+            //}
         }
         return t;
     }
@@ -162,14 +165,14 @@ public class Mundo {
         Utilitarias.parseInt(tokens[2]);
         Utilitarias.parseInt(tokens[3]);
 
-        tiles = new int[ancho][alto];
+        tilesLocal = new int[ancho][alto];
         tilesInv = new int[alto][ancho];
 
         for (int y = 0; y < alto; y++) {
             for (int x = 0; x < ancho; x++) {
 
-                tiles[x][y] = Utilitarias.parseInt(tokens[(x + y * ancho + 4)]);
-                tilesInv[y][x] = tiles[x][y];
+                tilesLocal[x][y] = Utilitarias.parseInt(tokens[(x + y * ancho + 4)]);
+                tilesInv[y][x] = tilesLocal[x][y];
             }
         }
 
@@ -194,10 +197,10 @@ public class Mundo {
         // Uno cada nodo con sus adyacentes
         for (int x = 0; x < yFinal; x++) {
             for (int y = 0; y < xFinal; y++) {
-                if (!Tile.tiles[tilesInv[x][y]].esSolido()) {
+                if (!Tile.getTiles()[tilesInv[x][y]].isEsSolido()) {
                     // Si no es la ultima fila y el tile de abajo es no solido,
                     // lo uno
-                    if (y < yFinal - 1 && !Tile.tiles[tilesInv[x][y + 1]].esSolido()) {
+                    if (y < yFinal - 1 && !Tile.getTiles()[tilesInv[x][y + 1]].isEsSolido()) {
                         nodos[x][y].agregarAdyacente(nodos[x][y + 1]);
                         nodos[x][y + 1].agregarAdyacente(nodos[x][y]);
                     }
@@ -207,14 +210,14 @@ public class Mundo {
                         // Y ademas el de arriba ni el de la derecha lo son, lo
                         // uno
                         // Tiene que ser a partir de la segunda fila
-                        if (y > 0 && !Tile.tiles[tilesInv[x + 1][y - 1]].esSolido()
-                            && !Tile.tiles[tilesInv[x + 1][y]].esSolido()
-                            && !Tile.tiles[tilesInv[x][y - 1]].esSolido()) {
+                        if (y > 0 && !Tile.getTiles()[tilesInv[x + 1][y - 1]].isEsSolido()
+                            && !Tile.getTiles()[tilesInv[x + 1][y]].isEsSolido()
+                            && !Tile.getTiles()[tilesInv[x][y - 1]].isEsSolido()) {
                             nodos[x][y].agregarAdyacente(nodos[x + 1][y - 1]);
                             nodos[x + 1][y - 1].agregarAdyacente(nodos[x][y]);
                         }
                         // Si el de la derecha no es un tile solido lo uno
-                        if (!Tile.tiles[tilesInv[x + 1][y]].esSolido()) {
+                        if (!Tile.getTiles()[tilesInv[x + 1][y]].isEsSolido()) {
                             nodos[x][y].agregarAdyacente(nodos[x + 1][y]);
                             nodos[x + 1][y].agregarAdyacente(nodos[x][y]);
                         }
@@ -222,9 +225,9 @@ public class Mundo {
                         // Y ademas el de abajo ni el de la derecha lo son, lo
                         // uno
                         // Debe ser antes de la ultima fila
-                        if (y < yFinal - 1 && !Tile.tiles[tilesInv[x + 1][y + 1]].esSolido()
-                            && !Tile.tiles[tilesInv[x + 1][y]].esSolido()
-                            && !Tile.tiles[tilesInv[x][y + 1]].esSolido()) {
+                        if (y < yFinal - 1 && !Tile.getTiles()[tilesInv[x + 1][y + 1]].isEsSolido()
+                            && !Tile.getTiles()[tilesInv[x + 1][y]].isEsSolido()
+                            && !Tile.getTiles()[tilesInv[x][y + 1]].isEsSolido()) {
                             nodos[x][y].agregarAdyacente(nodos[x + 1][y + 1]);
                             nodos[x + 1][y + 1].agregarAdyacente(nodos[x][y]);
                         }

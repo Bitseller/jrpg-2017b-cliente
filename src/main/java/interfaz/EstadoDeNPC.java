@@ -47,7 +47,7 @@ public final class EstadoDeNPC {
 
         int drawBarra = 0;
 
-        g.drawImage(Recursos.estadoPersonaje, x, y, null);
+        g.drawImage(Recursos.getEstadoPersonaje(), x, y, null);
 
         g.drawImage(miniaturaPersonaje, x + 10, y + 9, ANCHOMINIATURA, ALTOMINIATURA, null);
 
@@ -59,7 +59,7 @@ public final class EstadoDeNPC {
 
         g.setColor(Color.WHITE);
         g.setFont(new Font("Tahoma", Font.PLAIN, 10));
-        g.drawImage(Recursos.barraSalud, x + 80, y + 26, drawBarra, ALTOSALUD, null);
+        g.drawImage(Recursos.getBarraSalud(), x + 80, y + 26, drawBarra, ALTOSALUD, null);
         g.drawString(String.valueOf(personaje.getSalud()) + " / " + String.valueOf(personaje.getSaludTope()), x + 132,
             y + 37);
 
@@ -69,7 +69,7 @@ public final class EstadoDeNPC {
             drawBarra = (personaje.getEnergia() * ANCHOBARRA) / personaje.getEnergiaTope();
         }
 
-        g.drawImage(Recursos.barraEnergia, x + 80, y + 42, drawBarra, ALTOENERGIA, null);
+        g.drawImage(Recursos.getBarraEnergia(), x + 80, y + 42, drawBarra, ALTOENERGIA, null);
         g.drawString(String.valueOf(personaje.getEnergia()) + " / " + String.valueOf(personaje.getEnergiaTope()),
             x + 132, y + 52);
 
@@ -81,7 +81,7 @@ public final class EstadoDeNPC {
         }
 
         g.setFont(new Font("Tahoma", Font.PLAIN, 8));
-        g.drawImage(Recursos.barraExperiencia, x + 77, y + 65, drawBarra, ALTOEXPERIENCIA, null);
+        g.drawImage(Recursos.getBarraExperiencia(), x + 77, y + 65, drawBarra, ALTOEXPERIENCIA, null);
         g.drawString(String.valueOf(personaje.getExperiencia()) + " / "
             + String.valueOf(Personaje.getTablaDeNiveles()[personaje.getNivel() + 1]), x + 132, y + 70);
         g.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -109,7 +109,7 @@ public final class EstadoDeNPC {
 
         int drawBarra = 0;
 
-        g.drawImage(Recursos.estadoPersonaje, x, y, null);
+        g.drawImage(Recursos.getEstadoPersonaje(), x, y, null);
 
         g.drawImage(miniaturaNPC, x + 10, y + 9, ANCHOMINIATURA, ALTOMINIATURA, null);
 
@@ -121,12 +121,11 @@ public final class EstadoDeNPC {
 
         g.setColor(Color.WHITE);
         g.setFont(new Font("Tahoma", Font.PLAIN, 10));
-        g.drawImage(Recursos.barraSalud, x + 80, y + 26, drawBarra, ALTOSALUD, null);
+        g.drawImage(Recursos.getBarraSalud(), x + 80, y + 26, drawBarra, ALTOSALUD, null);
         g.drawString(String.valueOf(npc.getSalud()) + " / " + String.valueOf(npc.getSaludTope()), x + 132, y + 37);
 
         g.setFont(new Font("Tahoma", Font.PLAIN, 8));
-        g.drawImage(Recursos.barraExperiencia, x + 77, y + 65, drawBarra, ALTOEXPERIENCIA, null);
-        //g.drawString(String.valueOf(personaje.getExperiencia()) + " / " + String.valueOf(Personaje.getTablaDeNiveles()[personaje.getNivel() + 1]), x + 132, y + 70);
+        g.drawImage(Recursos.getBarraExperiencia(), x + 77, y + 65, drawBarra, ALTOEXPERIENCIA, null);
         g.setFont(new Font("Tahoma", Font.PLAIN, 10));
         g.setColor(Color.GREEN);
         g.drawString(String.valueOf(npc.getNivel()), x + 59, y + 70);

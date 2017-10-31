@@ -38,7 +38,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
      *             Signals that an I/O exception has occurred.
      */
     public PaquetePersonaje() throws IOException {
-        estado = Estado.estadoOffline;
+        estado = Estado.getEstadoOffline();
     }
 
     /**
@@ -369,7 +369,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
      *
      * @param idItem
      *            the id item
-     * @param nombre
+     * @param nombreItem
      *            the nombre
      * @param wearLocation
      *            the wear location
@@ -388,12 +388,12 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
      * @param fotoEquipado
      *            the foto equipado
      */
-    public final void anadirItem(final int idItem, final String nombre, final int wearLocation, final int bonusSalud,
+    public final void anadirItem(final int idItem, final String nombreItem, final int wearLocation, final int bonusSalud,
         final int bonusEnergia,
         final int bonusAtaque, final int bonusDefensa, final int bonusMagia, final String foto,
         final String fotoEquipado) {
         try {
-            items.add(new Item(idItem, nombre, wearLocation, bonusSalud, bonusEnergia, bonusAtaque, bonusDefensa,
+            items.add(new Item(idItem, nombreItem, wearLocation, bonusSalud, bonusEnergia, bonusAtaque, bonusDefensa,
                 bonusMagia, foto, fotoEquipado));
             useBonus(bonusSalud, bonusEnergia, bonusAtaque, bonusDefensa, bonusMagia);
         } catch (IOException e) {
@@ -604,12 +604,12 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
     /**
      * Actualizar trueque.
      *
-     * @param items
+     * @param nuevosItems
      *            the items
      */
-    public void actualizarTrueque(final ArrayList<Item> items) {
+    public void actualizarTrueque(final ArrayList<Item> nuevosItems) {
         this.items.removeAll(this.items);
-        for (Item item : items) {
+        for (Item item : nuevosItems) {
             this.items.add(item);
         }
     }

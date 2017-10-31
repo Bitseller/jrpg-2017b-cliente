@@ -12,10 +12,10 @@ public abstract class Estado {
     private static Estado estadoActual = null;
 
     // Tipo de estados
-    public static int estadoOffline = 0;
-    public static int estadoJuego = 1;
-    public static int estadoBatalla = 2;
-    public static int estadoBatallaNPC = 3;
+    private static final int estadoOffline = 0;
+    private static final int estadoJuego = 1;
+    private static final int estadoBatalla = 2;
+    private static final int estadoBatallaNPC = 3;
 
     protected Juego juego;
 
@@ -67,4 +67,47 @@ public abstract class Estado {
      * @return true, if successful
      */
     public abstract boolean esEstadoDeJuego();
+
+	/**
+	 * @return the estadoActual
+	 */
+	public static Estado getEstadoActual() {
+		return estadoActual;
+	}
+
+	/**
+	 * @param estadoActual the estadoActual to set
+	 */
+	public static void setEstadoActual(Estado estadoActual) {
+		Estado.estadoActual = estadoActual;
+	}
+
+	/**
+	 * @return the estadoOffline
+	 */
+	public static int getEstadoOffline() {
+		return estadoOffline;
+	}
+	
+	/**
+	 * @return the estadoJuego
+	 */
+	public static int getEstadoJuego() {
+		return estadoJuego;
+	}
+
+	/**
+	 * @return the estadoBatalla
+	 */
+	public static int getEstadoBatalla() {
+		return estadoBatalla;
+	}
+
+	/**
+	 * @return the estadoBatallaNPC
+	 */
+	public static int getEstadoBatallaNPC() {
+		return estadoBatallaNPC;
+	}    
+    
 }

@@ -9,11 +9,8 @@ import javax.swing.JOptionPane;
 /**
  * The Class Utilitarias.
  */
-public class Utilitarias {
-
-    private Utilitarias() {
-    }
-
+public final class Utilitarias {
+	
     /**
      * Archivo A string.
      *

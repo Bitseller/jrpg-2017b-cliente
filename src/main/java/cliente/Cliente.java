@@ -221,11 +221,11 @@ public class Cliente extends Thread {
     /**
      * Setea el cliente.
      *
-     * @param cliente
+     * @param clienteSocket
      *            cliente a setear
      */
-    public void setSocket(final Socket cliente) {
-        this.cliente = cliente;
+    public void setSocket(final Socket clienteSocket) {
+        this.cliente = clienteSocket;
     }
 
     /**

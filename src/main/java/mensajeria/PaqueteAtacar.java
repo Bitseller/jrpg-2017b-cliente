@@ -11,7 +11,7 @@ public class PaqueteAtacar extends Paquete implements Serializable, Cloneable {
     private int id;
     private int idEnemigo;
     private int nuevaSaludPersonaje;
-    private int nuevaEnergiaPersonaje;
+    private final int nuevaEnergiaPersonaje;
     private int nuevaSaludEnemigo;
     private int nuevaEnergiaEnemigo;
     private HashMap<String, Number> mapPersonaje = new HashMap<String, Number>();
@@ -125,16 +125,6 @@ public class PaqueteAtacar extends Paquete implements Serializable, Cloneable {
      */
     public int getNuevaEnergiaPersonaje() {
         return nuevaEnergiaPersonaje;
-    }
-
-    /**
-     * Sets the nueva energia personaje.
-     *
-     * @param nuevaEnergiaPersonaje
-     *            the new nueva energia personaje
-     */
-    public void setNuevaEnergiaPersonaje(final int nuevaEnergiaPersonaje) {
-        this.nuevaEnergiaPersonaje = nuevaEnergiaPersonaje;
     }
 
     /**

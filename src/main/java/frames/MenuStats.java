@@ -38,7 +38,7 @@ public class MenuStats extends JFrame implements MenuGenerico {
      * Create the frame.
      *
      * @param cliente
-     *            the cliente
+     *            el cliente
      */
     public MenuStats(final Cliente cliente) {
         paquetePersonaje = cliente.getPaquetePersonaje();
@@ -54,8 +54,8 @@ public class MenuStats extends JFrame implements MenuGenerico {
 
         addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent e) {
-                Pantalla.menuStats = null;
+            public void windowClosing(final WindowEvent e) {
+            	 Pantalla.setMenuStats(null);
                 dispose();
             }
         });
@@ -172,16 +172,16 @@ public class MenuStats extends JFrame implements MenuGenerico {
         btnVolver.setIcon(new ImageIcon("recursos//volver.png"));
         btnVolver.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                Pantalla.menuStats = null;
+            public void actionPerformed(final ActionEvent e) {
+            	 Pantalla.setMenuStats(null);
                 dispose();
             }
         });
         JLabel background = new JLabel(new ImageIcon(imagenFondo.getScaledInstance(400, 350, Image.SCALE_DEFAULT)));
-        GroupLayout gl_contentPane = new GroupLayout(contentPane);
-        gl_contentPane.setHorizontalGroup(
-            gl_contentPane.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_contentPane.createSequentialGroup()
+        GroupLayout glContentPane = new GroupLayout(contentPane);
+        glContentPane.setHorizontalGroup(
+            glContentPane.createParallelGroup(Alignment.LEADING)
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(24)
                     .addComponent(lblNombre, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
                     .addGap(12)
@@ -190,19 +190,19 @@ public class MenuStats extends JFrame implements MenuGenerico {
                     .addComponent(lblNivel, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
                     .addGap(26)
                     .addComponent(lvPj, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(24)
                     .addComponent(lblCasta, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
                     .addGap(12)
                     .addComponent(cstPj, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
                     .addGap(94)
                     .addComponent(xpPj, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(24)
                     .addComponent(lblRaza, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
                     .addGap(12)
                     .addComponent(rzPj, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(24)
                     .addComponent(lblSalud, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
                     .addGap(12)
@@ -211,7 +211,7 @@ public class MenuStats extends JFrame implements MenuGenerico {
                     .addComponent(lblEnergia, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
                     .addGap(34)
                     .addComponent(energiaPj, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(24)
                     .addComponent(lblFuerza, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
                     .addGap(20)
@@ -220,7 +220,7 @@ public class MenuStats extends JFrame implements MenuGenerico {
                     .addComponent(lblAtaque, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
                     .addGap(34)
                     .addComponent(ataPj, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(24)
                     .addComponent(lblDestreza, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
                     .addGap(12)
@@ -229,91 +229,91 @@ public class MenuStats extends JFrame implements MenuGenerico {
                     .addComponent(lblDefensa, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
                     .addGap(26)
                     .addComponent(defPj, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(181)
                     .addComponent(lblMagia, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
                     .addGap(43)
                     .addComponent(magicPj, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(24)
-                    .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-                        .addGroup(gl_contentPane.createSequentialGroup()
+                    .addGroup(glContentPane.createParallelGroup(Alignment.LEADING)
+                        .addGroup(glContentPane.createSequentialGroup()
                             .addGap(106)
                             .addComponent(cantItem, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
                         .addComponent(lblCantidadDeItems, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(24)
                     .addComponent(lblInteligencia, GroupLayout.PREFERRED_SIZE, 72, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(140)
                     .addComponent(btnVolver, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(181)
                     .addComponent(lblExperiencia, GroupLayout.PREFERRED_SIZE, 72, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(92)
                     .addComponent(intPj, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE))
                 .addComponent(background, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE)
         );
-        gl_contentPane.setVerticalGroup(
-            gl_contentPane.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_contentPane.createSequentialGroup()
+        glContentPane.setVerticalGroup(
+            glContentPane.createParallelGroup(Alignment.LEADING)
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(24)
-                    .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                    .addGroup(glContentPane.createParallelGroup(Alignment.LEADING)
                         .addComponent(lblNombre, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
                         .addComponent(nmbPj, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblNivel, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
                         .addComponent(lvPj, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
                     .addGap(13)
-                    .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                    .addGroup(glContentPane.createParallelGroup(Alignment.LEADING)
                         .addComponent(lblCasta, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
                         .addComponent(cstPj, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
                         .addComponent(xpPj, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
                     .addGap(13)
-                    .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                    .addGroup(glContentPane.createParallelGroup(Alignment.LEADING)
                         .addComponent(lblRaza, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
                         .addComponent(rzPj, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
                     .addGap(13)
-                    .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                    .addGroup(glContentPane.createParallelGroup(Alignment.LEADING)
                         .addComponent(lblSalud, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
                         .addComponent(saludPj, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblEnergia, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
                         .addComponent(energiaPj, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
                     .addGap(13)
-                    .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                    .addGroup(glContentPane.createParallelGroup(Alignment.LEADING)
                         .addComponent(lblFuerza, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
                         .addComponent(fzaPj, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblAtaque, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
                         .addComponent(ataPj, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
                     .addGap(13)
-                    .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                    .addGroup(glContentPane.createParallelGroup(Alignment.LEADING)
                         .addComponent(lblDestreza, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
                         .addComponent(dstzaPj, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblDefensa, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
                         .addComponent(defPj, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
                     .addGap(13)
-                    .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                    .addGroup(glContentPane.createParallelGroup(Alignment.LEADING)
                         .addComponent(lblMagia, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
                         .addComponent(magicPj, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
                     .addGap(13)
-                    .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                    .addGroup(glContentPane.createParallelGroup(Alignment.LEADING)
                         .addComponent(cantItem, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblCantidadDeItems, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(198)
                     .addComponent(lblInteligencia, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(256)
                     .addComponent(btnVolver, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(53)
                     .addComponent(lblExperiencia, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(198)
                     .addComponent(intPj, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
                 .addComponent(background, GroupLayout.PREFERRED_SIZE, 321, GroupLayout.PREFERRED_SIZE)
         );
-        contentPane.setLayout(gl_contentPane);
+        contentPane.setLayout(glContentPane);
     }
 
     /**

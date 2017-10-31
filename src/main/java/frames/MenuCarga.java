@@ -72,24 +72,24 @@ public class MenuCarga extends JFrame {
 
         JLabel lblBackground = new JLabel("");
         lblBackground.setIcon(new ImageIcon(MenuCarga.class.getResource("/frames/menuBackground.jpg")));
-        GroupLayout gl_contentPane = new GroupLayout(contentPane);
-        gl_contentPane.setAutoCreateGaps(true);
+        GroupLayout glContentPane = new GroupLayout(contentPane);
+        glContentPane.setAutoCreateGaps(true);
 
-        gl_contentPane.setHorizontalGroup(
-            gl_contentPane.createParallelGroup(Alignment.CENTER)
+        glContentPane.setHorizontalGroup(
+            glContentPane.createParallelGroup(Alignment.CENTER)
                 .addComponent(lblLogo)
-                .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                .addGroup(glContentPane.createParallelGroup(Alignment.LEADING)
                     .addComponent(barraCargando, GroupLayout.PREFERRED_SIZE, 0, GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblBarraCarga)
                 )
                 .addComponent(lblBackground, GroupLayout.PREFERRED_SIZE, FRAME_ANCHO, GroupLayout.PREFERRED_SIZE)
         );
 
-        gl_contentPane.setVerticalGroup(gl_contentPane.createSequentialGroup()
-            .addGroup(gl_contentPane.createParallelGroup(Alignment.CENTER)
-                .addGroup(gl_contentPane.createSequentialGroup()
+        glContentPane.setVerticalGroup(glContentPane.createSequentialGroup()
+            .addGroup(glContentPane.createParallelGroup(Alignment.CENTER)
+                .addGroup(glContentPane.createSequentialGroup()
                     .addComponent(lblLogo)
-                    .addGroup(gl_contentPane.createParallelGroup(GroupLayout.Alignment.CENTER)
+                    .addGroup(glContentPane.createParallelGroup(GroupLayout.Alignment.CENTER)
                         .addComponent(barraCargando)
                         .addComponent(lblBarraCarga, GroupLayout.PREFERRED_SIZE, BARRA_ALTO, GroupLayout.PREFERRED_SIZE)
                     )
@@ -97,7 +97,7 @@ public class MenuCarga extends JFrame {
                 .addComponent(lblBackground, GroupLayout.PREFERRED_SIZE, FRAME_ALTO, GroupLayout.PREFERRED_SIZE)
             )
         );
-        contentPane.setLayout(gl_contentPane);
+        contentPane.setLayout(glContentPane);
     }
 
     /**
@@ -106,7 +106,7 @@ public class MenuCarga extends JFrame {
      * @param ancho
      *            la longitud de la barra de carga
      */
-    public void setBarraCargando(int ancho) {
+    public void setBarraCargando(final int ancho) {
         barraCargando.setSize(ancho, ALTO_BARRA);
     }
 }

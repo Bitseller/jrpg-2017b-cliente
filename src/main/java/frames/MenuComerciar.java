@@ -38,6 +38,7 @@ import mensajeria.Comando;
  */
 public class MenuComerciar extends JFrame {
 
+	private static final int CANT_MAX_ITEM = 9;
     private static final int FRAME_ALTO = 363;
     private static final int FRAME_ANCHO = 610;
     private static final int BOTON_ANCHO = 97;
@@ -79,7 +80,7 @@ public class MenuComerciar extends JFrame {
 
         addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent e) {
+            public void windowClosing(final WindowEvent e) {
                 cliente.setM1(null);
                 dispose();
             }
@@ -97,7 +98,7 @@ public class MenuComerciar extends JFrame {
         btnCancelar.setIcon(new ImageIcon("recursos//volver.png"));
         btnCancelar.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 cliente.setM1(null);
                 dispose();
             }
@@ -208,18 +209,18 @@ public class MenuComerciar extends JFrame {
         btnAgregar.setIcon(new ImageIcon("recursos//flechaDer.png"));
         btnAgregar.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent arg0) {
+            public void actionPerformed(final ActionEvent arg0) {
                 if (listMisItems.getSelectedValue() != null) {
                     dar.addElement(listMisItems.getSelectedValue());
                     if (obtener.size() != 0) {
-                        if (sizeItems - dar.size() + obtener.size() <= 9) {
+                        if (sizeItems - dar.size() + obtener.size() <= CANT_MAX_ITEM) {
                             chckbxListo.setEnabled(true);
                             leyenda.setVisible(false);
                         }
                     }
                     // Pongo el primer item y pregunto si es igual al seleccionado
                     // Entonces mientras que sean distinto lo busca
-                    // Cuando sea igual sale del while y lo agrega en la lista 
+                    // Cuando sea igual sale del while y lo agrega en la lista
                     item1 = cliente.getPaquetePersonaje().getItems().get(count);
                     while (!item1.getNombre().equals(listMisItems.getSelectedValue())) {
                         count++;
@@ -249,7 +250,7 @@ public class MenuComerciar extends JFrame {
         btnSacar.setIcon(new ImageIcon("recursos//flechaIzq.png"));
         btnSacar.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent arg0) {
+            public void actionPerformed(final ActionEvent arg0) {
                 if (listADar.getSelectedValue() != null) {
                     misItems.addElement(listADar.getSelectedValue());
                     for (Item item : cliente.getPaquetePersonaje().getItems()) {
@@ -263,7 +264,7 @@ public class MenuComerciar extends JFrame {
                         chckbxListo.setEnabled(false);
                     }
                     // Si los items en total es mayor a 9 no puedo comerciar
-                    if (sizeItems - dar.size() + obtener.size() > 9) {
+                    if (sizeItems - dar.size() + obtener.size() > CANT_MAX_ITEM) {
                         chckbxListo.setEnabled(false);
                         leyenda.setVisible(true);
                     }
@@ -293,7 +294,7 @@ public class MenuComerciar extends JFrame {
         // List Listener para cargar stats del item mio clickeado
         listMisItems.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent arg0) {
+            public void mouseClicked(final MouseEvent arg0) {
                 if (arg0.getClickCount() == 1) {
                     if (listMisItems.getSelectedValue() != null) {
                         for (Item item : cliente.getPaquetePersonaje().getItems()) {
@@ -313,7 +314,7 @@ public class MenuComerciar extends JFrame {
         // List Listener para cargar stats del item del enemigo clickeado
         listAObtener.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent arg0) {
+            public void mouseClicked(final MouseEvent arg0) {
                 if (arg0.getClickCount() == 1) {
                     if (obtener.size() != 0) {
                         //cambiar la variable del for each a la lista que va a venir del otro pj
@@ -330,8 +331,7 @@ public class MenuComerciar extends JFrame {
                 }
             }
         });
-
-        //CARGO MIS ITEMS		
+        //CARGO MIS ITEMS
         for (Item item : cliente.getPaquetePersonaje().getItems()) {
             misItems.addElement(item.getNombre());
         }
@@ -350,7 +350,7 @@ public class MenuComerciar extends JFrame {
 
         chckbxListo.addItemListener(new ItemListener() {
             @Override
-            public void itemStateChanged(ItemEvent arg0) {
+            public void itemStateChanged(final ItemEvent arg0) {
                 if (chckbxListo.isSelected()) {
                     // Si ya la persona con la que voy a comerciar esta en LISTO
                     if (cantListos == 1) {
@@ -393,7 +393,7 @@ public class MenuComerciar extends JFrame {
                         cantListo.setText(cantListos + "/2");
                     }
                 } else {
-                    // Si habia clickeado LISTO, pero lo desclickie entonces le digo 
+                    // Si habia clickeado LISTO, pero lo desclickie entonces le digo
                     // que disminuya en el otro cliente
                     if (cantListos != 2) {
                         // Si no tenia nada en la lista no tengo que disminuir la cant
@@ -419,10 +419,10 @@ public class MenuComerciar extends JFrame {
         final JLabel background = new JLabel("");
         background.setIcon(new ImageIcon(MenuCarga.class.getResource("recursos//background.jpg")));
 
-        GroupLayout gl_contentPane = new GroupLayout(contentPane);
-        gl_contentPane.setHorizontalGroup(
-            gl_contentPane.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_contentPane.createSequentialGroup()
+        GroupLayout glContentPane = new GroupLayout(contentPane);
+        glContentPane.setHorizontalGroup(
+            glContentPane.createParallelGroup(Alignment.LEADING)
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(24)
                     .addComponent(lblMisItems, GroupLayout.PREFERRED_SIZE, LISTA_ANCHO, GroupLayout.PREFERRED_SIZE)
                     .addGap(75)
@@ -431,18 +431,18 @@ public class MenuComerciar extends JFrame {
                     .addGap(27)
                     .addComponent(lblItemsAObtener, GroupLayout.PREFERRED_SIZE, LISTA_ANCHO,
                         GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(24)
                     .addComponent(listMisItems, GroupLayout.PREFERRED_SIZE, LISTA_ANCHO, GroupLayout.PREFERRED_SIZE)
                     .addGap(12)
-                    .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                    .addGroup(glContentPane.createParallelGroup(Alignment.LEADING)
                         .addComponent(btnAgregar, GroupLayout.PREFERRED_SIZE, BOTON_CHICO_ANCHO,
                             GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnSacar, GroupLayout.PREFERRED_SIZE, BOTON_CHICO_ANCHO,
                             GroupLayout.PREFERRED_SIZE))
                     .addGap(12)
                     .addComponent(listADar, GroupLayout.PREFERRED_SIZE, LISTA_ANCHO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(63)
                     .addComponent(bonusSalud, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO, GroupLayout.PREFERRED_SIZE)
                     .addGap(6)
@@ -452,19 +452,19 @@ public class MenuComerciar extends JFrame {
                     .addGap(155)
                     .addComponent(lblSaludEnemy, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO, GroupLayout.PREFERRED_SIZE)
                     .addGap(54)
-                    .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                    .addGroup(glContentPane.createParallelGroup(Alignment.LEADING)
                         .addComponent(lblFzaEnemy, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO, GroupLayout.PREFERRED_SIZE)
-                        .addGroup(gl_contentPane.createSequentialGroup()
+                        .addGroup(glContentPane.createSequentialGroup()
                             .addGap(39)
                             .addComponent(fzaEnemy, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO,
                                 GroupLayout.PREFERRED_SIZE))))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(24)
-                    .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                    .addGroup(glContentPane.createParallelGroup(Alignment.LEADING)
                         .addComponent(lblEnerga, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO, GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblInteligencia, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO,
                             GroupLayout.PREFERRED_SIZE)
-                        .addGroup(gl_contentPane.createSequentialGroup()
+                        .addGroup(glContentPane.createSequentialGroup()
                             .addGap(39)
                             .addComponent(bonusInt, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO,
                                 GroupLayout.PREFERRED_SIZE)))
@@ -473,68 +473,68 @@ public class MenuComerciar extends JFrame {
                     .addGap(7)
                     .addComponent(bonusDes, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO, GroupLayout.PREFERRED_SIZE)
                     .addGap(44)
-                    .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                    .addGroup(glContentPane.createParallelGroup(Alignment.LEADING)
                         .addComponent(btnCancelar, GroupLayout.PREFERRED_SIZE, BOTON_ANCHO, GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblListo, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO, GroupLayout.PREFERRED_SIZE)
-                        .addGroup(gl_contentPane.createSequentialGroup()
+                        .addGroup(glContentPane.createSequentialGroup()
                             .addGap(41)
                             .addComponent(cantListo, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO,
                                 GroupLayout.PREFERRED_SIZE)))
                     .addGap(14)
-                    .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                    .addGroup(glContentPane.createParallelGroup(Alignment.LEADING)
                         .addComponent(lblEnergiaEnemy, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO,
                             GroupLayout.PREFERRED_SIZE)
-                        .addGroup(gl_contentPane.createSequentialGroup()
+                        .addGroup(glContentPane.createSequentialGroup()
                             .addGap(41)
                             .addComponent(energyEnemy, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO,
                                 GroupLayout.PREFERRED_SIZE))
-                        .addGroup(gl_contentPane.createSequentialGroup()
+                        .addGroup(glContentPane.createSequentialGroup()
                             .addGap(41)
                             .addComponent(intEnemy, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO,
                                 GroupLayout.PREFERRED_SIZE))
                         .addComponent(lblIntEnemy, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO, GroupLayout.PREFERRED_SIZE))
                     .addGap(FRAME_COLUMNA1)
-                    .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-                        .addGroup(gl_contentPane.createSequentialGroup()
+                    .addGroup(glContentPane.createParallelGroup(Alignment.LEADING)
+                        .addGroup(glContentPane.createSequentialGroup()
                             .addGap(39)
                             .addComponent(desEnemy, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO,
                                 GroupLayout.PREFERRED_SIZE))
                         .addComponent(lblDesEnemy, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO,
                             GroupLayout.PREFERRED_SIZE)))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(24)
                     .addComponent(leyenda, GroupLayout.PREFERRED_SIZE, 282, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(63)
                     .addComponent(bonusEnergia, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(440)
                     .addComponent(listAObtener, GroupLayout.PREFERRED_SIZE, LISTA_ANCHO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(24)
                     .addComponent(lblSalud, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(440)
                     .addComponent(saludEnemy, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(301)
                     .addComponent(chckbxListo, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO, GroupLayout.PREFERRED_SIZE))
                 .addComponent(background, GroupLayout.PREFERRED_SIZE, FRAME_ANCHO, GroupLayout.PREFERRED_SIZE)
         );
-        gl_contentPane.setVerticalGroup(
-            gl_contentPane.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_contentPane.createSequentialGroup()
+        glContentPane.setVerticalGroup(
+            glContentPane.createParallelGroup(Alignment.LEADING)
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(FRAME_COLUMNA1)
-                    .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                    .addGroup(glContentPane.createParallelGroup(Alignment.LEADING)
                         .addComponent(lblMisItems, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblItemsAIntercambiar, GroupLayout.PREFERRED_SIZE, LABEL_ALTO,
                             GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblItemsAObtener, GroupLayout.PREFERRED_SIZE, LABEL_ALTO,
                             GroupLayout.PREFERRED_SIZE))
                     .addGap(FRAME_COLUMNA1)
-                    .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                    .addGroup(glContentPane.createParallelGroup(Alignment.LEADING)
                         .addComponent(listMisItems, GroupLayout.PREFERRED_SIZE, LISTA_ALTO, GroupLayout.PREFERRED_SIZE)
-                        .addGroup(gl_contentPane.createSequentialGroup()
+                        .addGroup(glContentPane.createSequentialGroup()
                             .addGap(BOTON_CHICO_ANCHO)
                             .addComponent(btnAgregar, GroupLayout.PREFERRED_SIZE, BOTON_ALTO,
                                 GroupLayout.PREFERRED_SIZE)
@@ -542,7 +542,7 @@ public class MenuComerciar extends JFrame {
                             .addComponent(btnSacar, GroupLayout.PREFERRED_SIZE, BOTON_ALTO, GroupLayout.PREFERRED_SIZE))
                         .addComponent(listADar, GroupLayout.PREFERRED_SIZE, LISTA_ALTO, GroupLayout.PREFERRED_SIZE))
                     .addGap(FRAME_COLUMNA1)
-                    .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                    .addGroup(glContentPane.createParallelGroup(Alignment.LEADING)
                         .addComponent(bonusSalud, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblFuerza, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE)
                         .addComponent(bonusFuerza, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE)
@@ -550,37 +550,37 @@ public class MenuComerciar extends JFrame {
                         .addComponent(lblFzaEnemy, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE)
                         .addComponent(fzaEnemy, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE))
                     .addGap(7)
-                    .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-                        .addGroup(gl_contentPane.createSequentialGroup()
+                    .addGroup(glContentPane.createParallelGroup(Alignment.LEADING)
+                        .addGroup(glContentPane.createSequentialGroup()
                             .addComponent(lblEnerga, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE)
                             .addGap(7)
-                            .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                            .addGroup(glContentPane.createParallelGroup(Alignment.LEADING)
                                 .addComponent(lblInteligencia, GroupLayout.PREFERRED_SIZE, LABEL_ALTO,
                                     GroupLayout.PREFERRED_SIZE)
                                 .addComponent(bonusInt, GroupLayout.PREFERRED_SIZE, LABEL_ALTO,
                                     GroupLayout.PREFERRED_SIZE)))
                         .addComponent(lblDestreza, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE)
                         .addComponent(bonusDes, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE)
-                        .addGroup(gl_contentPane.createSequentialGroup()
+                        .addGroup(glContentPane.createSequentialGroup()
                             .addGap(5)
                             .addComponent(btnCancelar, GroupLayout.PREFERRED_SIZE, BOTON_ALTO,
                                 GroupLayout.PREFERRED_SIZE)
                             .addGap(8)
-                            .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-                                .addGroup(gl_contentPane.createSequentialGroup()
+                            .addGroup(glContentPane.createParallelGroup(Alignment.LEADING)
+                                .addGroup(glContentPane.createSequentialGroup()
                                     //.addGap(1)
                                     .addComponent(lblListo, GroupLayout.PREFERRED_SIZE, LABEL_ALTO,
                                         GroupLayout.PREFERRED_SIZE))
                                 .addComponent(cantListo, GroupLayout.PREFERRED_SIZE, LABEL_ALTO,
                                     GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(gl_contentPane.createSequentialGroup()
-                            .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                        .addGroup(glContentPane.createSequentialGroup()
+                            .addGroup(glContentPane.createParallelGroup(Alignment.LEADING)
                                 .addComponent(lblEnergiaEnemy, GroupLayout.PREFERRED_SIZE, LABEL_ALTO,
                                     GroupLayout.PREFERRED_SIZE)
                                 .addComponent(energyEnemy, GroupLayout.PREFERRED_SIZE, LABEL_ALTO,
                                     GroupLayout.PREFERRED_SIZE))
                             .addGap(7)
-                            .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                            .addGroup(glContentPane.createParallelGroup(Alignment.LEADING)
                                 .addComponent(intEnemy, GroupLayout.PREFERRED_SIZE, LABEL_ALTO,
                                     GroupLayout.PREFERRED_SIZE)
                                 .addComponent(lblIntEnemy, GroupLayout.PREFERRED_SIZE, LABEL_ALTO,
@@ -589,24 +589,24 @@ public class MenuComerciar extends JFrame {
                         .addComponent(lblDesEnemy, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE))
                     .addGap(4)
                     .addComponent(leyenda, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(240)
                     .addComponent(bonusEnergia, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(42)
                     .addComponent(listAObtener, GroupLayout.PREFERRED_SIZE, LISTA_ALTO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(217)
                     .addComponent(lblSalud, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(217)
                     .addComponent(saludEnemy, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
+                .addGroup(glContentPane.createSequentialGroup()
                     .addGap(213)
                     .addComponent(chckbxListo, GroupLayout.PREFERRED_SIZE, BOTON_ALTO, GroupLayout.PREFERRED_SIZE))
                 .addComponent(background, GroupLayout.PREFERRED_SIZE, FRAME_ALTO, GroupLayout.PREFERRED_SIZE)
         );
-        contentPane.setLayout(gl_contentPane);
+        contentPane.setLayout(glContentPane);
     }
 
     /**
@@ -624,7 +624,7 @@ public class MenuComerciar extends JFrame {
      * @param cantListos
      *            the new cant listos
      */
-    public void setCantListos(int cantListos) {
+    public void setCantListos(final int cantListos) {
         this.cantListos = cantListos;
     }
 
@@ -643,7 +643,7 @@ public class MenuComerciar extends JFrame {
      * @param obtener
      *            the new obtener
      */
-    public void setObtener(DefaultListModel<String> obtener) {
+    public void setObtener(final DefaultListModel<String> obtener) {
         this.obtener = obtener;
     }
 

@@ -47,7 +47,7 @@ public class MenuInicioSesion extends JFrame {
 
         addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent e) {
+            public void windowClosing(final WindowEvent e) {
                 synchronized (cliente) {
                     cliente.setAccion(Comando.SALIR);
                     cliente.notify();
@@ -69,13 +69,12 @@ public class MenuInicioSesion extends JFrame {
         layeredPane.setSize(450, 300);
         contentPane.add(layeredPane);
 
-        JLabel lblNewLabel_1 = new JLabel("Password");
-        lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblNewLabel_1.setForeground(Color.WHITE);
-
         JLabel lblNewLabel = new JLabel("Usuario");
         lblNewLabel.setForeground(Color.WHITE);
         lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        JLabel lblNewLabel1 = new JLabel("Password");
+        lblNewLabel1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblNewLabel1.setForeground(Color.WHITE);
 
         JLabel lblIngresar = new JLabel("Ingresar");
         layeredPane.setLayer(lblIngresar, 1);
@@ -85,7 +84,7 @@ public class MenuInicioSesion extends JFrame {
         textField = new JTextField();
         textField.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent arg0) {
+            public void actionPerformed(final ActionEvent arg0) {
                 logIn(cliente);
             }
         });
@@ -94,7 +93,7 @@ public class MenuInicioSesion extends JFrame {
         passwordField = new JPasswordField();
         passwordField.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 logIn(cliente);
             }
         });
@@ -113,54 +112,54 @@ public class MenuInicioSesion extends JFrame {
 
         JLabel labelBackground = new JLabel("");
         labelBackground.setIcon(new ImageIcon(MenuInicioSesion.class.getResource("/frames/menuBackground.jpg")));
-        GroupLayout gl_layeredPane = new GroupLayout(layeredPane);
-        gl_layeredPane.setHorizontalGroup(
-            gl_layeredPane.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_layeredPane.createSequentialGroup()
+        GroupLayout glLayeredPane = new GroupLayout(layeredPane);
+        glLayeredPane.setHorizontalGroup(
+            glLayeredPane.createParallelGroup(Alignment.LEADING)
+                .addGroup(glLayeredPane.createSequentialGroup()
                     .addGap(111)
                     .addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup()
+                .addGroup(glLayeredPane.createSequentialGroup()
                     .addGap(111)
-                    .addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup()
+                    .addComponent(lblNewLabel1, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE))
+                .addGroup(glLayeredPane.createSequentialGroup()
                     .addGap(141)
-                    .addGroup(gl_layeredPane.createParallelGroup(Alignment.LEADING)
+                    .addGroup(glLayeredPane.createParallelGroup(Alignment.LEADING)
                         .addComponent(btnConectar, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE)
-                        .addGroup(gl_layeredPane.createSequentialGroup()
+                        .addGroup(glLayeredPane.createSequentialGroup()
                             .addGap(52)
                             .addComponent(lblIngresar, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE))))
-                .addGroup(gl_layeredPane.createSequentialGroup()
+                .addGroup(glLayeredPane.createSequentialGroup()
                     .addGap(198)
                     .addComponent(textField, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup()
+                .addGroup(glLayeredPane.createSequentialGroup()
                     .addGap(198)
                     .addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE))
                 .addComponent(labelBackground, GroupLayout.PREFERRED_SIZE, 444, GroupLayout.PREFERRED_SIZE)
         );
-        gl_layeredPane.setVerticalGroup(
-            gl_layeredPane.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_layeredPane.createSequentialGroup()
+        glLayeredPane.setVerticalGroup(
+            glLayeredPane.createParallelGroup(Alignment.LEADING)
+                .addGroup(glLayeredPane.createSequentialGroup()
                     .addGap(66)
                     .addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
                     .addGap(29)
-                    .addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNewLabel1, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
                     .addGap(43)
-                    .addGroup(gl_layeredPane.createParallelGroup(Alignment.LEADING)
+                    .addGroup(glLayeredPane.createParallelGroup(Alignment.LEADING)
                         .addComponent(btnConectar, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
-                        .addGroup(gl_layeredPane.createSequentialGroup()
+                        .addGroup(glLayeredPane.createSequentialGroup()
                             .addGap(1)
                             .addComponent(lblIngresar, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))))
-                .addGroup(gl_layeredPane.createSequentialGroup()
+                .addGroup(glLayeredPane.createSequentialGroup()
                     .addGap(69)
                     .addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
                         GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup()
+                .addGroup(glLayeredPane.createSequentialGroup()
                     .addGap(119)
                     .addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
                         GroupLayout.PREFERRED_SIZE))
                 .addComponent(labelBackground, GroupLayout.PREFERRED_SIZE, 271, GroupLayout.PREFERRED_SIZE)
         );
-        layeredPane.setLayout(gl_layeredPane);
+        layeredPane.setLayout(glLayeredPane);
     }
 
     /**

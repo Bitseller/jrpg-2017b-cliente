@@ -75,8 +75,8 @@ public class EstadoBatalla extends Estado {
 
         menuBatalla = new MenuBatalla(miTurno, personaje);
 
-        miniaturaEnemigo = Recursos.personaje.get(enemigo.getNombreRaza()).get(5)[0];
-        miniaturaPersonaje = Recursos.personaje.get(personaje.getNombreRaza()).get(5)[0];
+        miniaturaEnemigo = Recursos.getPersonaje().get(enemigo.getNombreRaza()).get(5)[0];
+        miniaturaPersonaje = Recursos.getPersonaje().get(personaje.getNombreRaza()).get(5)[0];
 
         paqueteFinalizarBatalla = new PaqueteFinalizarBatalla();
         paqueteFinalizarBatalla.setId(personaje.getIdPersonaje());
@@ -198,8 +198,8 @@ public class EstadoBatalla extends Estado {
         g.fillRect(0, 0, juego.getAncho(), juego.getAlto());
         mundo.graficar(g);
 
-        g.drawImage(Recursos.personaje.get(paquetePersonaje.getRaza()).get(3)[0], 0, 175, 256, 256, null);
-        g.drawImage(Recursos.personaje.get(paqueteEnemigo.getRaza()).get(7)[0], 550, 75, 256, 256, null);
+        g.drawImage(Recursos.getPersonaje().get(paquetePersonaje.getRaza()).get(3)[0], 0, 175, 256, 256, null);
+        g.drawImage(Recursos.getPersonaje().get(paqueteEnemigo.getRaza()).get(7)[0], 550, 75, 256, 256, null);
 
         mundo.graficarObstaculos(g);
         menuBatalla.graficar(g);
@@ -268,12 +268,12 @@ public class EstadoBatalla extends Estado {
     /**
      * Enviar ataque.
      *
-     * @param paqueteAtacar
+     * @param paqueteAtt
      *            the paquete atacar
      */
-    public void enviarAtaque(final PaqueteAtacar paqueteAtacar) {
+    public void enviarAtaque(final PaqueteAtacar paqueteAtt) {
         try {
-            juego.getCliente().getSalida().writeObject(gson.toJson(paqueteAtacar));
+            juego.getCliente().getSalida().writeObject(gson.toJson(paqueteAtt));
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Fallo la conexion con el servidor.");
         }

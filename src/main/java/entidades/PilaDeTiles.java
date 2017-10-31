@@ -24,7 +24,7 @@ public class PilaDeTiles {
         ptrPila = nodo;
     }
 
-    /**Pide el tope 
+    /**Pide el tope
      * @return un nodo de pila con el tope de la pila
      */
     public NodoDePila pop() {
@@ -36,7 +36,7 @@ public class PilaDeTiles {
         return tope;
     }
 
-    /**Pregunta si esta vacia la pila de tiles 
+    /**Pregunta si esta vacia la pila de tiles
      * @return true or false
      */
     public boolean estaVacia() {

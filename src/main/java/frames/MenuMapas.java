@@ -28,7 +28,7 @@ import mensajeria.Comando;
  * The Class MenuMapas.
  */
 public class MenuMapas extends JFrame {
-    public static int numberMap = 0;
+    private static int numberMap = 0;
     private JPanel contentPane;
 
     /**
@@ -41,7 +41,7 @@ public class MenuMapas extends JFrame {
         //Acceso rapido al primer mapa.
         addKeyListener(new KeyAdapter() {
             @Override
-            public void keyPressed(KeyEvent e) {
+            public void keyPressed(final KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     synchronized (cliente) {
                         cliente.getPaquetePersonaje().setMapa("Aubenor");
@@ -63,7 +63,7 @@ public class MenuMapas extends JFrame {
         // En caso de cerrar
         addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent e) {
+            public void windowClosing(final WindowEvent e) {
                 cliente.getPaquetePersonaje().setMapa("Salir");
                 synchronized (cliente) {
                     cliente.setAccion(Comando.SALIR);
@@ -106,7 +106,7 @@ public class MenuMapas extends JFrame {
         //Configuracion del boton.
         btnAubenor.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 synchronized (cliente) {
                     cliente.getPaquetePersonaje().setMapa("Aubenor");
                     numberMap = 1;
@@ -130,7 +130,7 @@ public class MenuMapas extends JFrame {
         //Configuracion del boton.
         btnAris.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 synchronized (cliente) {
                     cliente.getPaquetePersonaje().setMapa("Aris");
                     numberMap = 2;
@@ -156,7 +156,7 @@ public class MenuMapas extends JFrame {
         //Configuracion del Boton
         btnEodrim.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 synchronized (cliente) {
                     cliente.getPaquetePersonaje().setMapa("Eodrim");
                     numberMap = 3;
@@ -170,51 +170,66 @@ public class MenuMapas extends JFrame {
         btnAris.setEnabled(true);
         btnAubenor.setEnabled(true);
         btnEodrim.setEnabled(false);
-        GroupLayout gl_layeredPane = new GroupLayout(layeredPane);
-        gl_layeredPane.setHorizontalGroup(
-            gl_layeredPane.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_layeredPane.createSequentialGroup()
+        GroupLayout glLayeredPane = new GroupLayout(layeredPane);
+        glLayeredPane.setHorizontalGroup(
+            glLayeredPane.createParallelGroup(Alignment.LEADING)
+                .addGroup(glLayeredPane.createSequentialGroup()
                     .addGap(148)
                     .addComponent(btnAubenor, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup()
+                .addGroup(glLayeredPane.createSequentialGroup()
                     .addGap(148)
                     .addComponent(btnEodrim, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup()
+                .addGroup(glLayeredPane.createSequentialGroup()
                     .addGap(204)
                     .addComponent(lblAris, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup()
+                .addGroup(glLayeredPane.createSequentialGroup()
                     .addGap(191)
                     .addComponent(lblAubenor, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup()
+                .addGroup(glLayeredPane.createSequentialGroup()
                     .addGap(198)
                     .addComponent(lblEodrim, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup()
+                .addGroup(glLayeredPane.createSequentialGroup()
                     .addGap(148)
                     .addComponent(btnAris, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE))
                 .addComponent(lblBackground, GroupLayout.PREFERRED_SIZE, 444, GroupLayout.PREFERRED_SIZE)
         );
-        gl_layeredPane.setVerticalGroup(
-            gl_layeredPane.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_layeredPane.createSequentialGroup()
+        glLayeredPane.setVerticalGroup(
+            glLayeredPane.createParallelGroup(Alignment.LEADING)
+                .addGroup(glLayeredPane.createSequentialGroup()
                     .addGap(72)
                     .addComponent(btnAubenor, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
                     .addGap(97)
                     .addComponent(btnEodrim, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup()
+                .addGroup(glLayeredPane.createSequentialGroup()
                     .addGap(129)
                     .addComponent(lblAris, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup()
+                .addGroup(glLayeredPane.createSequentialGroup()
                     .addGap(72)
                     .addComponent(lblAubenor, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup()
+                .addGroup(glLayeredPane.createSequentialGroup()
                     .addGap(192)
                     .addComponent(lblEodrim, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup()
+                .addGroup(glLayeredPane.createSequentialGroup()
                     .addGap(130)
                     .addComponent(btnAris, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
                 .addComponent(lblBackground, GroupLayout.PREFERRED_SIZE, 271, GroupLayout.PREFERRED_SIZE)
         );
-        layeredPane.setLayout(gl_layeredPane);
+        layeredPane.setLayout(glLayeredPane);
 
     }
+
+	/**
+	 * @return the numberMap
+	 */
+	public static int getNumberMap() {
+		return numberMap;
+	}
+
+	/**
+	 * @param numberMap the numberMap to set
+	 */
+	public static void setNumberMap(int numberMap) {
+		MenuMapas.numberMap = numberMap;
+	}
+  
 }

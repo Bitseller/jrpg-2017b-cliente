@@ -36,7 +36,7 @@ import recursos.Recursos;
  */
 public class Entidad {
 
-    Juego juego;
+    private Juego juego;
 
     // Tamaño de la entidad
     private int ancho;
@@ -49,8 +49,6 @@ public class Entidad {
     private float dy;
     private LinkedList<Double> movX;
     private LinkedList<Double> movY;
-    private float xInicial;
-    private float yInicial;
     private float xFinal;
     private float yFinal;
     private int xOffset;
@@ -62,6 +60,7 @@ public class Entidad {
 
     // Movimiento Actual
     private final LinkedList<Integer> movimientos;
+    private static final int MOVIMIENTOS = 6;
     private static final int HORIZONTAL_IZQ = 0;
     private static final int HORIZONTAL_DER = 4;
     private static final int VERTICAL_SUP = 2;
@@ -70,8 +69,12 @@ public class Entidad {
     private static final int VERTICAL_INF = 6;
     private static final int DIAGONAL_INF_IZQ = 7;
     private static final int DIAGONAL_INF_DER = 5;
-    private int movimientoHacia = 6;
+    private int movimientoHacia = MOVIMIENTOS;
     private boolean enMovimiento;
+    // Referencias del mapa
+    private static final int REFERENCIA_X = 64;
+    private static final int REFERENCIA_Y = 32;
+
 
     // Animaciones
     private final LinkedList<Animacion> patronAnimaciones;
@@ -135,8 +138,8 @@ public class Entidad {
         this.mundo = mundo;
         xOffset = ancho / 2;
         yOffset = alto / 2;
-        x = (int) (spawnX / 64) * 64;
-        y = (int) (spawnY / 32) * 32;
+        x = (int) (spawnX / REFERENCIA_X) * REFERENCIA_X;
+        y = (int) (spawnY / REFERENCIA_Y) * REFERENCIA_Y;
 
         double paso = 1;
 
@@ -226,32 +229,31 @@ public class Entidad {
     /**
      * Devuelve la entrada.
      *
-     * @return the entrada
      */
     public void getEntrada() {
         posMouseRecorrido = juego.getHandlerMouse().getPosMouseRecorrido();
         posMouse = juego.getHandlerMouse().getPosMouse();
         if (juego.getHandlerMouse().getNuevoClick() && posMouse[0] >= 738 && posMouse[0] <= 797 && posMouse[1] >= 545
             && posMouse[1] <= 597) {
-            if (Pantalla.menuInventario == null) {
-                Pantalla.menuInventario = new MenuInventario(juego.getCliente());
-                Pantalla.menuInventario.setVisible(true);
+            if (Pantalla.getMenuInventario() == null) {
+                Pantalla.setMenuInventario(new MenuInventario(juego.getCliente()));
+                Pantalla.getMenuInventario().setVisible(true);
             }
             juego.getHandlerMouse().setNuevoClick(false);
         }
         if (juego.getHandlerMouse().getNuevoClick() && posMouse[0] >= 3 && posMouse[0] <= 105 && posMouse[1] >= 562
             && posMouse[1] <= 597) {
-            if (Pantalla.menuEscp == null) {
-                Pantalla.menuEscp = new MenuEscape(juego.getCliente());
-                Pantalla.menuEscp.setVisible(true);
+            if (Pantalla.getMenuEscp() == null) {
+            	Pantalla.setMenuEscp(new MenuEscape(juego.getCliente()));
+                Pantalla.getMenuEscp().setVisible(true);
             }
             juego.getHandlerMouse().setNuevoClick(false);
         }
         if (juego.getHandlerMouse().getNuevoClick() && posMouse[0] >= 3 && posMouse[0] <= 105 && posMouse[1] >= 524
             && posMouse[1] <= 559) {
-            if (Pantalla.ventContac == null) {
-                Pantalla.ventContac = new VentanaContactos(juego);
-                Pantalla.ventContac.setVisible(true);
+            if (Pantalla.getVentContac() == null) {
+                Pantalla.setVentContac(new VentanaContactos(juego));
+                Pantalla.getVentContac().setVisible(true);
             }
             juego.getHandlerMouse().setNuevoClick(false);
         }
@@ -328,15 +330,13 @@ public class Entidad {
                 } else {
                     juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.MENU_BATALLAR);
                 }
-            } else
+            } else {
             // Se fija si clickeo alguno de los personajes
-            {
                 Iterator<Integer> it = juego.getUbicacionPersonajes().keySet().iterator();
                 int key;
-                int[] tileMoverme = Mundo.mouseATile(posMouse[0] + juego.getCamara().getxOffset() - xOffset,
+                int[] tileMovermeLocal = Mundo.mouseATile(posMouse[0] + juego.getCamara().getxOffset() - xOffset,
                     posMouse[1] + juego.getCamara().getyOffset() - yOffset);
                 PaqueteMovimiento actual;
-
                 while (it.hasNext()) {
                     key = it.next();
                     actual = juego.getUbicacionPersonajes().get(key);
@@ -344,14 +344,14 @@ public class Entidad {
                     if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId()
                         && juego.getPersonajesConectados().get(actual.getIdPersonaje()) != null
                         && juego.getPersonajesConectados().get(actual.getIdPersonaje())
-                            .getEstado() == Estado.estadoJuego) {
+                            .getEstado() == Estado.getEstadoJuego()) {
 
-                        if (tileMoverme[0] == tilePersonajes[0] && tileMoverme[1] == tilePersonajes[1]) {
+                        if (tileMovermeLocal[0] == tilePersonajes[0] && tileMovermeLocal[1] == tilePersonajes[1]) {
                             idEnemigo = actual.getIdPersonaje();
-                            float XY[] = Mundo.isoA2D(x, y);
+                            float [] posXY = Mundo.isoA2D(x, y);
                             // Controlo la posicion para no moverme hasta el
                             // lugar.
-                            if (XY[0] >= 44 && XY[0] <= 71 && XY[1] >= 0 && XY[1] <= 29) {
+                            if (posXY[0] >= 44 && posXY[0] <= 71 && posXY[1] >= 0 && posXY[1] <= 29) {
                                 // Si me encuentro dentro de la zona de
                                 // comercio, abro el menu de Comercio.
                                 juego.getEstadoJuego().setHaySolicitud(true,
@@ -399,7 +399,7 @@ public class Entidad {
             }
 
             if (tileMoverme[0] == tileActual[0] && tileMoverme[1] == tileActual[1]
-                || mundo.getTile(tileMoverme[0], tileMoverme[1]).esSolido()) {
+                || mundo.getTile(tileMoverme[0], tileMoverme[1]).isEsSolido()) {
                 tileMoverme = null;
                 enMovimiento = false;
                 juego.getHandlerMouse().setNuevoRecorrido(false);
@@ -499,8 +499,8 @@ public class Entidad {
         if (juego.getNPCs() != null) {
             boolean esPelea = false;
 
-            Map<Integer, PaqueteDeNPC> NPCs;
-            NPCs = new HashMap<Integer, PaqueteDeNPC>(juego.getNPCs());
+            Map<Integer, PaqueteDeNPC> mapNPCs;
+            mapNPCs = new HashMap<Integer, PaqueteDeNPC>(juego.getNPCs());
             Map<Integer, PaqueteMovimiento> ubicacionNPCs;
             ubicacionNPCs = new HashMap<Integer, PaqueteMovimiento>(juego.getUbicacionNPCs());
 
@@ -520,7 +520,7 @@ public class Entidad {
                         pBatalla.setId(juego.getPersonaje().getId());
                         pBatalla.setIdEnemigo(key);
 
-                        juego.getPersonaje().setEstado(Estado.estadoBatallaNPC);
+                        juego.getPersonaje().setEstado(Estado.getEstadoBatallaNPC());
                         Estado.setEstado(null);
                         juego.setEstadoBatallaNPC(new EstadoBatallaNPC(juego, pBatalla));
                         Estado.setEstado(juego.getEstadoBatallaNPC());
@@ -573,7 +573,7 @@ public class Entidad {
             return patronAnimaciones.get(i).getFrameActual();
         }
 
-        return Recursos.orco.get(6)[0];
+        return Recursos.getOrco().get(6)[0];
     }
 
     /**
@@ -627,21 +627,22 @@ public class Entidad {
      *            ubicacion en X inicial
      * @param yInicial
      *            ubicacion en Y inicial
-     * @param xFinal
+     * @param xFinalAux
      *            ubicacion en X final
-     * @param yFinal
+     * @param yFinalAux
      *            ubicacion en Y final
      * @return la pila de tiles a recorrer
      */
-    private PilaDeTiles caminoMasCorto(final int xInicial, final int yInicial, final int xFinal, final int yFinal) {
+    private PilaDeTiles caminoMasCorto(final int xInicial, final int yInicial,
+    		final int xFinalAux, final int yFinalAux) {
         Grafo grafoLibres = mundo.obtenerGrafoDeTilesNoSolidos();
         // Transformo las coordenadas iniciales y finales en indices
         int nodoInicial = (yInicial - grafoLibres.obtenerNodos()[0].obtenerY())
             * (int) Math.sqrt(grafoLibres.obtenerCantidadDeNodosTotal()) + xInicial
             - grafoLibres.obtenerNodos()[0].obtenerX();
 
-        int nodoFinal = (yFinal - grafoLibres.obtenerNodos()[0].obtenerY())
-            * (int) Math.sqrt(grafoLibres.obtenerCantidadDeNodosTotal()) + xFinal
+        int nodoFinal = (yFinalAux - grafoLibres.obtenerNodos()[0].obtenerY())
+            * (int) Math.sqrt(grafoLibres.obtenerCantidadDeNodosTotal()) + xFinalAux
             - grafoLibres.obtenerNodos()[0].obtenerX();
 
         // Hago todo

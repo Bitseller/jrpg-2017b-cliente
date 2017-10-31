@@ -34,7 +34,7 @@ public class Talk extends ComandosEscucha {
                 chat.setVisible(true);
 
                 juego.getChatsActivos().put("Sala", chat);
-                if (Pantalla.ventContac != null) {
+                if (Pantalla.getVentContac() != null) {
                     VentanaContactos.getBotonMc().setEnabled(false);
                 }
             }

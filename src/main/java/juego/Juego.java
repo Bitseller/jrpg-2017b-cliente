@@ -24,7 +24,7 @@ import mensajeria.PaquetePersonaje;
  */
 public class Juego implements Runnable {
 
-    private static final int MICRO_SEGUNDO = 1000000000;
+	private static final int MICRO_SEGUNDO = 1000000000;
     private Pantalla pantalla;
     private final String nombre;
     private final int ancho;
@@ -341,11 +341,11 @@ public class Juego implements Runnable {
     /**
      * Sets the personaje.
      *
-     * @param paquetePersonaje
+     * @param pp
      *            the new personaje
      */
-    public void setPersonaje(final PaquetePersonaje paquetePersonaje) {
-        this.paquetePersonaje = paquetePersonaje;
+    public void setPersonaje(final PaquetePersonaje pp) {
+        this.paquetePersonaje = pp;
     }
 
     /**

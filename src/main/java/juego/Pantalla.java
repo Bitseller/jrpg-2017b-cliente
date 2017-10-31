@@ -36,6 +36,10 @@ import mensajeria.Paquete;
 /**
  * The Class Pantalla.
  */
+/**
+ * @author ARIEL
+ *
+ */
 public class Pantalla {
 
     private JFrame pantalla;
@@ -44,12 +48,12 @@ public class Pantalla {
     private final LinkedList<Integer> keys;
 
     // Menus
-    public static LinkedList<JFrame> menues;
-    public static MenuInventario menuInventario;
-    public static MenuAsignarSkills menuAsignar;
-    public static MenuStats menuStats;
-    public static MenuEscape menuEscp;
-    public static VentanaContactos ventContac;
+    private static LinkedList<JFrame> menues;
+    private static MenuInventario menuInventario;
+    private static MenuAsignarSkills menuAsignar;
+    private static MenuStats menuStats;
+    private static MenuEscape menuEscp;
+    private static VentanaContactos ventContac;
 
     private final Gson gson = new Gson();
 
@@ -123,7 +127,7 @@ public class Pantalla {
 
                 if (i < keys.size()) {
 
-                    //Como se que ambas listas estan sincronizadas, 
+                    //Como se que ambas listas estan sincronizadas,
                     //el mismo indice me indica que menu es el que debo verificar.
                     if (Estado.getEstado().esEstadoDeJuego() && menues.get(i) == null) {
                         switch (i) {
@@ -214,4 +218,100 @@ public class Pantalla {
 
         g.drawString(s, r.x + a, r.y + b);
     }
+
+    /**
+     *
+     * @return menues
+     */
+	public static LinkedList<JFrame> getMenues() {
+		return menues;
+	}
+
+	/**
+	 *
+	 * @param menues
+	 */
+	public static void setMenues(final LinkedList<JFrame> menues) {
+		Pantalla.menues = menues;
+	}
+
+	/**
+	 *
+	 * @return menuInventario
+	 */
+	public static MenuInventario getMenuInventario() {
+		return menuInventario;
+	}
+
+	/**
+	 *
+	 * @param menuInventario
+	 */
+	public static void setMenuInventario(final MenuInventario menuInventario) {
+		Pantalla.menuInventario = menuInventario;
+	}
+
+	/**
+	 *
+	 * @return menuAsignar
+	 */
+	public static MenuAsignarSkills getMenuAsignar() {
+		return menuAsignar;
+	}
+
+	/**
+	 *
+	 * @param menuAsignar
+	 */
+	public static void setMenuAsignar(final MenuAsignarSkills menuAsignar) {
+		Pantalla.menuAsignar = menuAsignar;
+	}
+
+	/**
+	 *
+	 * @return menuStats
+	 */
+	public static MenuStats getMenuStats() {
+		return menuStats;
+	}
+
+	/**
+	 *
+	 * @param menuStats
+	 */
+	public static void setMenuStats(final MenuStats menuStats) {
+		Pantalla.menuStats = menuStats;
+	}
+
+	/**
+	 *
+	 * @return menuEscp
+	 */
+	public static MenuEscape getMenuEscp() {
+		return menuEscp;
+	}
+
+	/**
+	 *
+	 * @param menuEscp
+	 */
+	public static void setMenuEscp(final MenuEscape menuEscp) {
+		Pantalla.menuEscp = menuEscp;
+	}
+
+	/**
+	 *
+	 * @return ventContac
+	 */
+	public static VentanaContactos getVentContac() {
+		return ventContac;
+	}
+	
+	/**
+	 *
+	 * @param ventContac
+	 */
+	public static void setVentContac(final VentanaContactos ventContac) {
+		Pantalla.ventContac = ventContac;
+	}
 }

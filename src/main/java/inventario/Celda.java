@@ -49,35 +49,35 @@ public class Celda extends JPanel {
      * Instantiates a new celda.
      */
     public Celda() {
-        label = new JLabel(new ImageIcon(Recursos.noItem.getScaledInstance(49, 49, Image.SCALE_DEFAULT)));
+        label = new JLabel(new ImageIcon(Recursos.getNoItem().getScaledInstance(49, 49, Image.SCALE_DEFAULT)));
         add(label);
     }
 
     /**
      * Action listeners Y label.
      *
-     * @param item
+     * @param obj
      *            the item
      */
-    private void actionListenersYLabel(final Item item) {
+    private void actionListenersYLabel(final Item obj) {
         StringBuilder s = new StringBuilder();
 
-        s.append("<html>" + item.getNombre() + "<br>");
+        s.append("<html>" + obj.getNombre() + "<br>");
 
-        if (item.getBonusSalud() != 0) {
-            s.append("+" + item.getBonusSalud() + " Salud " + "<br>");
+        if (obj.getBonusSalud() != 0) {
+            s.append("+" + obj.getBonusSalud() + " Salud " + "<br>");
         }
-        if (item.getBonusEnergia() != 0) {
-            s.append("+" + item.getBonusEnergia() + " Energia " + "<br>");
+        if (obj.getBonusEnergia() != 0) {
+            s.append("+" + obj.getBonusEnergia() + " Energia " + "<br>");
         }
-        if (item.getBonusFuerza() != 0) {
-            s.append("+" + item.getBonusFuerza() + " Fuerza " + "<br>");
+        if (obj.getBonusFuerza() != 0) {
+            s.append("+" + obj.getBonusFuerza() + " Fuerza " + "<br>");
         }
-        if (item.getBonusDestreza() != 0) {
-            s.append("+" + item.getBonusDestreza() + " Destreza " + "<br>");
+        if (obj.getBonusDestreza() != 0) {
+            s.append("+" + obj.getBonusDestreza() + " Destreza " + "<br>");
         }
-        if (item.getBonusInteligencia() != 0) {
-            s.append("+" + item.getBonusInteligencia() + " Inteligencia");
+        if (obj.getBonusInteligencia() != 0) {
+            s.append("+" + obj.getBonusInteligencia() + " Inteligencia");
         }
         s.append("</html>");
         label.setToolTipText(s.toString());
@@ -96,7 +96,7 @@ public class Celda extends JPanel {
      * Reset label.
      */
     protected void resetLabel() {
-        label.setIcon(new ImageIcon(Recursos.noItem.getScaledInstance(49, 49, Image.SCALE_DEFAULT)));
+        label.setIcon(new ImageIcon(Recursos.getNoItem().getScaledInstance(49, 49, Image.SCALE_DEFAULT)));
         label.setToolTipText(null);
         paquetePersonaje.removerItem(it);
         label.removeMouseListener(mouseListener);
@@ -117,10 +117,10 @@ public class Celda extends JPanel {
         return label;
     }
 
-    MouseListener mouseListener = new MouseAdapter() {
+    private MouseListener mouseListener = new MouseAdapter() {
         @Override
         public void mouseClicked(final MouseEvent e) {
-            Object[] options = { "Tirar", "Cancelar" };
+        	Object[] options = {"Tirar", "Cancelar"};
             if (e.getClickCount() == 2) {
                 int answer = JOptionPane.showOptionDialog(getParent(), "¿Qué desea hacer?", "Item: " + it.getNombre(),
                         JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);

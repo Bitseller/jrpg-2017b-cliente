@@ -3,7 +3,7 @@ package entidades;
 import java.awt.image.BufferedImage;
 
 /**
- * La clase Animacion tiene como función  
+ * La clase Animacion tiene como función
  * controlar las animaciones.
  */
 public class Animacion {
@@ -50,7 +50,7 @@ public class Animacion {
     }
 
     /**
-     * Pide el frame actual 
+     * Pide el frame actual
      * @return devuelve el valor del frame en un indice
      */
     public BufferedImage getFrameActual() {
@@ -58,7 +58,7 @@ public class Animacion {
     }
 
     /**
-     * Pide el frame  
+     * Pide el frame
      * @return devuelve el indice del frame
      */
     public int getFrame() {

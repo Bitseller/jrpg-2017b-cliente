@@ -36,14 +36,14 @@ public class NodoDePila {
         ptrSiguiente = nodo;
     }
 
-    /**Pide el valor de X 
+    /**Pide el valor de X
      * @return devuelve el valor de X
      */
     public int obtenerX() {
         return x;
     }
 
-    /**Pide el valor de Y 
+    /**Pide el valor de Y
      * @return devuelve el valor de Y
      */
     public int obtenerY() {

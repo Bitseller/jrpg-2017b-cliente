@@ -42,7 +42,7 @@ public class MenuInicio extends JFrame {
     public MenuInicio() {
         addKeyListener(new KeyAdapter() {
             @Override
-            public void keyPressed(KeyEvent e) {
+            public void keyPressed(final KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     Cliente cliente;
                     try {
@@ -109,7 +109,7 @@ public class MenuInicio extends JFrame {
         btnRegistrar.setIcon(new ImageIcon(MenuJugar.class.getResource("/frames/BotonMenu.png")));
         btnRegistrar.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 Cliente cliente;
                 try {
                     cliente = new Cliente();
@@ -127,7 +127,7 @@ public class MenuInicio extends JFrame {
         btnIniciarSesion.setIcon(new ImageIcon(MenuJugar.class.getResource("/frames/BotonMenu.png")));
         btnIniciarSesion.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 dispose();
             }
         });
@@ -137,35 +137,35 @@ public class MenuInicio extends JFrame {
         layeredPane.setLayer(lblBackground, JLayeredPane.DEFAULT_LAYER);
         lblBackground.setForeground(Color.WHITE);
 
-        GroupLayout gl_layeredPane = new GroupLayout(layeredPane);
-        gl_layeredPane.setAutoCreateGaps(true);
+        GroupLayout glLayeredPane = new GroupLayout(layeredPane);
+        glLayeredPane.setAutoCreateGaps(true);
 
-        gl_layeredPane.setHorizontalGroup(gl_layeredPane.createParallelGroup(Alignment.CENTER)
-                .addGroup(gl_layeredPane.createSequentialGroup().addComponent(lblLogo, GroupLayout.PREFERRED_SIZE,
+        glLayeredPane.setHorizontalGroup(glLayeredPane.createParallelGroup(Alignment.CENTER)
+                .addGroup(glLayeredPane.createSequentialGroup().addComponent(lblLogo, GroupLayout.PREFERRED_SIZE,
                         GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup().addComponent(lblRegistrarse,
+                .addGroup(glLayeredPane.createSequentialGroup().addComponent(lblRegistrarse,
                         GroupLayout.PREFERRED_SIZE, BOTON_ANCHO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup().addComponent(btnIniciarSesion,
+                .addGroup(glLayeredPane.createSequentialGroup().addComponent(btnIniciarSesion,
                         GroupLayout.PREFERRED_SIZE, BOTON_ANCHO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup().addComponent(btnRegistrar, GroupLayout.PREFERRED_SIZE,
+                .addGroup(glLayeredPane.createSequentialGroup().addComponent(btnRegistrar, GroupLayout.PREFERRED_SIZE,
                         191, GroupLayout.PREFERRED_SIZE))
                 .addComponent(lblBackground, GroupLayout.PREFERRED_SIZE, FRAME_ANCHO, GroupLayout.PREFERRED_SIZE)
-                .addGroup(gl_layeredPane.createSequentialGroup().addComponent(lblIniciarSesion,
+                .addGroup(glLayeredPane.createSequentialGroup().addComponent(lblIniciarSesion,
                         GroupLayout.PREFERRED_SIZE, BOTON_ANCHO, GroupLayout.PREFERRED_SIZE)));
 
-        gl_layeredPane.setVerticalGroup(gl_layeredPane.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_layeredPane.createSequentialGroup().addGap(POS_LOGO).addComponent(lblLogo,
+        glLayeredPane.setVerticalGroup(glLayeredPane.createParallelGroup(Alignment.LEADING)
+                .addGroup(glLayeredPane.createSequentialGroup().addGap(POS_LOGO).addComponent(lblLogo,
                         GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup().addGap(POS_JUGAR).addComponent(lblRegistrarse,
+                .addGroup(glLayeredPane.createSequentialGroup().addGap(POS_JUGAR).addComponent(lblRegistrarse,
                         GroupLayout.PREFERRED_SIZE, BOTON_ALTO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup().addGap(POS_SALIR).addComponent(btnIniciarSesion,
+                .addGroup(glLayeredPane.createSequentialGroup().addGap(POS_SALIR).addComponent(btnIniciarSesion,
                         GroupLayout.PREFERRED_SIZE, BOTON_ALTO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup().addGap(POS_JUGAR).addComponent(btnRegistrar,
+                .addGroup(glLayeredPane.createSequentialGroup().addGap(POS_JUGAR).addComponent(btnRegistrar,
                         GroupLayout.PREFERRED_SIZE, BOTON_ALTO, GroupLayout.PREFERRED_SIZE))
                 .addComponent(lblBackground, GroupLayout.PREFERRED_SIZE, FRAME_ALTO, GroupLayout.PREFERRED_SIZE)
-                .addGroup(gl_layeredPane.createSequentialGroup().addGap(POS_SALIR).addComponent(lblIniciarSesion,
+                .addGroup(glLayeredPane.createSequentialGroup().addGap(POS_SALIR).addComponent(lblIniciarSesion,
                         GroupLayout.PREFERRED_SIZE, BOTON_ALTO, GroupLayout.PREFERRED_SIZE)));
-        layeredPane.setLayout(gl_layeredPane);
+        layeredPane.setLayout(glLayeredPane);
     }
 
     /**
@@ -174,7 +174,7 @@ public class MenuInicio extends JFrame {
      * @param args
      *            the arguments
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         new MenuInicio().setVisible(true);
     }
 

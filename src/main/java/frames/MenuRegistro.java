@@ -48,7 +48,7 @@ public class MenuRegistro extends JFrame {
 
         addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent e) {
+            public void windowClosing(final WindowEvent e) {
                 synchronized (cliente) {
                     cliente.setAccion(Comando.SALIR);
                     cliente.notify();
@@ -88,7 +88,7 @@ public class MenuRegistro extends JFrame {
         pwPassword = new JPasswordField();
         pwPassword.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 logIn(cliente);
                 dispose();
             }
@@ -97,7 +97,7 @@ public class MenuRegistro extends JFrame {
         txtUsuario = new JTextField();
         txtUsuario.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 logIn(cliente);
                 dispose();
             }
@@ -106,55 +106,55 @@ public class MenuRegistro extends JFrame {
 
         JLabel labelBackground = new JLabel("");
         labelBackground.setIcon(new ImageIcon(MenuRegistro.class.getResource("/frames/menuBackground.jpg")));
-        GroupLayout gl_layeredPane = new GroupLayout(layeredPane);
-        gl_layeredPane.setHorizontalGroup(
-            gl_layeredPane.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_layeredPane.createSequentialGroup()
+        GroupLayout glLayeredPane = new GroupLayout(layeredPane);
+        glLayeredPane.setHorizontalGroup(
+            glLayeredPane.createParallelGroup(Alignment.LEADING)
+                .addGroup(glLayeredPane.createSequentialGroup()
                     .addGap(113)
                     .addComponent(lblUsuario, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
                     .addGap(29)
                     .addComponent(txtUsuario, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup()
+                .addGroup(glLayeredPane.createSequentialGroup()
                     .addGap(113)
                     .addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
                     .addGap(21)
                     .addComponent(pwPassword, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup()
+                .addGroup(glLayeredPane.createSequentialGroup()
                     .addGap(143)
-                    .addGroup(gl_layeredPane.createParallelGroup(Alignment.LEADING)
+                    .addGroup(glLayeredPane.createParallelGroup(Alignment.LEADING)
                         .addComponent(btnRegistrarse, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE)
-                        .addGroup(gl_layeredPane.createSequentialGroup()
+                        .addGroup(glLayeredPane.createSequentialGroup()
                             .addGap(43)
                             .addComponent(lblRegistrarse, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE))))
                 .addComponent(labelBackground, GroupLayout.PREFERRED_SIZE, 444, GroupLayout.PREFERRED_SIZE)
         );
-        gl_layeredPane.setVerticalGroup(
-            gl_layeredPane.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_layeredPane.createSequentialGroup()
+        glLayeredPane.setVerticalGroup(
+            glLayeredPane.createParallelGroup(Alignment.LEADING)
+                .addGroup(glLayeredPane.createSequentialGroup()
                     .addGap(69)
-                    .addGroup(gl_layeredPane.createParallelGroup(Alignment.LEADING)
-                        .addGroup(gl_layeredPane.createSequentialGroup()
+                    .addGroup(glLayeredPane.createParallelGroup(Alignment.LEADING)
+                        .addGroup(glLayeredPane.createSequentialGroup()
                             .addGap(1)
                             .addComponent(lblUsuario))
                         .addComponent(txtUsuario, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
                             GroupLayout.PREFERRED_SIZE))
                     .addGap(31)
-                    .addGroup(gl_layeredPane.createParallelGroup(Alignment.LEADING)
-                        .addGroup(gl_layeredPane.createSequentialGroup()
+                    .addGroup(glLayeredPane.createParallelGroup(Alignment.LEADING)
+                        .addGroup(glLayeredPane.createSequentialGroup()
                             .addGap(1)
                             .addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE))
                         .addComponent(pwPassword, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
                             GroupLayout.PREFERRED_SIZE))
                     .addGap(42)
-                    .addGroup(gl_layeredPane.createParallelGroup(Alignment.LEADING)
+                    .addGroup(glLayeredPane.createParallelGroup(Alignment.LEADING)
                         .addComponent(btnRegistrarse, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblRegistrarse, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)))
                 .addComponent(labelBackground, GroupLayout.PREFERRED_SIZE, 271, GroupLayout.PREFERRED_SIZE)
         );
-        layeredPane.setLayout(gl_layeredPane);
+        layeredPane.setLayout(glLayeredPane);
         btnRegistrarse.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 logIn(cliente);
                 dispose();
             }
@@ -176,8 +176,8 @@ public class MenuRegistro extends JFrame {
      * @param txtUsuario
      *            the new txt usuario
      */
-    public void settxtUsuario(JTextField txtUsuario) {
-        this.txtUsuario = txtUsuario;
+    public void settxtUsuario(final JTextField txtUser) {
+        this.txtUsuario = txtUser;
     }
 
     /**
@@ -192,11 +192,11 @@ public class MenuRegistro extends JFrame {
     /**
      * Sets the password field.
      *
-     * @param pwPassword
+     * @param pwPass
      *            the new password field
      */
-    public void setPasswordField(JPasswordField pwPassword) {
-        this.pwPassword = pwPassword;
+    public void setPasswordField(final JPasswordField pwPass) {
+        this.pwPassword = pwPass;
     }
 
     /**

@@ -9,8 +9,8 @@ import javax.swing.JOptionPane;
  */
 public class Paquete implements Serializable, Cloneable {
 
-    public static String msjExito = "1";
-    public static String msjFracaso = "0";
+    private static String msjExito = "1";
+    private static String msjFracaso = "0";
 
     private String mensaje;
     private String ip;
@@ -175,5 +175,33 @@ public class Paquete implements Serializable, Cloneable {
         }
         return c;
     }
+
+	/**
+	 * @return the msjExito
+	 */
+	public static String getMsjExito() {
+		return msjExito;
+	}
+
+	/**
+	 * @param msjExito the msjExito to set
+	 */
+	public static void setMsjExito(String msjExito) {
+		Paquete.msjExito = msjExito;
+	}
+
+	/**
+	 * @return the msjFracaso
+	 */
+	public static String getMsjFracaso() {
+		return msjFracaso;
+	}
+
+	/**
+	 * @param msjFracaso the msjFracaso to set
+	 */
+	public static void setMsjFracaso(String msjFracaso) {
+		Paquete.msjFracaso = msjFracaso;
+	}
 
 }

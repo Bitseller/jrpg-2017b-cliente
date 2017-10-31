@@ -57,7 +57,7 @@ public class VentanaContactos extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(final WindowEvent arg0) {
-                Pantalla.ventContac = null;
+                Pantalla.setVentContac(null);
                 dispose();
             }
         });
