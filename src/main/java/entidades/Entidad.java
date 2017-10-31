@@ -36,7 +36,7 @@ import recursos.Recursos;
  */
 public class Entidad {
 
-    Juego juego;
+    private Juego juego;
 
     // Tamaño de la entidad
     private int ancho;
@@ -49,8 +49,6 @@ public class Entidad {
     private float dy;
     private LinkedList<Double> movX;
     private LinkedList<Double> movY;
-    private float xInicial;
-    private float yInicial;
     private float xFinal;
     private float yFinal;
     private int xOffset;
@@ -62,6 +60,7 @@ public class Entidad {
 
     // Movimiento Actual
     private final LinkedList<Integer> movimientos;
+    private static final int MOVIMIENTOS = 6;
     private static final int HORIZONTAL_IZQ = 0;
     private static final int HORIZONTAL_DER = 4;
     private static final int VERTICAL_SUP = 2;
@@ -70,8 +69,11 @@ public class Entidad {
     private static final int VERTICAL_INF = 6;
     private static final int DIAGONAL_INF_IZQ = 7;
     private static final int DIAGONAL_INF_DER = 5;
-    private int movimientoHacia = 6;
+    private int movimientoHacia = MOVIMIENTOS;
     private boolean enMovimiento;
+    // Referencias del mapa
+    private static final int REFERENCIA_X = 64;
+    private static final int REFERENCIA_Y = 32;
 
     // Animaciones
     private final LinkedList<Animacion> patronAnimaciones;
@@ -135,8 +137,8 @@ public class Entidad {
         this.mundo = mundo;
         xOffset = ancho / 2;
         yOffset = alto / 2;
-        x = (int) (spawnX / 64) * 64;
-        y = (int) (spawnY / 32) * 32;
+        x = (int) (spawnX / REFERENCIA_X) * REFERENCIA_X;
+        y = (int) (spawnY / REFERENCIA_Y) * REFERENCIA_Y;
 
         double paso = 1;
 
