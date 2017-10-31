@@ -30,6 +30,19 @@ import mensajeria.Comando;
  */
 public class MenuAsignarSkills extends JFrame implements MenuGenerico {
 
+    private static final int SEPARATOR = 20;
+    private static final int FILA_SEPARATOR_4 = 100;
+    private static final int FILA_SEPARATOR_3 = 55;
+    private static final int FILA_SEPARATOR_2 = 217;
+    private static final int FILA_SEPARATOR = 155;
+    private static final int COLUMNA_SEPARADOR_4 = 150;
+    private static final int COLUMNA_SEPARADOR_3 = 12;
+    private static final int COLUMNA_SEPARADOR_2 = 200;
+    private static final int COLUMNA_SEPARADOR = 50;
+    private static final int ATRIBUTO_MAX = 200;
+    private static final int PUNTOS_ASIGNAR_INICIALES = 3;
+    private static final int ATRIBUTO_GANANCIA = 5;
+    private static final int ATRIBUTO_BASE = 10;
     private static final int FRAME_ALTO = 350;
     private static final int FRAME_ANCHO = 400;
     private static final int BOTON_ALTO = 23;
@@ -40,7 +53,7 @@ public class MenuAsignarSkills extends JFrame implements MenuGenerico {
     private static final int BOTON_CHICO_ANCHO = 34;
 
     private JPanel contentPane;
-    private int puntosAsignarInicial = 10;
+    private int puntosAsignarInicial = ATRIBUTO_BASE;
     private int puntosFuerzaInicial = 0;
     private int puntosDestrezaInicial = 0;
     private int puntosInteligenciaInicial = 0;
@@ -53,15 +66,15 @@ public class MenuAsignarSkills extends JFrame implements MenuGenerico {
     /**
      * Declaracion de Botones.
      */
-    final JButton buttonConfirm = new JButton("Confirmar");
-    final JButton buttonCancel = new JButton("Cancelar");
-    final JButton buttonRestart = new JButton("Reiniciar");
-    final JButton buttonMinus = new JButton("");
-    final JButton buttonMinus1 = new JButton("");
-    final JButton buttonMinus2 = new JButton("");
-    final JButton buttonMore = new JButton("");
-    final JButton buttonMore1 = new JButton("");
-    final JButton buttonMore2 = new JButton("");
+    private final JButton buttonConfirm = new JButton("Confirmar");
+    private final JButton buttonCancel = new JButton("Cancelar");
+    private final JButton buttonRestart = new JButton("Reiniciar");
+    private final JButton buttonMinus = new JButton("");
+    private final JButton buttonMinus1 = new JButton("");
+    private final JButton buttonMinus2 = new JButton("");
+    private final JButton buttonMore = new JButton("");
+    private final JButton buttonMore1 = new JButton("");
+    private final JButton buttonMore2 = new JButton("");
 
     /**
      * Create the frame.
@@ -116,7 +129,7 @@ public class MenuAsignarSkills extends JFrame implements MenuGenerico {
 
         addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent arg0) {
+            public void windowClosing(final WindowEvent arg0) {
                 Pantalla.menuAsignar = null;
                 dispose();
             }
@@ -157,17 +170,16 @@ public class MenuAsignarSkills extends JFrame implements MenuGenerico {
         lblFuerza.setForeground(Color.WHITE);
         lblFuerza.setHorizontalAlignment(SwingConstants.CENTER);
 
-        ImageIcon icono_confirm = new ImageIcon("recursos//botonMenu.png");
+        ImageIcon iconoConfirm = new ImageIcon("recursos//botonMenu.png");
         buttonConfirm.setHorizontalTextPosition(SwingConstants.CENTER);
         buttonConfirm.setHorizontalTextPosition(SwingConstants.CENTER);
-        buttonConfirm.setFont(new Font("Arial", Font.PLAIN, 15));
+        buttonConfirm.setFont(new Font("Arial", Font.PLAIN, FUENTE_SIZE));
         buttonConfirm.setForeground(Color.WHITE);
-        buttonConfirm.setIcon(icono_confirm);
+        buttonConfirm.setIcon(iconoConfirm);
         buttonConfirm.setEnabled(false);
         buttonConfirm.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                ;
+            public void actionPerformed(final ActionEvent e) {
                 puntosAsignarInicial = puntosAsignar;
                 int bonusF = puntosFuerza - puntosFuerzaInicial;
                 int bonusD = puntosDestreza - puntosDestrezaInicial;
@@ -188,15 +200,15 @@ public class MenuAsignarSkills extends JFrame implements MenuGenerico {
             }
         });
 
-        ImageIcon icono_cancel = new ImageIcon("recursos//botonMenu.png");
+        ImageIcon iconoCancel = new ImageIcon("recursos//botonMenu.png");
         buttonCancel.setHorizontalTextPosition(SwingConstants.CENTER);
         buttonCancel.setHorizontalTextPosition(SwingConstants.CENTER);
-        buttonCancel.setFont(new Font("Arial", Font.PLAIN, 15));
+        buttonCancel.setFont(new Font("Arial", Font.PLAIN, FUENTE_SIZE));
         buttonCancel.setForeground(Color.WHITE);
-        buttonCancel.setIcon(icono_cancel);
+        buttonCancel.setIcon(iconoCancel);
         buttonCancel.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent arg0) {
+            public void actionPerformed(final ActionEvent arg0) {
                 Pantalla.menuAsignar = null;
                 dispose();
             }
@@ -208,33 +220,33 @@ public class MenuAsignarSkills extends JFrame implements MenuGenerico {
          * Casta. Ademas se encarga de obtener los puntos de Skill
          * correspondientes para poder volverlos a asigar.
          */
-        ImageIcon icono_restart = new ImageIcon("recursos//botonMenu.png");
+        ImageIcon iconoRestart = new ImageIcon("recursos//botonMenu.png");
         buttonRestart.setHorizontalTextPosition(SwingConstants.CENTER);
         buttonRestart.setHorizontalTextPosition(SwingConstants.CENTER);
-        buttonRestart.setFont(new Font("Arial", Font.PLAIN, 15));
+        buttonRestart.setFont(new Font("Arial", Font.PLAIN, FUENTE_SIZE));
         buttonRestart.setForeground(Color.WHITE);
-        buttonRestart.setIcon(icono_restart);
+        buttonRestart.setIcon(iconoRestart);
         buttonRestart.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                int fuerzaBase = 10;
-                int destrezaBase = 10;
-                int inteligenciaBase = 10;
+            public void actionPerformed(final ActionEvent e) {
+                int fuerzaBase = ATRIBUTO_BASE;
+                int destrezaBase = ATRIBUTO_BASE;
+                int inteligenciaBase = ATRIBUTO_BASE;
                 switch (cliente.getPaquetePersonaje().getCasta()) {
                     case "Guerrero":
-                        fuerzaBase += 5;
+                        fuerzaBase += ATRIBUTO_GANANCIA;
                         break;
 
                     case "Hechicero":
-                        inteligenciaBase += 5;
+                        inteligenciaBase += ATRIBUTO_GANANCIA;
                         break;
 
                     default:
-                        destrezaBase += 5;
+                        destrezaBase += ATRIBUTO_GANANCIA;
                         break;
                 }
 
-                puntosAsignar = (cliente.getPaquetePersonaje().getNivel() - 1) * 3;
+                puntosAsignar = (cliente.getPaquetePersonaje().getNivel() - 1) * PUNTOS_ASIGNAR_INICIALES;
                 //Multiplico por 3 ya que otorga 3 puntos por cada nivel obtenido.
                 puntosFuerza = cliente.getPaquetePersonaje().getStatSkill("Fuerza") + fuerzaBase;
                 puntosDestreza = cliente.getPaquetePersonaje().getStatSkill("Destreza") + destrezaBase;
@@ -258,18 +270,18 @@ public class MenuAsignarSkills extends JFrame implements MenuGenerico {
             }
         });
 
-        ImageIcon icono_1 = new ImageIcon("recursos//botonMenoss.png");
-        buttonMinus.setIcon(icono_1);
+        ImageIcon iconoBotonMenos = new ImageIcon("recursos//botonMenoss.png");
+        buttonMinus.setIcon(iconoBotonMenos);
         buttonMinus.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 if (puntosFuerza > puntosFuerzaInicial) {
                     puntosFuerza--;
                     if (puntosAsignar == 0) {
-                        if (puntosInteligencia != 200) {
+                        if (puntosInteligencia != ATRIBUTO_MAX) {
                             buttonMore2.setEnabled(true);
                         }
-                        if (puntosDestreza != 200) {
+                        if (puntosDestreza != ATRIBUTO_MAX) {
                             buttonMore1.setEnabled(true);
                         }
                     } else {
@@ -295,14 +307,14 @@ public class MenuAsignarSkills extends JFrame implements MenuGenerico {
 
         buttonMinus1.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 if (puntosDestreza > puntosDestrezaInicial) {
                     puntosDestreza--;
                     if (puntosAsignar == 0) {
-                        if (puntosInteligencia != 200) {
+                        if (puntosInteligencia != ATRIBUTO_MAX) {
                             buttonMore2.setEnabled(true);
                         }
-                        if (puntosFuerza != 200) {
+                        if (puntosFuerza != ATRIBUTO_MAX) {
                             buttonMore.setEnabled(true);
                         }
                     } else {
@@ -325,18 +337,18 @@ public class MenuAsignarSkills extends JFrame implements MenuGenerico {
                 }
             }
         });
-        buttonMinus1.setIcon(icono_1);
+        buttonMinus1.setIcon(iconoBotonMenos);
 
         buttonMinus2.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 if (puntosInteligencia > puntosInteligenciaInicial) {
                     puntosInteligencia--;
                     if (puntosAsignar == 0) {
-                        if (puntosFuerza != 200) {
+                        if (puntosFuerza != ATRIBUTO_MAX) {
                             buttonMore.setEnabled(true);
                         }
-                        if (puntosDestreza != 200) {
+                        if (puntosDestreza != ATRIBUTO_MAX) {
                             buttonMore1.setEnabled(true);
                         }
                     } else {
@@ -359,11 +371,11 @@ public class MenuAsignarSkills extends JFrame implements MenuGenerico {
                 }
             }
         });
-        buttonMinus2.setIcon(icono_1);
+        buttonMinus2.setIcon(iconoBotonMenos);
 
         buttonMore.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 if (puntosAsignar != 0 && !labelFuerza.getText().equals("200")) {
                     puntosFuerza++;
                     puntosAsignar--;
@@ -382,12 +394,12 @@ public class MenuAsignarSkills extends JFrame implements MenuGenerico {
                 }
             }
         });
-        ImageIcon icono_2 = new ImageIcon("recursos//botonMass.png");
-        buttonMore.setIcon(icono_2);
+        ImageIcon iconoBotonMas = new ImageIcon("recursos//botonMass.png");
+        buttonMore.setIcon(iconoBotonMas);
 
         buttonMore1.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 if (puntosAsignar != 0 && !labelDestreza.getText().equals("200")) {
                     puntosDestreza++;
                     puntosAsignar--;
@@ -406,11 +418,11 @@ public class MenuAsignarSkills extends JFrame implements MenuGenerico {
                 }
             }
         });
-        buttonMore1.setIcon(icono_2);
+        buttonMore1.setIcon(iconoBotonMas);
 
         buttonMore2.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 if (puntosAsignar != 0 && !labelInteligencia.getText().equals("200")) {
                     puntosInteligencia++;
                     puntosAsignar--;
@@ -429,129 +441,128 @@ public class MenuAsignarSkills extends JFrame implements MenuGenerico {
                 }
             }
         });
-        buttonMore2.setIcon(icono_2);
+        buttonMore2.setIcon(iconoBotonMas);
 
         final JLabel imageLabel = new JLabel(new ImageIcon("recursos//background.jpg"));
         imageLabel.setVisible(true);
-        GroupLayout gl_contentPane = new GroupLayout(contentPane);
-        gl_contentPane.setHorizontalGroup(
-            gl_contentPane.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(50)
+        GroupLayout layout = new GroupLayout(contentPane);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(COLUMNA_SEPARADOR)
                     .addComponent(labelFuerza, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(50)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(COLUMNA_SEPARADOR)
                     .addComponent(lblDestreza, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(50)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(COLUMNA_SEPARADOR)
                     .addComponent(lblInteligencia, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(50)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(COLUMNA_SEPARADOR)
                     .addComponent(labelInteligencia, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO,
                         GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(200)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(COLUMNA_SEPARADOR_2)
                     .addComponent(buttonConfirm, GroupLayout.PREFERRED_SIZE, BOTON_ANCHO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(12)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(COLUMNA_SEPARADOR_3)
                     .addComponent(buttonMinus1, GroupLayout.PREFERRED_SIZE, BOTON_CHICO_ANCHO,
                         GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(150)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(COLUMNA_SEPARADOR_4)
                     .addComponent(buttonMore1, GroupLayout.PREFERRED_SIZE, BOTON_CHICO_ANCHO,
                         GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(200)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(COLUMNA_SEPARADOR_2)
                     .addComponent(buttonCancel, GroupLayout.PREFERRED_SIZE, BOTON_ANCHO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(12)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(COLUMNA_SEPARADOR_3)
                     .addComponent(buttonMinus, GroupLayout.PREFERRED_SIZE, BOTON_CHICO_ANCHO,
                         GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(39)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(COLUMNA_SEPARADOR)
                     .addComponent(labelPuntos, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(200)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(COLUMNA_SEPARADOR_2)
                     .addComponent(buttonRestart, GroupLayout.PREFERRED_SIZE, BOTON_ANCHO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(12)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(COLUMNA_SEPARADOR_3)
                     .addComponent(lblCantidadDePuntos, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO + BOTON_ANCHO,
                         GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(12)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(COLUMNA_SEPARADOR_3)
                     .addComponent(buttonMinus2, GroupLayout.PREFERRED_SIZE, BOTON_CHICO_ANCHO,
                         GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(50)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(COLUMNA_SEPARADOR)
                     .addComponent(labelDestreza, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(150)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(COLUMNA_SEPARADOR_4)
                     .addComponent(buttonMore, GroupLayout.PREFERRED_SIZE, BOTON_CHICO_ANCHO,
                         GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(50)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(COLUMNA_SEPARADOR)
                     .addComponent(lblFuerza, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(150)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(COLUMNA_SEPARADOR_4)
                     .addComponent(buttonMore2, GroupLayout.PREFERRED_SIZE, BOTON_CHICO_ANCHO,
                         GroupLayout.PREFERRED_SIZE))
                 .addComponent(imageLabel, GroupLayout.PREFERRED_SIZE, FRAME_ANCHO, GroupLayout.PREFERRED_SIZE)
         );
-        gl_contentPane.setVerticalGroup(
-            gl_contentPane.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(101)
+        layout.setVerticalGroup(
+            layout.createParallelGroup(Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(FILA_SEPARATOR_4)
                     .addComponent(labelFuerza, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE)
-                    .addGap(13)
                     .addComponent(lblDestreza, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE)
-                    .addGap(20)
+                    .addGap(SEPARATOR)
                     .addComponent(lblInteligencia, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE)
-                    .addGap(5)
+                    .addGap(ATRIBUTO_GANANCIA)
                     .addComponent(labelInteligencia, GroupLayout.PREFERRED_SIZE, LABEL_ALTO,
                         GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(155)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(FILA_SEPARATOR)
                     .addComponent(buttonConfirm, GroupLayout.PREFERRED_SIZE, BOTON_ALTO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(159)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(FILA_SEPARATOR)
                     .addComponent(buttonMinus1, GroupLayout.PREFERRED_SIZE, BOTON_ALTO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(159)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(FILA_SEPARATOR)
                     .addComponent(buttonMore1, GroupLayout.PREFERRED_SIZE, BOTON_ALTO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(189)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(FILA_SEPARATOR_2)
                     .addComponent(buttonCancel, GroupLayout.PREFERRED_SIZE, BOTON_ALTO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(92)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(FILA_SEPARATOR_4)
                     .addComponent(buttonMinus, GroupLayout.PREFERRED_SIZE, BOTON_ALTO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(41)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(FILA_SEPARATOR_3)
                     .addComponent(labelPuntos, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(121)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(FILA_SEPARATOR)
                     .addComponent(buttonRestart, GroupLayout.PREFERRED_SIZE, BOTON_ALTO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(13)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(SEPARATOR)
                     .addComponent(lblCantidadDePuntos, GroupLayout.PREFERRED_SIZE, LABEL_ALTO,
                         GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(217)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(FILA_SEPARATOR_2)
                     .addComponent(buttonMinus2, GroupLayout.PREFERRED_SIZE, BOTON_ALTO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(159)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(FILA_SEPARATOR)
                     .addComponent(labelDestreza, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(92)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(FILA_SEPARATOR_4)
                     .addComponent(buttonMore, GroupLayout.PREFERRED_SIZE, BOTON_ALTO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(72)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(FILA_SEPARATOR_3)
                     .addComponent(lblFuerza, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(217)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(FILA_SEPARATOR_2)
                     .addComponent(buttonMore2, GroupLayout.PREFERRED_SIZE, BOTON_ALTO, GroupLayout.PREFERRED_SIZE))
                 .addComponent(imageLabel, GroupLayout.PREFERRED_SIZE, FRAME_ALTO, GroupLayout.PREFERRED_SIZE)
         );
-        contentPane.setLayout(gl_contentPane);
+        contentPane.setLayout(layout);
     }
 
     @Override

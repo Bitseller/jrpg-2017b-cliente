@@ -11,6 +11,9 @@ import javax.swing.JOptionPane;
  */
 public class CargadorImagen {
 
+    /**
+     * Instantiates a new cargador imagen.
+     */
     private CargadorImagen() {
 
     }
@@ -18,7 +21,8 @@ public class CargadorImagen {
     /**
      * Carga una imagen.
      *
-     * @param path ruta de la imagen
+     * @param path
+     *            ruta de la imagen
      * @return the buffered image
      */
     public static BufferedImage cargarImagen(final String path) {

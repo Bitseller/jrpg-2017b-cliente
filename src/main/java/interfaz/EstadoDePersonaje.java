@@ -22,6 +22,13 @@ public class EstadoDePersonaje {
     private static final int ANCHOMINIATURA = 64;
 
     /**
+     * Instantiates a new estado de personaje.
+     */
+    private EstadoDePersonaje() {
+
+    }
+
+    /**
      * Dibujar estado de personaje.
      *
      * @param g
@@ -97,8 +104,9 @@ public class EstadoDePersonaje {
      * @param miniaturaPersonaje
      *            the miniatura personaje
      */
-    public static void dibujarEstadoDePersonaje(final Graphics g, final int x, final int y, PaquetePersonaje personaje,
-        BufferedImage miniaturaPersonaje) {
+    public static void dibujarEstadoDePersonaje(final Graphics g, final int x, final int y,
+        final PaquetePersonaje personaje,
+        final BufferedImage miniaturaPersonaje) {
 
         int drawBarra = 0;
 

@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import cliente.Cliente;
 import mensajeria.Comando;
@@ -30,6 +31,14 @@ import mensajeria.Comando;
  * The Class MenuRegistro.
  */
 public class MenuRegistro extends JFrame {
+
+    private static final int TEXT_SIZE = 15;
+    private static final int LABEL_ALTO = 23;
+    private static final int BOTON_ANCHO = 153;
+    private static final int LABEL_ANCHO = 68;
+    private static final int FILA_SEPARADOR = 20;
+    private static final int FRAME_ANCHO = 450;
+    private static final int FRAME_ALTO = 300;
 
     private JTextField txtUsuario;
     private JPasswordField pwPassword;
@@ -48,7 +57,7 @@ public class MenuRegistro extends JFrame {
 
         addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent e) {
+            public void windowClosing(final WindowEvent e) {
                 synchronized (cliente) {
                     cliente.setAccion(Comando.SALIR);
                     cliente.notify();
@@ -60,26 +69,27 @@ public class MenuRegistro extends JFrame {
         setTitle("WOME - Registrarse");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
-        setSize(450, 300);
+        setSize(FRAME_ANCHO, FRAME_ALTO);
         getContentPane().setLayout(null);
         setLocationRelativeTo(null);
 
         JLayeredPane layeredPane = new JLayeredPane();
-        layeredPane.setSize(450, 300);
+        layeredPane.setSize(FRAME_ANCHO, FRAME_ALTO);
         getContentPane().add(layeredPane);
 
         JLabel lblUsuario = new JLabel("Usuario");
         lblUsuario.setForeground(Color.WHITE);
-        lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, TEXT_SIZE));
 
         JLabel lblPassword = new JLabel("Password");
         lblPassword.setForeground(Color.WHITE);
-        lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblPassword.setFont(new Font("Tahoma", Font.PLAIN, TEXT_SIZE));
 
         JLabel lblRegistrarse = new JLabel("Registrarse");
+        lblRegistrarse.setHorizontalAlignment(SwingConstants.CENTER);
         layeredPane.setLayer(lblRegistrarse, 1);
         lblRegistrarse.setForeground(Color.WHITE);
-        lblRegistrarse.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblRegistrarse.setFont(new Font("Tahoma", Font.PLAIN, TEXT_SIZE));
 
         JButton btnRegistrarse = new JButton("");
         btnRegistrarse.setFocusable(false);
@@ -88,7 +98,7 @@ public class MenuRegistro extends JFrame {
         pwPassword = new JPasswordField();
         pwPassword.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 logIn(cliente);
                 dispose();
             }
@@ -97,64 +107,53 @@ public class MenuRegistro extends JFrame {
         txtUsuario = new JTextField();
         txtUsuario.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 logIn(cliente);
                 dispose();
             }
         });
-        txtUsuario.setColumns(10);
+        //txtUsuario.setColumns(10);
 
         JLabel labelBackground = new JLabel("");
         labelBackground.setIcon(new ImageIcon(MenuRegistro.class.getResource("/frames/menuBackground.jpg")));
-        GroupLayout gl_layeredPane = new GroupLayout(layeredPane);
-        gl_layeredPane.setHorizontalGroup(
-            gl_layeredPane.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_layeredPane.createSequentialGroup()
-                    .addGap(113)
-                    .addComponent(lblUsuario, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
-                    .addGap(29)
-                    .addComponent(txtUsuario, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup()
-                    .addGap(113)
-                    .addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
-                    .addGap(21)
-                    .addComponent(pwPassword, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup()
-                    .addGap(143)
-                    .addGroup(gl_layeredPane.createParallelGroup(Alignment.LEADING)
-                        .addComponent(btnRegistrarse, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE)
-                        .addGroup(gl_layeredPane.createSequentialGroup()
-                            .addGap(43)
-                            .addComponent(lblRegistrarse, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE))))
-                .addComponent(labelBackground, GroupLayout.PREFERRED_SIZE, 444, GroupLayout.PREFERRED_SIZE)
+        GroupLayout layout = new GroupLayout(layeredPane);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(Alignment.CENTER)
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(lblUsuario, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUsuario, GroupLayout.PREFERRED_SIZE, BOTON_ANCHO, GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pwPassword, GroupLayout.PREFERRED_SIZE, BOTON_ANCHO, GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(Alignment.CENTER)
+                    .addComponent(btnRegistrarse, GroupLayout.PREFERRED_SIZE, BOTON_ANCHO, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblRegistrarse, GroupLayout.PREFERRED_SIZE, BOTON_ANCHO, GroupLayout.PREFERRED_SIZE))
+                .addComponent(labelBackground, GroupLayout.PREFERRED_SIZE, FRAME_ANCHO, GroupLayout.PREFERRED_SIZE)
         );
-        gl_layeredPane.setVerticalGroup(
-            gl_layeredPane.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_layeredPane.createSequentialGroup()
-                    .addGap(69)
-                    .addGroup(gl_layeredPane.createParallelGroup(Alignment.LEADING)
-                        .addGroup(gl_layeredPane.createSequentialGroup()
-                            .addGap(1)
-                            .addComponent(lblUsuario))
+        layout.setVerticalGroup(
+            layout.createParallelGroup(Alignment.CENTER)
+                .addComponent(labelBackground, GroupLayout.PREFERRED_SIZE, FRAME_ALTO, GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(Alignment.CENTER)
+                        .addComponent(lblUsuario, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtUsuario, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
                             GroupLayout.PREFERRED_SIZE))
-                    .addGap(31)
-                    .addGroup(gl_layeredPane.createParallelGroup(Alignment.LEADING)
-                        .addGroup(gl_layeredPane.createSequentialGroup()
-                            .addGap(1)
-                            .addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE))
+                    .addGap(FILA_SEPARADOR)
+                    .addGroup(layout.createParallelGroup(Alignment.CENTER)
+                        .addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE)
                         .addComponent(pwPassword, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
                             GroupLayout.PREFERRED_SIZE))
-                    .addGap(42)
-                    .addGroup(gl_layeredPane.createParallelGroup(Alignment.LEADING)
-                        .addComponent(btnRegistrarse, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblRegistrarse, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)))
-                .addComponent(labelBackground, GroupLayout.PREFERRED_SIZE, 271, GroupLayout.PREFERRED_SIZE)
+                    .addGap(FILA_SEPARADOR)
+                    .addGroup(layout.createParallelGroup(Alignment.CENTER)
+                        .addComponent(btnRegistrarse, GroupLayout.PREFERRED_SIZE, LABEL_ALTO,
+                            GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblRegistrarse, GroupLayout.PREFERRED_SIZE, LABEL_ALTO,
+                            GroupLayout.PREFERRED_SIZE)))
         );
-        layeredPane.setLayout(gl_layeredPane);
+        layeredPane.setLayout(layout);
         btnRegistrarse.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 logIn(cliente);
                 dispose();
             }
@@ -176,7 +175,7 @@ public class MenuRegistro extends JFrame {
      * @param txtUsuario
      *            the new txt usuario
      */
-    public void settxtUsuario(JTextField txtUsuario) {
+    public void settxtUsuario(final JTextField txtUsuario) {
         this.txtUsuario = txtUsuario;
     }
 
@@ -195,7 +194,7 @@ public class MenuRegistro extends JFrame {
      * @param pwPassword
      *            the new password field
      */
-    public void setPasswordField(JPasswordField pwPassword) {
+    public void setPasswordField(final JPasswordField pwPassword) {
         this.pwPassword = pwPassword;
     }
 

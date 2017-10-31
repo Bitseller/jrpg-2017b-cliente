@@ -19,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
 import cliente.Cliente;
@@ -28,8 +29,23 @@ import mensajeria.Comando;
  * The Class MenuMapas.
  */
 public class MenuMapas extends JFrame {
+    private static final int FILA_SEPARADOR = 20;
+    private static final int TEXT_SIZE = 15;
+    private static final int LABEL_ANCHO = 70;
+    private static final int LABEL_ALTO = 23;
+    private static final int BOTON_ANCHO = 143;
+    private static final int FRAME_ALTO = 300;
+    private static final int FRAME_ANCHO = 450;
     public static int numberMap = 0;
     private JPanel contentPane;
+
+    private JLabel lblBackground;
+    private JButton btnAubenor;
+    private JLabel lblAubenor;
+    private JButton btnAris;
+    private JLabel lblAris;
+    private JButton btnEodrim;
+    private JLabel lblEodrim;
 
     /**
      * Instantiates a new menu mapas.
@@ -38,10 +54,158 @@ public class MenuMapas extends JFrame {
      *            the cliente
      */
     public MenuMapas(final Cliente cliente) {
+        iniciarVentana(cliente);
+
+        //Formato de la ventana.
+        JLayeredPane layeredPane = new JLayeredPane();
+        layeredPane.setSize(FRAME_ANCHO, FRAME_ALTO);
+        contentPane.add(layeredPane);
+
+        iniciarLabels(cliente);
+
+        layeredPane.setLayer(lblAubenor, JLayeredPane.PALETTE_LAYER);
+        layeredPane.setLayer(lblEodrim, JLayeredPane.PALETTE_LAYER);
+        layeredPane.setLayer(lblAris, JLayeredPane.PALETTE_LAYER);
+        GroupLayout layout = new GroupLayout(layeredPane);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(Alignment.CENTER)
+                .addGroup(layout.createParallelGroup(Alignment.CENTER)
+                    .addComponent(btnAris, GroupLayout.PREFERRED_SIZE, BOTON_ANCHO, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblAris, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO, GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(Alignment.CENTER)
+                    .addComponent(btnAubenor, GroupLayout.PREFERRED_SIZE, BOTON_ANCHO, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblAubenor, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO, GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(Alignment.CENTER)
+                    .addComponent(btnEodrim, GroupLayout.PREFERRED_SIZE, BOTON_ANCHO, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEodrim, GroupLayout.PREFERRED_SIZE, LABEL_ANCHO, GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblBackground, GroupLayout.PREFERRED_SIZE, FRAME_ANCHO, GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(Alignment.CENTER)
+                .addComponent(lblBackground, GroupLayout.PREFERRED_SIZE, FRAME_ALTO, GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(Alignment.CENTER)
+                        .addComponent(btnAris, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblAris, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE))
+                    .addGap(FILA_SEPARADOR)
+                    .addGroup(layout.createParallelGroup(Alignment.CENTER)
+                        .addComponent(btnAubenor, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblAubenor, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE))
+                    .addGap(FILA_SEPARADOR)
+                    .addGroup(layout.createParallelGroup(Alignment.CENTER)
+                        .addComponent(btnEodrim, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblEodrim, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE)))
+
+        );
+        layeredPane.setLayout(layout);
+
+    }
+
+    /**
+     * Iniciar labels.
+     *
+     * @param cliente
+     *            the cliente
+     */
+    private void iniciarLabels(final Cliente cliente) {
+        lblBackground = new JLabel("");
+        lblBackground.setIcon(new ImageIcon(MenuMapas.class.getResource("/frames/menuBackground.jpg")));
+
+        // Mapa Aubenor
+        //Boton.
+        btnAubenor = new JButton("");
+        btnAubenor.setFocusable(false);
+        btnAubenor.setIcon(new ImageIcon(MenuMapas.class.getResource("/frames/BotonMenu.png")));
+
+        //Formato del boton (etiqueta).
+        lblAubenor = new JLabel("Aubenor");
+        lblAubenor.setHorizontalAlignment(SwingConstants.CENTER);
+
+        lblAubenor.setForeground(Color.WHITE);
+        lblAubenor.setFont(new Font("Tahoma", Font.PLAIN, TEXT_SIZE));
+
+        //Configuracion del boton.
+        btnAubenor.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                synchronized (cliente) {
+                    cliente.getPaquetePersonaje().setMapa("Aubenor");
+                    numberMap = 1;
+                    cliente.notify();
+                }
+                dispose();
+            }
+        });
+
+        // Mapa Aris
+        //Boton.
+        btnAris = new JButton("");
+        btnAris.setFocusable(false);
+        btnAris.setIcon(new ImageIcon(MenuMapas.class.getResource("/frames/BotonMenu.png")));
+
+        //Formato del boton (etiqueta).
+        lblAris = new JLabel("Aris");
+        lblAris.setHorizontalAlignment(SwingConstants.CENTER);
+        lblAris.setForeground(Color.WHITE);
+        lblAris.setFont(new Font("Tahoma", Font.PLAIN, TEXT_SIZE));
+
+        //Configuracion del boton.
+        btnAris.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                synchronized (cliente) {
+                    cliente.getPaquetePersonaje().setMapa("Aris");
+                    numberMap = 2;
+                    cliente.notify();
+                }
+                dispose();
+            }
+        });
+
+        // Mapa Eodrim
+        //Boton
+        btnEodrim = new JButton("");
+        btnEodrim.setFocusable(false);
+        btnEodrim.setEnabled(false);
+        btnEodrim.setIcon(new ImageIcon(MenuMapas.class.getResource("/frames/BotonMenu.png")));
+
+        //Formato del boton (etiqueta).
+        lblEodrim = new JLabel("Eodrim");
+        lblEodrim.setHorizontalAlignment(SwingConstants.CENTER);
+
+        lblEodrim.setForeground(Color.WHITE);
+        lblEodrim.setFont(new Font("Tahoma", Font.PLAIN, TEXT_SIZE));
+
+        //Configuracion del Boton
+        btnEodrim.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                synchronized (cliente) {
+                    cliente.getPaquetePersonaje().setMapa("Eodrim");
+                    numberMap = 3;
+                    cliente.notify();
+                }
+                dispose();
+            }
+        });
+
+        //Seteo de botones.
+        btnAris.setEnabled(true);
+        btnAubenor.setEnabled(true);
+        btnEodrim.setEnabled(false);
+    }
+
+    /**
+     * Iniciar ventana.
+     *
+     * @param cliente
+     *            the cliente
+     */
+    private void iniciarVentana(final Cliente cliente) {
         //Acceso rapido al primer mapa.
         addKeyListener(new KeyAdapter() {
             @Override
-            public void keyPressed(KeyEvent e) {
+            public void keyPressed(final KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     synchronized (cliente) {
                         cliente.getPaquetePersonaje().setMapa("Aubenor");
@@ -58,12 +222,12 @@ public class MenuMapas extends JFrame {
             new Point(0, 0), "custom cursor"));
 
         setTitle("Elegir Mapa");
-        setBounds(100, 100, 450, 300);
+        setSize(FRAME_ANCHO, FRAME_ALTO);
 
         // En caso de cerrar
         addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent e) {
+            public void windowClosing(final WindowEvent e) {
                 cliente.getPaquetePersonaje().setMapa("Salir");
                 synchronized (cliente) {
                     cliente.setAccion(Comando.SALIR);
@@ -76,145 +240,9 @@ public class MenuMapas extends JFrame {
         // Ventana del menu.
         setTitle("WOME - Elegir Mapa");
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        setSize(450, 300);
         contentPane = new JPanel();
         setContentPane(contentPane);
-        contentPane.setLayout(null);
         setLocationRelativeTo(null);
         setResizable(false);
-
-        //Formato de la ventana.
-        JLayeredPane layeredPane = new JLayeredPane();
-        layeredPane.setSize(450, 300);
-        contentPane.add(layeredPane);
-
-        JLabel lblBackground = new JLabel("");
-        lblBackground.setIcon(new ImageIcon(MenuMapas.class.getResource("/frames/menuBackground.jpg")));
-
-        // Mapa Aubenor
-        //Boton.
-        JButton btnAubenor = new JButton("");
-        btnAubenor.setFocusable(false);
-        btnAubenor.setIcon(new ImageIcon(MenuMapas.class.getResource("/frames/BotonMenu.png")));
-
-        //Formato del boton (etiqueta).
-        JLabel lblAubenor = new JLabel("Aubenor");
-        layeredPane.setLayer(lblAubenor, 1);
-        lblAubenor.setForeground(Color.WHITE);
-        lblAubenor.setFont(new Font("Tahoma", Font.PLAIN, 15));
-
-        //Configuracion del boton.
-        btnAubenor.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                synchronized (cliente) {
-                    cliente.getPaquetePersonaje().setMapa("Aubenor");
-                    numberMap = 1;
-                    cliente.notify();
-                }
-                dispose();
-            }
-        });
-
-        // Mapa Aris
-        //Boton.
-        JButton btnAris = new JButton("");
-        btnAris.setFocusable(false);
-        btnAris.setIcon(new ImageIcon(MenuMapas.class.getResource("/frames/BotonMenu.png")));
-
-        //Formato del boton (etiqueta).
-        JLabel lblAris = new JLabel("Aris");
-        lblAris.setForeground(Color.WHITE);
-        lblAris.setFont(new Font("Tahoma", Font.PLAIN, 15));
-
-        //Configuracion del boton.
-        btnAris.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                synchronized (cliente) {
-                    cliente.getPaquetePersonaje().setMapa("Aris");
-                    numberMap = 2;
-                    cliente.notify();
-                }
-                dispose();
-            }
-        });
-
-        // Mapa Eodrim
-        //Boton
-        JButton btnEodrim = new JButton("");
-        btnEodrim.setFocusable(false);
-        btnEodrim.setEnabled(false);
-        btnEodrim.setIcon(new ImageIcon(MenuMapas.class.getResource("/frames/BotonMenu.png")));
-
-        //Formato del boton (etiqueta).
-        JLabel lblEodrim = new JLabel("Eodrim");
-        layeredPane.setLayer(lblEodrim, 1);
-        lblEodrim.setForeground(Color.WHITE);
-        lblEodrim.setFont(new Font("Tahoma", Font.PLAIN, 15));
-
-        //Configuracion del Boton
-        btnEodrim.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                synchronized (cliente) {
-                    cliente.getPaquetePersonaje().setMapa("Eodrim");
-                    numberMap = 3;
-                    cliente.notify();
-                }
-                dispose();
-            }
-        });
-
-        //Seteo de botones.
-        btnAris.setEnabled(true);
-        btnAubenor.setEnabled(true);
-        btnEodrim.setEnabled(false);
-        GroupLayout gl_layeredPane = new GroupLayout(layeredPane);
-        gl_layeredPane.setHorizontalGroup(
-            gl_layeredPane.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_layeredPane.createSequentialGroup()
-                    .addGap(148)
-                    .addComponent(btnAubenor, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup()
-                    .addGap(148)
-                    .addComponent(btnEodrim, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup()
-                    .addGap(204)
-                    .addComponent(lblAris, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup()
-                    .addGap(191)
-                    .addComponent(lblAubenor, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup()
-                    .addGap(198)
-                    .addComponent(lblEodrim, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup()
-                    .addGap(148)
-                    .addComponent(btnAris, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE))
-                .addComponent(lblBackground, GroupLayout.PREFERRED_SIZE, 444, GroupLayout.PREFERRED_SIZE)
-        );
-        gl_layeredPane.setVerticalGroup(
-            gl_layeredPane.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_layeredPane.createSequentialGroup()
-                    .addGap(72)
-                    .addComponent(btnAubenor, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
-                    .addGap(97)
-                    .addComponent(btnEodrim, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup()
-                    .addGap(129)
-                    .addComponent(lblAris, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup()
-                    .addGap(72)
-                    .addComponent(lblAubenor, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup()
-                    .addGap(192)
-                    .addComponent(lblEodrim, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_layeredPane.createSequentialGroup()
-                    .addGap(130)
-                    .addComponent(btnAris, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-                .addComponent(lblBackground, GroupLayout.PREFERRED_SIZE, 271, GroupLayout.PREFERRED_SIZE)
-        );
-        layeredPane.setLayout(gl_layeredPane);
-
     }
 }

@@ -8,7 +8,7 @@ import java.util.Map;
  */
 public class PaqueteDeNPCs extends Paquete implements Serializable, Cloneable {
 
-    private Map<Integer, PaqueteDeNPC> NPCs;
+    private Map<Integer, PaqueteDeNPC> npcs;
 
     /**
      * Instantiates a new paquete de NPcs.
@@ -23,8 +23,8 @@ public class PaqueteDeNPCs extends Paquete implements Serializable, Cloneable {
      * @param NPCs
      *            el paquete de NPcs
      */
-    public PaqueteDeNPCs(final Map<Integer, PaqueteDeNPC> NPCs) {
-        this.NPCs = NPCs;
+    public PaqueteDeNPCs(final Map<Integer, PaqueteDeNPC> npcs) {
+        this.npcs = npcs;
     }
 
     /**
@@ -33,7 +33,7 @@ public class PaqueteDeNPCs extends Paquete implements Serializable, Cloneable {
      * @return the NPcs
      */
     public Map<Integer, PaqueteDeNPC> getNPCs() {
-        return NPCs;
+        return npcs;
     }
 
     @Override

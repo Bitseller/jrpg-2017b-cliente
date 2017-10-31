@@ -22,6 +22,8 @@ import recursos.Recursos;
  */
 public class Celda extends JPanel {
 
+    private static final int CELDA_TAM = 60;
+    private static final int ICON_SIZE = 49;
     private BufferedImage item;
     private PaquetePersonaje paquetePersonaje;
     private JLabel label;
@@ -41,7 +43,7 @@ public class Celda extends JPanel {
         this.item = item.getFoto();
         it = item;
         this.paquetePersonaje = paquetePersonaje;
-        label = new JLabel(new ImageIcon(this.item.getScaledInstance(49, 49, Image.SCALE_DEFAULT)));
+        label = new JLabel(new ImageIcon(this.item.getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_DEFAULT)));
         actionListenersYLabel(item);
     }
 
@@ -49,7 +51,7 @@ public class Celda extends JPanel {
      * Instantiates a new celda.
      */
     public Celda() {
-        label = new JLabel(new ImageIcon(Recursos.noItem.getScaledInstance(49, 49, Image.SCALE_DEFAULT)));
+        label = new JLabel(new ImageIcon(Recursos.noItem.getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_DEFAULT)));
         add(label);
     }
 
@@ -96,7 +98,7 @@ public class Celda extends JPanel {
      * Reset label.
      */
     protected void resetLabel() {
-        label.setIcon(new ImageIcon(Recursos.noItem.getScaledInstance(49, 49, Image.SCALE_DEFAULT)));
+        label.setIcon(new ImageIcon(Recursos.noItem.getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_DEFAULT)));
         label.setToolTipText(null);
         paquetePersonaje.removerItem(it);
         label.removeMouseListener(mouseListener);
@@ -105,7 +107,7 @@ public class Celda extends JPanel {
 
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension(60, 60);
+        return new Dimension(CELDA_TAM, CELDA_TAM);
     }
 
     /**
@@ -120,14 +122,15 @@ public class Celda extends JPanel {
     MouseListener mouseListener = new MouseAdapter() {
         @Override
         public void mouseClicked(final MouseEvent e) {
-            Object[] options = { "Tirar", "Cancelar" };
+            Object[] options = {
+                "Tirar", "Cancelar" };
             if (e.getClickCount() == 2) {
                 int answer = JOptionPane.showOptionDialog(getParent(), "¿Qué desea hacer?", "Item: " + it.getNombre(),
-                        JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
+                    JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
                 //Tirar
                 if (answer == 0) {
                     paquetePersonaje.sacarBonus(it.getBonusSalud(), it.getBonusEnergia(), it.getBonusFuerza(),
-                            it.getBonusDestreza(), it.getBonusInteligencia());
+                        it.getBonusDestreza(), it.getBonusInteligencia());
                     resetLabel();
                 }
             }

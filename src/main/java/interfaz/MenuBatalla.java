@@ -17,8 +17,20 @@ public class MenuBatalla {
     private static final int X = 100;
     private static final int Y = 380;
     private static final int ANCHO_BOTON = 40;
-    private static final int[][] BOTONES = { { X + 48, Y + 72 }, { X + 48, Y + 146 }, { X + 221, Y + 72 }, { X + 221, Y
-        + 146 }, { X + 394, Y + 72 }, { X + 394, Y + 146 } };
+    private static final int[][] BOTONES = {
+        {
+            X + 48, Y + 72 },
+        {
+            X + 48, Y + 146 },
+        {
+            X + 221, Y + 72 },
+        {
+            X + 221, Y + 146 },
+        {
+            X + 394, Y + 72 },
+        {
+            X + 394, Y + 146 }
+    };
     private boolean habilitado;
     private Personaje personaje;
 
@@ -126,7 +138,7 @@ public class MenuBatalla {
      * @param b
      *            the new habilitado
      */
-    public void setHabilitado(boolean b) {
+    public void setHabilitado(final boolean b) {
         habilitado = b;
     }
 }

@@ -42,8 +42,9 @@ public class PaqueteAtacar extends Paquete implements Serializable, Cloneable {
      *            the prob evitar dano enemgio
      */
     public PaqueteAtacar(final int id, final int idEnemigo, final int nuevaSalud, final int nuevaEnergia,
-            final int nuevaSaludEnemigo, int nuevaEnergiaEnemigo, final int nuevaDefensa, final int nuevaDefensaEnemigo,
-            final double probEvitarDano, final double probEvitarDanoEnemgio) {
+        final int nuevaSaludEnemigo, final int nuevaEnergiaEnemigo, final int nuevaDefensa,
+        final int nuevaDefensaEnemigo,
+        final double probEvitarDano, final double probEvitarDanoEnemgio) {
         setComando(Comando.ATACAR);
         this.id = id;
         this.idEnemigo = idEnemigo;

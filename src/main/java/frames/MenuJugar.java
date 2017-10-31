@@ -19,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import cliente.Cliente;
 import mensajeria.Comando;
@@ -28,6 +29,12 @@ import mensajeria.Comando;
  */
 public class MenuJugar extends JFrame {
 
+    private static final int TEXT_SIZE = 15;
+    private static final int LABEL_ALTO = 23;
+    private static final int FRAME_ALTO = 300;
+    private static final int FRAME_ANCHO = 450;
+    private static final int BOTON_ANCHO = 191;
+    private static final int FILA_SEPARADOR = 30;
     private JPanel contentPane;
 
     /**
@@ -39,7 +46,7 @@ public class MenuJugar extends JFrame {
     public MenuJugar(final Cliente cliente) {
         addKeyListener(new KeyAdapter() {
             @Override
-            public void keyPressed(KeyEvent e) {
+            public void keyPressed(final KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     MenuInicioSesion menuInicioSesion = new MenuInicioSesion(cliente);
                     menuInicioSesion.setVisible(true);
@@ -57,7 +64,7 @@ public class MenuJugar extends JFrame {
         // En caso de cerrar la ventana
         addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent e) {
+            public void windowClosing(final WindowEvent e) {
                 synchronized (cliente) {
                     cliente.setAccion(Comando.SALIR);
                     cliente.notify();
@@ -68,7 +75,7 @@ public class MenuJugar extends JFrame {
 
         // Propiedades de la ventana
         setTitle("WOME - World Of the Middle Earth");
-        setSize(450, 300);
+        setSize(FRAME_ANCHO, FRAME_ALTO);
         setLocationRelativeTo(null);
         setResizable(false);
         contentPane = new JPanel();
@@ -76,29 +83,31 @@ public class MenuJugar extends JFrame {
         contentPane.setLayout(null);
 
         JLayeredPane layeredPane = new JLayeredPane();
-        layeredPane.setSize(450, 300);
+        layeredPane.setSize(FRAME_ANCHO, FRAME_ALTO);
         contentPane.add(layeredPane);
 
         // Boton Registrarse
         JLabel lblRegistrarse = new JLabel("Registrarse");
+        lblRegistrarse.setHorizontalAlignment(SwingConstants.CENTER);
         layeredPane.setLayer(lblRegistrarse, 1);
         lblRegistrarse.setForeground(Color.WHITE);
         lblRegistrarse.setEnabled(true);
-        lblRegistrarse.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblRegistrarse.setFont(new Font("Tahoma", Font.PLAIN, TEXT_SIZE));
         lblRegistrarse.setBackground(Color.WHITE);
 
         // Boton Iniciar sesion
         JLabel lblIniciarSesion = new JLabel("Iniciar Sesion");
+        lblIniciarSesion.setHorizontalAlignment(SwingConstants.CENTER);
         layeredPane.setLayer(lblIniciarSesion, 1);
         lblIniciarSesion.setForeground(Color.WHITE);
-        lblIniciarSesion.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblIniciarSesion.setFont(new Font("Tahoma", Font.PLAIN, TEXT_SIZE));
 
         JButton btnRegistrar = new JButton("Registrarse");
         btnRegistrar.setFocusable(false);
         btnRegistrar.setIcon(new ImageIcon(MenuJugar.class.getResource("/frames/BotonMenu.png")));
         btnRegistrar.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 MenuRegistro menuRegistro = new MenuRegistro(cliente);
                 menuRegistro.setVisible(true);
                 dispose();
@@ -110,7 +119,7 @@ public class MenuJugar extends JFrame {
         btnIniciarSesion.setIcon(new ImageIcon(MenuJugar.class.getResource("/frames/BotonMenu.png")));
         btnIniciarSesion.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 MenuInicioSesion menuInicioSesion = new MenuInicioSesion(cliente);
                 menuInicioSesion.setVisible(true);
                 dispose();
@@ -119,41 +128,31 @@ public class MenuJugar extends JFrame {
 
         JLabel lblBackground = new JLabel("");
         lblBackground.setIcon(new ImageIcon(MenuJugar.class.getResource("/frames/menuBackground.jpg")));
-        GroupLayout gl_layeredPane = new GroupLayout(layeredPane);
-        gl_layeredPane.setHorizontalGroup(
-            gl_layeredPane.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_layeredPane.createSequentialGroup()
-                    .addGap(121)
-                    .addGroup(gl_layeredPane.createParallelGroup(Alignment.LEADING)
-                        .addComponent(btnIniciarSesion, GroupLayout.PREFERRED_SIZE, 191, GroupLayout.PREFERRED_SIZE)
-                        .addGroup(gl_layeredPane.createSequentialGroup()
-                            .addGap(54)
-                            .addComponent(lblIniciarSesion, GroupLayout.PREFERRED_SIZE, 91,
-                                GroupLayout.PREFERRED_SIZE))))
-                .addGroup(gl_layeredPane.createSequentialGroup()
-                    .addGap(121)
-                    .addGroup(gl_layeredPane.createParallelGroup(Alignment.LEADING)
-                        .addComponent(btnRegistrar, GroupLayout.PREFERRED_SIZE, 191, GroupLayout.PREFERRED_SIZE)
-                        .addGroup(gl_layeredPane.createSequentialGroup()
-                            .addGap(60)
-                            .addComponent(lblRegistrarse, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE))))
-                .addComponent(lblBackground, GroupLayout.PREFERRED_SIZE, 444, GroupLayout.PREFERRED_SIZE)
+
+        GroupLayout layout = new GroupLayout(layeredPane);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(Alignment.CENTER)
+                .addComponent(btnIniciarSesion, GroupLayout.PREFERRED_SIZE, BOTON_ANCHO, GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblIniciarSesion, GroupLayout.PREFERRED_SIZE, BOTON_ANCHO, GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnRegistrar, GroupLayout.PREFERRED_SIZE, BOTON_ANCHO, GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblRegistrarse, GroupLayout.PREFERRED_SIZE, BOTON_ANCHO, GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblBackground, GroupLayout.PREFERRED_SIZE, FRAME_ANCHO, GroupLayout.PREFERRED_SIZE)
         );
-        gl_layeredPane.setVerticalGroup(
-            gl_layeredPane.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_layeredPane.createSequentialGroup()
-                    .addGap(91)
-                    .addGroup(gl_layeredPane.createParallelGroup(Alignment.LEADING)
-                        .addGroup(gl_layeredPane.createSequentialGroup()
-                            .addGap(1)
-                            .addComponent(btnIniciarSesion, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-                        .addComponent(lblIniciarSesion, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-                    .addGap(47)
-                    .addGroup(gl_layeredPane.createParallelGroup(Alignment.LEADING)
-                        .addComponent(btnRegistrar, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblRegistrarse, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)))
-                .addComponent(lblBackground, GroupLayout.PREFERRED_SIZE, 271, GroupLayout.PREFERRED_SIZE)
+        layout.setVerticalGroup(
+            layout.createParallelGroup(Alignment.CENTER)
+                .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(Alignment.CENTER)
+                        .addComponent(btnIniciarSesion, GroupLayout.PREFERRED_SIZE, LABEL_ALTO,
+                            GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblIniciarSesion, GroupLayout.PREFERRED_SIZE, LABEL_ALTO,
+                            GroupLayout.PREFERRED_SIZE))
+                    .addGap(FILA_SEPARADOR)
+                    .addGroup(layout.createParallelGroup(Alignment.CENTER)
+                        .addComponent(btnRegistrar, GroupLayout.PREFERRED_SIZE, LABEL_ALTO, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblRegistrarse, GroupLayout.PREFERRED_SIZE, LABEL_ALTO,
+                            GroupLayout.PREFERRED_SIZE)))
+                .addComponent(lblBackground, GroupLayout.PREFERRED_SIZE, FRAME_ALTO, GroupLayout.PREFERRED_SIZE)
         );
-        layeredPane.setLayout(gl_layeredPane);
+        layeredPane.setLayout(layout);
     }
 }

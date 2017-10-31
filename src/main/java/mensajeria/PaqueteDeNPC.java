@@ -186,7 +186,7 @@ public class PaqueteDeNPC {
      * @param items
      *            the new items
      */
-    public void setItems(ArrayList<Item> items) {
+    public void setItems(final ArrayList<Item> items) {
         this.items = items;
     }
 }

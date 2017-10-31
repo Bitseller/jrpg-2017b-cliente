@@ -16,7 +16,7 @@ import mundo.Tile;
 /**
  * The Class Recursos.
  */
-public class Recursos {
+public final class Recursos {
 
     private static final int FRAMES = 4;
     private static final int ELEMENTOS = 65;
@@ -373,14 +373,23 @@ public class Recursos {
         if (MenuMapas.numberMap == 1) {
             SpriteSheet mapaAubenor = new SpriteSheet(CargadorImagen.cargarImagen("/Aubenor.png"));
             Tile.aubenor = new Tile[81];
-            boolean[][] solidezAubenor = { { true, true, false, true, false, true, true, true, true, true },
-                { true, true, true, true, true, true, true, true, true, true },
-                { true, true, true, true, true, true, true, true, true, true },
-                { true, false, false, false, false, false, false, false, true, true },
-                { false, false, false, false, false, false, false, false, true, true },
-                { false, true, true, true, true, true, true, true, true, true },
-                { true, true, true, true, true, true, true, true, true, true },
-                { true, true, true, true, true, true, true, true, true, true } };
+            boolean[][] solidezAubenor = {
+                {
+                    true, true, false, true, false, true, true, true, true, true },
+                {
+                    true, true, true, true, true, true, true, true, true, true },
+                {
+                    true, true, true, true, true, true, true, true, true, true },
+                {
+                    true, false, false, false, false, false, false, false, true, true },
+                {
+                    false, false, false, false, false, false, false, false, true, true },
+                {
+                    false, true, true, true, true, true, true, true, true, true },
+                {
+                    true, true, true, true, true, true, true, true, true, true },
+                {
+                    true, true, true, true, true, true, true, true, true, true } };
             for (int y = 0; y < 8; y++) {
                 for (int x = 0; x < 10; x++) {
                     Tile.aubenor[y * 10 + x + 1] = new Tile(mapaAubenor.getTile(x * 64, y * 64, 64, 64), y * 10 + x + 1,
@@ -390,14 +399,23 @@ public class Recursos {
         } else {
             SpriteSheet mapaAris = new SpriteSheet(CargadorImagen.cargarImagen("/Aris.png"));
             Tile.aris = new Tile[81];
-            boolean[][] solidezAris = { { true, false, false, false, false, false, false, true, true, true },
-                { false, false, false, false, false, false, false, false, true, true },
-                { false, false, false, false, true, true, true, true, true, true },
-                { true, true, true, true, true, true, true, true, true, true },
-                { true, true, true, true, true, true, true, true, true, true },
-                { false, true, true, true, true, true, true, true, true, true },
-                { true, true, true, true, true, true, true, true, true, true },
-                { true, true, true, true, true, true, true, true, true, true } };
+            boolean[][] solidezAris = {
+                {
+                    true, false, false, false, false, false, false, true, true, true },
+                {
+                    false, false, false, false, false, false, false, false, true, true },
+                {
+                    false, false, false, false, true, true, true, true, true, true },
+                {
+                    true, true, true, true, true, true, true, true, true, true },
+                {
+                    true, true, true, true, true, true, true, true, true, true },
+                {
+                    false, true, true, true, true, true, true, true, true, true },
+                {
+                    true, true, true, true, true, true, true, true, true, true },
+                {
+                    true, true, true, true, true, true, true, true, true, true } };
             for (int y = 0; y < 8; y++) {
                 for (int x = 0; x < 10; x++) {
                     Tile.aris[y * 10 + x + 1] = new Tile(mapaAris.getTile(x * 64, y * 64, 64, 64), y * 10 + x + 1,

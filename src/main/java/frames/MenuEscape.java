@@ -30,6 +30,11 @@ import mensajeria.Paquete;
  */
 public class MenuEscape extends JFrame implements MenuGenerico {
 
+    private static final int FRAME_ALTO = 270;
+    private static final int FRAME_ANCHO = 180;
+    private static final int BOTON_ALTO = 25;
+    private static final int BOTON_ANCHO = 125;
+    private static final int FILA_SEPARADOR = 30;
     private JPanel contentPane;
     private final Gson gson = new Gson();
 
@@ -43,7 +48,7 @@ public class MenuEscape extends JFrame implements MenuGenerico {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setUndecorated(true);
         this.setResizable(false);
-        this.setSize(180, 270);
+        this.setSize(FRAME_ANCHO, FRAME_ALTO);
         this.setLocationRelativeTo(null);
 
         contentPane = new JPanel();
@@ -54,7 +59,7 @@ public class MenuEscape extends JFrame implements MenuGenerico {
         verStats.setToolTipText("Presiona S para ver estadísticas");
         verStats.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 dispose();
                 Pantalla.menuEscp = null;
                 if (Pantalla.menuStats == null) {
@@ -69,7 +74,7 @@ public class MenuEscape extends JFrame implements MenuGenerico {
         asignarSkills.setToolTipText("Presiona A para asignar skills");
         asignarSkills.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 dispose();
                 Pantalla.menuEscp = null;
                 if (Pantalla.menuAsignar == null) {
@@ -84,7 +89,7 @@ public class MenuEscape extends JFrame implements MenuGenerico {
         inventario.setToolTipText("Presiona I para abrir inventario");
         inventario.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 dispose();
                 Pantalla.menuEscp = null;
                 if (Estado.getEstado().esEstadoDeJuego()) {
@@ -100,7 +105,7 @@ public class MenuEscape extends JFrame implements MenuGenerico {
         desconectarse.setIcon(new ImageIcon("recursos//desconectarse.png"));
         desconectarse.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 try {
                     Paquete p = new Paquete();
                     p.setComando(Comando.DESCONECTAR);
@@ -121,7 +126,7 @@ public class MenuEscape extends JFrame implements MenuGenerico {
         volver.setIcon(new ImageIcon("recursos//volver.png"));
         volver.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent arg0) {
+            public void actionPerformed(final ActionEvent arg0) {
                 Pantalla.menuEscp = null;
                 dispose();
             }
@@ -134,43 +139,33 @@ public class MenuEscape extends JFrame implements MenuGenerico {
             JOptionPane.showMessageDialog(null, "No se pudo cargar el fondo");
 
         }
-        JLabel background = new JLabel(new ImageIcon(imagenFondo.getScaledInstance(200, 350, Image.SCALE_DEFAULT)));
-        GroupLayout gl_contentPane = new GroupLayout(contentPane);
-        gl_contentPane.setHorizontalGroup(
-            gl_contentPane.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(29)
-                    .addComponent(verStats, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(29)
-                    .addComponent(asignarSkills, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(29)
-                    .addComponent(inventario, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(29)
-                    .addComponent(desconectarse, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE))
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(29)
-                    .addComponent(volver, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE))
-                .addComponent(background, GroupLayout.PREFERRED_SIZE, 186, GroupLayout.PREFERRED_SIZE)
+        JLabel background = new JLabel(new ImageIcon(imagenFondo.getScaledInstance(FRAME_ANCHO, FRAME_ALTO,
+            Image.SCALE_DEFAULT)));
+        GroupLayout layout = new GroupLayout(contentPane);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(Alignment.CENTER)
+                .addComponent(verStats, GroupLayout.PREFERRED_SIZE, BOTON_ANCHO, GroupLayout.PREFERRED_SIZE)
+                .addComponent(asignarSkills, GroupLayout.PREFERRED_SIZE, BOTON_ANCHO, GroupLayout.PREFERRED_SIZE)
+                .addComponent(inventario, GroupLayout.PREFERRED_SIZE, BOTON_ANCHO, GroupLayout.PREFERRED_SIZE)
+                .addComponent(desconectarse, GroupLayout.PREFERRED_SIZE, BOTON_ANCHO, GroupLayout.PREFERRED_SIZE)
+                .addComponent(volver, GroupLayout.PREFERRED_SIZE, BOTON_ANCHO, GroupLayout.PREFERRED_SIZE)
+                .addComponent(background, GroupLayout.PREFERRED_SIZE, FRAME_ANCHO, GroupLayout.PREFERRED_SIZE)
         );
-        gl_contentPane.setVerticalGroup(
-            gl_contentPane.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_contentPane.createSequentialGroup()
-                    .addGap(13)
-                    .addComponent(verStats, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-                    .addGap(28)
-                    .addComponent(asignarSkills, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-                    .addGap(30)
-                    .addComponent(inventario, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-                    .addGap(29)
-                    .addComponent(desconectarse, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-                    .addGap(27)
-                    .addComponent(volver, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-                .addComponent(background, GroupLayout.PREFERRED_SIZE, 273, GroupLayout.PREFERRED_SIZE)
+        layout.setVerticalGroup(
+            layout.createParallelGroup(Alignment.CENTER)
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(verStats, GroupLayout.PREFERRED_SIZE, BOTON_ALTO, GroupLayout.PREFERRED_SIZE)
+                    .addGap(FILA_SEPARADOR)
+                    .addComponent(asignarSkills, GroupLayout.PREFERRED_SIZE, BOTON_ALTO, GroupLayout.PREFERRED_SIZE)
+                    .addGap(FILA_SEPARADOR)
+                    .addComponent(inventario, GroupLayout.PREFERRED_SIZE, BOTON_ALTO, GroupLayout.PREFERRED_SIZE)
+                    .addGap(FILA_SEPARADOR)
+                    .addComponent(desconectarse, GroupLayout.PREFERRED_SIZE, BOTON_ALTO, GroupLayout.PREFERRED_SIZE)
+                    .addGap(FILA_SEPARADOR)
+                    .addComponent(volver, GroupLayout.PREFERRED_SIZE, BOTON_ALTO, GroupLayout.PREFERRED_SIZE))
+                .addComponent(background, GroupLayout.PREFERRED_SIZE, FRAME_ALTO, GroupLayout.PREFERRED_SIZE)
         );
-        contentPane.setLayout(gl_contentPane);
+        contentPane.setLayout(layout);
     }
 
     @Override
