@@ -102,8 +102,8 @@ public class EstadoBatalla extends Estado {
 
         menuBatalla = new MenuBatalla(miTurno, personaje);
 
-        miniaturaEnemigo = Recursos.personaje.get(enemigo.getNombreRaza()).get(ENEMIGOBUFFERED)[0];
-        miniaturaPersonaje = Recursos.personaje.get(personaje.getNombreRaza()).get(PERSONAJEBUFFERED)[0];
+        miniaturaEnemigo = Recursos.getPersonaje().get(enemigo.getNombreRaza()).get(ENEMIGOBUFFERED)[0];
+        miniaturaPersonaje = Recursos.getPersonaje().get(personaje.getNombreRaza()).get(PERSONAJEBUFFERED)[0];
 
         paqueteFinalizarBatalla = new PaqueteFinalizarBatalla();
         paqueteFinalizarBatalla.setId(personaje.getIdPersonaje());
@@ -223,9 +223,9 @@ public class EstadoBatalla extends Estado {
         g.fillRect(0, 0, juego.getAncho(), juego.getAlto());
         mundo.graficar(g);
 
-        g.drawImage(Recursos.personaje.get(paquetePersonaje.getRaza()).get(PERSONAJEBUFFERESPALDA)[0]
+        g.drawImage(Recursos.getPersonaje().get(paquetePersonaje.getRaza()).get(PERSONAJEBUFFERESPALDA)[0]
         		, X_PERSONAJE, Y_PERSONAJE, W_PERSONAJE, H_PERSONAJE, null);
-        g.drawImage(Recursos.personaje.get(paqueteEnemigo.getRaza()).get(ENEMIGOBUFFERFRENTE)[0]
+        g.drawImage(Recursos.getPersonaje().get(paqueteEnemigo.getRaza()).get(ENEMIGOBUFFERFRENTE)[0]
         		, X_ENEMIGO, Y_ENEMIGO, W_ENEMIGO, H_ENEMIGO, null);
 
         mundo.graficarObstaculos(g);

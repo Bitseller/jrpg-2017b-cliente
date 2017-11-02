@@ -16,7 +16,7 @@ import recursos.Recursos;
  */
 public class MenuInfoPersonaje {
 
-    private static final BufferedImage MENU = Recursos.menuEnemigo;
+    private static final BufferedImage MENU = Recursos.getMenuEnemigo();
     public static final int MENU_BATALLAR = 0;
     public static final int MENU_INFORMACION = 1;
     public static final int MENU_SUBIR_NIVEL = 2;
@@ -303,7 +303,7 @@ public class MenuInfoPersonaje {
         g.drawImage(MENU, x, y, null);
 
         // dibujo el personaje
-        g.drawImage(Recursos.personaje.get(personaje.getRaza()).get(INDICE_LINKEDLIST_IMG_PERS)[0], x
+        g.drawImage(Recursos.getPersonaje().get(personaje.getRaza()).get(INDICE_LINKEDLIST_IMG_PERS)[0], x
           + MENU.getWidth() / 2  - ANCHO_PERSONAJE / 2, y + DESPLAZAM_Y_PERSONAJE, ANCHO_PERSONAJE,
         		ALTO_PERSONAJE, null);
 
@@ -341,7 +341,7 @@ public class MenuInfoPersonaje {
         }
         // Muestro los botones
         g.setFont(new Font("Book Antiqua", 1, TAM_FONT_BOTON_MENU));
-		g.drawImage(Recursos.botonMenu, x + DESPL_X_BOTON_MENU, y + DESPL_Y_BOTON_MENU, ANCHO_BOTON_MENU,
+		g.drawImage(Recursos.getBotonMenu(), x + DESPL_X_BOTON_MENU, y + DESPL_Y_BOTON_MENU, ANCHO_BOTON_MENU,
 				ALTO_BOTON_MENU, null);
 		g.setColor(Color.WHITE);
 		Pantalla.centerString(g, new Rectangle(x + DESPL_X_BOTON_MENU, y + DESPL_Y_BOTON_MENU, ANCHO_BOTON_MENU,
