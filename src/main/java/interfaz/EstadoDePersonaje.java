@@ -146,7 +146,8 @@ public final class EstadoDePersonaje {
             drawBarra = (personaje.getEnergia() * ANCHOBARRA) / personaje.getEnergiaTope();
         }
 
-        g.drawImage(Recursos.getBarraEnergia(), x + DESPL_X_BAR_ENERG, y + DESPL_Y_BAR_ENERG, drawBarra, ALTOENERGIA, null);
+        g.drawImage(Recursos.getBarraEnergia(), x + DESPL_X_BAR_ENERG, y + DESPL_Y_BAR_ENERG, drawBarra, ALTOENERGIA,
+         null);
         g.drawString(String.valueOf(personaje.getEnergia()) + " / " + String.valueOf(personaje.getEnergiaTope()), x
             + DESPL_X_ENERG_VAL, y + DESPL_Y_ENERG_VAL);
 
@@ -158,8 +159,8 @@ public final class EstadoDePersonaje {
         }
 
         g.setFont(new Font("Tahoma", Font.PLAIN, TAM_FONT_EXP));
-        g.drawImage(Recursos.getBarraExperiencia(), x + DESPL_X_BAR_EXP, y + DESPL_Y_BAR_EXP, drawBarra, ALTOEXPERIENCIA,
-        		null);
+        g.drawImage(Recursos.getBarraExperiencia(), x + DESPL_X_BAR_EXP, y + DESPL_Y_BAR_EXP, drawBarra,
+            ALTOEXPERIENCIA, null);
         g.drawString(String.valueOf(personaje.getExperiencia()) + " / " + String.valueOf(Personaje
             .getTablaDeNiveles()[personaje.getNivel() + 1]), x + DESPL_X_EXP_VAL, y + DESPL_Y_EXP_VAL);
         g.setFont(new Font("Tahoma", Font.PLAIN, TAM_FONT_NIVEL));
@@ -199,7 +200,8 @@ public final class EstadoDePersonaje {
         g.drawString(String.valueOf(personaje.getSaludTope()) + " / " + String.valueOf(personaje.getSaludTope()),
         		x + DESPL_X_SALUD_VAL, y + DESPL_Y_SALUD_VAL);
 
-        g.drawImage(Recursos.getBarraEnergia(), x + DESPL_X_BAR_ENERG, y + DESPL_Y_BAR_ENERG, drawBarra, ALTOENERGIA, null);
+        g.drawImage(Recursos.getBarraEnergia(), x + DESPL_X_BAR_ENERG, y + DESPL_Y_BAR_ENERG, drawBarra, ALTOENERGIA,
+            null);
         g.drawString(String.valueOf(personaje.getEnergiaTope()) + " / " + String.valueOf(personaje.getEnergiaTope()), x
         	+ DESPL_X_ENERG_VAL, y + DESPL_Y_ENERG_VAL);
 
@@ -211,8 +213,8 @@ public final class EstadoDePersonaje {
         }
 
         g.setFont(new Font("Tahoma", Font.PLAIN, TAM_FONT_EXP));
-        g.drawImage(Recursos.getBarraExperiencia(), x + DESPL_X_BAR_EXP, y + DESPL_Y_BAR_EXP, drawBarra, ALTOEXPERIENCIA,
-        		null);
+        g.drawImage(Recursos.getBarraExperiencia(), x + DESPL_X_BAR_EXP, y + DESPL_Y_BAR_EXP, drawBarra,
+            ALTOEXPERIENCIA, null);
         g.drawString(String.valueOf(personaje.getExperiencia()) + " / " + String.valueOf(Personaje
             .getTablaDeNiveles()[personaje.getNivel() + 1]), x + DESPL_X_EXP_VAL, y + DESPL_Y_EXP_VAL);
         g.setFont(new Font("Tahoma", Font.PLAIN, TAM_FONT_NIVEL));
