@@ -168,7 +168,7 @@ public class EstadoBatallaNPC extends Estado {
 
                         if (!personaje.estaVivo()) {
                             juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(),
-                                MenuInfoPersonaje.MENU_PEDER_BATALLA);
+                                MenuInfoPersonaje.MENU_PERDER_BATALLA);
 
                             juego.getPersonaje().setEstado(Estado.estadoJuego);
 

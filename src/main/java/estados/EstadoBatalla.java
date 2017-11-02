@@ -83,7 +83,7 @@ public class EstadoBatalla extends Estado {
         paqueteFinalizarBatalla.setIdEnemigo(enemigo.getIdPersonaje());
 
         // por defecto batalla perdida
-        juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.MENU_PEDER_BATALLA);
+        juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.MENU_PERDER_BATALLA);
 
         // limpio la accion del mouse
         juego.getHandlerMouse().setNuevoClick(false);
