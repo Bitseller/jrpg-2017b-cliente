@@ -12,7 +12,6 @@ public class Movimiento extends ComandosEscucha {
 
         PaqueteDeMovimientos pdm = gson.fromJson(cadenaLeida, PaqueteDeMovimientos.class);
         juego.setUbicacionPersonajes(pdm.getPersonajes());
-
     }
 
 }

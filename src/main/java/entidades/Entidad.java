@@ -133,6 +133,9 @@ public class Entidad {
     private float xComercio;
     private float yComercio;
     private float[] comercio;
+    
+    
+    private static final int TOLERANCIA_DISTANCIA_NPC = 30;
 
     /**
      * Constructor de la clase Entidad.
@@ -511,13 +514,16 @@ public class Entidad {
             x += dx;
             y += dy;
 
+            verSiNoEstaCercaDeUnNPC();
+            
             // Le envio la posicion
             if (intervaloEnvio == 2) {
-                verSiNoEstaCercaDeUnNPC();
                 enviarPosicion();
                 intervaloEnvio = 0;
             }
             intervaloEnvio++;
+            
+           
 
             if (x == xFinal && y == yFinal - BIG_TREINTAYDOS) {
                 enMovimiento = false;
@@ -529,7 +535,7 @@ public class Entidad {
      * Ver si no esta cerca de un NPC.
      */
     private void verSiNoEstaCercaDeUnNPC() {
-        if (juego.getNPCs() != null) {
+    	if (juego.getNPCs() != null) {
             boolean esPelea = false;
 
             Map<Integer, PaqueteDeNPC> npcs;
@@ -545,10 +551,9 @@ public class Entidad {
                 key = it.next();
                 actual = ubicacionNPCs.get(key);
                 if (actual != null) {
-                    if (actual.getPosX() - x < RANGO_MIN && x > RANGO_MAX
-                    		&& actual.getPosY() - y < RANGO_MIN && y > RANGO_MAX) {
+                    if (actual.getPosX() - x < TOLERANCIA_DISTANCIA_NPC && actual.getPosX() - x > (-1) * TOLERANCIA_DISTANCIA_NPC && actual.getPosY() - y < TOLERANCIA_DISTANCIA_NPC && actual.getPosY() - y > (-1) * TOLERANCIA_DISTANCIA_NPC) {
                         // iniciar pelea
-
+                    	
                         PaqueteBatalla pBatalla = new PaqueteBatalla();
 
                         pBatalla.setId(juego.getPersonaje().getId());
@@ -559,12 +564,13 @@ public class Entidad {
                         juego.setEstadoBatallaNPC(new EstadoBatallaNPC(juego, pBatalla));
                         Estado.setEstado(juego.getEstadoBatallaNPC());
 
-                        esPelea = true;
-                        break;
+                        esPelea = true;  
+                        break; 
                     }
                 }
             }
-        }
+            
+        } 
     }
 
     /**
