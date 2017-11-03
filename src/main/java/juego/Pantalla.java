@@ -127,27 +127,36 @@ public class Pantalla {
                     //el mismo indice me indica que menu es el que debo verificar.
                     if (Estado.getEstado().esEstadoDeJuego() && menues.get(i) == null) {
                         switch (i) {
-                            case 1:
+                            case 0:
                                 menuInventario = new MenuInventario(cliente);
+                                menuInventario.setVisible(true);
+                                break;
+                            case 1:
+                                menuAsignar = new MenuAsignarSkills(cliente);
+                                menuAsignar.setVisible(true);
                                 break;
                             case 2:
-                                menuAsignar = new MenuAsignarSkills(cliente);
+                                menuStats = new MenuStats(cliente);
+                                menuStats.setVisible(true);
                                 break;
                             case 3:
-                                menuStats = new MenuStats(cliente);
+                                menuEscp = new MenuEscape(cliente);
+                                menuEscp.setVisible(true);
                                 break;
                             case 4:
-                                menuEscp = new MenuEscape(cliente);
+                                ventContac = new VentanaContactos(cliente.getJuego());
+                                ventContac.setVisible(true);
                                 break;
                             default:
                                 break;
                         }
                     }
                 } else {
-                    ventContac = new VentanaContactos(cliente.getJuego());
+                    menuEscp = new MenuEscape(cliente);
+                    menuEscp.setVisible(true);
                 }
 
-                menues.get(i).setVisible(true);
+                //menues.get(i).setVisible(true);
 
             }
         });
