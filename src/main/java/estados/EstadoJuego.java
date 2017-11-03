@@ -31,7 +31,39 @@ import recursos.Recursos;
  */
 public class EstadoJuego extends Estado {
 
-    private Entidad entidadPersonaje;
+    private static final int POS_Y_MENU_INFO = 50;
+	private static final int POS_X_MENU_INFO = 300;
+	private static final int ALTO_NPC = 64;
+	private static final int ANCHO_NPC = 64;
+	private static final int ALTO_RECT_NPC = 10;
+	private static final int DESPL_Y_RECT_NPC = 20;
+	private static final int DESPL_X_RECT_NPC = 32;
+	private static final int TAM_FONT_NPC = 15;
+	private static final int ALTO_PERSONAJE = 64;
+	private static final int ANCHO_PERSONAJE = 64;
+	private static final int ALTO_RECT_PER = 10;
+	private static final int DESPL_Y_RECT_PER = 20;
+	private static final int DESPL_X_RECT_PER = 32;
+	private static final int TAM_FONT_PER = 15;
+	private static final int ALTO_CHAT = 35;
+	private static final int ANCHO_CHAT = 102;
+	private static final int POS_Y_CHAT = 524;
+	private static final int POS_X_CHAT = 3;
+	private static final int ALTO_MENU = 35;
+	private static final int ANCHO_MENU = 102;
+	private static final int POS_Y_MENU = 562;
+	private static final int POS_X_MENU = 3;
+	private static final int ALTO_MOCHILA = 52;
+	private static final int ANCHO_MOCHILA = 59;
+	private static final int POS_Y_MOCHILA = 545;
+	private static final int POS_X_MOCHILA = 738;
+	private static final int POS_Y_PER = 5;
+	private static final int POS_X_PER = 5;
+	private static final int POS_LISTA = 5;
+	private static final int VEL_ANIMACION = 150;
+	private static final int ALTO_ENTIDAD_PER = 64;
+	private static final int ANCHO_ENTIDAD_PER = 64;
+	private Entidad entidadPersonaje;
     private PaquetePersonaje paquetePersonaje;
     private Mundo mundo;
     private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
@@ -45,9 +77,17 @@ public class EstadoJuego extends Estado {
 
     private BufferedImage miniaturaPersonaje;
 
-    MenuInfoPersonaje menuEnemigo;
+    private MenuInfoPersonaje menuEnemigo;
 
     /**
+     * @param menuEnemigo
+     * 					el menu enemigo
+     */
+    public void setMenuEnemigo(final MenuInfoPersonaje menuEnemigo) {
+		this.menuEnemigo = menuEnemigo;
+	}
+
+	/**
      * Instantiates a new estado juego.
      *
      * @param juego
@@ -57,9 +97,10 @@ public class EstadoJuego extends Estado {
         super(juego);
         mundo = new Mundo(juego, "recursos/" + getMundo() + ".txt", "recursos/" + getMundo() + ".txt");
         paquetePersonaje = juego.getPersonaje();
-        entidadPersonaje = new Entidad(juego, mundo, 64, 64, juego.getPersonaje().getNombre(), 0, 0, Recursos.personaje
-            .get(juego.getPersonaje().getRaza()), 150);
-        miniaturaPersonaje = Recursos.personaje.get(paquetePersonaje.getRaza()).get(5)[0];
+        entidadPersonaje = new Entidad(juego, mundo, ANCHO_ENTIDAD_PER, ALTO_ENTIDAD_PER,
+        		juego.getPersonaje().getNombre(), 0, 0,
+        		Recursos.getPersonaje().get(juego.getPersonaje().getRaza()), VEL_ANIMACION);
+        miniaturaPersonaje = Recursos.getPersonaje().get(paquetePersonaje.getRaza()).get(POS_LISTA)[0];
 
         try {
             // Le envio al servidor que me conecte al mapa y mi posicion
@@ -81,18 +122,18 @@ public class EstadoJuego extends Estado {
 
     @Override
     public void graficar(final Graphics g) {
-        g.drawImage(Recursos.background, 0, 0, juego.getAncho(), juego.getAlto(), null);
+        g.drawImage(Recursos.getBackground(), 0, 0, juego.getAncho(), juego.getAlto(), null);
         mundo.graficar(g);
         //entidadPersonaje.graficar(g);
         graficarPersonajes(g);
         graficarNPCs(g);
         mundo.graficarObstaculos(g);
         entidadPersonaje.graficarNombre(g);
-        g.drawImage(Recursos.marco, 0, 0, juego.getAncho(), juego.getAlto(), null);
-        EstadoDePersonaje.dibujarEstadoDePersonaje(g, 5, 5, paquetePersonaje, miniaturaPersonaje);
-        g.drawImage(Recursos.mochila, 738, 545, 59, 52, null);
-        g.drawImage(Recursos.menu, 3, 562, 102, 35, null);
-        g.drawImage(Recursos.chat, 3, 524, 102, 35, null);
+        g.drawImage(Recursos.getMarco(), 0, 0, juego.getAncho(), juego.getAlto(), null);
+        EstadoDePersonaje.dibujarEstadoDePersonaje(g, POS_X_PER, POS_Y_PER, paquetePersonaje, miniaturaPersonaje);
+        g.drawImage(Recursos.getMochila(), POS_X_MOCHILA, POS_Y_MOCHILA, ANCHO_MOCHILA, ALTO_MOCHILA, null);
+        g.drawImage(Recursos.getMenu(), POS_X_MENU, POS_Y_MENU, ANCHO_MENU, ALTO_MENU, null);
+        g.drawImage(Recursos.getChat(), POS_X_CHAT, POS_Y_CHAT, ANCHO_CHAT, ALTO_CHAT, null);
         if (haySolicitud) {
             menuEnemigo.graficar(g, tipoSolicitud);
         }
@@ -113,18 +154,21 @@ public class EstadoJuego extends Estado {
             int key;
             PaqueteMovimiento actual;
             g.setColor(Color.WHITE);
-            g.setFont(new Font("Book Antiqua", Font.PLAIN, 15));
+            g.setFont(new Font("Book Antiqua", Font.PLAIN, TAM_FONT_PER));
             while (it.hasNext()) {
                 key = it.next();
                 actual = ubicacionPersonajes.get(key);
                 if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId() && personajesConectados
                     .get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
                     Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset()
-                        + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20), 0, 10),
-                        personajesConectados.get(actual.getIdPersonaje()).getNombre());
-                    g.drawImage(Recursos.personaje.get(personajesConectados.get(actual.getIdPersonaje()).getRaza()).get(
-                        actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX() - juego.getCamara()
-                            .getxOffset()), (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
+                        + DESPL_X_RECT_PER), (int) (actual.getPosY() - juego.getCamara().getyOffset()
+                        - DESPL_Y_RECT_PER), 0, ALTO_RECT_PER),
+                    	personajesConectados.get(actual.getIdPersonaje()).getNombre());
+                    g.drawImage(Recursos.getPersonaje().get(personajesConectados.get(actual.getIdPersonaje())
+                    		.getRaza()).get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX()
+                    		  - juego.getCamara().getxOffset()), (int) (actual.getPosY()
+                    				- juego.getCamara().getyOffset()), ANCHO_PERSONAJE,
+                              ALTO_PERSONAJE, null);
                 }
             }
         }
@@ -145,16 +189,17 @@ public class EstadoJuego extends Estado {
             int key;
             PaqueteMovimiento actual;
             g.setColor(Color.WHITE);
-            g.setFont(new Font("Book Antiqua", Font.PLAIN, 15));
+            g.setFont(new Font("Book Antiqua", Font.PLAIN, TAM_FONT_NPC));
             while (it.hasNext()) {
                 key = it.next();
                 actual = ubicacionNPCS.get(key);
                 if (actual != null) {
                     Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset()
-                        + 32), (int) (actual.getPosY() - juego.getCamara().getyOffset() - 20), 0, 10), npcs.get(actual
-                            .getIdPersonaje()).getNombre());
-                    g.drawImage(Recursos.monstruo, (int) (actual.getPosX() - juego.getCamara().getxOffset()),
-                        (int) (actual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null);
+                        + DESPL_X_RECT_NPC), (int) (actual.getPosY() - juego.getCamara().getyOffset()
+                        		- DESPL_Y_RECT_NPC), 0, ALTO_RECT_NPC),
+                    		npcs.get(actual.getIdPersonaje()).getNombre());
+                    g.drawImage(Recursos.getMonstruo(), (int) (actual.getPosX() - juego.getCamara().getxOffset()),
+                        (int) (actual.getPosY() - juego.getCamara().getyOffset()), ANCHO_NPC, ALTO_NPC, null);
                 }
             }
         }
@@ -185,14 +230,14 @@ public class EstadoJuego extends Estado {
      *            the b
      * @param enemigo
      *            the enemigo
-     * @param tipoSolicitud
+     * @param tipoSolicitudExt
      *            the tipo solicitud
      */
-    public void setHaySolicitud(final boolean b, final PaquetePersonaje enemigo, final int tipoSolicitud) {
+    public void setHaySolicitud(final boolean b, final PaquetePersonaje enemigo, final int tipoSolicitudExt) {
         haySolicitud = b;
         // menu que mostrara al enemigo
-        menuEnemigo = new MenuInfoPersonaje(300, 50, enemigo);
-        this.tipoSolicitud = tipoSolicitud;
+        menuEnemigo = new MenuInfoPersonaje(POS_X_MENU_INFO, POS_Y_MENU_INFO, enemigo);
+        this.tipoSolicitud = tipoSolicitudExt;
     }
 
     /**
@@ -217,7 +262,7 @@ public class EstadoJuego extends Estado {
      * @return the menu enemigo
      */
     public MenuInfoPersonaje getMenuEnemigo() {
-        return menuEnemigo;
+        return this.menuEnemigo;
     }
 
     /**

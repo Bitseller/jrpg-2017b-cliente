@@ -9,6 +9,8 @@ import java.awt.event.WindowEvent;
 import java.util.Map;
 
 import javax.swing.DefaultListModel;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,7 +18,6 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.border.EmptyBorder;
 
 import juego.Juego;
 import juego.Pantalla;
@@ -26,6 +27,13 @@ import mensajeria.PaquetePersonaje;
  * The Class VentanaContactos.
  */
 public class VentanaContactos extends JFrame {
+    private static final int BOTON_ANCHO = 89;
+    private static final int BOTON_ALTO = 23;
+    private static final int SCROLL_ALTO = 188;
+    private static final int SCROLL_ANCHO = 300;
+    private static final int FRAME_ALTO = 273;
+    private static final int FRAME_ANCHO = 327;
+
     private JPanel contentPane;
     private DefaultListModel<String> modelo = new DefaultListModel<String>();
     private static JList<String> list = new JList<String>();
@@ -41,18 +49,14 @@ public class VentanaContactos extends JFrame {
     public VentanaContactos(final Juego juego) {
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 327, 273);
+        setSize(FRAME_ANCHO, FRAME_ALTO);
         setLocationRelativeTo(null);
         setTitle("Usuarios");
 
         contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
-        contentPane.setLayout(null);
 
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(10, 11, 299, 188);
-        contentPane.add(scrollPane);
 
         addWindowListener(new WindowAdapter() {
             @Override
@@ -78,8 +82,6 @@ public class VentanaContactos extends JFrame {
                 }
             }
         });
-        botonMc.setBounds(119, 208, 89, 23);
-        contentPane.add(botonMc);
 
         // Cargo la lista de contactos
         actualizarLista(juego);
@@ -112,8 +114,23 @@ public class VentanaContactos extends JFrame {
         scrollPane.setViewportView(list);
 
         background = new JLabel(new ImageIcon("recursos//background.jpg"));
-        background.setBounds(-16, 0, 352, 254);
-        contentPane.add(background);
+        GroupLayout layout = new GroupLayout(contentPane);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(Alignment.CENTER)
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, SCROLL_ANCHO, GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(botonMc, GroupLayout.PREFERRED_SIZE, BOTON_ANCHO, GroupLayout.PREFERRED_SIZE))
+                .addComponent(background, GroupLayout.PREFERRED_SIZE, FRAME_ANCHO, GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(Alignment.CENTER)
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, SCROLL_ALTO, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonMc, GroupLayout.PREFERRED_SIZE, BOTON_ALTO, GroupLayout.PREFERRED_SIZE))
+                .addComponent(background, GroupLayout.PREFERRED_SIZE, FRAME_ALTO, GroupLayout.PREFERRED_SIZE)
+        );
+        contentPane.setLayout(layout);
     }
 
     /**

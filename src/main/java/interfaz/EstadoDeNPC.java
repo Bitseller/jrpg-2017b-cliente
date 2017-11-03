@@ -14,7 +14,83 @@ import recursos.Recursos;
  */
 public final class EstadoDeNPC {
 
-    private static final int ANCHOBARRA = 122;
+    /**
+     * Desplazamiento en Y del nivel
+     */
+	private static final int DESPL_Y_NIVEL = 70;
+    /**
+     * Desplazamiento en X del nivel
+     */
+	private static final int DESPL_X_NIVEL = 59;
+	/**
+	 * Tamanio de fuente del nivel
+	 */
+	private static final int TAM_FONT_NIVEL = 10;
+	/**
+	 * Desplazamiento en Y del valor de experiencia
+	 */
+	private static final int DESPL_Y_EXP_VAL = 70;
+	/**
+	 * Desplazamiento en X del valor de experiencia
+	 */
+	private static final int DESPL_X_EXP_VAL = 132;
+	/**
+	 * Desplazamiento en Y de la barra de experiencia
+	 */
+	private static final int DESPL_Y_BAR_EXP = 65;
+	/**
+	 * Desplazamiento en X de la barra de experiencia
+	 */
+	private static final int DESPL_X_BAR_EXP = 77;
+	/**
+	 * Tamanio de fuente de la experiencia
+	 */
+	private static final int TAM_FONT_EXP = 8;
+	/**
+	 * Desplazamiento en Y del valor de energia
+	 */
+	private static final int DESPL_Y_ENERG_VAL = 52;
+	/**
+	 * Desplazamiento en X del valor de energia
+	 */
+	private static final int DESPL_X_ENERG_VAL = 132;
+	/**
+	 * Desplazamiento en Y de la barra de energia
+	 */
+	private static final int DESPL_Y_BAR_ENERG = 42;
+	/**
+	 * Desplazamiento en X de la barra de energia
+	 */
+	private static final int DESPL_X_BAR_ENERG = 80;
+	/**
+	 * Desplazamiento en Y del valor de salud
+	 */
+	private static final int DESPL_Y_SALUD_VAL = 37;
+	/**
+	 * Desplazamiento en X del valor de salud
+	 */
+	private static final int DESPL_X_SALUD_VAL = 132;
+	/**
+	 * Desplazamiento en Y de la barra de salud
+	 */
+	private static final int DESPL_Y_BAR_SALUD = 26;
+	/**
+	 * Desplazamiento en X de la barra de salud
+	 */
+	private static final int DESPL_X_BAR_SALUD = 80;
+	/**
+	 * Tamanio de fuente de la salud
+	 */
+	private static final int TAM_FONT_SALUD = 10;
+	/**
+	 * Desplazamiento en Y de la miniatura del npc
+	 */
+	private static final int DESPL_Y_MIN_NPC = 9;
+	/**
+	 * Desplazamiento en X de la miniatura del npc
+	 */
+	private static final int DESPL_X_MIN_NPC = 10;
+	private static final int ANCHOBARRA = 122;
     private static final int ALTOSALUD = 14;
     private static final int ALTOENERGIA = 14;
     private static final int ALTOEXPERIENCIA = 6;
@@ -47,9 +123,10 @@ public final class EstadoDeNPC {
 
         int drawBarra = 0;
 
-        g.drawImage(Recursos.estadoPersonaje, x, y, null);
+        g.drawImage(Recursos.getEstadoPersonaje(), x, y, null);
 
-        g.drawImage(miniaturaPersonaje, x + 10, y + 9, ANCHOMINIATURA, ALTOMINIATURA, null);
+        g.drawImage(miniaturaPersonaje, x + DESPL_X_MIN_NPC, y + DESPL_Y_MIN_NPC, ANCHOMINIATURA, ALTOMINIATURA,
+        		null);
 
         if (personaje.getSalud() == personaje.getSaludTope()) {
             drawBarra = ANCHOBARRA;
@@ -58,10 +135,11 @@ public final class EstadoDeNPC {
         }
 
         g.setColor(Color.WHITE);
-        g.setFont(new Font("Tahoma", Font.PLAIN, 10));
-        g.drawImage(Recursos.barraSalud, x + 80, y + 26, drawBarra, ALTOSALUD, null);
-        g.drawString(String.valueOf(personaje.getSalud()) + " / " + String.valueOf(personaje.getSaludTope()), x + 132,
-            y + 37);
+        g.setFont(new Font("Tahoma", Font.PLAIN, TAM_FONT_SALUD));
+        g.drawImage(Recursos.getBarraSalud(), x + DESPL_X_BAR_SALUD, y + DESPL_Y_BAR_SALUD, drawBarra, ALTOSALUD,
+        		null);
+        g.drawString(String.valueOf(personaje.getSalud()) + " / " + String.valueOf(personaje.getSaludTope()),
+        		x + DESPL_X_SALUD_VAL, y + DESPL_Y_SALUD_VAL);
 
         if (personaje.getEnergia() == personaje.getEnergiaTope()) {
             drawBarra = ANCHOBARRA;
@@ -69,9 +147,10 @@ public final class EstadoDeNPC {
             drawBarra = (personaje.getEnergia() * ANCHOBARRA) / personaje.getEnergiaTope();
         }
 
-        g.drawImage(Recursos.barraEnergia, x + 80, y + 42, drawBarra, ALTOENERGIA, null);
+        g.drawImage(Recursos.getBarraEnergia(), x + DESPL_X_BAR_ENERG, y + DESPL_Y_BAR_ENERG, drawBarra, ALTOENERGIA,
+        		null);
         g.drawString(String.valueOf(personaje.getEnergia()) + " / " + String.valueOf(personaje.getEnergiaTope()),
-            x + 132, y + 52);
+            x + DESPL_X_ENERG_VAL, y + DESPL_Y_ENERG_VAL);
 
         if (personaje.getExperiencia() == Personaje.getTablaDeNiveles()[personaje.getNivel() + 1]) {
             drawBarra = ANCHOBARRA;
@@ -80,13 +159,15 @@ public final class EstadoDeNPC {
                 / Personaje.getTablaDeNiveles()[personaje.getNivel() + 1];
         }
 
-        g.setFont(new Font("Tahoma", Font.PLAIN, 8));
-        g.drawImage(Recursos.barraExperiencia, x + 77, y + 65, drawBarra, ALTOEXPERIENCIA, null);
+        g.setFont(new Font("Tahoma", Font.PLAIN, TAM_FONT_EXP));
+        g.drawImage(Recursos.getBarraExperiencia(), x + DESPL_X_BAR_EXP, y + DESPL_Y_BAR_EXP, drawBarra,
+        		ALTOEXPERIENCIA, null);
         g.drawString(String.valueOf(personaje.getExperiencia()) + " / "
-            + String.valueOf(Personaje.getTablaDeNiveles()[personaje.getNivel() + 1]), x + 132, y + 70);
-        g.setFont(new Font("Tahoma", Font.PLAIN, 10));
+            + String.valueOf(Personaje.getTablaDeNiveles()[personaje.getNivel() + 1]), x + DESPL_X_EXP_VAL,
+            y + DESPL_Y_EXP_VAL);
+        g.setFont(new Font("Tahoma", Font.PLAIN, TAM_FONT_NIVEL));
         g.setColor(Color.GREEN);
-        g.drawString(String.valueOf(personaje.getNivel()), x + 59, y + 70);
+        g.drawString(String.valueOf(personaje.getNivel()), x + DESPL_X_NIVEL, y + DESPL_Y_NIVEL);
 
     }
 
@@ -109,9 +190,9 @@ public final class EstadoDeNPC {
 
         int drawBarra = 0;
 
-        g.drawImage(Recursos.estadoPersonaje, x, y, null);
+        g.drawImage(Recursos.getEstadoPersonaje(), x, y, null);
 
-        g.drawImage(miniaturaNPC, x + 10, y + 9, ANCHOMINIATURA, ALTOMINIATURA, null);
+        g.drawImage(miniaturaNPC, x + DESPL_X_MIN_NPC, y + DESPL_Y_MIN_NPC, ANCHOMINIATURA, ALTOMINIATURA, null);
 
         if (npc.getSalud() == npc.getSaludTope()) {
             drawBarra = ANCHOBARRA;
@@ -120,15 +201,19 @@ public final class EstadoDeNPC {
         }
 
         g.setColor(Color.WHITE);
-        g.setFont(new Font("Tahoma", Font.PLAIN, 10));
-        g.drawImage(Recursos.barraSalud, x + 80, y + 26, drawBarra, ALTOSALUD, null);
-        g.drawString(String.valueOf(npc.getSalud()) + " / " + String.valueOf(npc.getSaludTope()), x + 132, y + 37);
+        g.setFont(new Font("Tahoma", Font.PLAIN, TAM_FONT_SALUD));
+        g.drawImage(Recursos.getBarraSalud(), x + DESPL_X_BAR_SALUD, y + DESPL_Y_BAR_SALUD, drawBarra, ALTOSALUD,
+        		null);
+        g.drawString(String.valueOf(npc.getSalud()) + " / " + String.valueOf(npc.getSaludTope()),
+        		x + DESPL_X_SALUD_VAL, y + DESPL_Y_SALUD_VAL);
 
-        g.setFont(new Font("Tahoma", Font.PLAIN, 8));
-        g.drawImage(Recursos.barraExperiencia, x + 77, y + 65, drawBarra, ALTOEXPERIENCIA, null);
-        //g.drawString(String.valueOf(personaje.getExperiencia()) + " / " + String.valueOf(Personaje.getTablaDeNiveles()[personaje.getNivel() + 1]), x + 132, y + 70);
-        g.setFont(new Font("Tahoma", Font.PLAIN, 10));
+        g.setFont(new Font("Tahoma", Font.PLAIN, TAM_FONT_EXP));
+        g.drawImage(Recursos.getBarraExperiencia(), x + DESPL_X_BAR_EXP, y + DESPL_Y_BAR_EXP, drawBarra,
+        		ALTOEXPERIENCIA, null);
+        /*g.drawString(String.valueOf(personaje.getExperiencia()) + " / "
+        + String.valueOf(Personaje.getTablaDeNiveles()[personaje.getNivel() + 1]), x + 132, y + 70); */
+        g.setFont(new Font("Tahoma", Font.PLAIN, TAM_FONT_NIVEL));
         g.setColor(Color.GREEN);
-        g.drawString(String.valueOf(npc.getNivel()), x + 59, y + 70);
+        g.drawString(String.valueOf(npc.getNivel()), x + DESPL_X_NIVEL, y + DESPL_Y_NIVEL);
     }
 }

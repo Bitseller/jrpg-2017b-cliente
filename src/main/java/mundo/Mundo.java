@@ -9,6 +9,10 @@ import juego.Juego;
  * The Class Mundo.
  */
 public class Mundo {
+    private static final int GRAFICAR_Y_EXTRA_OFFSET = 32;
+    private static final int Y_EXTRA_OFFSET = 60;
+    private static final int X_EXTRA_OFFSET = 30;
+    private static final int TILE_SIZE = 64;
     private Juego juego;
     private int ancho;
     private int alto;
@@ -33,6 +37,8 @@ public class Mundo {
      *            the juego
      * @param pathMap
      *            the path map
+     * @param pathObstac
+     *            the path obstac
      */
     public Mundo(final Juego juego, final String pathMap, final String pathObstac) {
         this.juego = juego;
@@ -57,10 +63,10 @@ public class Mundo {
         xOffset = juego.getEstadoJuego().getPersonaje().getxOffset();
         yOffset = juego.getEstadoJuego().getPersonaje().getYOffset();
 
-        xMinimo = (int) (juego.getCamara().getxOffset() - xOffset - 30);
-        xMaximo = xMinimo + juego.getAncho() + xOffset + 30;
-        yMinimo = (int) juego.getCamara().getyOffset() + yOffset - 60;
-        yMaximo = yMinimo + juego.getAlto() + yOffset + 60;
+        xMinimo = (int) (juego.getCamara().getxOffset() - xOffset - X_EXTRA_OFFSET);
+        xMaximo = xMinimo + juego.getAncho() + xOffset + X_EXTRA_OFFSET;
+        yMinimo = (int) juego.getCamara().getyOffset() + yOffset - Y_EXTRA_OFFSET;
+        yMaximo = yMinimo + juego.getAlto() + yOffset + Y_EXTRA_OFFSET;
 
         // Grafico el el tile base
         for (int i = 0; i < alto; i++) {
@@ -70,18 +76,21 @@ public class Mundo {
                     String map = juego.getPersonaje().getMapa();
                     if (map == "Aubenor") {
                         Tile.aubenor[Tile.aubenorBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
-                            (int) (iso[1] - juego.getCamara().getyOffset() - 32), 64, 64);
+                            (int) (iso[1] - juego.getCamara().getyOffset() - GRAFICAR_Y_EXTRA_OFFSET), TILE_SIZE,
+                            TILE_SIZE);
                     } else if (map == "Aris") {
                         Tile.aris[Tile.arisBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
-                            (int) (iso[1] - juego.getCamara().getyOffset() - 32), 64, 64);
-                    } else if (map == "Eodrim") {
-                        //Falta implementar Eodrim.
-                        //Tile.aubenor[Tile.aubenorBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
-                        //		(int) (iso[1] - juego.getCamara().getyOffset() - 32),64,64);
-                    }
+                            (int) (iso[1] - juego.getCamara().getyOffset() - GRAFICAR_Y_EXTRA_OFFSET), TILE_SIZE,
+                            TILE_SIZE);
+                    } //else if (map == "Eodrim") {
+                      //Falta implementar Eodrim.
+                      //Tile.aubenor[Tile.aubenorBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
+                      //		(int) (iso[1] - juego.getCamara().getyOffset() - 32),64,64);
+                      //}
                     if (!getTile(j, i).esSolido()) {
                         getTile(j, i).graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
-                            (int) (iso[1] - juego.getCamara().getyOffset() - 32), 64, 64);
+                            (int) (iso[1] - juego.getCamara().getyOffset() - GRAFICAR_Y_EXTRA_OFFSET), TILE_SIZE,
+                            TILE_SIZE);
                     }
                 }
             }
@@ -138,10 +147,10 @@ public class Mundo {
                 return Tile.aubenor[Tile.aubenorBase];
             } else if (map == "Aris") {
                 return Tile.aris[Tile.arisBase];
-            } else if (map == "Eodrim") {
-                //Falta implementar el mapa.
-                //return Tile.aubenor[Tile.aubenorBase];
-            }
+            } //else if (map == "Eodrim") {
+              //Falta implementar el mapa.
+              //return Tile.aubenor[Tile.aubenorBase];
+              //}
         }
         return t;
     }
@@ -159,8 +168,9 @@ public class Mundo {
         String[] tokens = archivo.split("\\s+");
         ancho = Utilitarias.parseInt(tokens[0]);
         alto = Utilitarias.parseInt(tokens[1]);
-        Utilitarias.parseInt(tokens[2]);
-        Utilitarias.parseInt(tokens[3]);
+        //Utilitarias.parseInt(tokens[2]);
+        //Utilitarias.parseInt(tokens[3]);
+        final int comienzoMapa = 4;
 
         tiles = new int[ancho][alto];
         tilesInv = new int[alto][ancho];
@@ -168,7 +178,7 @@ public class Mundo {
         for (int y = 0; y < alto; y++) {
             for (int x = 0; x < ancho; x++) {
 
-                tiles[x][y] = Utilitarias.parseInt(tokens[(x + y * ancho + 4)]);
+                tiles[x][y] = Utilitarias.parseInt(tokens[(x + y * ancho + comienzoMapa)]);
                 tilesInv[y][x] = tiles[x][y];
             }
         }
