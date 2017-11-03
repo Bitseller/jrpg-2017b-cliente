@@ -28,6 +28,7 @@ import mensajeria.PaquetePersonaje;
  */
 public class VentanaContactos extends JFrame {
     private static final int BOTON_ANCHO = 89;
+    private static final int BOTON_ALTO = 23;
     private static final int SCROLL_ALTO = 188;
     private static final int SCROLL_ANCHO = 300;
     private static final int FRAME_ALTO = 273;
@@ -126,7 +127,7 @@ public class VentanaContactos extends JFrame {
             layout.createParallelGroup(Alignment.CENTER)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, SCROLL_ALTO, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonMc))
+                    .addComponent(botonMc, GroupLayout.PREFERRED_SIZE, BOTON_ALTO, GroupLayout.PREFERRED_SIZE))
                 .addComponent(background, GroupLayout.PREFERRED_SIZE, FRAME_ALTO, GroupLayout.PREFERRED_SIZE)
         );
         contentPane.setLayout(layout);
