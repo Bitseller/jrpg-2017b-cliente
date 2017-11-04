@@ -79,7 +79,7 @@ public abstract class Estado {
 	/**
 	 * @param estadoOffline the estadoOffline to set
 	 */
-	public static void setEstadoOffline(int estadoOffline) {
+	public static void setEstadoOffline(final int estadoOffline) {
 		Estado.estadoOffline = estadoOffline;
 	}
 
@@ -93,7 +93,7 @@ public abstract class Estado {
 	/**
 	 * @param estadoJuego the estadoJuego to set
 	 */
-	public static void setEstadoJuego(int estadoJuego) {
+	public static void setEstadoJuego(final int estadoJuego) {
 		Estado.estadoJuego = estadoJuego;
 	}
 
@@ -107,7 +107,7 @@ public abstract class Estado {
 	/**
 	 * @param estadoBatalla the estadoBatalla to set
 	 */
-	public static void setEstadoBatalla(int estadoBatalla) {
+	public static void setEstadoBatalla(final int estadoBatalla) {
 		Estado.estadoBatalla = estadoBatalla;
 	}
 
@@ -121,7 +121,7 @@ public abstract class Estado {
 	/**
 	 * @param estadoBatallaNPC the estadoBatallaNPC to set
 	 */
-	public static void setEstadoBatallaNPC(int estadoBatallaNPC) {
+	public static void setEstadoBatallaNPC(final int estadoBatallaNPC) {
 		Estado.estadoBatallaNPC = estadoBatallaNPC;
 	}
 
@@ -135,9 +135,7 @@ public abstract class Estado {
 	/**
 	 * @param juego the juego to set
 	 */
-	public void setJuego(Juego juego) {
+	public void setJuego(final Juego juego) {
 		this.juego = juego;
 	}
-    
-    
 }
