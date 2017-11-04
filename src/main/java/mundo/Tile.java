@@ -8,23 +8,26 @@ import java.awt.image.BufferedImage;
  */
 public class Tile {
 
-    public static Tile[] tiles = new Tile[256];
-    public static Tile[] aubenor;
-    public static Tile[] aris;
+    private static final int BASE_AUBENOR = 3;
+	private static final int BASE_ARIS = 3;
+	private static final int TAM_VEC_TILE = 256;
+	private static Tile[] tiles = new Tile[TAM_VEC_TILE];
+    private static Tile[] aubenor;
+    private static Tile[] aris;
     // es el piso de aubenor por defecto si queres llamarlo asi, es gris
-    public static int arisBase = 3;
-    public static int aubenorBase = 3;
+    private static int arisBase = BASE_ARIS;
+    private static int aubenorBase = BASE_AUBENOR;
 
     public static final int ANCHO = 64;
     public static final int ALTO = 32;
 
-    protected BufferedImage textura;
-    protected final int id;
+    private BufferedImage textura;
+    private final int id;
 
     private boolean esSolido;
 
-    protected int ancho;
-    protected int alto;
+    private int ancho;
+    private int alto;
 
     /**
      * Instantiates a new tile.
@@ -44,6 +47,118 @@ public class Tile {
     }
 
     /**
+	 * @return the tiles
+	 */
+	public static Tile[] getTiles() {
+		return tiles;
+	}
+
+
+	/**
+	 * @param tiles the tiles to set
+	 */
+	public static void setTiles(final Tile[] tiles) {
+		Tile.tiles = tiles;
+	}
+
+
+	/**
+	 * @return the aubenor
+	 */
+	public static Tile[] getAubenor() {
+		return aubenor;
+	}
+
+
+	/**
+	 * @param aubenor the aubenor to set
+	 */
+	public static void setAubenor(final Tile[] aubenor) {
+		Tile.aubenor = aubenor;
+	}
+
+
+	/**
+	 * @return the aris
+	 */
+	public static Tile[] getAris() {
+		return aris;
+	}
+
+
+	/**
+	 * @param aris the aris to set
+	 */
+	public static void setAris(final Tile[] aris) {
+		Tile.aris = aris;
+	}
+
+
+	/**
+	 * @return the arisBase
+	 */
+	public static int getArisBase() {
+		return arisBase;
+	}
+
+
+	/**
+	 * @param arisBase the arisBase to set
+	 */
+	public static void setArisBase(final int arisBase) {
+		Tile.arisBase = arisBase;
+	}
+
+
+	/**
+	 * @return the aubenorBase
+	 */
+	public static int getAubenorBase() {
+		return aubenorBase;
+	}
+
+
+	/**
+	 * @param aubenorBase the aubenorBase to set
+	 */
+	public static void setAubenorBase(final int aubenorBase) {
+		Tile.aubenorBase = aubenorBase;
+	}
+
+
+	/**
+	 * @return the textura
+	 */
+	public BufferedImage getTextura() {
+		return textura;
+	}
+
+
+	/**
+	 * @param textura the textura to set
+	 */
+	public void setTextura(final BufferedImage textura) {
+		this.textura = textura;
+	}
+
+
+	/**
+	 * @param ancho the ancho to set
+	 */
+	public void setAncho(final int ancho) {
+		this.ancho = ancho;
+	}
+
+
+	/**
+	 * @param alto the alto to set
+	 */
+	public void setAlto(final int alto) {
+		this.alto = alto;
+	}
+
+
+	/**
      * Instantiates a new tile.
      *
      * @param textura

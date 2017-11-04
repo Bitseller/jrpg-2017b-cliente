@@ -382,7 +382,7 @@ public final class Recursos {
         // Mapa
         if (MenuMapas.numberMap == 1) {
             SpriteSheet mapaAubenor = new SpriteSheet(CargadorImagen.cargarImagen("/Aubenor.png"));
-            Tile.aubenor = new Tile[MAGIC_TILENUMBER];
+            Tile.setAubenor(new Tile[MAGIC_TILENUMBER]);
             boolean[][] solidezAubenor = {
                 {
                     true, true, false, true, false, true, true, true, true, true },
@@ -402,7 +402,7 @@ public final class Recursos {
                     true, true, true, true, true, true, true, true, true, true } };
             for (int y = 0; y < BIG_EIGHT; y++) {
                 for (int x = 0; x < BIG_TEN; x++) {
-                    Tile.aubenor[y * BIG_TEN + x + 1] = new Tile(mapaAubenor.getTile(x * GRAN_SESENTAYCUATRO
+                    Tile.getAubenor()[y * BIG_TEN + x + 1] = new Tile(mapaAubenor.getTile(x * GRAN_SESENTAYCUATRO
                     		, y * GRAN_SESENTAYCUATRO, GRAN_SESENTAYCUATRO
                     		, GRAN_SESENTAYCUATRO), y * BIG_TEN + x + 1,
                         solidezAubenor[y][x], GRAN_SESENTAYCUATRO, GRAN_SESENTAYCUATRO);
@@ -410,7 +410,7 @@ public final class Recursos {
             }
         } else {
             SpriteSheet mapaAris = new SpriteSheet(CargadorImagen.cargarImagen("/Aris.png"));
-            Tile.aris = new Tile[MAGIC_TILENUMBER];
+            Tile.setAris(new Tile[MAGIC_TILENUMBER]);
             boolean[][] solidezAris = {
                 {
                     true, false, false, false, false, false, false, true, true, true },
@@ -430,7 +430,7 @@ public final class Recursos {
                     true, true, true, true, true, true, true, true, true, true } };
             for (int y = 0; y < BIG_EIGHT; y++) {
                 for (int x = 0; x < BIG_TEN; x++) {
-                    Tile.aris[y * BIG_TEN + x + 1] = new Tile(mapaAris.getTile(x * GRAN_SESENTAYCUATRO
+                    Tile.getAris()[y * BIG_TEN + x + 1] = new Tile(mapaAris.getTile(x * GRAN_SESENTAYCUATRO
                     		, y * GRAN_SESENTAYCUATRO, GRAN_SESENTAYCUATRO
                     		, GRAN_SESENTAYCUATRO), y * BIG_TEN + x + 1,
                         solidezAris[y][x], GRAN_SESENTAYCUATRO, GRAN_SESENTAYCUATRO);

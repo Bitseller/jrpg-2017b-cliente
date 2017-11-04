@@ -133,8 +133,6 @@ public class Entidad {
     private float xComercio;
     private float yComercio;
     private float[] comercio;
-    
-    
     private static final int TOLERANCIA_DISTANCIA_NPC = 30;
 
     /**
@@ -515,16 +513,12 @@ public class Entidad {
             y += dy;
 
             verSiNoEstaCercaDeUnNPC();
-            
             // Le envio la posicion
             if (intervaloEnvio == 2) {
                 enviarPosicion();
                 intervaloEnvio = 0;
             }
             intervaloEnvio++;
-            
-           
-
             if (x == xFinal && y == yFinal - BIG_TREINTAYDOS) {
                 enMovimiento = false;
             }
@@ -551,9 +545,10 @@ public class Entidad {
                 key = it.next();
                 actual = ubicacionNPCs.get(key);
                 if (actual != null) {
-                    if (actual.getPosX() - x < TOLERANCIA_DISTANCIA_NPC && actual.getPosX() - x > (-1) * TOLERANCIA_DISTANCIA_NPC && actual.getPosY() - y < TOLERANCIA_DISTANCIA_NPC && actual.getPosY() - y > (-1) * TOLERANCIA_DISTANCIA_NPC) {
+                    if (actual.getPosX() - x < TOLERANCIA_DISTANCIA_NPC && actual.getPosX() - x > (-1)
+                        * TOLERANCIA_DISTANCIA_NPC && actual.getPosY() - y < TOLERANCIA_DISTANCIA_NPC
+                        && actual.getPosY() - y > (-1) * TOLERANCIA_DISTANCIA_NPC) {
                         // iniciar pelea
-                    	
                         PaqueteBatalla pBatalla = new PaqueteBatalla();
 
                         pBatalla.setId(juego.getPersonaje().getId());
@@ -564,13 +559,12 @@ public class Entidad {
                         juego.setEstadoBatallaNPC(new EstadoBatallaNPC(juego, pBatalla));
                         Estado.setEstado(juego.getEstadoBatallaNPC());
 
-                        esPelea = true;  
-                        break; 
+                        esPelea = true;
+                        break;
                     }
                 }
             }
-            
-        } 
+        }
     }
 
     /**
