@@ -48,8 +48,8 @@ public abstract class Comando {
     public static final int INICIARBATALLANPC = 21;
     public static final int FINALIZARBATALLANPC = 22;
 
-    public final Gson gson = new Gson();
-    public String cadenaLeida;
+    private final Gson gson = new Gson();
+    private String cadenaLeida;
 
     /**
      * Sets the cadena.
