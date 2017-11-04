@@ -20,7 +20,7 @@ public class PaqueteDeNPCs extends Paquete implements Serializable, Cloneable {
     /**
      * Instantiates a new paquete de NPcs.
      *
-     * @param NPCs
+     * @param npcs
      *            el paquete de NPcs
      */
     public PaqueteDeNPCs(final Map<Integer, PaqueteDeNPC> npcs) {

@@ -172,11 +172,11 @@ public class MenuRegistro extends JFrame {
     /**
      * Sets the txt usuario.
      *
-     * @param txtUsuario
+     * @param txtUser
      *            the new txt usuario
      */
-    public void settxtUsuario(final JTextField txtUsuario) {
-        this.txtUsuario = txtUsuario;
+    public void settxtUsuario(final JTextField txtUser) {
+        this.txtUsuario = txtUser;
     }
 
     /**
@@ -191,11 +191,11 @@ public class MenuRegistro extends JFrame {
     /**
      * Sets the password field.
      *
-     * @param pwPassword
+     * @param pwPass
      *            the new password field
      */
-    public void setPasswordField(final JPasswordField pwPassword) {
-        this.pwPassword = pwPassword;
+    public void setPasswordField(final JPasswordField pwPass) {
+        this.pwPassword = pwPass;
     }
 
     /**
