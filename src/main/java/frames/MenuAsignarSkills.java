@@ -187,7 +187,7 @@ public class MenuAsignarSkills extends JFrame implements MenuGenerico {
                 cliente.getPaquetePersonaje().setPuntosSkill(puntosAsignar);
                 cliente.getPaquetePersonaje().useBonus(0, 0, bonusF, bonusD, bonusI);
                 cliente.getPaquetePersonaje().removerBonus();
-                cliente.getPaquetePersonaje().setComando(Comando.ACTUALIZARPERSONAJELV);
+                cliente.getPaquetePersonaje().setComando(Comando.ACTUALIZARPERSONAJE);
                 try {
                     cliente.getSalida().writeObject(gson.toJson(cliente.getPaquetePersonaje()));
                 } catch (IOException e1) {
