@@ -11,7 +11,6 @@ public abstract class ComandosEscucha extends Comando {
 
     /**
      * Sets the juego.
-     *
      * @param juego
      *            el juego
      */

@@ -29,6 +29,7 @@ import mensajeria.Comando;
  * The Class MenuMapas.
  */
 public class MenuMapas extends JFrame {
+    private static final int MAPA_EODRIM = 3;
     private static final int FILA_SEPARADOR = 20;
     private static final int TEXT_SIZE = 15;
     private static final int LABEL_ANCHO = 70;
@@ -182,7 +183,7 @@ public class MenuMapas extends JFrame {
             public void actionPerformed(final ActionEvent e) {
                 synchronized (cliente) {
                     cliente.getPaquetePersonaje().setMapa("Eodrim");
-                    numberMap = 3;
+                    numberMap = MAPA_EODRIM;
                     cliente.notify();
                 }
                 dispose();
