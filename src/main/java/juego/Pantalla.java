@@ -38,18 +38,20 @@ import mensajeria.Paquete;
  */
 public class Pantalla {
 
-    private JFrame pantalla;
+    private static final int CASE_4 = 4;
+	private static final int CASE_3 = 3;
+	private JFrame pantalla;
     private Canvas canvas;
 
     private final LinkedList<Integer> keys;
 
     // Menus
-    public static LinkedList<JFrame> menues;
-    public static MenuInventario menuInventario;
-    public static MenuAsignarSkills menuAsignar;
-    public static MenuStats menuStats;
-    public static MenuEscape menuEscp;
-    public static VentanaContactos ventContac;
+    private static LinkedList<JFrame> menues;
+    private static MenuInventario menuInventario;
+    private static MenuAsignarSkills menuAsignar;
+    private static MenuStats menuStats;
+    private static MenuEscape menuEscp;
+    private static VentanaContactos ventContac;
 
     private final Gson gson = new Gson();
 
@@ -123,7 +125,7 @@ public class Pantalla {
 
                 if (i < keys.size()) {
 
-                    //Como se que ambas listas estan sincronizadas, 
+                    //Como se que ambas listas estan sincronizadas,
                     //el mismo indice me indica que menu es el que debo verificar.
                     if (Estado.getEstado().esEstadoDeJuego() && menues.get(i) == null) {
                         switch (i) {
@@ -139,11 +141,11 @@ public class Pantalla {
                                 menuStats = new MenuStats(cliente);
                                 menuStats.setVisible(true);
                                 break;
-                            case 3:
+                            case CASE_3:
                                 menuEscp = new MenuEscape(cliente);
                                 menuEscp.setVisible(true);
                                 break;
-                            case 4:
+                            case CASE_4:
                                 ventContac = new VentanaContactos(cliente.getJuego());
                                 ventContac.setVisible(true);
                                 break;
@@ -175,6 +177,114 @@ public class Pantalla {
     }
 
     /**
+	 * @return the menues
+	 */
+	public static LinkedList<JFrame> getMenues() {
+		return menues;
+	}
+
+
+
+	/**
+	 * @param menues the menues to set
+	 */
+	public static void setMenues(final LinkedList<JFrame> menues) {
+		Pantalla.menues = menues;
+	}
+
+
+
+	/**
+	 * @return the menuInventario
+	 */
+	public static MenuInventario getMenuInventario() {
+		return menuInventario;
+	}
+
+
+
+	/**
+	 * @param menuInventario the menuInventario to set
+	 */
+	public static void setMenuInventario(final MenuInventario menuInventario) {
+		Pantalla.menuInventario = menuInventario;
+	}
+
+
+
+	/**
+	 * @return the menuAsignar
+	 */
+	public static MenuAsignarSkills getMenuAsignar() {
+		return menuAsignar;
+	}
+
+
+
+	/**
+	 * @param menuAsignar the menuAsignar to set
+	 */
+	public static void setMenuAsignar(final MenuAsignarSkills menuAsignar) {
+		Pantalla.menuAsignar = menuAsignar;
+	}
+
+
+
+	/**
+	 * @return the menuStats
+	 */
+	public static MenuStats getMenuStats() {
+		return menuStats;
+	}
+
+
+
+	/**
+	 * @param menuStats the menuStats to set
+	 */
+	public static void setMenuStats(final MenuStats menuStats) {
+		Pantalla.menuStats = menuStats;
+	}
+
+
+
+	/**
+	 * @return the menuEscp
+	 */
+	public static MenuEscape getMenuEscp() {
+		return menuEscp;
+	}
+
+
+
+	/**
+	 * @param menuEscp the menuEscp to set
+	 */
+	public static void setMenuEscp(final MenuEscape menuEscp) {
+		Pantalla.menuEscp = menuEscp;
+	}
+
+
+
+	/**
+	 * @return the ventContac
+	 */
+	public static VentanaContactos getVentContac() {
+		return ventContac;
+	}
+
+
+
+	/**
+	 * @param ventContac the ventContac to set
+	 */
+	public static void setVentContac(final VentanaContactos ventContac) {
+		Pantalla.ventContac = ventContac;
+	}
+
+
+
+	/**
      * Gets the canvas.
      *
      * @return the canvas

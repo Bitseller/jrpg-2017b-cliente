@@ -200,8 +200,8 @@ public class EstadoBatalla extends Estado {
                         paqueteAtacar = new PaqueteAtacar(paquetePersonaje.getId(), paqueteEnemigo.getId(),
                             personaje.getSalud(), personaje.getEnergia(), enemigo.getSalud(), enemigo.getEnergia(),
                             personaje.getDefensa(), enemigo.getDefensa(),
-                            personaje.getCasta().getProbabilidadEvitarAtaque(),
-                            enemigo.getCasta().getProbabilidadEvitarAtaque());
+                            personaje.getCasta().getProbabilidadEvitarDaño(),
+                            enemigo.getCasta().getProbabilidadEvitarDaño());
                         enviarAtaque(paqueteAtacar);
                         miTurno = false;
                         menuBatalla.setHabilitado(false);

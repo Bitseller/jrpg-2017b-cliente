@@ -242,7 +242,7 @@ public class MenuStats extends JFrame implements MenuGenerico {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(final WindowEvent e) {
-                Pantalla.menuStats = null;
+                Pantalla.setMenuStats(null);
                 dispose();
             }
         });
@@ -357,7 +357,7 @@ public class MenuStats extends JFrame implements MenuGenerico {
         btnVolver.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                Pantalla.menuStats = null;
+                Pantalla.setMenuStats(null);
                 dispose();
             }
         });

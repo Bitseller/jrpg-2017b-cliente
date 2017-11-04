@@ -264,27 +264,27 @@ public class Entidad {
         if (juego.getHandlerMouse().getNuevoClick() && posMouse[0] >= INV_IZQ
         		&& posMouse[0] <= INV_DER && posMouse[1] >= INV_DOWN
             && posMouse[1] <= INV_UP) {
-            if (Pantalla.menuInventario == null) {
-                Pantalla.menuInventario = new MenuInventario(juego.getCliente());
-                Pantalla.menuInventario.setVisible(true);
+            if (Pantalla.getMenuInventario() == null) {
+                Pantalla.setMenuInventario(new MenuInventario(juego.getCliente()));
+                Pantalla.getMenuInventario().setVisible(true);
             }
             juego.getHandlerMouse().setNuevoClick(false);
         }
         if (juego.getHandlerMouse().getNuevoClick() && posMouse[0] >= ESCAPE_IZQ
         		&& posMouse[0] <= ESCAPE_DER && posMouse[1] >= ESCAPE_DOWN
             && posMouse[1] <= ESCAPE_UP) {
-            if (Pantalla.menuEscp == null) {
-                Pantalla.menuEscp = new MenuEscape(juego.getCliente());
-                Pantalla.menuEscp.setVisible(true);
+            if (Pantalla.getMenuEscp() == null) {
+                Pantalla.setMenuEscp(new MenuEscape(juego.getCliente()));
+                Pantalla.getMenuEscp().setVisible(true);
             }
             juego.getHandlerMouse().setNuevoClick(false);
         }
         if (juego.getHandlerMouse().getNuevoClick() && posMouse[0] >= V_CONT_IZQ
         		&& posMouse[0] <= V_CONT_DER && posMouse[1] >= V_CONT_DOWN
             && posMouse[1] <= V_CONT_UP) {
-            if (Pantalla.ventContac == null) {
-                Pantalla.ventContac = new VentanaContactos(juego);
-                Pantalla.ventContac.setVisible(true);
+            if (Pantalla.getVentContac() == null) {
+                Pantalla.setVentContac(new VentanaContactos(juego));
+                Pantalla.getVentContac().setVisible(true);
             }
             juego.getHandlerMouse().setNuevoClick(false);
         }

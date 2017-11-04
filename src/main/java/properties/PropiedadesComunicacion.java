@@ -17,10 +17,10 @@ import java.util.Properties;
 public final class PropiedadesComunicacion {
     private static final int MAX_PORT = 65535;
 
-    private final String RUTA_PROPIEDADES = "properties/comunicacion.properties";
+    private final String rutaPropiedades = "properties/comunicacion.properties";
 
-    private final String KEY_PORT = "Servidor.PORT";
-    private final String KEY_IP = "Servidor.IP";
+    private final String keyPort = "Servidor.PORT";
+    private final String keyIp = "Servidor.IP";
 
     private static PropiedadesComunicacion propiedades = null;
 
@@ -53,7 +53,7 @@ public final class PropiedadesComunicacion {
 
     /**
      * Gets the instancia.
-     * 
+     *
      * @throws Exception
      *             the exception
      */
@@ -73,11 +73,11 @@ public final class PropiedadesComunicacion {
         try {
 
             Properties propiedades = new Properties();
-            InputStream stream = ClassLoader.getSystemResourceAsStream(RUTA_PROPIEDADES);
+            InputStream stream = ClassLoader.getSystemResourceAsStream(rutaPropiedades);
             propiedades.load(stream);
 
-            puerto = Integer.parseInt(propiedades.getProperty(KEY_PORT));
-            ip = propiedades.getProperty(KEY_IP);
+            puerto = Integer.parseInt(propiedades.getProperty(keyPort));
+            ip = propiedades.getProperty(keyIp);
 
             stream.close();
             if (!validarIP(ip)) {
@@ -99,8 +99,9 @@ public final class PropiedadesComunicacion {
      * @return true, if successful
      */
     public static boolean validarIP(final String ip) {
-        String PATTERN = "^((0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)\\.){3}(0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)$";
-        return ip.matches(PATTERN) || ip.equals("localhost");
+        String pattern
+         = "^((0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)\\.){3}(0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)$";
+        return ip.matches(pattern) || ip.equals("localhost");
     }
 
     /**

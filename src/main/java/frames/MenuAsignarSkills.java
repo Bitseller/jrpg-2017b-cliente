@@ -130,7 +130,7 @@ public class MenuAsignarSkills extends JFrame implements MenuGenerico {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(final WindowEvent arg0) {
-                Pantalla.menuAsignar = null;
+                Pantalla.setMenuAsignar(null);
                 dispose();
             }
         });
@@ -195,7 +195,7 @@ public class MenuAsignarSkills extends JFrame implements MenuGenerico {
 
                 }
                 JOptionPane.showMessageDialog(null, "Se han actualizado tus atributos.");
-                Pantalla.menuAsignar = null;
+                Pantalla.setMenuAsignar(null);
                 dispose();
             }
         });
@@ -209,7 +209,7 @@ public class MenuAsignarSkills extends JFrame implements MenuGenerico {
         buttonCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                Pantalla.menuAsignar = null;
+                Pantalla.setMenuAsignar(null);
                 dispose();
             }
         });
