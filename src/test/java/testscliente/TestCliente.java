@@ -1,4 +1,4 @@
-package testsCliente;
+package testscliente;
 
 
 import java.io.IOException;
