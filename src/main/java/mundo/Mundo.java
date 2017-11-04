@@ -75,7 +75,8 @@ public class Mundo {
                 if ((iso[0] >= xMinimo && iso[0] <= xMaximo) && (iso[1] >= yMinimo && iso[1] <= yMaximo)) {
                     String map = juego.getPersonaje().getMapa();
                     if (map == "Aubenor") {
-                        Tile.getAubenor()[Tile.getAubenorBase()].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
+                        Tile.getAubenor()[Tile.getAubenorBase()].graficar(g, (int) (iso[0]
+                        		- juego.getCamara().getxOffset()),
                             (int) (iso[1] - juego.getCamara().getyOffset() - GRAFICAR_Y_EXTRA_OFFSET), TILE_SIZE,
                             TILE_SIZE);
                     } else if (map == "Aris") {

@@ -196,7 +196,8 @@ public final class EstadoDePersonaje {
 
         g.setColor(Color.WHITE);
         g.setFont(new Font("Tahoma", Font.PLAIN, TAM_FONT_SALUD));
-        g.drawImage(Recursos.getBarraSalud(), x + DESPL_X_BAR_SALUD, y + DESPL_Y_BAR_SALUD, ANCHOBARRA, ALTOSALUD, null);
+        g.drawImage(Recursos.getBarraSalud(), x + DESPL_X_BAR_SALUD, y + DESPL_Y_BAR_SALUD, ANCHOBARRA,
+        		ALTOSALUD, null);
         g.drawString(String.valueOf(personaje.getSaludTope()) + " / " + String.valueOf(personaje.getSaludTope()),
         		x + DESPL_X_SALUD_VAL, y + DESPL_Y_SALUD_VAL);
 

@@ -9,7 +9,7 @@ public class ActualizarTrueque extends ComandosEscucha {
 
     @Override
     public void ejecutar() {
-        PaquetePersonaje paquetePersonaje = gson.fromJson(cadenaLeida, PaquetePersonaje.class);
+        PaquetePersonaje paquetePersonaje = getGson().fromJson(getCadenaLeida(), PaquetePersonaje.class);
 
         juego.getPersonajesConectados().remove(paquetePersonaje.getId());
         juego.getPersonajesConectados().put(paquetePersonaje.getId(), paquetePersonaje);

@@ -48,8 +48,8 @@ public abstract class Comando {
 	public static final int INICIARBATALLANPC = 21;
 	public static final int FINALIZARBATALLANPC = 22;
 
-	protected final Gson gson = new Gson();
-	protected String cadenaLeida;
+	private final Gson gson = new Gson();
+	private String cadenaLeida;
 
 	/**
 	 * Sets the cadena.
@@ -65,4 +65,25 @@ public abstract class Comando {
 	 * Ejecutar el comando
 	 */
 	public abstract void ejecutar();
+
+	/**
+	 * @return the cadenaLeida
+	 */
+	public String getCadenaLeida() {
+		return cadenaLeida;
+	}
+
+	/**
+	 * @param cadenaLeida the cadenaLeida to set
+	 */
+	public void setCadenaLeida(final String cadenaLeida) {
+		this.cadenaLeida = cadenaLeida;
+	}
+
+	/**
+	 * @return the gson
+	 */
+	public Gson getGson() {
+		return gson;
+	}
 }

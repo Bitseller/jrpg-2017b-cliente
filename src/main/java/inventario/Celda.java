@@ -51,7 +51,8 @@ public class Celda extends JPanel {
      * Instantiates a new celda.
      */
     public Celda() {
-        label = new JLabel(new ImageIcon(Recursos.getNoItem().getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_DEFAULT)));
+        label = new JLabel(new ImageIcon(Recursos.getNoItem().getScaledInstance(ICON_SIZE, ICON_SIZE,
+        		Image.SCALE_DEFAULT)));
         add(label);
     }
 

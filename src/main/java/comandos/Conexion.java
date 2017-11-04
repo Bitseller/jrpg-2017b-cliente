@@ -15,7 +15,7 @@ public class Conexion extends ComandosEscucha {
 
     @Override
     public void ejecutar() {
-        PaqueteDePersonajes pdp = gson.fromJson(cadenaLeida, PaqueteDePersonajes.class);
+        PaqueteDePersonajes pdp = getGson().fromJson(getCadenaLeida(), PaqueteDePersonajes.class);
         juego.setPersonajesConectados(pdp.getPersonajes());
         actualizarLista(pdp);
     }

@@ -14,7 +14,7 @@ public class Talk extends ComandosEscucha {
     public void ejecutar() {
         MiChat chat = null;
         String destino;
-        juego.getCliente().setPaqueteMensaje(gson.fromJson(cadenaLeida, PaqueteMensaje.class));
+        juego.getCliente().setPaqueteMensaje(getGson().fromJson(getCadenaLeida(), PaqueteMensaje.class));
         if (!(juego.getCliente().getPaqueteMensaje().getUserReceptor() == null)) {
             if (!(juego.getChatsActivos().containsKey(juego.getCliente().getPaqueteMensaje().getUserEmisor()))) {
                 chat = new MiChat(juego);
@@ -26,7 +26,7 @@ public class Talk extends ComandosEscucha {
             }
             destino = juego.getCliente().getPaqueteMensaje().getUserEmisor();
         } else {
-            //ALL						
+            //ALL
             if (!juego.getChatsActivos().containsKey("Sala")) {
                 chat = new MiChat(juego);
 

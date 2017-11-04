@@ -12,7 +12,7 @@ public class CrearPersonaje extends ComandosCliente {
     @Override
     public void ejecutar() {
         JOptionPane.showMessageDialog(null, "Registro exitoso.");
-        cliente.setPaquetePersonaje(gson.fromJson(cadenaLeida, PaquetePersonaje.class));
+        cliente.setPaquetePersonaje(getGson().fromJson(getCadenaLeida(), PaquetePersonaje.class));
         cliente.getPaqueteUsuario().setInicioSesion(true);
 
     }

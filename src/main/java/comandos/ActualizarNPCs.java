@@ -8,7 +8,7 @@ import mensajeria.PaqueteDeNPCs;
 public class ActualizarNPCs extends ComandosEscucha {
     @Override
     public void ejecutar() {
-        PaqueteDeNPCs paqueteDeNPCs = gson.fromJson(cadenaLeida, PaqueteDeNPCs.class);
+        PaqueteDeNPCs paqueteDeNPCs = getGson().fromJson(getCadenaLeida(), PaqueteDeNPCs.class);
 
         //juego.getPersonajesConectados().remove(paqueteDeNPC.getId());
         juego.setNPCs(paqueteDeNPCs.getNPCs());
@@ -19,7 +19,6 @@ public class ActualizarNPCs extends ComandosEscucha {
         	juego.getEstadoJuego().actualizarPersonaje();
         	juego.getCliente().actualizarItems(paquetePersonaje);
         	juego.getCliente().actualizarPersonaje(juego.getPersonajesConectados().get(paquetePersonaje.getId()));
-        
         } */
 
     }

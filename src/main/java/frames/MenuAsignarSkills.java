@@ -30,7 +30,8 @@ import mensajeria.Comando;
  */
 public class MenuAsignarSkills extends JFrame implements MenuGenerico {
 
-    private static final int SEPARATOR = 20;
+    private static final int CONST_GAP = 185;
+	private static final int SEPARATOR = 20;
     private static final int FILA_SEPARATOR_4 = 100;
     private static final int FILA_SEPARATOR_3 = 55;
     private static final int FILA_SEPARATOR_2 = 217;
@@ -521,7 +522,7 @@ public class MenuAsignarSkills extends JFrame implements MenuGenerico {
                     .addComponent(labelInteligencia, GroupLayout.PREFERRED_SIZE, LABEL_ALTO,
                         GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(185)
+                    .addGap(CONST_GAP)
                     .addComponent(buttonConfirm, GroupLayout.PREFERRED_SIZE, BOTON_ALTO, GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createSequentialGroup()
                     .addGap(FILA_SEPARATOR)
