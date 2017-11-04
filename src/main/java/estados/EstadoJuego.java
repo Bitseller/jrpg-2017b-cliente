@@ -105,7 +105,7 @@ public class EstadoJuego extends Estado {
         try {
             // Le envio al servidor que me conecte al mapa y mi posicion
             juego.getPersonaje().setComando(Comando.CONEXION);
-            juego.getPersonaje().setEstado(Estado.estadoJuego);
+            juego.getPersonaje().setEstado(Estado.getEstadoJuego());
             juego.getCliente().getSalida().writeObject(gson.toJson(juego.getPersonaje(), PaquetePersonaje.class));
             juego.getCliente().getSalida().writeObject(gson.toJson(juego.getUbicacionPersonaje(),
                 PaqueteMovimiento.class));
@@ -122,14 +122,14 @@ public class EstadoJuego extends Estado {
 
     @Override
     public void graficar(final Graphics g) {
-        g.drawImage(Recursos.getBackground(), 0, 0, juego.getAncho(), juego.getAlto(), null);
+        g.drawImage(Recursos.getBackground(), 0, 0, getJuego().getAncho(), getJuego().getAlto(), null);
         mundo.graficar(g);
         //entidadPersonaje.graficar(g);
         graficarPersonajes(g);
         graficarNPCs(g);
         mundo.graficarObstaculos(g);
         entidadPersonaje.graficarNombre(g);
-        g.drawImage(Recursos.getMarco(), 0, 0, juego.getAncho(), juego.getAlto(), null);
+        g.drawImage(Recursos.getMarco(), 0, 0, getJuego().getAncho(), getJuego().getAlto(), null);
         EstadoDePersonaje.dibujarEstadoDePersonaje(g, POS_X_PER, POS_Y_PER, paquetePersonaje, miniaturaPersonaje);
         g.drawImage(Recursos.getMochila(), POS_X_MOCHILA, POS_Y_MOCHILA, ANCHO_MOCHILA, ALTO_MOCHILA, null);
         g.drawImage(Recursos.getMenu(), POS_X_MENU, POS_Y_MENU, ANCHO_MENU, ALTO_MENU, null);
@@ -147,9 +147,9 @@ public class EstadoJuego extends Estado {
      */
     public void graficarPersonajes(final Graphics g) {
 
-        if (juego.getPersonajesConectados() != null) {
-            personajesConectados = new HashMap<Integer, PaquetePersonaje>(juego.getPersonajesConectados());
-            ubicacionPersonajes = new HashMap<Integer, PaqueteMovimiento>(juego.getUbicacionPersonajes());
+        if (getJuego().getPersonajesConectados() != null) {
+            personajesConectados = new HashMap<Integer, PaquetePersonaje>(getJuego().getPersonajesConectados());
+            ubicacionPersonajes = new HashMap<Integer, PaqueteMovimiento>(getJuego().getUbicacionPersonajes());
             Iterator<Integer> it = personajesConectados.keySet().iterator();
             int key;
             PaqueteMovimiento actual;
@@ -158,16 +158,16 @@ public class EstadoJuego extends Estado {
             while (it.hasNext()) {
                 key = it.next();
                 actual = ubicacionPersonajes.get(key);
-                if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId() && personajesConectados
-                    .get(actual.getIdPersonaje()).getEstado() == Estado.estadoJuego) {
-                    Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset()
-                        + DESPL_X_RECT_PER), (int) (actual.getPosY() - juego.getCamara().getyOffset()
+                if (actual != null && actual.getIdPersonaje() != getJuego().getPersonaje().getId() 
+                		&& personajesConectados.get(actual.getIdPersonaje()).getEstado() == Estado.getEstadoJuego()) {
+                    Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - getJuego().getCamara().getxOffset()
+                        + DESPL_X_RECT_PER), (int) (actual.getPosY() - getJuego().getCamara().getyOffset()
                         - DESPL_Y_RECT_PER), 0, ALTO_RECT_PER),
                     	personajesConectados.get(actual.getIdPersonaje()).getNombre());
                     g.drawImage(Recursos.getPersonaje().get(personajesConectados.get(actual.getIdPersonaje())
                     		.getRaza()).get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX()
-                    		  - juego.getCamara().getxOffset()), (int) (actual.getPosY()
-                    				- juego.getCamara().getyOffset()), ANCHO_PERSONAJE,
+                    		  - getJuego().getCamara().getxOffset()), (int) (actual.getPosY()
+                    				- getJuego().getCamara().getyOffset()), ANCHO_PERSONAJE,
                               ALTO_PERSONAJE, null);
                 }
             }
@@ -182,9 +182,9 @@ public class EstadoJuego extends Estado {
      */
     public void graficarNPCs(final Graphics g) {
 
-        if (juego.getNPCs() != null) {
-            npcs = new HashMap<Integer, PaqueteDeNPC>(juego.getNPCs());
-            ubicacionNPCS = new HashMap<Integer, PaqueteMovimiento>(juego.getUbicacionNPCs());
+        if (getJuego().getNPCs() != null) {
+            npcs = new HashMap<Integer, PaqueteDeNPC>(getJuego().getNPCs());
+            ubicacionNPCS = new HashMap<Integer, PaqueteMovimiento>(getJuego().getUbicacionNPCs());
             Iterator<Integer> it = npcs.keySet().iterator();
             int key;
             PaqueteMovimiento actual;
@@ -194,12 +194,12 @@ public class EstadoJuego extends Estado {
                 key = it.next();
                 actual = ubicacionNPCS.get(key);
                 if (actual != null) {
-                    Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - juego.getCamara().getxOffset()
-                        + DESPL_X_RECT_NPC), (int) (actual.getPosY() - juego.getCamara().getyOffset()
+                    Pantalla.centerString(g, new Rectangle((int) (actual.getPosX() - getJuego().getCamara().getxOffset()
+                        + DESPL_X_RECT_NPC), (int) (actual.getPosY() - getJuego().getCamara().getyOffset()
                         		- DESPL_Y_RECT_NPC), 0, ALTO_RECT_NPC),
                     		npcs.get(actual.getIdPersonaje()).getNombre());
-                    g.drawImage(Recursos.getMonstruo(), (int) (actual.getPosX() - juego.getCamara().getxOffset()),
-                        (int) (actual.getPosY() - juego.getCamara().getyOffset()), ANCHO_NPC, ALTO_NPC, null);
+                    g.drawImage(Recursos.getMonstruo(), (int) (actual.getPosX() - getJuego().getCamara().getxOffset()),
+                        (int) (actual.getPosY() - getJuego().getCamara().getyOffset()), ANCHO_NPC, ALTO_NPC, null);
                 }
             }
         }
@@ -220,7 +220,7 @@ public class EstadoJuego extends Estado {
      * @return the mundo
      */
     private String getMundo() {
-        return juego.getPersonaje().getMapa();
+        return getJuego().getPersonaje().getMapa();
     }
 
     /**
@@ -253,7 +253,7 @@ public class EstadoJuego extends Estado {
      * Actualizar personaje.
      */
     public void actualizarPersonaje() {
-        paquetePersonaje = juego.getPersonaje();
+        paquetePersonaje = getJuego().getPersonaje();
     }
 
     /**

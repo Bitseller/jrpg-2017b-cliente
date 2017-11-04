@@ -377,7 +377,7 @@ public class Entidad {
                     if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId()
                         && juego.getPersonajesConectados().get(actual.getIdPersonaje()) != null
                         && juego.getPersonajesConectados().get(actual.getIdPersonaje())
-                            .getEstado() == Estado.estadoJuego) {
+                            .getEstado() == Estado.getEstadoJuego()) {
 
                         if (tileMov[0] == tilePersonajes[0] && tileMov[1] == tilePersonajes[1]) {
                             idEnemigo = actual.getIdPersonaje();
@@ -554,7 +554,7 @@ public class Entidad {
                         pBatalla.setId(juego.getPersonaje().getId());
                         pBatalla.setIdEnemigo(key);
 
-                        juego.getPersonaje().setEstado(Estado.estadoBatallaNPC);
+                        juego.getPersonaje().setEstado(Estado.getEstadoBatallaNPC());
                         Estado.setEstado(null);
                         juego.setEstadoBatallaNPC(new EstadoBatallaNPC(juego, pBatalla));
                         Estado.setEstado(juego.getEstadoBatallaNPC());
