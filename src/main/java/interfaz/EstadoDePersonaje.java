@@ -196,11 +196,11 @@ public final class EstadoDePersonaje {
 
         g.setColor(Color.WHITE);
         g.setFont(new Font("Tahoma", Font.PLAIN, TAM_FONT_SALUD));
-        g.drawImage(Recursos.getBarraSalud(), x + DESPL_X_BAR_SALUD, y + DESPL_Y_BAR_SALUD, drawBarra, ALTOSALUD, null);
+        g.drawImage(Recursos.getBarraSalud(), x + DESPL_X_BAR_SALUD, y + DESPL_Y_BAR_SALUD, ANCHOBARRA, ALTOSALUD, null);
         g.drawString(String.valueOf(personaje.getSaludTope()) + " / " + String.valueOf(personaje.getSaludTope()),
         		x + DESPL_X_SALUD_VAL, y + DESPL_Y_SALUD_VAL);
 
-        g.drawImage(Recursos.getBarraEnergia(), x + DESPL_X_BAR_ENERG, y + DESPL_Y_BAR_ENERG, drawBarra, ALTOENERGIA,
+        g.drawImage(Recursos.getBarraEnergia(), x + DESPL_X_BAR_ENERG, y + DESPL_Y_BAR_ENERG, ANCHOBARRA, ALTOENERGIA,
             null);
         g.drawString(String.valueOf(personaje.getEnergiaTope()) + " / " + String.valueOf(personaje.getEnergiaTope()), x
         	+ DESPL_X_ENERG_VAL, y + DESPL_Y_ENERG_VAL);
