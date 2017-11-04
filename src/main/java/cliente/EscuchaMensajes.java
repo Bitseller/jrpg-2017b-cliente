@@ -68,13 +68,13 @@ public class EscuchaMensajes extends Thread {
     }
     /**
      * Pide la ubicacion de los personajes
-     * 
+     *
      * @return devuelve el mapa con la ubicacion de los personajes
      */
 
     /**
      * Pide los personajes conectados
-     * 
+     *
      * @return devuelve el mapa con los personajes conectados
      */
 

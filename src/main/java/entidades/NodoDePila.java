@@ -34,7 +34,7 @@ public class NodoDePila {
 
     /**
      * Setea el siguiente
-     * 
+     *
      * @param nodo
      *            nuevo nodo a setear
      */
@@ -44,7 +44,7 @@ public class NodoDePila {
 
     /**
      * Pide el valor de X
-     * 
+     *
      * @return devuelve el valor de X
      */
     public int obtenerX() {
@@ -53,7 +53,7 @@ public class NodoDePila {
 
     /**
      * Pide el valor de Y
-     * 
+     *
      * @return devuelve el valor de Y
      */
     public int obtenerY() {

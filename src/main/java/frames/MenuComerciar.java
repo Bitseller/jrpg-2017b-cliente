@@ -432,7 +432,7 @@ public class MenuComerciar extends JFrame {
             }
         });
 
-        //CARGO MIS ITEMS		
+        //CARGO MIS ITEMS
         for (Item item : cliente.getPaquetePersonaje().getItems()) {
             misItems.addElement(item.getNombre());
         }
@@ -494,7 +494,7 @@ public class MenuComerciar extends JFrame {
                         cantListo.setText(cantListos + "/2");
                     }
                 } else {
-                    // Si habia clickeado LISTO, pero lo desclickie entonces le digo 
+                    // Si habia clickeado LISTO, pero lo desclickie entonces le digo
                     // que disminuya en el otro cliente
                     if (cantListos != 2) {
                         // Si no tenia nada en la lista no tengo que disminuir la cant
@@ -540,7 +540,7 @@ public class MenuComerciar extends JFrame {
                     }
                     // Pongo el primer item y pregunto si es igual al seleccionado
                     // Entonces mientras que sean distinto lo busca
-                    // Cuando sea igual sale del while y lo agrega en la lista 
+                    // Cuando sea igual sale del while y lo agrega en la lista
                     item1 = cliente.getPaquetePersonaje().getItems().get(count);
                     while (!item1.getNombre().equals(listMisItems.getSelectedValue())) {
                         count++;
