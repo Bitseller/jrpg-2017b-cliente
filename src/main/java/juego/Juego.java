@@ -24,7 +24,11 @@ import mensajeria.PaquetePersonaje;
  */
 public class Juego implements Runnable {
 
-    private static final int MICRO_SEGUNDO = 1000000000;
+    private static final int CANT_FPS = 60;
+	private static final int TAM_FONT_OBJ = 15;
+	private static final int CONST_3 = 3;
+	private static final int CONST_DIRECCION = 6;
+	private static final int MICRO_SEGUNDO = 1000000000;
     private Pantalla pantalla;
     private final String nombre;
     private final int ancho;
@@ -87,7 +91,7 @@ public class Juego implements Runnable {
         ubicacionPersonaje = new PaqueteMovimiento();
         ubicacionPersonaje.setIdPersonaje(paquetePersonaje.getId());
         ubicacionPersonaje.setFrame(0);
-        ubicacionPersonaje.setDireccion(6);
+        ubicacionPersonaje.setDireccion(CONST_DIRECCION);
 
         // Creo el escucha de mensajes
         escuchaMensajes = new EscuchaMensajes(this);
@@ -130,7 +134,7 @@ public class Juego implements Runnable {
     private void graficar() { // Grafica los objetos y sus posiciones
         bs = pantalla.getCanvas().getBufferStrategy();
         if (bs == null) { // Seteo una estrategia para el canvas en caso de que no tenga una
-            pantalla.getCanvas().createBufferStrategy(3);
+            pantalla.getCanvas().createBufferStrategy(CONST_3);
             return;
         }
 
@@ -139,7 +143,7 @@ public class Juego implements Runnable {
         g.clearRect(0, 0, ancho, alto); // Limpiamos la pantalla
 
         // Graficado de imagenes
-        g.setFont(new Font("Book Antiqua", 1, 15));
+        g.setFont(new Font("Book Antiqua", 1, TAM_FONT_OBJ));
 
         if (Estado.getEstado() != null) {
             Estado.getEstado().graficar(g);
@@ -154,7 +158,7 @@ public class Juego implements Runnable {
     @Override
     public void run() { // Hilo principal del juego
 
-        int fps = 60; // Cantidad de actualizaciones por segundo que se desean
+        int fps = CANT_FPS; // Cantidad de actualizaciones por segundo que se desean
         double tiempoPorActualizacion = MICRO_SEGUNDO / fps; // Cantidad de nanosegundos en FPS deseados
         double delta = 0;
         long ahora;
