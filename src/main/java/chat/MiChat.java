@@ -190,7 +190,12 @@ public class MiChat extends JFrame {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (!texto.getText().equals("")) {
-                	mandarMensaje();
+                	if( texto.getText().charAt(0) == '\\' ){
+                		// ponerCheat();
+                	}
+                	else{
+                		mandarMensaje();
+                	}
                     texto.setText("");       
                 }
             }
@@ -203,7 +208,12 @@ public class MiChat extends JFrame {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (!texto.getText().equals("")) {
-                	mandarMensaje();
+                	if( texto.getText().charAt(0) == '\\' ){
+                		ponerCheat( texto.getText() );
+                	}
+                	else{
+                		mandarMensaje();
+                	}
                     texto.setText("");       
                 }
             }
@@ -247,6 +257,16 @@ public class MiChat extends JFrame {
 
     }
     
+    public void ponerCheat(String cheat){
+    	
+    	if( cheat.equals( "\\noclip") ){
+    		juego.setCheatAtravezarParedes(true);
+    	}
+    	if( cheat.equals( "\noclip") ){
+    		juego.setCheatAtravezarParedes(true);
+    	}
+    	
+    }
     
     /**
      * Gets the chat.

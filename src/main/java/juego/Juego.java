@@ -62,6 +62,9 @@ public class Juego implements Runnable {
     private Map<Integer, PaqueteDeNPC> npcs;
     private Map<Integer, PaqueteMovimiento> ubicacionNPCS;
     private Map<String, MiChat> chatsActivos = new HashMap<>();
+    
+    //cheats
+    private boolean cheatAtravezarParedes = false;
 
     private CargarRecursos cargarRecursos;
 
@@ -443,4 +446,14 @@ public class Juego implements Runnable {
     public void setUbicacionNPCs(final Map<Integer, PaqueteMovimiento> ubicacionNPCs) {
         this.ubicacionNPCS = ubicacionNPCs;
     }
+
+	public boolean isCheatAtravezarParedes() {
+		return cheatAtravezarParedes;
+	}
+
+	public void setCheatAtravezarParedes(boolean cheatAtravezarParedes) {
+		this.cheatAtravezarParedes = cheatAtravezarParedes;
+	}
+    
+    
 }
