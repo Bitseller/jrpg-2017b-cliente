@@ -65,26 +65,26 @@ public class VentanaContactos extends JFrame {
                 dispose();
             }
         });
+       
 
         botonMc = new JButton("Multichat");
         botonMc.setIcon(new ImageIcon("recursos//multichatButton.png"));
         botonMc.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(final ActionEvent e) {
-                if (modelo.size() != 0) {
-                    if (!juego.getChatsActivos().containsKey("Sala")) {
+            public void actionPerformed(final ActionEvent e) { 
+                    if (!juego.getChatsActivos().containsKey("Sala")) { // si no esta abierto ya el multichat
                         MiChat chat = new MiChat(juego);
                         juego.getChatsActivos().put("Sala", chat);
                         chat.setTitle("Sala");
                         chat.setVisible(true);
-                        botonMc.setEnabled(false);
+                        botonMc.setEnabled(false); 
                     }
-                }
             }
         });
-
+        
         // Cargo la lista de contactos
         actualizarLista(juego);
+        
         // Pregunto si la ventana sala esta abierta y cancelo el boton multichat
         if (juego.getChatsActivos().containsKey("Sala")) {
             botonMc.setEnabled(false);
