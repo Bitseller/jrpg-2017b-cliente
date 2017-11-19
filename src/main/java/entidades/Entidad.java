@@ -379,7 +379,9 @@ public class Entidad {
                     		&& actual.getIdPersonaje() != juego.getPersonaje().getId()
                     		&& juego.getPersonajesConectados().get(actual.getIdPersonaje()) != null
                     		&& juego.getPersonajesConectados().get(actual.getIdPersonaje()).getEstado() == Estado.getEstadoJuego()) {
-
+                    	//Si quiero clickear un personaje invisible, y yo no lo soy (no puedo verlo), no lo puedo atacar
+                    	if(juego.getPersonajesConectados().get(key).isInvisible() && !juego.getPersonaje().isInvisible())
+                    		continue;
                     	//if (   tileMoverme[0] == tilePersonajes[0] && (tileMoverme[1] == tilePersonajes[1] || tileMoverme[1] == (tilePersonajes[1] - 1) ) ) {
                     	 if (tileMov[0] == tilePersonajes[0] && tileMov[1] == tilePersonajes[1]) {	
                     		

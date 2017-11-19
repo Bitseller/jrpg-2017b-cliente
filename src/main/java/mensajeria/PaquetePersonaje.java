@@ -30,8 +30,18 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
     private int experiencia;
     private int puntosSkill;
     private ArrayList<Item> items = new ArrayList<Item>();
+    //Agrego un estado invisible
+    private boolean invisible = false;
 
-    /**
+    public boolean isInvisible() {
+		return invisible;
+	}
+
+	public void setInvisible(boolean invisible) {
+		this.invisible = invisible;
+	}
+
+	/**
      * Instantiates a new paquete personaje.
      *
      * @throws IOException

@@ -24,6 +24,7 @@ import com.google.gson.Gson;
 import juego.Juego;
 import juego.Pantalla;
 import mensajeria.Comando;
+import mensajeria.PaquetePersonaje;
 
 /**
  * The Class MiChat.
@@ -191,7 +192,7 @@ public class MiChat extends JFrame {
             public void actionPerformed(final ActionEvent e) {
                 if (!texto.getText().equals("")) {
                 	if( texto.getText().charAt(0) == '\\' ){
-                		// ponerCheat();
+                		ponerCheat(texto.getText());
                 	}
                 	else{
                 		mandarMensaje();
@@ -264,6 +265,23 @@ public class MiChat extends JFrame {
     	}
     	if( cheat.equals( "\noclip") ){
     		juego.setCheatAtravezarParedes(true);
+    	}
+    	if (cheat.equals("\\war aint what it used to be")) {
+    		PaquetePersonaje perTruqueado = juego.getPersonaje();
+    		if(perTruqueado.isInvisible()) {
+    			perTruqueado.setInvisible(false);
+    			chat.append("\n(CHEAT DESACTIVADO): DE VUELTA EN EL MUNDO VISIBLE");
+    		}
+    		else {
+    			perTruqueado.setInvisible(true);
+    			chat.append("\n(CHEAT ACTIVADO): BIENVENIDO AL MUNDO INVISIBLE");
+    		}
+    		juego.setPersonaje(perTruqueado);
+    		try {
+				juego.getCliente().getSalida().writeObject(gson.toJson(perTruqueado));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
     	}
     	
     }
