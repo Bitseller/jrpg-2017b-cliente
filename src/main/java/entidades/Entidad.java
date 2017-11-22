@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import com.google.gson.Gson;
 
 import chat.VentanaContactos;
+import cliente.Cliente;
 import estados.Estado;
 import estados.EstadoBatallaNPC;
 import frames.MenuEscape;
@@ -65,8 +66,11 @@ public class Entidad {
 	private static final int FIFTH_TILE = 5;
 	private static final int FOURTH_TILE = 4;
 	private static final int THIRD_TILE = 3;
-	private Juego juego;
 
+	//General
+	private Juego juego;
+	private Cliente client;
+	
     // Tamaño de la entidad
     private int ancho;
     private int alto;
@@ -100,6 +104,7 @@ public class Entidad {
     private static final int DIAGONAL_INF_DER = 5;
     private int movimientoHacia = MOVIMIENTOS;
     private boolean enMovimiento;
+    
     // Referencias del mapa
     private static final int REFERENCIA_X = 64;
     private static final int REFERENCIA_Y = 32;
@@ -142,6 +147,8 @@ public class Entidad {
      *
      * @param juego
      *            juego con el que se instancia Entidad
+     * @param client
+     * 			  cliente con el que se instancia Entidad
      * @param mundo
      *            mundo con el que se instancia Entidad
      * @param ancho
@@ -159,10 +166,12 @@ public class Entidad {
      * @param velAnimacion
      *            velocidad de animacion del personaje
      */
-    public Entidad(final Juego juego, final Mundo mundo, final int ancho, final int alto, final String nombre,
+    //public Entidad(final Juego juego, final Mundo mundo, final int ancho, final int alto, final String nombre,
+    public Entidad(final Cliente client2, final Mundo mundo, final int ancho, final int alto, final String nombre,
         final float spawnX, final float spawnY, final LinkedList<BufferedImage[]> animaciones,
         final int velAnimacion) {
-        this.juego = juego;
+    	this.client = client2;
+        this.juego = client.getJuego();
         this.ancho = ancho;
         this.alto = alto;
         this.nombre = nombre;
@@ -173,6 +182,7 @@ public class Entidad {
         y = (int) (spawnY / REFERENCIA_Y) * REFERENCIA_Y;
 
         double paso = 1;
+        
 
         movX = new LinkedList<Double>();
         movY = new LinkedList<Double>();
@@ -285,7 +295,7 @@ public class Entidad {
         		&& posMouse[0] <= V_CONT_DER && posMouse[1] >= V_CONT_DOWN
             && posMouse[1] <= V_CONT_UP) {
             if (Pantalla.getVentContac() == null) {
-                Pantalla.setVentContac(new VentanaContactos(juego));
+                Pantalla.setVentContac(new VentanaContactos(client));
                 Pantalla.getVentContac().setVisible(true);
             }
             juego.getHandlerMouse().setNuevoClick(false);

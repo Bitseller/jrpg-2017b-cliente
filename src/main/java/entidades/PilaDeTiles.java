@@ -45,5 +45,4 @@ public class PilaDeTiles {
     public boolean estaVacia() {
         return ptrPila == null;
     }
-
 }

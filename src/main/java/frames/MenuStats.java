@@ -28,7 +28,7 @@ import mensajeria.PaquetePersonaje;
 /**
  * The Class MenuStats.
  */
-public class MenuStats extends JFrame implements MenuGenerico {
+public class MenuStats extends JFrame {
 
     private static final int BOTON_ALTO = 25;
     private static final int FILA_SEPARADOR = 13;
@@ -383,10 +383,5 @@ public class MenuStats extends JFrame implements MenuGenerico {
      */
     private int calcularAtaque(final int fuerza) {
         return (int) (fuerza * mod);
-    }
-
-    @Override
-    public JFrame getMenu() {
-        return this;
     }
 }

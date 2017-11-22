@@ -28,7 +28,7 @@ import mensajeria.Paquete;
 /**
  * The Class MenuEscape.
  */
-public class MenuEscape extends JFrame implements MenuGenerico {
+public class MenuEscape extends JFrame {
 
     private static final int FRAME_ALTO = 270;
     private static final int FRAME_ANCHO = 180;
@@ -166,10 +166,5 @@ public class MenuEscape extends JFrame implements MenuGenerico {
                 .addComponent(background, GroupLayout.PREFERRED_SIZE, FRAME_ALTO, GroupLayout.PREFERRED_SIZE)
         );
         contentPane.setLayout(layout);
-    }
-
-    @Override
-    public JFrame getMenu() {
-        return this;
     }
 }

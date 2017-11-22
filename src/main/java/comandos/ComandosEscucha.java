@@ -17,5 +17,4 @@ public abstract class ComandosEscucha extends Comando {
     public void setJuego(final Juego juego) {
         this.juego = juego;
     }
-
 }

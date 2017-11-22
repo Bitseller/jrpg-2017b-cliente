@@ -59,5 +59,4 @@ public class NodoDePila {
     public int obtenerY() {
         return y;
     }
-
 }

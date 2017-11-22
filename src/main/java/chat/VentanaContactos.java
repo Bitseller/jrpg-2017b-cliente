@@ -19,6 +19,8 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import cliente.Cliente;
+import frames.MenuEscape;
 import juego.Juego;
 import juego.Pantalla;
 import mensajeria.PaquetePersonaje;
@@ -46,7 +48,7 @@ public class VentanaContactos extends JFrame {
      * @param juego
      *            the juego
      */
-    public VentanaContactos(final Juego juego) {
+    public VentanaContactos(final Cliente client) {
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(FRAME_ANCHO, FRAME_ALTO);
@@ -72,9 +74,9 @@ public class VentanaContactos extends JFrame {
         botonMc.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) { 
-                    if (!juego.getChatsActivos().containsKey("Sala")) { // si no esta abierto ya el multichat
-                        MiChat chat = new MiChat(juego);
-                        juego.getChatsActivos().put("Sala", chat);
+                    if (!client.getJuego().getChatsActivos().containsKey("Sala")) { // si no esta abierto ya el multichat
+                        MiChat chat = new MiChat(client.getJuego());
+                        client.getJuego().getChatsActivos().put("Sala", chat);
                         chat.setTitle("Sala");
                         chat.setVisible(true);
                         botonMc.setEnabled(false); 
@@ -83,10 +85,10 @@ public class VentanaContactos extends JFrame {
         });
         
         // Cargo la lista de contactos
-        actualizarLista(juego);
+        actualizarLista(client.getJuego());
         
         // Pregunto si la ventana sala esta abierta y cancelo el boton multichat
-        if (juego.getChatsActivos().containsKey("Sala")) {
+        if (client.getJuego().getChatsActivos().containsKey("Sala")) {
             botonMc.setEnabled(false);
         } else {
             botonMc.setEnabled(true);
@@ -97,10 +99,10 @@ public class VentanaContactos extends JFrame {
             public void mouseClicked(final MouseEvent arg0) {
                 if (arg0.getClickCount() == 2) {
                     if (list.getSelectedValue() != null) {
-                        if (!juego.getChatsActivos().containsKey(list.getSelectedValue())) {
-                            if (juego.getCliente() != null) {
-                                MiChat chat = new MiChat(juego);
-                                juego.getChatsActivos().put(list.getSelectedValue(), chat);
+                        if (!client.getJuego().getChatsActivos().containsKey(list.getSelectedValue())) {
+                            if (client.getJuego().getCliente() != null) {
+                                MiChat chat = new MiChat(client.getJuego());
+                                client.getJuego().getChatsActivos().put(list.getSelectedValue(), chat);
                                 chat.setTitle(list.getSelectedValue());
                                 chat.setVisible(true);
                             }

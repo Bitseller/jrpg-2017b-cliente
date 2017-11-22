@@ -12,5 +12,4 @@ public class SalirSet extends ComandosCliente {
         cliente.getPaqueteUsuario().setIp(cliente.getMiIp());
         cliente.getPaqueteUsuario().setComando(Comando.SALIR);
     }
-
 }

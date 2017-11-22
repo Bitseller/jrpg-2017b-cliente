@@ -28,8 +28,7 @@ import mensajeria.Comando;
 /**
  * The Class MenuAsignarSkills.
  */
-public class MenuAsignarSkills extends JFrame implements MenuGenerico {
-
+public class MenuAsignarSkills extends JFrame {
     private static final int CONST_GAP = 185;
 	private static final int SEPARATOR = 20;
     private static final int FILA_SEPARATOR_4 = 100;
@@ -565,9 +564,5 @@ public class MenuAsignarSkills extends JFrame implements MenuGenerico {
         );
         contentPane.setLayout(layout);
     }
-
-    @Override
-    public JFrame getMenu() {
-        return this;
-    }
+    
 }

@@ -15,5 +15,4 @@ public class FinalizarBatalla extends ComandosEscucha {
         juego.getPersonaje().setEstado(Estado.getEstadoJuego());
         Estado.setEstado(juego.getEstadoJuego());
     }
-
 }

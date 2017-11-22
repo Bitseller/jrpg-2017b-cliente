@@ -18,5 +18,4 @@ public abstract class ComandosCliente extends Comando {
     public void setCliente(final Cliente cliente) {
         this.cliente = cliente;
     }
-
 }

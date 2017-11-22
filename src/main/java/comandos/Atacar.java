@@ -13,7 +13,5 @@ public class Atacar extends ComandosEscucha {
         juego.getEstadoBatalla().getEnemigo().actualizarAtributos(paqueteAtacar.getMapPersonaje());
         juego.getEstadoBatalla().getPersonaje().actualizarAtributos(paqueteAtacar.getMapEnemigo());
         juego.getEstadoBatalla().setMiTurno(true);
-
     }
-
 }

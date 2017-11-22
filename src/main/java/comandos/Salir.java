@@ -20,9 +20,6 @@ public class Salir extends ComandosCliente {
             cliente.getSocket().close();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error al salir");
-
         }
-
     }
-
 }
