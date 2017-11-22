@@ -11,5 +11,4 @@ public class InicioSesionSet extends ComandosCliente {
     public void ejecutar() {
         cliente.getPaqueteUsuario().setComando(Comando.INICIOSESION);
     }
-
 }

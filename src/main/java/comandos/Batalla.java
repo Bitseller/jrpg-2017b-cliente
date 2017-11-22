@@ -17,7 +17,5 @@ public class Batalla extends ComandosEscucha {
         Estado.setEstado(null);
         juego.setEstadoBatalla(new EstadoBatalla(juego, paqueteBatalla));
         Estado.setEstado(juego.getEstadoBatalla());
-
     }
-
 }

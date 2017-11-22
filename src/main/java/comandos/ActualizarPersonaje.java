@@ -19,9 +19,7 @@ public class ActualizarPersonaje extends ComandosEscucha {
             juego.getEstadoJuego().actualizarPersonaje();
             juego.getCliente().actualizarItems(paquetePersonaje);
             juego.getCliente().actualizarPersonaje(juego.getPersonajesConectados().get(paquetePersonaje.getId()));
-
         }
-
     }
 
 }

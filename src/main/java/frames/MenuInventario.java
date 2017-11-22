@@ -19,7 +19,7 @@ import mensajeria.Comando;
 /**
  * The Class MenuInventario.
  */
-public class MenuInventario extends JFrame implements MenuGenerico {
+public class MenuInventario extends JFrame {
     private static final int FRAME_SIZE = 600;
     private JButton cancelar = new JButton("Exit");
 
@@ -61,10 +61,5 @@ public class MenuInventario extends JFrame implements MenuGenerico {
         //this.setLocation(900, 140);
         this.setResizable(false);
         this.setVisible(true);
-    }
-
-    @Override
-    public JFrame getMenu() {
-        return this;
     }
 }

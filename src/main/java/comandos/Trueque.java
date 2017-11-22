@@ -83,9 +83,6 @@ public class Trueque extends ComandosEscucha {
             juego.getCliente().getSalida().writeObject(getGson().toJson(paquetePersonaje));
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error al actualizar trueque");
-
         }
-
     }
-
 }

@@ -18,7 +18,5 @@ public class ActualizarInventario extends ComandosEscucha {
             juego.getCliente().actualizarItems(paquetePersonaje);
             juego.getCliente().actualizarPersonaje(juego.getPersonajesConectados().get(paquetePersonaje.getId()));
         }
-
     }
-
 }

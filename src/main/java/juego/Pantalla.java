@@ -13,8 +13,7 @@ import java.awt.event.WindowEvent;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
-import java.util.LinkedList;
-
+import java.util.HashMap;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -38,15 +37,13 @@ import mensajeria.Paquete;
  */
 public class Pantalla {
 
-    private static final int CASE_4 = 4;
-	private static final int CASE_3 = 3;
 	private JFrame pantalla;
     private Canvas canvas;
 
-    private final LinkedList<Integer> keys;
-
+    private Cliente cliente;
+    private HashMap<Integer,Runnable> keyMap;
+  
     // Menus
-    private static LinkedList<JFrame> menues;
     private static MenuInventario menuInventario;
     private static MenuAsignarSkills menuAsignar;
     private static MenuStats menuStats;
@@ -67,8 +64,7 @@ public class Pantalla {
      * @param cliente
      *            the cliente
      */
-    public Pantalla(final String nombre, final int ancho, final int alto, final Cliente cliente) {
-
+    public Pantalla (final String nombre, final int ancho, final int alto, final Cliente client) {
         pantalla = new JFrame(nombre);
         pantalla.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
         pantalla.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
@@ -84,11 +80,11 @@ public class Pantalla {
                 try {
                     Paquete p = new Paquete();
                     p.setComando(Comando.DESCONECTAR);
-                    p.setIp(cliente.getMiIp());
-                    cliente.getSalida().writeObject(gson.toJson(p));
-                    cliente.getEntrada().close();
-                    cliente.getSalida().close();
-                    cliente.getSocket().close();
+                    p.setIp(client.getMiIp());
+                    client.getSalida().writeObject(gson.toJson(p));
+                    client.getEntrada().close();
+                    client.getSalida().close();
+                    client.getSocket().close();
                     System.exit(0);
                 } catch (IOException e) {
                     JOptionPane.showMessageDialog(null, "Fallo al intentar cerrar la aplicación.");
@@ -96,70 +92,24 @@ public class Pantalla {
                 }
             }
         });
-
-        keys = new LinkedList<Integer>();
-        // Cargo los KeyEvents en una lista
-        keys.add(KeyEvent.VK_I);
-        keys.add(KeyEvent.VK_A);
-        keys.add(KeyEvent.VK_S);
-        keys.add(KeyEvent.VK_ESCAPE);
-        keys.add(KeyEvent.VK_C);
-
-        menues = new LinkedList<JFrame>();
-        // Cargo los menues en una lista
-        menues.add(menuInventario);
-        menues.add(menuAsignar);
-        menues.add(menuStats);
-        menues.add(menuEscp);
-        menues.add(ventContac);
-
+        
+        //para instanciar los menues necesito el cliente.
+        this.cliente = client;
+        
+        //Creo un mapa con los KeyEvent y la interface Runnable que me permite dirigirme a los diferentes menues.
+        keyMap = new HashMap<Integer,Runnable>();
+        keyMap.put(KeyEvent.VK_I, ()->mostrarMenuInventario());
+        keyMap.put(KeyEvent.VK_A, ()->mostrarMenuAsignarSkills());
+        keyMap.put(KeyEvent.VK_S, ()->mostrarMenuStats());
+        keyMap.put(KeyEvent.VK_ESCAPE, ()->mostrarMenuEscp());
+        keyMap.put(KeyEvent.VK_C, ()->mostrarVentanaContactos());
+        
         pantalla.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(final KeyEvent e) {
-
-                int i = 0;
-
-                while (i < keys.size() && e.getKeyCode() != keys.get(i)) {
-                    i++;
-                }
-
-                if (i < keys.size()) {
-
-                    //Como se que ambas listas estan sincronizadas,
-                    //el mismo indice me indica que menu es el que debo verificar.
-                    if (Estado.getEstado().esEstadoDeJuego() && menues.get(i) == null) {
-                        switch (i) {
-                            case 0:
-                                menuInventario = new MenuInventario(cliente);
-                                menuInventario.setVisible(true);
-                                break;
-                            case 1:
-                                menuAsignar = new MenuAsignarSkills(cliente);
-                                menuAsignar.setVisible(true);
-                                break;
-                            case 2:
-                                menuStats = new MenuStats(cliente);
-                                menuStats.setVisible(true);
-                                break;
-                            case CASE_3:
-                                menuEscp = new MenuEscape(cliente);
-                                menuEscp.setVisible(true);
-                                break;
-                            case CASE_4:
-                                ventContac = new VentanaContactos(cliente.getJuego());
-                                ventContac.setVisible(true);
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                } else {
-                    menuEscp = new MenuEscape(cliente);
-                    menuEscp.setVisible(true);
-                }
-
-                //menues.get(i).setVisible(true);
-
+            	if (Estado.getEstado().esEstadoDeJuego() && keyMap.containsKey(e.getKeyCode())) {
+            		keyMap.get(e.getKeyCode()).run();
+            	}
             }
         });
 
@@ -172,27 +122,64 @@ public class Pantalla {
         canvas.setMinimumSize(new Dimension(ancho, alto));
         canvas.setFocusable(false);
 
-        pantalla.add(canvas);
+        pantalla.getContentPane().add(canvas);
         pantalla.pack();
     }
 
-    /**
-	 * @return the menues
-	 */
-	public static LinkedList<JFrame> getMenues() {
-		return menues;
-	}
-
-
-
 	/**
-	 * @param menues the menues to set
-	 */
-	public static void setMenues(final LinkedList<JFrame> menues) {
-		Pantalla.menues = menues;
+     * Instancia y muestra menuInventario
+     */
+    private void mostrarMenuInventario() {
+    	if (menuInventario == null) {
+    		menuInventario = new MenuInventario(this.cliente);
+    		menuInventario.setVisible(true);
+    	}else
+			menuInventario.requestFocus();
+    }
+    
+    /**
+     * Instancia y muestra menuAsignar
+     */
+    private void mostrarMenuAsignarSkills() {
+    	if (menuAsignar == null) {
+    		menuAsignar = new MenuAsignarSkills(this.cliente);
+    		menuAsignar.setVisible(true);
+    	}else
+			menuAsignar.requestFocus();
+    }
+    
+    /**
+     * Instancia y muestra menuStats
+     */
+    private void mostrarMenuStats() {
+    	if (menuStats == null) {
+    		menuStats = new MenuStats(this.cliente);
+    			menuStats.setVisible(true);
+    	}else
+    		menuStats.requestFocus();
+    }
+    
+    /**
+     * Instancia y muestra menuEscp
+     */
+    private void mostrarMenuEscp() {
+    	if (menuEscp == null) {
+    		menuEscp = new MenuEscape(this.cliente);
+    		menuEscp.setVisible(true);
+    	}else
+			menuEscp.requestFocus();
+    }
+    
+    /**
+     * Instancia y muestra ventContac
+     */
+	private void mostrarVentanaContactos() {
+		if (ventContac == null) {
+			ventContac = new VentanaContactos(this.cliente);
+			ventContac.setVisible(true);
+		}else
+			ventContac.requestFocus();
 	}
-
-
 
 	/**
 	 * @return the menuInventario
@@ -201,16 +188,12 @@ public class Pantalla {
 		return menuInventario;
 	}
 
-
-
 	/**
 	 * @param menuInventario the menuInventario to set
 	 */
 	public static void setMenuInventario(final MenuInventario menuInventario) {
 		Pantalla.menuInventario = menuInventario;
 	}
-
-
 
 	/**
 	 * @return the menuAsignar
@@ -219,16 +202,12 @@ public class Pantalla {
 		return menuAsignar;
 	}
 
-
-
 	/**
 	 * @param menuAsignar the menuAsignar to set
 	 */
 	public static void setMenuAsignar(final MenuAsignarSkills menuAsignar) {
 		Pantalla.menuAsignar = menuAsignar;
 	}
-
-
 
 	/**
 	 * @return the menuStats
@@ -237,16 +216,12 @@ public class Pantalla {
 		return menuStats;
 	}
 
-
-
 	/**
 	 * @param menuStats the menuStats to set
 	 */
 	public static void setMenuStats(final MenuStats menuStats) {
 		Pantalla.menuStats = menuStats;
 	}
-
-
 
 	/**
 	 * @return the menuEscp
@@ -255,16 +230,12 @@ public class Pantalla {
 		return menuEscp;
 	}
 
-
-
 	/**
 	 * @param menuEscp the menuEscp to set
 	 */
 	public static void setMenuEscp(final MenuEscape menuEscp) {
 		Pantalla.menuEscp = menuEscp;
 	}
-
-
 
 	/**
 	 * @return the ventContac
@@ -273,16 +244,12 @@ public class Pantalla {
 		return ventContac;
 	}
 
-
-
 	/**
 	 * @param ventContac the ventContac to set
 	 */
 	public static void setVentContac(final VentanaContactos ventContac) {
 		Pantalla.ventContac = ventContac;
 	}
-
-
 
 	/**
      * Gets the canvas.

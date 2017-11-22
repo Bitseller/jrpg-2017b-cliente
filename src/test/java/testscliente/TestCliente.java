@@ -64,13 +64,11 @@ public class TestCliente {
 					JOptionPane.showMessageDialog(null, "Falló");
 
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} finally {
 					try {
 						server.close();
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						JOptionPane.showMessageDialog(null, "Falló");
 
 					}
@@ -335,8 +333,5 @@ public class TestCliente {
 			JOptionPane.showMessageDialog(null, "Falló");
 		}
 	}
-	
 }
-
-
 

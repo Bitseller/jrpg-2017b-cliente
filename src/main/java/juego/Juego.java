@@ -82,12 +82,12 @@ public class Juego implements Runnable {
      * @param pp
      *            the pp
      */
-    public Juego(final String nombre, final int ancho, final int alto, final Cliente cliente,
+    public Juego(final String nombre, final int ancho, final int alto, final Cliente client,
         final PaquetePersonaje pp) {
         this.nombre = nombre;
         this.alto = alto;
         this.ancho = ancho;
-        this.cliente = cliente;
+        this.cliente = client;
         this.paquetePersonaje = pp;
 
         // Inicializo la ubicacion del personaje
@@ -203,7 +203,7 @@ public class Juego implements Runnable {
             return;
         }
 
-        estadoJuego = new EstadoJuego(this);
+        estadoJuego = new EstadoJuego(this.cliente);
         Estado.setEstado(estadoJuego);
         pantalla.mostrar();
         corriendo = true;

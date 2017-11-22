@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 
 import com.google.gson.Gson;
 
+import cliente.Cliente;
 import entidades.Entidad;
 import interfaz.EstadoDePersonaje;
 import interfaz.MenuInfoPersonaje;
@@ -93,21 +94,22 @@ public class EstadoJuego extends Estado {
      * @param juego
      *            the juego
      */
-    public EstadoJuego(final Juego juego) {
-        super(juego);
-        mundo = new Mundo(juego, "recursos/" + getMundo() + ".txt", "recursos/" + getMundo() + ".txt");
-        paquetePersonaje = juego.getPersonaje();
-        entidadPersonaje = new Entidad(juego, mundo, ANCHO_ENTIDAD_PER, ALTO_ENTIDAD_PER,
-        		juego.getPersonaje().getNombre(), 0, 0,
-        		Recursos.getPersonaje().get(juego.getPersonaje().getRaza()), VEL_ANIMACION);
+    //public EstadoJuego(final Juego juego) {
+    public EstadoJuego(final Cliente client) {
+        super(client.getJuego());
+        mundo = new Mundo(client.getJuego(), "recursos/" + getMundo() + ".txt", "recursos/" + getMundo() + ".txt");
+        paquetePersonaje = client.getJuego().getPersonaje();
+        entidadPersonaje = new Entidad(client, mundo, ANCHO_ENTIDAD_PER, ALTO_ENTIDAD_PER,
+        		client.getJuego().getPersonaje().getNombre(), 0, 0,
+        		Recursos.getPersonaje().get(client.getJuego().getPersonaje().getRaza()), VEL_ANIMACION);
         miniaturaPersonaje = Recursos.getPersonaje().get(paquetePersonaje.getRaza()).get(POS_LISTA)[0];
 
         try {
             // Le envio al servidor que me conecte al mapa y mi posicion
-            juego.getPersonaje().setComando(Comando.CONEXION);
-            juego.getPersonaje().setEstado(Estado.getEstadoJuego());
-            juego.getCliente().getSalida().writeObject(gson.toJson(juego.getPersonaje(), PaquetePersonaje.class));
-            juego.getCliente().getSalida().writeObject(gson.toJson(juego.getUbicacionPersonaje(),
+        	client.getJuego().getPersonaje().setComando(Comando.CONEXION);
+        	client.getJuego().getPersonaje().setEstado(Estado.getEstadoJuego());
+        	client.getJuego().getCliente().getSalida().writeObject(gson.toJson(client.getJuego().getPersonaje(), PaquetePersonaje.class));
+        	client.getJuego().getCliente().getSalida().writeObject(gson.toJson(client.getJuego().getUbicacionPersonaje(),
                 PaqueteMovimiento.class));
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor al ingresar al mundo");
@@ -284,5 +286,4 @@ public class EstadoJuego extends Estado {
     public boolean esEstadoDeJuego() {
         return true;
     }
-
 }

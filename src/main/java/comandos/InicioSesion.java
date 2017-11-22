@@ -29,7 +29,5 @@ public class InicioSesion extends ComandosCliente {
             // El usuario no pudo iniciar sesión
             cliente.getPaqueteUsuario().setInicioSesion(false);
         }
-
     }
-
 }

@@ -14,7 +14,5 @@ public class CrearPersonaje extends ComandosCliente {
         JOptionPane.showMessageDialog(null, "Registro exitoso.");
         cliente.setPaquetePersonaje(getGson().fromJson(getCadenaLeida(), PaquetePersonaje.class));
         cliente.getPaqueteUsuario().setInicioSesion(true);
-
     }
-
 }
