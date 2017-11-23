@@ -3,6 +3,7 @@ package mensajeria;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import javax.swing.JOptionPane;
@@ -15,6 +16,30 @@ import estados.Estado;
  */
 public class PaquetePersonaje extends Paquete implements Serializable, Cloneable {
 
+	/**
+	 * Codigo de modo dios
+	 */
+	private static final int CODE_IDDQD = 1; 
+	
+	/**
+	 * Codigo de modo espectro
+	 */
+	private static final int CODE_NOCLIP = 2; 
+	
+	/**
+	 * Codigo de modo Hulk
+	 */
+	private static final int CODE_BIGDADDY = 3;
+	
+	/**
+	 * Codigo de modo KickAss
+	 */
+	private static final int CODE_TINYDADDY = 4;
+	/**
+	 * Codigo de modo fantasma
+	 */
+	private static final int CODE_WAWIUTB = 5; 
+	
     private int id;
     private String idMapa;
     private int estado;
@@ -30,8 +55,18 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
     private int experiencia;
     private int puntosSkill;
     private ArrayList<Item> items = new ArrayList<Item>();
+    
+    //Paquete de cheats dentro del personaje
+    private ArrayList<Boolean> estadoCheats;
+    private final HashMap<String, Integer> cheatMap;
+    private final HashMap<Integer,Runnable> cheatAction;
+    
     //Agrego un estado invisible
     private boolean invisible = false;
+    
+    public void getCheatsPersonaje() {
+    	
+    }
 
     public boolean isInvisible() {
 		return invisible;
@@ -49,8 +84,101 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
      */
     public PaquetePersonaje() throws IOException {
         estado = Estado.getEstadoOffline();
-    }
+        
+        //Se instancia vector y Mapa de cheats del personaje.
+        cheatMap = new HashMap<String, Integer>();
+        estadoCheats = new ArrayList<Boolean>();
+        cheatAction = new HashMap<Integer,Runnable>();
 
+        //Cada cheat tiene un valor asignado para saber donde buscar en el array de estado.
+        cheatMap.put("/iddqd", CODE_IDDQD);
+        cheatMap.put("/noclip", CODE_NOCLIP);
+        cheatMap.put("/bigdaddy", CODE_BIGDADDY);
+        cheatMap.put("/tinnydaddy", CODE_TINYDADDY);
+        cheatMap.put("/war aint what it used to be", CODE_WAWIUTB);
+
+        //Todos los cheats se inicializan en false.
+        estadoCheats.add(false);
+        estadoCheats.add(false);
+        estadoCheats.add(false);
+        estadoCheats.add(false);
+        estadoCheats.add(false);
+        
+        //Todos los cheats poseen su metodo.
+        //cheatAction.put(CODE_IDDQD, ()-> setIddqd());
+        //cheatAction.put(CODE_NOCLIP, ()-> setNoClip());
+        //cheatAction.put(CODE_BIGDADDY, ()-> setBigDaddy());
+        //cheatAction.put(CODE_TINYDADDY, ()-> setTinyDaddy());
+        //cheatAction.put(CODE_WAWIUTB, ()-> setWawiutb());
+    }
+    
+//    /**
+//     * Aplica el cheat iddqd
+//     */
+//	private void setIddqd() {
+//    	System.out.println("ACTIVAR CHEAT");
+//    }
+//    
+//	/**
+//     * Aplica el cheat noclip
+//     */
+//    private void setNoClip() {
+//    	
+//    }
+//    
+//    /**
+//     * Aplica el cheat bigdaddy
+//     */
+//    private void setBigDaddy() {
+//    	
+//    }
+//    
+//    /**
+//     * Aplica el cheat tinydaddy
+//     */
+//    private void setTinyDaddy() {
+//    	
+//    }
+//    
+//    /**
+//     * Aplica el cheat war aint what it used to be
+//     */
+//    private void setWawiutb() {
+//		
+//	}
+//    
+	/**
+     * Get el valor de la key del mapa de cheats.
+     * 
+     * @return el mapa de cheats
+     */
+    public HashMap<String, Integer> getCheats(){
+    	return this.cheatMap;
+    }
+    
+    /**
+     * Get el estado de los cheats.
+     * 
+     * @return el array de estado de los cheats
+     */
+    public Boolean getEstadoCheats(int index){
+    	return this.estadoCheats.get(index-1);
+    }
+    
+    /**
+     * Set el estado de los cheats.
+     * 
+     * @param index
+     * @param valor
+     */
+    public void setEstadoCheats(int index, boolean valor){
+    	this.estadoCheats.remove(index-1);
+    	this.estadoCheats.add(index-1, valor);
+    }
+    
+    public HashMap<Integer, Runnable> getCheatAction() {
+    	return this.cheatAction;
+    }
     /**
      * Gets the estado.
      *

@@ -24,6 +24,8 @@ import frames.MenuEscape;
 import juego.Juego;
 import juego.Pantalla;
 import mensajeria.PaquetePersonaje;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  * The Class VentanaContactos.
@@ -49,6 +51,17 @@ public class VentanaContactos extends JFrame {
      *            the juego
      */
     public VentanaContactos(final Cliente client) {
+    	addKeyListener(new KeyAdapter() {
+    		//Si se presiona la tecla escape
+    		@Override
+    		public void keyPressed(KeyEvent e) {
+    			if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+    				Pantalla.setVentContac(null);
+    				dispose();
+    			}
+    		}
+    	});
+    	
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(FRAME_ANCHO, FRAME_ALTO);
@@ -60,29 +73,49 @@ public class VentanaContactos extends JFrame {
 
         JScrollPane scrollPane = new JScrollPane();
 
+        botonMc = new JButton("Multichat");
+        botonMc.addKeyListener(new KeyAdapter() {
+        	@Override
+        	public void keyPressed(KeyEvent e) {
+        		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+        			if (!client.getJuego().getChatsActivos().containsKey("Sala")) { // si no esta abierto ya el multichat
+            			MiChat chat = new MiChat(client.getJuego());
+            			client.getJuego().getChatsActivos().put("Sala", chat);
+            			chat.setTitle("Sala");
+            			chat.setVisible(true);
+            			botonMc.setEnabled(false); 
+            		}
+        		}
+        	}
+        });
+        
+        botonMc.setIcon(new ImageIcon("recursos//multichatButton.png"));
+        botonMc.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(final ActionEvent e) { 
+        		if (!client.getJuego().getChatsActivos().containsKey("Sala")) { // si no esta abierto ya el multichat
+        			MiChat chat = new MiChat(client.getJuego());
+        			client.getJuego().getChatsActivos().put("Sala", chat);
+        			chat.setTitle("Sala");
+        			chat.setVisible(true);
+        			botonMc.setEnabled(false); 
+        		}
+        	}
+        });
+        
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(final WindowEvent arg0) {
                 Pantalla.setVentContac(null);
                 dispose();
             }
+        	@Override
+        	public void windowOpened(WindowEvent arg0) {
+        		botonMc.requestFocus();
+        	}
         });
        
 
-        botonMc = new JButton("Multichat");
-        botonMc.setIcon(new ImageIcon("recursos//multichatButton.png"));
-        botonMc.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) { 
-                    if (!client.getJuego().getChatsActivos().containsKey("Sala")) { // si no esta abierto ya el multichat
-                        MiChat chat = new MiChat(client.getJuego());
-                        client.getJuego().getChatsActivos().put("Sala", chat);
-                        chat.setTitle("Sala");
-                        chat.setVisible(true);
-                        botonMc.setEnabled(false); 
-                    }
-            }
-        });
         
         // Cargo la lista de contactos
         actualizarLista(client.getJuego());

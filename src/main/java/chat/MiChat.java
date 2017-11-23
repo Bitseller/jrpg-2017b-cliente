@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Stack;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -25,6 +27,8 @@ import juego.Juego;
 import juego.Pantalla;
 import mensajeria.Comando;
 import mensajeria.PaquetePersonaje;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  * The Class MiChat.
@@ -33,6 +37,8 @@ public class MiChat extends JFrame {
 
     private JPanel contentPane;
     private JTextField texto;
+    private Stack<String> StackTextoPrevio;
+    private Stack<String> StackTextoPosterior;
     private JTextArea chat;
     private Juego juego;
     private final Gson gson = new Gson();
@@ -146,6 +152,21 @@ public class MiChat extends JFrame {
      *            the juego
      */
     public MiChat(final Juego juego) {
+    	addKeyListener(new KeyAdapter() {
+    		//Si se presiona la tecla escape
+    		@Override
+    		public void keyPressed(KeyEvent e) {
+    			if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+    				if (getTitle() == "Sala") {
+                        if (Pantalla.getVentContac() != null) {
+                            VentanaContactos.getBotonMc().setEnabled(true);
+                        }
+                    }
+                    juego.getChatsActivos().remove(getTitle());
+                }
+    		}
+    	});
+    	
         this.juego = juego;
         setTitle("Mi Chat");
 
@@ -168,6 +189,9 @@ public class MiChat extends JFrame {
         caret = (DefaultCaret) chat.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
+        StackTextoPrevio = new Stack<String>();
+        StackTextoPrevio.push("");
+        StackTextoPosterior = new Stack<String>();
         texto = new JTextField();
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -186,15 +210,16 @@ public class MiChat extends JFrame {
             }
         });
 
-        //SI TOCO ENTER
+        //Si se presiona la tecla enter
         texto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (!texto.getText().equals("")) {
-                	if( texto.getText().charAt(0) == '\\' ){
+                		if( texto.getText().charAt(0) == '/' ){
                 		ponerCheat(texto.getText());
                 	}
                 	else{
+                		StackTextoPrevio.push(texto.getText());
                 		mandarMensaje();
                 	}
                     texto.setText("");       
@@ -202,17 +227,20 @@ public class MiChat extends JFrame {
             }
         });
 
-        //SI TOCO ENVIAR
+        //Si presiono el boton Enviar
         JButton enviar = new JButton("ENVIAR");
         enviar.setIcon(new ImageIcon("recursos//enviarButton.png"));
         enviar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (!texto.getText().equals("")) {
-                	if( texto.getText().charAt(0) == '\\' ){
-                		ponerCheat( texto.getText() );
+                	if( texto.getText().charAt(0) == '/' ){
+                		chat.append("HOLA MUNDO");
+                		texto.setText("");
+                		ponerCheat(texto.getText());
                 	}
                 	else{
+                		StackTextoPrevio.push(texto.getText());
                 		mandarMensaje();
                 	}
                     texto.setText("");       
@@ -227,6 +255,20 @@ public class MiChat extends JFrame {
         background.setBounds(COORD_X_SUP_IZQ_LABEL_FONDO, COORD_Y_SUP_IZQ_LABEL_FONDO, ANCHO_LABEL_FONDO,
             ALTO_LABEL_FONDO);
         contentPane.add(background);
+        
+        //Si pulso la flecha de arriba o abajo, me carga entradas anteriores que realice.
+        texto.addKeyListener(new KeyAdapter() {
+        	@Override
+        	public void keyPressed(KeyEvent e) {
+        		if (e.getKeyCode() == KeyEvent.VK_UP && !StackTextoPrevio.empty()) {
+        			StackTextoPosterior.push(texto.getText());
+        			texto.setText(StackTextoPrevio.pop());
+        		} else if (e.getKeyCode() == KeyEvent.VK_DOWN && !StackTextoPosterior.empty()) {
+        			StackTextoPrevio.push(texto.getText());
+        			texto.setText(StackTextoPosterior.pop());
+        		}
+        	}
+        });
     }
 
     
@@ -259,31 +301,79 @@ public class MiChat extends JFrame {
     }
     
     public void ponerCheat(String cheat){
+    	PaquetePersonaje pjCheater = juego.getPersonaje();
+    	int cheatCode;
     	
-    	if( cheat.equals( "\\noclip") ){
-    		juego.setCheatAtravezarParedes(true);
-    	}
-    	if( cheat.equals( "\noclip") ){
-    		juego.setCheatAtravezarParedes(true);
-    	}
-    	if (cheat.equals("\\war aint what it used to be")) {
-    		PaquetePersonaje perTruqueado = juego.getPersonaje();
-    		if(perTruqueado.isInvisible()) {
-    			perTruqueado.setInvisible(false);
-    			chat.append("\n(CHEAT DESACTIVADO): DE VUELTA EN EL MUNDO VISIBLE");
-    		}
-    		else {
-    			perTruqueado.setInvisible(true);
-    			chat.append("\n(CHEAT ACTIVADO): BIENVENIDO AL MUNDO INVISIBLE");
-    		}
-    		juego.setPersonaje(perTruqueado);
+    	if (pjCheater.getCheats().containsKey(cheat)) {
+    		cheatCode  = pjCheater.getCheats().get(cheat);
+    		System.out.println("ENTRE A LOS CHEATS " + cheatCode);
+    		//pjCheater.getCheatAction().get(cheatCode).run();
+	    	
+    		switch(cheat) {
+		    	case "/iddqd":
+		    		if (!pjCheater.getEstadoCheats(cheatCode)){
+		    			
+		    			pjCheater.setEstadoCheats(cheatCode, true);
+		    			chat.append("\n/iddqd ON");
+		    		}else {
+		    			
+		    			pjCheater.setEstadoCheats(cheatCode, false);
+		    			chat.append("\n/iddqd OFF");
+		    		}
+		    		break;
+		    	case "/noclip":
+		    		if (!pjCheater.getEstadoCheats(cheatCode)) {
+		    			juego.setCheatAtravezarParedes(true);
+		    			pjCheater.setEstadoCheats(cheatCode, true);
+		    			chat.append("\n/noclip ON");
+		    		}else {
+		    			juego.setCheatAtravezarParedes(false);
+		    			pjCheater.setEstadoCheats(cheatCode, false);
+		    			chat.append("\n/noclip OFF");
+		    		}
+		    		break;
+		    	case "/bigdaddy":
+		    		if (!pjCheater.getEstadoCheats(cheatCode)){
+		    			
+		    			pjCheater.setEstadoCheats(cheatCode, true);
+		    			chat.append("\n/bigdaddy ON");
+		    		}else {
+		    			
+		    			pjCheater.setEstadoCheats(cheatCode, false);
+		    			chat.append("\n/bigdaddy OFF");
+		    		}
+		    		break;
+		    	case "/tinydaddy":
+		    		if (!pjCheater.getEstadoCheats(cheatCode)){
+		    			
+		    			pjCheater.setEstadoCheats(cheatCode, true);
+		    			chat.append("\n/tinydaddy ON");
+		    		}else {
+		    			
+		    			pjCheater.setEstadoCheats(cheatCode, false);
+		    			chat.append("\n/tinydaddy OFF");
+		    		}
+		    		break;
+		    	case "/war aint what it used to be":
+		    		if(!pjCheater.getEstadoCheats(cheatCode)) {
+		        		pjCheater.setInvisible(true);
+		        		pjCheater.setEstadoCheats(cheatCode, true);
+		        		chat.append("\n/wawiutb ON");
+		        		}
+		        	else {
+		        		pjCheater.setInvisible(false);
+		        		pjCheater.setEstadoCheats(cheatCode, false);
+		        		chat.append("\n/wawiutb OFF");
+		        	}
+		    		break;
+	    	}
+	    	juego.setPersonaje(pjCheater);
     		try {
-				juego.getCliente().getSalida().writeObject(gson.toJson(perTruqueado));
+				juego.getCliente().getSalida().writeObject(gson.toJson(pjCheater));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-    	}
-    	
+	    }
     }
     
     /**

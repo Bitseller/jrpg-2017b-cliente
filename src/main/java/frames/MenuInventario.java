@@ -15,6 +15,8 @@ import cliente.Cliente;
 import inventario.Inventario;
 import juego.Pantalla;
 import mensajeria.Comando;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  * The Class MenuInventario.
@@ -48,9 +50,19 @@ public class MenuInventario extends JFrame {
         this.setUndecorated(true);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         try {
-            this.setLayout(new BorderLayout());
-            this.add(new Inventario(cliente.getPaquetePersonaje()));
-            this.add(cancelar, BorderLayout.AFTER_LAST_LINE);
+            getContentPane().setLayout(new BorderLayout());
+            Inventario inventario = new Inventario(cliente.getPaquetePersonaje());
+            inventario.addKeyListener(new KeyAdapter() {
+            	@Override
+            	public void keyPressed(KeyEvent e) {
+            		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            			Pantalla.setMenuInventario(null);
+                        dispose();
+            		}
+            	}
+            });
+            getContentPane().add(inventario);
+            getContentPane().add(cancelar, BorderLayout.AFTER_LAST_LINE);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Falló al iniciar el inventario");
 
