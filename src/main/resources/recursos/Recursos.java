@@ -29,7 +29,8 @@ public final class Recursos {
 	private static final int BIG_FIVE = 5;
 	private static final int BIG_THREE = 3;
 	private static final int FRAMES = 4;
-    private static final int ELEMENTOS = 65;
+    //private static final int ELEMENTOS = 65;
+	private static final int ELEMENTOS = 74;
     private static final int ANCHOBARRA = 345;
 
     private static final int ANCHO = 256; // Ancho del frame a obtener
@@ -49,7 +50,20 @@ public final class Recursos {
     private static BufferedImage[] humanoAbajoDer;
     private static BufferedImage[] humanoAbajo;
     private static BufferedImage[] humanoAbajoIzq;
-
+	
+    //CheatsSprite Humano
+    //God Mode
+    private static SpriteSheet spriteHumanoG;
+    private static LinkedList<BufferedImage[]> humanoG = new LinkedList<>();
+    private static BufferedImage[] humanoIzqG;
+    private static BufferedImage[] humanoArribaIzqG;
+    private static BufferedImage[] humanoArribaG;
+    private static BufferedImage[] humanoArribaDerG;
+    private static BufferedImage[] humanoDerG;
+    private static BufferedImage[] humanoAbajoDerG;
+    private static BufferedImage[] humanoAbajoG;
+    private static BufferedImage[] humanoAbajoIzqG;
+    
     private static SpriteSheet spriteOgro;
     private static LinkedList<BufferedImage[]> orco = new LinkedList<>();
 
@@ -206,7 +220,79 @@ public final class Recursos {
         humano.add(humanoAbajo);
         humano.add(humanoAbajoIzq);
         // Fin humano
+        
+     // Inicio humano God Mode
+        setSpriteHumanoG(new SpriteSheet(ImageIO.read(new File("recursos//HumanoGodMode.png"))));
+        
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+        
+        humanoIzqG = new BufferedImage[FRAMES];
+        humanoArribaIzqG = new BufferedImage[FRAMES];
+        humanoArribaG = new BufferedImage[FRAMES];
+        humanoArribaDerG = new BufferedImage[FRAMES];
+        humanoDerG = new BufferedImage[FRAMES];
+        humanoAbajoDerG = new BufferedImage[FRAMES];
+        humanoAbajoG = new BufferedImage[FRAMES];
+        humanoAbajoIzqG = new BufferedImage[FRAMES];
 
+        for (int i = 0; i < FRAMES; i++) {
+            humanoIzqG[i] = getSpriteHumanoG().getTile(ANCHO * i, 0, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoArribaIzqG[i] = getSpriteHumanoG().getTile(ANCHO * i, ALTO, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoArribaG[i] = getSpriteHumanoG().getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoArribaDerG[i] = getSpriteHumanoG().getTile(ANCHO * i, ALTO * BIG_THREE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoDerG[i] = getSpriteHumanoG().getTile(ANCHO * i, ALTO * FRAMES, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoAbajoDerG[i] = getSpriteHumanoG().getTile(ANCHO * i, ALTO * BIG_FIVE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoAbajoG[i] = getSpriteHumanoG().getTile(ANCHO * i, ALTO * BIG_SIX, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoAbajoIzqG[i] = getSpriteHumanoG().getTile(ANCHO * i, ALTO * BIG_SEVEN, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        humanoG.add(humanoIzqG);
+        humanoG.add(humanoArribaIzqG);
+        humanoG.add(humanoArribaG);
+        humanoG.add(humanoArribaDerG);
+        humanoG.add(humanoDerG);
+        humanoG.add(humanoAbajoDerG);
+        humanoG.add(humanoAbajoG);
+        humanoG.add(humanoAbajoIzqG);
+        // Fin humano God Mode
+        
         // Inicio Ogro
         spriteOgro = new SpriteSheet(CargadorImagen.cargarImagen("/Ogro.png"));
 
@@ -357,7 +443,10 @@ public final class Recursos {
         personaje.put("Humano", humano);
         personaje.put("Orco", orco);
         personaje.put("Elfo", elfo);
-
+        
+        //cheats
+        personaje.put("HumanoGodMode", humanoG);
+        
         // Inicio Entorno
         setCesped(CargadorImagen.cargarImagen("/Cesped.png"));
         actualizarBarraDeCarga(++elementosCargados, menuCarga);
@@ -1309,6 +1398,20 @@ public final class Recursos {
 	 */
 	public static void setHabilidades(final Map<String, BufferedImage> habilidades) {
 		Recursos.habilidades = habilidades;
+	}
+
+	/**
+	 * @return the spriteHumanoG
+	 */
+	public static SpriteSheet getSpriteHumanoG() {
+		return spriteHumanoG;
+	}
+
+	/**
+	 * @param spriteHumanoG the spriteHumanoG to set
+	 */
+	public static void setSpriteHumanoG(SpriteSheet spriteHumanoG) {
+		Recursos.spriteHumanoG = spriteHumanoG;
 	}
 
 
