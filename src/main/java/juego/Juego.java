@@ -140,7 +140,7 @@ public class Juego implements Runnable {
             pantalla.getCanvas().createBufferStrategy(CONST_3);
             return;
         }
-
+        
         g = bs.getDrawGraphics(); // Permite graficar el buffer mediante g
 
         g.clearRect(0, 0, ancho, alto); // Limpiamos la pantalla
@@ -149,7 +149,7 @@ public class Juego implements Runnable {
         g.setFont(new Font("Book Antiqua", 1, TAM_FONT_OBJ));
 
         if (Estado.getEstado() != null) {
-            Estado.getEstado().graficar(g);
+            Estado.getEstado().graficar(g, cliente.getPaquetePersonaje());
         }
 
         // Fin de graficado de imagenes

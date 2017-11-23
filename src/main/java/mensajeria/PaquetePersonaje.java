@@ -19,26 +19,26 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	/**
 	 * Codigo de modo dios
 	 */
-	private static final int CODE_IDDQD = 1; 
+	public static final int CODE_IDDQD = 1; 
 	
 	/**
 	 * Codigo de modo espectro
 	 */
-	private static final int CODE_NOCLIP = 2; 
+	public static final int CODE_NOCLIP = 2; 
 	
 	/**
 	 * Codigo de modo Hulk
 	 */
-	private static final int CODE_BIGDADDY = 3;
+	public static final int CODE_BIGDADDY = 3;
 	
 	/**
 	 * Codigo de modo KickAss
 	 */
-	private static final int CODE_TINYDADDY = 4;
+	public static final int CODE_TINYDADDY = 4;
 	/**
 	 * Codigo de modo fantasma
 	 */
-	private static final int CODE_WAWIUTB = 5; 
+	public static final int CODE_WAWIUTB = 5; 
 	
     private int id;
     private String idMapa;

@@ -12,6 +12,8 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 
+import org.omg.CORBA.CODESET_INCOMPATIBLE;
+
 import com.google.gson.Gson;
 
 import chat.VentanaContactos;
@@ -27,6 +29,7 @@ import mensajeria.PaqueteBatalla;
 import mensajeria.PaqueteComerciar;
 import mensajeria.PaqueteDeNPC;
 import mensajeria.PaqueteMovimiento;
+import mensajeria.PaquetePersonaje;
 import mundo.Grafo;
 import mundo.Mundo;
 import mundo.Nodo;
@@ -609,10 +612,16 @@ public class Entidad {
      * @param g
      *            the g
      */
-    public void graficarNombre(final Graphics g) {
-        g.setColor(Color.WHITE);
-        g.setFont(new Font("Book Antiqua", Font.BOLD, FONT_SIZE));
-        Pantalla.centerString(g, new java.awt.Rectangle(drawX
+    public void graficarNombre(final Graphics g, PaquetePersonaje pj) {
+    	if (pj.getEstadoCheats(PaquetePersonaje.CODE_WAWIUTB)) {
+    		g.setColor(Color.BLUE);
+    		g.setFont(new Font("Book Antiqua", Font.ITALIC, FONT_SIZE));
+    	} else {
+    		g.setColor(Color.WHITE);
+    		g.setFont(new Font("Book Antiqua", Font.BOLD, FONT_SIZE));
+    	}
+    	
+    	Pantalla.centerString(g, new java.awt.Rectangle(drawX
         		+ BIG_TREINTAYDOS, drawY - BIG_TWENTY, 0, BIG_TEN), nombre);
     }
 

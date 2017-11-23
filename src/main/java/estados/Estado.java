@@ -3,6 +3,7 @@ package estados;
 import java.awt.Graphics;
 
 import juego.Juego;
+import mensajeria.PaquetePersonaje;
 
 /**
  * The Class Estado.
@@ -41,7 +42,7 @@ public abstract class Estado {
      * @param g
      *            the g
      */
-    public abstract void graficar(final Graphics g);
+    public abstract void graficar(final Graphics g, final PaquetePersonaje pj);
 
     /**
      * Sets the estado.

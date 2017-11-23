@@ -123,14 +123,14 @@ public class EstadoJuego extends Estado {
     }
 
     @Override
-    public void graficar(final Graphics g) {
+    public void graficar(final Graphics g, PaquetePersonaje pj) {
         g.drawImage(Recursos.getBackground(), 0, 0, getJuego().getAncho(), getJuego().getAlto(), null);
         mundo.graficar(g);
         //entidadPersonaje.graficar(g);
         graficarPersonajes(g);
         graficarNPCs(g);
         mundo.graficarObstaculos(g);
-        entidadPersonaje.graficarNombre(g);
+        entidadPersonaje.graficarNombre(g, pj);
         g.drawImage(Recursos.getMarco(), 0, 0, getJuego().getAncho(), getJuego().getAlto(), null);
         EstadoDePersonaje.dibujarEstadoDePersonaje(g, POS_X_PER, POS_Y_PER, paquetePersonaje, miniaturaPersonaje);
         g.drawImage(Recursos.getMochila(), POS_X_MOCHILA, POS_Y_MOCHILA, ANCHO_MOCHILA, ALTO_MOCHILA, null);
@@ -157,9 +157,18 @@ public class EstadoJuego extends Estado {
             PaqueteMovimiento actual;
             g.setColor(Color.WHITE);
             g.setFont(new Font("Book Antiqua", Font.PLAIN, TAM_FONT_PER));
+            
             while (it.hasNext()) {
                 key = it.next();
                 actual = ubicacionPersonajes.get(key);
+                
+                if (personajesConectados.get(key).getEstadoCheats(PaquetePersonaje.CODE_WAWIUTB)) {
+            		g.setColor(Color.BLUE);
+            		g.setFont(new Font("Book Antiqua", Font.ITALIC, TAM_FONT_PER));
+            	} else {
+            		g.setColor(Color.WHITE);
+            		g.setFont(new Font("Book Antiqua", Font.BOLD, TAM_FONT_PER));
+            	}
                 
                 if (actual != null && actual.getIdPersonaje() != getJuego().getPersonaje().getId()
                 		&& personajesConectados.get(actual.getIdPersonaje()).getEstado()

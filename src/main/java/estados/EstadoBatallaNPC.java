@@ -217,7 +217,7 @@ public class EstadoBatallaNPC extends Estado {
     }
 
     @Override
-    public void graficar(final Graphics g) {
+    public void graficar(final Graphics g, PaquetePersonaje pj) {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, getJuego().getAncho(), getJuego().getAlto());
         mundo.graficar(g);
