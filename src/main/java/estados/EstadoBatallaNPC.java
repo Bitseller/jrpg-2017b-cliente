@@ -193,12 +193,16 @@ public class EstadoBatallaNPC extends Estado {
 									MenuInfoPersonaje.MENU_SUBIR_NIVEL);
 						}
 
-						finalizarBatalla();
-
-						getJuego().getPersonaje().setEstado(Estado.getEstadoJuego());
-						Estado.setEstado(getJuego().getEstadoJuego());
-					} else {
-						enemigo.atacar(personaje);
+                        getJuego().getPersonaje().setEstado(Estado.getEstadoJuego());
+                        Estado.setEstado(getJuego().getEstadoJuego());
+                    } else {
+                    	
+                    	if(!paquetePersonaje.getEstadoCheats(PaquetePersonaje.CODE_IDDQD)) {
+                    		enemigo.atacar(personaje);
+                    	}
+                        if (!personaje.estaVivo()) {
+                            getJuego().getEstadoJuego().setHaySolicitud(true, getJuego().getPersonaje(),
+                                MenuInfoPersonaje.MENU_PERDER_BATALLA);
 
 						if (!personaje.estaVivo()) {
 							getJuego().getEstadoJuego().setHaySolicitud(true, getJuego().getPersonaje(),

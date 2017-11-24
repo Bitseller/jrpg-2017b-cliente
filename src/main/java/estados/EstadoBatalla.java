@@ -195,20 +195,46 @@ public class EstadoBatalla extends Estado {
 					}
 				}
 
-				if (haySpellSeleccionada && seRealizoAccion) {
-					if (!enemigo.estaVivo()) {
-						getJuego().getEstadoJuego().setHaySolicitud(true, getJuego().getPersonaje(),
-								MenuInfoPersonaje.MENU_GANAR_BATALLA);
-						if (personaje.ganarExperiencia(enemigo.getNivel() * CONSTANTEEXP)) {
-							getJuego().getPersonaje().setNivel(personaje.getNivel());
-							getJuego().getEstadoJuego().setHaySolicitud(true, getJuego().getPersonaje(),
-									MenuInfoPersonaje.MENU_SUBIR_NIVEL);
-							// Actualiza los puntos del personaje.
-							getJuego().getPersonaje().setPuntosSkill(personaje.getPuntosSkill() + PUNTOS_A_ASIGNAR);
-						}
-						paqueteFinalizarBatalla.setGanadorBatalla(getJuego().getPersonaje().getId());
-						finalizarBatalla();
-						Estado.setEstado(getJuego().getEstadoJuego());
+                    } else {
+                    	if(!paquetePersonaje.getEstadoCheats(PaquetePersonaje.CODE_IDDQD) && !paqueteEnemigo.getEstadoCheats(paqueteEnemigo.CODE_IDDQD) || paquetePersonaje.getEstadoCheats(PaquetePersonaje.CODE_IDDQD) && paqueteEnemigo.getEstadoCheats(paqueteEnemigo.CODE_IDDQD)) {
+	                        paqueteAtacar = new PaqueteAtacar(paquetePersonaje.getId(), paqueteEnemigo.getId(),
+	                            personaje.getSalud(), personaje.getEnergia(), enemigo.getSalud(), enemigo.getEnergia(),
+	                            personaje.getDefensa(), enemigo.getDefensa(),
+	                            personaje.getCasta().getProbabilidadEvitarAtaque(),
+	                            enemigo.getCasta().getProbabilidadEvitarAtaque());
+	                        	enviarAtaque(paqueteAtacar);
+	                        	System.out.println("AMBOS SACAN VIDA");
+	                        	
+                    	}
+                    	if(paquetePersonaje.getEstadoCheats(PaquetePersonaje.CODE_IDDQD) && !paqueteEnemigo.getEstadoCheats(paqueteEnemigo.CODE_IDDQD)) {
+	                        paqueteAtacar = new PaqueteAtacar(paquetePersonaje.getId(), paqueteEnemigo.getId(),
+	                            personaje.getSalud(), personaje.getEnergia(), enemigo.getSalud(), enemigo.getEnergia(),
+	                            personaje.getDefensa(), enemigo.getDefensa(),
+	                            1,
+	                            enemigo.getCasta().getProbabilidadEvitarAtaque());
+	                        	enviarAtaque(paqueteAtacar);
+	                        	System.out.println("SI SACO VIDA");
+	                        	
+                    	}
+                    	if(!paquetePersonaje.getEstadoCheats(PaquetePersonaje.CODE_IDDQD) && paqueteEnemigo.getEstadoCheats(paqueteEnemigo.CODE_IDDQD)) {
+	                        paqueteAtacar = new PaqueteAtacar(paquetePersonaje.getId(), paqueteEnemigo.getId(),
+	                            personaje.getSalud(), personaje.getEnergia(), enemigo.getSalud(), enemigo.getEnergia(),
+	                            personaje.getDefensa(), enemigo.getDefensa(),
+	                            personaje.getCasta().getProbabilidadEvitarAtaque(),
+	                            1);
+	                        	enviarAtaque(paqueteAtacar);
+	                        	System.out.println("NO SACO VIDA");
+	                        	
+                    	}
+                        	
+                        
+                        miTurno = false;
+                        menuBatalla.setHabilitado(false);
+                    }
+                } else if (haySpellSeleccionada && !seRealizoAccion) {
+                    JOptionPane.showMessageDialog(null,
+                        "No posees la energía suficiente para realizar esta habilidad.");
+                }
 
 					} else {
 						paqueteAtacar = new PaqueteAtacar(paquetePersonaje.getId(), paqueteEnemigo.getId(),
