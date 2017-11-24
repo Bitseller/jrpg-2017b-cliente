@@ -186,7 +186,6 @@ public class MenuAsignarSkills extends JFrame {
                 int bonusI = puntosInteligencia - puntosInteligenciaInicial;
                 cliente.getPaquetePersonaje().setPuntosSkill(puntosAsignar);
                 cliente.getPaquetePersonaje().useBonus(0, 0, bonusF, bonusD, bonusI);
-                cliente.getPaquetePersonaje().removerBonus();
                 cliente.getPaquetePersonaje().setComando(Comando.ACTUALIZARPERSONAJE);
                 try {
                     cliente.getSalida().writeObject(gson.toJson(cliente.getPaquetePersonaje()));

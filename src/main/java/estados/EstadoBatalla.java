@@ -370,7 +370,6 @@ public class EstadoBatalla extends Estado {
             paqueteEnemigo.setDestreza(enemigo.getDestreza());
             paqueteEnemigo.setFuerza(enemigo.getFuerza());
             paqueteEnemigo.setInteligencia(enemigo.getInteligencia());
-            paqueteEnemigo.removerBonus();
 
             paquetePersonaje.setComando(Comando.ACTUALIZARPERSONAJE);
             paqueteEnemigo.setComando(Comando.ACTUALIZARPERSONAJE);

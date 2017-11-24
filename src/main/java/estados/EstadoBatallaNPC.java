@@ -295,7 +295,6 @@ public class EstadoBatallaNPC extends Estado {
             paquetePersonaje.setInteligencia(personaje.getInteligencia());
 
             paquetePersonaje.setPuntosSkill(personaje.getPuntosSkill());
-            paquetePersonaje.removerBonus();
 
             paquetePersonaje.setComando(Comando.ACTUALIZARPERSONAJE);
             getJuego().getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
