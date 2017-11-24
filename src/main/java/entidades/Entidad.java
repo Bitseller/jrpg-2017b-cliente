@@ -540,7 +540,8 @@ public class Entidad {
             x += dx;
             y += dy;
 
-            verSiNoEstaCercaDeUnNPC();
+            if(!juego.getPersonaje().isInvisible())
+            	verSiNoEstaCercaDeUnNPC();
             // Le envio la posicion
             if (intervaloEnvio == 2) {
                 enviarPosicion();
