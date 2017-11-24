@@ -30,7 +30,7 @@ public final class Recursos {
 	private static final int BIG_THREE = 3;
 	private static final int FRAMES = 4;
     //private static final int ELEMENTOS = 65;
-	private static final int ELEMENTOS = 74;
+	private static final int ELEMENTOS = 100;
     private static final int ANCHOBARRA = 345;
 
     private static final int ANCHO = 256; // Ancho del frame a obtener
@@ -63,6 +63,50 @@ public final class Recursos {
     private static BufferedImage[] humanoAbajoDerG;
     private static BufferedImage[] humanoAbajoG;
     private static BufferedImage[] humanoAbajoIzqG;
+    //Fantasma
+    private static SpriteSheet spriteHumanoF;
+    private static LinkedList<BufferedImage[]> humanoF = new LinkedList<>();
+    private static BufferedImage[] humanoIzqF;
+    private static BufferedImage[] humanoArribaIzqF;
+    private static BufferedImage[] humanoArribaF;
+    private static BufferedImage[] humanoArribaDerF;
+    private static BufferedImage[] humanoDerF;
+    private static BufferedImage[] humanoAbajoDerF;
+    private static BufferedImage[] humanoAbajoF;
+    private static BufferedImage[] humanoAbajoIzqF;
+  //Invisible
+    private static SpriteSheet spriteHumanoI;
+    private static LinkedList<BufferedImage[]> humanoI = new LinkedList<>();
+    private static BufferedImage[] humanoIzqI;
+    private static BufferedImage[] humanoArribaIzqI;
+    private static BufferedImage[] humanoArribaI;
+    private static BufferedImage[] humanoArribaDerI;
+    private static BufferedImage[] humanoDerI;
+    private static BufferedImage[] humanoAbajoDerI;
+    private static BufferedImage[] humanoAbajoI;
+    private static BufferedImage[] humanoAbajoIzqI;
+    //Powerup
+    private static SpriteSheet spriteHumanoB;
+    private static LinkedList<BufferedImage[]> humanoB = new LinkedList<>();
+    private static BufferedImage[] humanoIzqB;
+    private static BufferedImage[] humanoArribaIzqB;
+    private static BufferedImage[] humanoArribaB;
+    private static BufferedImage[] humanoArribaDerB;
+    private static BufferedImage[] humanoDerB;
+    private static BufferedImage[] humanoAbajoDerB;
+    private static BufferedImage[] humanoAbajoB;
+    private static BufferedImage[] humanoAbajoIzqB;
+    //PowerDown
+    private static SpriteSheet spriteHumanoT;
+    private static LinkedList<BufferedImage[]> humanoT = new LinkedList<>();
+    private static BufferedImage[] humanoIzqT;
+    private static BufferedImage[] humanoArribaIzqT;
+    private static BufferedImage[] humanoArribaT;
+    private static BufferedImage[] humanoArribaDerT;
+    private static BufferedImage[] humanoDerT;
+    private static BufferedImage[] humanoAbajoDerT;
+    private static BufferedImage[] humanoAbajoT;
+    private static BufferedImage[] humanoAbajoIzqT;
     
     private static SpriteSheet spriteOgro;
     private static LinkedList<BufferedImage[]> orco = new LinkedList<>();
@@ -75,7 +119,64 @@ public final class Recursos {
     private static BufferedImage[] orcoAbajoDer;
     private static BufferedImage[] orcoAbajo;
     private static BufferedImage[] orcoAbajoIzq;
-
+    
+    //CheatsSprite orco
+    //God Mode
+    private static SpriteSheet spriteOrcoG;
+    private static LinkedList<BufferedImage[]> orcoG = new LinkedList<>();
+    private static BufferedImage[] orcoIzqG;
+    private static BufferedImage[] orcoArribaIzqG;
+    private static BufferedImage[] orcoArribaG;
+    private static BufferedImage[] orcoArribaDerG;
+    private static BufferedImage[] orcoDerG;
+    private static BufferedImage[] orcoAbajoDerG;
+    private static BufferedImage[] orcoAbajoG;
+    private static BufferedImage[] orcoAbajoIzqG;
+    //Fantasma
+    private static SpriteSheet spriteOrcoF;
+    private static LinkedList<BufferedImage[]> orcoF = new LinkedList<>();
+    private static BufferedImage[] orcoIzqF;
+    private static BufferedImage[] orcoArribaIzqF;
+    private static BufferedImage[] orcoArribaF;
+    private static BufferedImage[] orcoArribaDerF;
+    private static BufferedImage[] orcoDerF;
+    private static BufferedImage[] orcoAbajoDerF;
+    private static BufferedImage[] orcoAbajoF;
+    private static BufferedImage[] orcoAbajoIzqF;
+  //Invisible
+    private static SpriteSheet spriteOrcoI;
+    private static LinkedList<BufferedImage[]> orcoI = new LinkedList<>();
+    private static BufferedImage[] orcoIzqI;
+    private static BufferedImage[] orcoArribaIzqI;
+    private static BufferedImage[] orcoArribaI;
+    private static BufferedImage[] orcoArribaDerI;
+    private static BufferedImage[] orcoDerI;
+    private static BufferedImage[] orcoAbajoDerI;
+    private static BufferedImage[] orcoAbajoI;
+    private static BufferedImage[] orcoAbajoIzqI;
+    //Powerup
+    private static SpriteSheet spriteOrcoB;
+    private static LinkedList<BufferedImage[]> orcoB = new LinkedList<>();
+    private static BufferedImage[] orcoIzqB;
+    private static BufferedImage[] orcoArribaIzqB;
+    private static BufferedImage[] orcoArribaB;
+    private static BufferedImage[] orcoArribaDerB;
+    private static BufferedImage[] orcoDerB;
+    private static BufferedImage[] orcoAbajoDerB;
+    private static BufferedImage[] orcoAbajoB;
+    private static BufferedImage[] orcoAbajoIzqB;
+    //PowerDown
+    private static SpriteSheet spriteOrcoT;
+    private static LinkedList<BufferedImage[]> orcoT = new LinkedList<>();
+    private static BufferedImage[] orcoIzqT;
+    private static BufferedImage[] orcoArribaIzqT;
+    private static BufferedImage[] orcoArribaT;
+    private static BufferedImage[] orcoArribaDerT;
+    private static BufferedImage[] orcoDerT;
+    private static BufferedImage[] orcoAbajoDerT;
+    private static BufferedImage[] orcoAbajoT;
+    private static BufferedImage[] orcoAbajoIzqT;
+    
     private static SpriteSheet spriteElfo;
     private static LinkedList<BufferedImage[]> elfo = new LinkedList<>();
     private static BufferedImage[] elfoIzq;
@@ -86,7 +187,64 @@ public final class Recursos {
     private static BufferedImage[] elfoAbajoDer;
     private static BufferedImage[] elfoAbajo;
     private static BufferedImage[] elfoAbajoIzq;
-
+  
+    //CheatsSprite elfo
+    //God Mode
+    private static SpriteSheet spriteElfoG;
+    private static LinkedList<BufferedImage[]> elfoG = new LinkedList<>();
+    private static BufferedImage[] elfoIzqG;
+    private static BufferedImage[] elfoArribaIzqG;
+    private static BufferedImage[] elfoArribaG;
+    private static BufferedImage[] elfoArribaDerG;
+    private static BufferedImage[] elfoDerG;
+    private static BufferedImage[] elfoAbajoDerG;
+    private static BufferedImage[] elfoAbajoG;
+    private static BufferedImage[] elfoAbajoIzqG;
+    //Fantasma
+    private static SpriteSheet spriteElfoF;
+    private static LinkedList<BufferedImage[]> elfoF = new LinkedList<>();
+    private static BufferedImage[] elfoIzqF;
+    private static BufferedImage[] elfoArribaIzqF;
+    private static BufferedImage[] elfoArribaF;
+    private static BufferedImage[] elfoArribaDerF;
+    private static BufferedImage[] elfoDerF;
+    private static BufferedImage[] elfoAbajoDerF;
+    private static BufferedImage[] elfoAbajoF;
+    private static BufferedImage[] elfoAbajoIzqF;
+  //Invisible
+    private static SpriteSheet spriteElfoI;
+    private static LinkedList<BufferedImage[]> elfoI = new LinkedList<>();
+    private static BufferedImage[] elfoIzqI;
+    private static BufferedImage[] elfoArribaIzqI;
+    private static BufferedImage[] elfoArribaI;
+    private static BufferedImage[] elfoArribaDerI;
+    private static BufferedImage[] elfoDerI;
+    private static BufferedImage[] elfoAbajoDerI;
+    private static BufferedImage[] elfoAbajoI;
+    private static BufferedImage[] elfoAbajoIzqI;
+    //Powerup
+    private static SpriteSheet spriteElfoB;
+    private static LinkedList<BufferedImage[]> elfoB = new LinkedList<>();
+    private static BufferedImage[] elfoIzqB;
+    private static BufferedImage[] elfoArribaIzqB;
+    private static BufferedImage[] elfoArribaB;
+    private static BufferedImage[] elfoArribaDerB;
+    private static BufferedImage[] elfoDerB;
+    private static BufferedImage[] elfoAbajoDerB;
+    private static BufferedImage[] elfoAbajoB;
+    private static BufferedImage[] elfoAbajoIzqB;
+    //PowerDown
+    private static SpriteSheet spriteElfoT;
+    private static LinkedList<BufferedImage[]> elfoT = new LinkedList<>();
+    private static BufferedImage[] elfoIzqT;
+    private static BufferedImage[] elfoArribaIzqT;
+    private static BufferedImage[] elfoArribaT;
+    private static BufferedImage[] elfoArribaDerT;
+    private static BufferedImage[] elfoDerT;
+    private static BufferedImage[] elfoAbajoDerT;
+    private static BufferedImage[] elfoAbajoT;
+    private static BufferedImage[] elfoAbajoIzqT;
+    
     ///NPC
     private static BufferedImage monstruo;
 
@@ -293,6 +451,295 @@ public final class Recursos {
         humanoG.add(humanoAbajoIzqG);
         // Fin humano God Mode
         
+        // Inicio humano Fantasma
+        setSpriteHumanoF(new SpriteSheet(ImageIO.read(new File("recursos//HumanoFantasma.png"))));
+        
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+        
+        humanoIzqF = new BufferedImage[FRAMES];
+        humanoArribaIzqF = new BufferedImage[FRAMES];
+        humanoArribaF = new BufferedImage[FRAMES];
+        humanoArribaDerF = new BufferedImage[FRAMES];
+        humanoDerF = new BufferedImage[FRAMES];
+        humanoAbajoDerF = new BufferedImage[FRAMES];
+        humanoAbajoF = new BufferedImage[FRAMES];
+        humanoAbajoIzqF = new BufferedImage[FRAMES];
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoIzqF[i] = getSpriteHumanoF().getTile(ANCHO * i, 0, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoArribaIzqF[i] = getSpriteHumanoF().getTile(ANCHO * i, ALTO, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoArribaF[i] = getSpriteHumanoF().getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoArribaDerF[i] = getSpriteHumanoF().getTile(ANCHO * i, ALTO * BIG_THREE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoDerF[i] = getSpriteHumanoF().getTile(ANCHO * i, ALTO * FRAMES, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoAbajoDerF[i] = getSpriteHumanoF().getTile(ANCHO * i, ALTO * BIG_FIVE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoAbajoF[i] = getSpriteHumanoF().getTile(ANCHO * i, ALTO * BIG_SIX, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoAbajoIzqF[i] = getSpriteHumanoF().getTile(ANCHO * i, ALTO * BIG_SEVEN, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        humanoF.add(humanoIzqF);
+        humanoF.add(humanoArribaIzqF);
+        humanoF.add(humanoArribaF);
+        humanoF.add(humanoArribaDerF);
+        humanoF.add(humanoDerF);
+        humanoF.add(humanoAbajoDerF);
+        humanoF.add(humanoAbajoF);
+        humanoF.add(humanoAbajoIzqF);
+        // Fin humano fantasma
+        
+        // Inicio humano Invisible
+        setSpriteHumanoI(new SpriteSheet(ImageIO.read(new File("recursos//HumanoInvisible.png"))));
+        
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+        
+        humanoIzqI = new BufferedImage[FRAMES];
+        humanoArribaIzqI = new BufferedImage[FRAMES];
+        humanoArribaI = new BufferedImage[FRAMES];
+        humanoArribaDerI = new BufferedImage[FRAMES];
+        humanoDerI = new BufferedImage[FRAMES];
+        humanoAbajoDerI = new BufferedImage[FRAMES];
+        humanoAbajoI = new BufferedImage[FRAMES];
+        humanoAbajoIzqI = new BufferedImage[FRAMES];
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoIzqI[i] = getSpriteHumanoI().getTile(ANCHO * i, 0, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoArribaIzqI[i] = getSpriteHumanoI().getTile(ANCHO * i, ALTO, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoArribaI[i] = getSpriteHumanoI().getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoArribaDerI[i] = getSpriteHumanoI().getTile(ANCHO * i, ALTO * BIG_THREE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoDerI[i] = getSpriteHumanoI().getTile(ANCHO * i, ALTO * FRAMES, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoAbajoDerI[i] = getSpriteHumanoI().getTile(ANCHO * i, ALTO * BIG_FIVE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoAbajoI[i] = getSpriteHumanoI().getTile(ANCHO * i, ALTO * BIG_SIX, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoAbajoIzqI[i] = getSpriteHumanoI().getTile(ANCHO * i, ALTO * BIG_SEVEN, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        humanoI.add(humanoIzqI);
+        humanoI.add(humanoArribaIzqI);
+        humanoI.add(humanoArribaI);
+        humanoI.add(humanoArribaDerI);
+        humanoI.add(humanoDerI);
+        humanoI.add(humanoAbajoDerI);
+        humanoI.add(humanoAbajoI);
+        humanoI.add(humanoAbajoIzqI);
+        // Fin humano Invisible
+        
+        // Inicio humano PowerUp
+        setSpriteHumanoB(new SpriteSheet(ImageIO.read(new File("recursos//HumanoBig.png"))));
+        
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+        
+        humanoIzqB = new BufferedImage[FRAMES];
+        humanoArribaIzqB = new BufferedImage[FRAMES];
+        humanoArribaB = new BufferedImage[FRAMES];
+        humanoArribaDerB = new BufferedImage[FRAMES];
+        humanoDerB = new BufferedImage[FRAMES];
+        humanoAbajoDerB = new BufferedImage[FRAMES];
+        humanoAbajoB = new BufferedImage[FRAMES];
+        humanoAbajoIzqB = new BufferedImage[FRAMES];
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoIzqB[i] = getSpriteHumanoB().getTile(ANCHO * i, 0, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoArribaIzqB[i] = getSpriteHumanoB().getTile(ANCHO * i, ALTO, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoArribaB[i] = getSpriteHumanoB().getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoArribaDerB[i] = getSpriteHumanoB().getTile(ANCHO * i, ALTO * BIG_THREE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoDerB[i] = getSpriteHumanoB().getTile(ANCHO * i, ALTO * FRAMES, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoAbajoDerB[i] = getSpriteHumanoB().getTile(ANCHO * i, ALTO * BIG_FIVE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoAbajoB[i] = getSpriteHumanoB().getTile(ANCHO * i, ALTO * BIG_SIX, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoAbajoIzqB[i] = getSpriteHumanoB().getTile(ANCHO * i, ALTO * BIG_SEVEN, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        humanoB.add(humanoIzqB);
+        humanoB.add(humanoArribaIzqB);
+        humanoB.add(humanoArribaB);
+        humanoB.add(humanoArribaDerB);
+        humanoB.add(humanoDerB);
+        humanoB.add(humanoAbajoDerB);
+        humanoB.add(humanoAbajoB);
+        humanoB.add(humanoAbajoIzqB);
+        // Fin humano PowerUp
+        
+        // Inicio humano PowerDown
+        setSpriteHumanoT(new SpriteSheet(ImageIO.read(new File("recursos//HumanoTiny.png"))));
+        
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+        
+        humanoIzqT = new BufferedImage[FRAMES];
+        humanoArribaIzqT = new BufferedImage[FRAMES];
+        humanoArribaT = new BufferedImage[FRAMES];
+        humanoArribaDerT = new BufferedImage[FRAMES];
+        humanoDerT = new BufferedImage[FRAMES];
+        humanoAbajoDerT = new BufferedImage[FRAMES];
+        humanoAbajoT = new BufferedImage[FRAMES];
+        humanoAbajoIzqT = new BufferedImage[FRAMES];
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoIzqT[i] = getSpriteHumanoT().getTile(ANCHO * i, 0, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoArribaIzqT[i] = getSpriteHumanoT().getTile(ANCHO * i, ALTO, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoArribaT[i] = getSpriteHumanoT().getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoArribaDerT[i] = getSpriteHumanoT().getTile(ANCHO * i, ALTO * BIG_THREE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoDerT[i] = getSpriteHumanoT().getTile(ANCHO * i, ALTO * FRAMES, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoAbajoDerT[i] = getSpriteHumanoT().getTile(ANCHO * i, ALTO * BIG_FIVE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoAbajoT[i] = getSpriteHumanoT().getTile(ANCHO * i, ALTO * BIG_SIX, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            humanoAbajoIzqT[i] = getSpriteHumanoT().getTile(ANCHO * i, ALTO * BIG_SEVEN, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        humanoT.add(humanoIzqT);
+        humanoT.add(humanoArribaIzqT);
+        humanoT.add(humanoArribaT);
+        humanoT.add(humanoArribaDerT);
+        humanoT.add(humanoDerT);
+        humanoT.add(humanoAbajoDerT);
+        humanoT.add(humanoAbajoT);
+        humanoT.add(humanoAbajoIzqT);
+        // Fin humano PowerDown
+        
+        
         // Inicio Ogro
         spriteOgro = new SpriteSheet(CargadorImagen.cargarImagen("/Ogro.png"));
 
@@ -365,7 +812,367 @@ public final class Recursos {
         orco.add(orcoAbajoIzq);
 
         // Fin Ogro
+        
+     // Inicio orco God Mode
+        setSpriteOrcoG(new SpriteSheet(ImageIO.read(new File("recursos//OgroGodMode.png"))));
+        
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+        
+        orcoIzqG = new BufferedImage[FRAMES];
+        orcoArribaIzqG = new BufferedImage[FRAMES];
+        orcoArribaG = new BufferedImage[FRAMES];
+        orcoArribaDerG = new BufferedImage[FRAMES];
+        orcoDerG = new BufferedImage[FRAMES];
+        orcoAbajoDerG = new BufferedImage[FRAMES];
+        orcoAbajoG = new BufferedImage[FRAMES];
+        orcoAbajoIzqG = new BufferedImage[FRAMES];
 
+        for (int i = 0; i < FRAMES; i++) {
+            orcoIzqG[i] = getSpriteOrcoG().getTile(ANCHO * i, 0, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoArribaIzqG[i] = getSpriteOrcoG().getTile(ANCHO * i, ALTO, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoArribaG[i] = getSpriteOrcoG().getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoArribaDerG[i] = getSpriteOrcoG().getTile(ANCHO * i, ALTO * BIG_THREE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoDerG[i] = getSpriteOrcoG().getTile(ANCHO * i, ALTO * FRAMES, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoAbajoDerG[i] = getSpriteOrcoG().getTile(ANCHO * i, ALTO * BIG_FIVE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoAbajoG[i] = getSpriteOrcoG().getTile(ANCHO * i, ALTO * BIG_SIX, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoAbajoIzqG[i] = getSpriteOrcoG().getTile(ANCHO * i, ALTO * BIG_SEVEN, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        orcoG.add(orcoIzqG);
+        orcoG.add(orcoArribaIzqG);
+        orcoG.add(orcoArribaG);
+        orcoG.add(orcoArribaDerG);
+        orcoG.add(orcoDerG);
+        orcoG.add(orcoAbajoDerG);
+        orcoG.add(orcoAbajoG);
+        orcoG.add(orcoAbajoIzqG);
+        // Fin orco God Mode
+        
+        // Inicio orco Fantasma
+        setSpriteOrcoF(new SpriteSheet(ImageIO.read(new File("recursos//OgroFantasma.png"))));
+        
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+        
+        orcoIzqF = new BufferedImage[FRAMES];
+        orcoArribaIzqF = new BufferedImage[FRAMES];
+        orcoArribaF = new BufferedImage[FRAMES];
+        orcoArribaDerF = new BufferedImage[FRAMES];
+        orcoDerF = new BufferedImage[FRAMES];
+        orcoAbajoDerF = new BufferedImage[FRAMES];
+        orcoAbajoF = new BufferedImage[FRAMES];
+        orcoAbajoIzqF = new BufferedImage[FRAMES];
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoIzqF[i] = getSpriteOrcoF().getTile(ANCHO * i, 0, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoArribaIzqF[i] = getSpriteOrcoF().getTile(ANCHO * i, ALTO, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoArribaF[i] = getSpriteOrcoF().getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoArribaDerF[i] = getSpriteOrcoF().getTile(ANCHO * i, ALTO * BIG_THREE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoDerF[i] = getSpriteOrcoF().getTile(ANCHO * i, ALTO * FRAMES, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoAbajoDerF[i] = getSpriteOrcoF().getTile(ANCHO * i, ALTO * BIG_FIVE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoAbajoF[i] = getSpriteOrcoF().getTile(ANCHO * i, ALTO * BIG_SIX, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoAbajoIzqF[i] = getSpriteOrcoF().getTile(ANCHO * i, ALTO * BIG_SEVEN, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        orcoF.add(orcoIzqF);
+        orcoF.add(orcoArribaIzqF);
+        orcoF.add(orcoArribaF);
+        orcoF.add(orcoArribaDerF);
+        orcoF.add(orcoDerF);
+        orcoF.add(orcoAbajoDerF);
+        orcoF.add(orcoAbajoF);
+        orcoF.add(orcoAbajoIzqF);
+        // Fin orco fantasma
+        
+        // Inicio orco Invisible
+        setSpriteOrcoI(new SpriteSheet(ImageIO.read(new File("recursos//OgroInvisible.png"))));
+        
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+        
+        orcoIzqI = new BufferedImage[FRAMES];
+        orcoArribaIzqI = new BufferedImage[FRAMES];
+        orcoArribaI = new BufferedImage[FRAMES];
+        orcoArribaDerI = new BufferedImage[FRAMES];
+        orcoDerI = new BufferedImage[FRAMES];
+        orcoAbajoDerI = new BufferedImage[FRAMES];
+        orcoAbajoI = new BufferedImage[FRAMES];
+        orcoAbajoIzqI = new BufferedImage[FRAMES];
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoIzqI[i] = getSpriteOrcoI().getTile(ANCHO * i, 0, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoArribaIzqI[i] = getSpriteOrcoI().getTile(ANCHO * i, ALTO, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoArribaI[i] = getSpriteOrcoI().getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoArribaDerI[i] = getSpriteOrcoI().getTile(ANCHO * i, ALTO * BIG_THREE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoDerI[i] = getSpriteOrcoI().getTile(ANCHO * i, ALTO * FRAMES, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoAbajoDerI[i] = getSpriteOrcoI().getTile(ANCHO * i, ALTO * BIG_FIVE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoAbajoI[i] = getSpriteOrcoI().getTile(ANCHO * i, ALTO * BIG_SIX, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoAbajoIzqI[i] = getSpriteOrcoI().getTile(ANCHO * i, ALTO * BIG_SEVEN, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        orcoI.add(orcoIzqI);
+        orcoI.add(orcoArribaIzqI);
+        orcoI.add(orcoArribaI);
+        orcoI.add(orcoArribaDerI);
+        orcoI.add(orcoDerI);
+        orcoI.add(orcoAbajoDerI);
+        orcoI.add(orcoAbajoI);
+        orcoI.add(orcoAbajoIzqI);
+        // Fin orco Invisible
+        
+        // Inicio orco PowerUp
+        setSpriteOrcoB(new SpriteSheet(ImageIO.read(new File("recursos//OgroBig.png"))));
+        
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+        
+        orcoIzqB = new BufferedImage[FRAMES];
+        orcoArribaIzqB = new BufferedImage[FRAMES];
+        orcoArribaB = new BufferedImage[FRAMES];
+        orcoArribaDerB = new BufferedImage[FRAMES];
+        orcoDerB = new BufferedImage[FRAMES];
+        orcoAbajoDerB = new BufferedImage[FRAMES];
+        orcoAbajoB = new BufferedImage[FRAMES];
+        orcoAbajoIzqB = new BufferedImage[FRAMES];
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoIzqB[i] = getSpriteOrcoB().getTile(ANCHO * i, 0, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoArribaIzqB[i] = getSpriteOrcoB().getTile(ANCHO * i, ALTO, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoArribaB[i] = getSpriteOrcoB().getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoArribaDerB[i] = getSpriteOrcoB().getTile(ANCHO * i, ALTO * BIG_THREE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoDerB[i] = getSpriteOrcoB().getTile(ANCHO * i, ALTO * FRAMES, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoAbajoDerB[i] = getSpriteOrcoB().getTile(ANCHO * i, ALTO * BIG_FIVE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoAbajoB[i] = getSpriteOrcoB().getTile(ANCHO * i, ALTO * BIG_SIX, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoAbajoIzqB[i] = getSpriteOrcoB().getTile(ANCHO * i, ALTO * BIG_SEVEN, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        orcoB.add(orcoIzqB);
+        orcoB.add(orcoArribaIzqB);
+        orcoB.add(orcoArribaB);
+        orcoB.add(orcoArribaDerB);
+        orcoB.add(orcoDerB);
+        orcoB.add(orcoAbajoDerB);
+        orcoB.add(orcoAbajoB);
+        orcoB.add(orcoAbajoIzqB);
+        // Fin orco PowerUp
+        
+        // Inicio orco PowerDown
+        setSpriteOrcoT(new SpriteSheet(ImageIO.read(new File("recursos//OgroTiny.png"))));
+        
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+        
+        orcoIzqT = new BufferedImage[FRAMES];
+        orcoArribaIzqT = new BufferedImage[FRAMES];
+        orcoArribaT = new BufferedImage[FRAMES];
+        orcoArribaDerT = new BufferedImage[FRAMES];
+        orcoDerT = new BufferedImage[FRAMES];
+        orcoAbajoDerT = new BufferedImage[FRAMES];
+        orcoAbajoT = new BufferedImage[FRAMES];
+        orcoAbajoIzqT = new BufferedImage[FRAMES];
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoIzqT[i] = getSpriteOrcoT().getTile(ANCHO * i, 0, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoArribaIzqT[i] = getSpriteOrcoT().getTile(ANCHO * i, ALTO, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoArribaT[i] = getSpriteOrcoT().getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoArribaDerT[i] = getSpriteOrcoT().getTile(ANCHO * i, ALTO * BIG_THREE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoDerT[i] = getSpriteOrcoT().getTile(ANCHO * i, ALTO * FRAMES, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoAbajoDerT[i] = getSpriteOrcoT().getTile(ANCHO * i, ALTO * BIG_FIVE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoAbajoT[i] = getSpriteOrcoT().getTile(ANCHO * i, ALTO * BIG_SIX, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            orcoAbajoIzqT[i] = getSpriteOrcoT().getTile(ANCHO * i, ALTO * BIG_SEVEN, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        orcoT.add(orcoIzqT);
+        orcoT.add(orcoArribaIzqT);
+        orcoT.add(orcoArribaT);
+        orcoT.add(orcoArribaDerT);
+        orcoT.add(orcoDerT);
+        orcoT.add(orcoAbajoDerT);
+        orcoT.add(orcoAbajoT);
+        orcoT.add(orcoAbajoIzqT);
+        // Fin orco PowerDown
+        
         // Inicio Elfo
         spriteElfo = new SpriteSheet(CargadorImagen.cargarImagen("/elfo2.png"));
 
@@ -438,7 +1245,368 @@ public final class Recursos {
         elfo.add(elfoAbajoIzq);
 
         // Fin Elfo
+        
+        
+     // Inicio elfo God Mode
+        setSpriteElfoG(new SpriteSheet(ImageIO.read(new File("recursos//elfo2GodMode.png"))));
+        
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+        
+        elfoIzqG = new BufferedImage[FRAMES];
+        elfoArribaIzqG = new BufferedImage[FRAMES];
+        elfoArribaG = new BufferedImage[FRAMES];
+        elfoArribaDerG = new BufferedImage[FRAMES];
+        elfoDerG = new BufferedImage[FRAMES];
+        elfoAbajoDerG = new BufferedImage[FRAMES];
+        elfoAbajoG = new BufferedImage[FRAMES];
+        elfoAbajoIzqG = new BufferedImage[FRAMES];
 
+        for (int i = 0; i < FRAMES; i++) {
+            elfoIzqG[i] = getSpriteElfoG().getTile(ANCHO * i, 0, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoArribaIzqG[i] = getSpriteElfoG().getTile(ANCHO * i, ALTO, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoArribaG[i] = getSpriteElfoG().getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoArribaDerG[i] = getSpriteElfoG().getTile(ANCHO * i, ALTO * BIG_THREE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoDerG[i] = getSpriteElfoG().getTile(ANCHO * i, ALTO * FRAMES, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoAbajoDerG[i] = getSpriteElfoG().getTile(ANCHO * i, ALTO * BIG_FIVE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoAbajoG[i] = getSpriteElfoG().getTile(ANCHO * i, ALTO * BIG_SIX, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoAbajoIzqG[i] = getSpriteElfoG().getTile(ANCHO * i, ALTO * BIG_SEVEN, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        elfoG.add(elfoIzqG);
+        elfoG.add(elfoArribaIzqG);
+        elfoG.add(elfoArribaG);
+        elfoG.add(elfoArribaDerG);
+        elfoG.add(elfoDerG);
+        elfoG.add(elfoAbajoDerG);
+        elfoG.add(elfoAbajoG);
+        elfoG.add(elfoAbajoIzqG);
+        // Fin elfo God Mode
+        
+        // Inicio elfo Fantasma
+        setSpriteElfoF(new SpriteSheet(ImageIO.read(new File("recursos//elfo2Fantasma.png"))));
+        
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+        
+        elfoIzqF = new BufferedImage[FRAMES];
+        elfoArribaIzqF = new BufferedImage[FRAMES];
+        elfoArribaF = new BufferedImage[FRAMES];
+        elfoArribaDerF = new BufferedImage[FRAMES];
+        elfoDerF = new BufferedImage[FRAMES];
+        elfoAbajoDerF = new BufferedImage[FRAMES];
+        elfoAbajoF = new BufferedImage[FRAMES];
+        elfoAbajoIzqF = new BufferedImage[FRAMES];
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoIzqF[i] = getSpriteElfoF().getTile(ANCHO * i, 0, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoArribaIzqF[i] = getSpriteElfoF().getTile(ANCHO * i, ALTO, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoArribaF[i] = getSpriteElfoF().getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoArribaDerF[i] = getSpriteElfoF().getTile(ANCHO * i, ALTO * BIG_THREE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoDerF[i] = getSpriteElfoF().getTile(ANCHO * i, ALTO * FRAMES, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoAbajoDerF[i] = getSpriteElfoF().getTile(ANCHO * i, ALTO * BIG_FIVE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoAbajoF[i] = getSpriteElfoF().getTile(ANCHO * i, ALTO * BIG_SIX, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoAbajoIzqF[i] = getSpriteElfoF().getTile(ANCHO * i, ALTO * BIG_SEVEN, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        elfoF.add(elfoIzqF);
+        elfoF.add(elfoArribaIzqF);
+        elfoF.add(elfoArribaF);
+        elfoF.add(elfoArribaDerF);
+        elfoF.add(elfoDerF);
+        elfoF.add(elfoAbajoDerF);
+        elfoF.add(elfoAbajoF);
+        elfoF.add(elfoAbajoIzqF);
+        // Fin elfo fantasma
+        
+        // Inicio elfo Invisible
+        setSpriteElfoI(new SpriteSheet(ImageIO.read(new File("recursos//elfo2Invisible.png"))));
+        
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+        
+        elfoIzqI = new BufferedImage[FRAMES];
+        elfoArribaIzqI = new BufferedImage[FRAMES];
+        elfoArribaI = new BufferedImage[FRAMES];
+        elfoArribaDerI = new BufferedImage[FRAMES];
+        elfoDerI = new BufferedImage[FRAMES];
+        elfoAbajoDerI = new BufferedImage[FRAMES];
+        elfoAbajoI = new BufferedImage[FRAMES];
+        elfoAbajoIzqI = new BufferedImage[FRAMES];
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoIzqI[i] = getSpriteElfoI().getTile(ANCHO * i, 0, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoArribaIzqI[i] = getSpriteElfoI().getTile(ANCHO * i, ALTO, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoArribaI[i] = getSpriteElfoI().getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoArribaDerI[i] = getSpriteElfoI().getTile(ANCHO * i, ALTO * BIG_THREE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoDerI[i] = getSpriteElfoI().getTile(ANCHO * i, ALTO * FRAMES, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoAbajoDerI[i] = getSpriteElfoI().getTile(ANCHO * i, ALTO * BIG_FIVE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoAbajoI[i] = getSpriteElfoI().getTile(ANCHO * i, ALTO * BIG_SIX, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoAbajoIzqI[i] = getSpriteElfoI().getTile(ANCHO * i, ALTO * BIG_SEVEN, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        elfoI.add(elfoIzqI);
+        elfoI.add(elfoArribaIzqI);
+        elfoI.add(elfoArribaI);
+        elfoI.add(elfoArribaDerI);
+        elfoI.add(elfoDerI);
+        elfoI.add(elfoAbajoDerI);
+        elfoI.add(elfoAbajoI);
+        elfoI.add(elfoAbajoIzqI);
+        // Fin elfo Invisible
+        
+        // Inicio elfo PowerUp
+        setSpriteElfoB(new SpriteSheet(ImageIO.read(new File("recursos//elfo2Big.png"))));
+        
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+        
+        elfoIzqB = new BufferedImage[FRAMES];
+        elfoArribaIzqB = new BufferedImage[FRAMES];
+        elfoArribaB = new BufferedImage[FRAMES];
+        elfoArribaDerB = new BufferedImage[FRAMES];
+        elfoDerB = new BufferedImage[FRAMES];
+        elfoAbajoDerB = new BufferedImage[FRAMES];
+        elfoAbajoB = new BufferedImage[FRAMES];
+        elfoAbajoIzqB = new BufferedImage[FRAMES];
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoIzqB[i] = getSpriteElfoB().getTile(ANCHO * i, 0, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoArribaIzqB[i] = getSpriteElfoB().getTile(ANCHO * i, ALTO, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoArribaB[i] = getSpriteElfoB().getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoArribaDerB[i] = getSpriteElfoB().getTile(ANCHO * i, ALTO * BIG_THREE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoDerB[i] = getSpriteElfoB().getTile(ANCHO * i, ALTO * FRAMES, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoAbajoDerB[i] = getSpriteElfoB().getTile(ANCHO * i, ALTO * BIG_FIVE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoAbajoB[i] = getSpriteElfoB().getTile(ANCHO * i, ALTO * BIG_SIX, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoAbajoIzqB[i] = getSpriteElfoB().getTile(ANCHO * i, ALTO * BIG_SEVEN, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        elfoB.add(elfoIzqB);
+        elfoB.add(elfoArribaIzqB);
+        elfoB.add(elfoArribaB);
+        elfoB.add(elfoArribaDerB);
+        elfoB.add(elfoDerB);
+        elfoB.add(elfoAbajoDerB);
+        elfoB.add(elfoAbajoB);
+        elfoB.add(elfoAbajoIzqB);
+        // Fin elfo PowerUp
+        
+        // Inicio elfo PowerDown
+        setSpriteElfoT(new SpriteSheet(ImageIO.read(new File("recursos//elfo2Tiny.png"))));
+        
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+        
+        elfoIzqT = new BufferedImage[FRAMES];
+        elfoArribaIzqT = new BufferedImage[FRAMES];
+        elfoArribaT = new BufferedImage[FRAMES];
+        elfoArribaDerT = new BufferedImage[FRAMES];
+        elfoDerT = new BufferedImage[FRAMES];
+        elfoAbajoDerT = new BufferedImage[FRAMES];
+        elfoAbajoT = new BufferedImage[FRAMES];
+        elfoAbajoIzqT = new BufferedImage[FRAMES];
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoIzqT[i] = getSpriteElfoT().getTile(ANCHO * i, 0, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoArribaIzqT[i] = getSpriteElfoT().getTile(ANCHO * i, ALTO, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoArribaT[i] = getSpriteElfoT().getTile(ANCHO * i, ALTO * 2, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoArribaDerT[i] = getSpriteElfoT().getTile(ANCHO * i, ALTO * BIG_THREE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoDerT[i] = getSpriteElfoT().getTile(ANCHO * i, ALTO * FRAMES, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoAbajoDerT[i] = getSpriteElfoT().getTile(ANCHO * i, ALTO * BIG_FIVE, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoAbajoT[i] = getSpriteElfoT().getTile(ANCHO * i, ALTO * BIG_SIX, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < FRAMES; i++) {
+            elfoAbajoIzqT[i] = getSpriteElfoT().getTile(ANCHO * i, ALTO * BIG_SEVEN, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        elfoT.add(elfoIzqT);
+        elfoT.add(elfoArribaIzqT);
+        elfoT.add(elfoArribaT);
+        elfoT.add(elfoArribaDerT);
+        elfoT.add(elfoDerT);
+        elfoT.add(elfoAbajoDerT);
+        elfoT.add(elfoAbajoT);
+        elfoT.add(elfoAbajoIzqT);
+        // Fin elfo PowerDown
+        
         // Agrego los pj al hash
         personaje.put("Humano", humano);
         personaje.put("Orco", orco);
@@ -446,6 +1614,20 @@ public final class Recursos {
         
         //cheats
         personaje.put("HumanoGodMode", humanoG);
+        personaje.put("HumanoFantasma", humanoF);
+        personaje.put("HumanoInvisible", humanoI);
+        personaje.put("HumanoBig", humanoB);
+        personaje.put("HumanoTiny", humanoT);
+        personaje.put("OrcoGodMode", orcoG);
+        personaje.put("OrcoFantasma", orcoF);
+        personaje.put("OrcoInvisible", orcoI);
+        personaje.put("OrcoBig", orcoB);
+        personaje.put("OrcoTiny", orcoT);
+        personaje.put("ElfoGodMode", elfoG);
+        personaje.put("ElfoFantasma", elfoF);
+        personaje.put("ElfoInvisible", elfoI);
+        personaje.put("ElfoBig", elfoB);
+        personaje.put("ElfoTiny", elfoT);
         
         // Inicio Entorno
         setCesped(CargadorImagen.cargarImagen("/Cesped.png"));
@@ -1412,6 +2594,230 @@ public final class Recursos {
 	 */
 	public static void setSpriteHumanoG(SpriteSheet spriteHumanoG) {
 		Recursos.spriteHumanoG = spriteHumanoG;
+	}
+
+	/**
+	 * @return the spriteHumanoF
+	 */
+	public static SpriteSheet getSpriteHumanoF() {
+		return spriteHumanoF;
+	}
+
+	/**
+	 * @param spriteHumanoF the spriteHumanoF to set
+	 */
+	public static void setSpriteHumanoF(SpriteSheet spriteHumanoF) {
+		Recursos.spriteHumanoF = spriteHumanoF;
+	}
+
+	/**
+	 * @return the spriteHumanoI
+	 */
+	public static SpriteSheet getSpriteHumanoI() {
+		return spriteHumanoI;
+	}
+
+	/**
+	 * @param spriteHumanoI the spriteHumanoI to set
+	 */
+	public static void setSpriteHumanoI(SpriteSheet spriteHumanoI) {
+		Recursos.spriteHumanoI = spriteHumanoI;
+	}
+
+	/**
+	 * @return the spriteHumanoT
+	 */
+	public static SpriteSheet getSpriteHumanoT() {
+		return spriteHumanoT;
+	}
+
+	/**
+	 * @param spriteHumanoT the spriteHumanoT to set
+	 */
+	public static void setSpriteHumanoT(SpriteSheet spriteHumanoT) {
+		Recursos.spriteHumanoT = spriteHumanoT;
+	}
+
+	/**
+	 * @return the humanoB
+	 */
+	public static LinkedList<BufferedImage[]> getHumanoB() {
+		return humanoB;
+	}
+
+	/**
+	 * @param humanoB the humanoB to set
+	 */
+	public static void setHumanoB(LinkedList<BufferedImage[]> humanoB) {
+		Recursos.humanoB = humanoB;
+	}
+
+	/**
+	 * @return the spriteHumanoB
+	 */
+	public static SpriteSheet getSpriteHumanoB() {
+		return spriteHumanoB;
+	}
+
+	/**
+	 * @param spriteHumanoB the spriteHumanoB to set
+	 */
+	public static void setSpriteHumanoB(SpriteSheet spriteHumanoB) {
+		Recursos.spriteHumanoB = spriteHumanoB;
+	}
+
+	/**
+	 * @return the humanoT
+	 */
+	public static LinkedList<BufferedImage[]> getHumanoT() {
+		return humanoT;
+	}
+
+	/**
+	 * @param humanoT the humanoT to set
+	 */
+	public static void setHumanoT(LinkedList<BufferedImage[]> humanoT) {
+		Recursos.humanoT = humanoT;
+	}
+
+	/**
+	 * @return the spriteElfoT
+	 */
+	public static SpriteSheet getSpriteElfoT() {
+		return spriteElfoT;
+	}
+
+	/**
+	 * @param spriteElfoT the spriteElfoT to set
+	 */
+	public static void setSpriteElfoT(SpriteSheet spriteElfoT) {
+		Recursos.spriteElfoT = spriteElfoT;
+	}
+
+	/**
+	 * @return the spriteElfoB
+	 */
+	public static SpriteSheet getSpriteElfoB() {
+		return spriteElfoB;
+	}
+
+	/**
+	 * @param spriteElfoB the spriteElfoB to set
+	 */
+	public static void setSpriteElfoB(SpriteSheet spriteElfoB) {
+		Recursos.spriteElfoB = spriteElfoB;
+	}
+
+	/**
+	 * @return the spriteElfoI
+	 */
+	public static SpriteSheet getSpriteElfoI() {
+		return spriteElfoI;
+	}
+
+	/**
+	 * @param spriteElfoI the spriteElfoI to set
+	 */
+	public static void setSpriteElfoI(SpriteSheet spriteElfoI) {
+		Recursos.spriteElfoI = spriteElfoI;
+	}
+
+	/**
+	 * @return the spriteElfoF
+	 */
+	public static SpriteSheet getSpriteElfoF() {
+		return spriteElfoF;
+	}
+
+	/**
+	 * @param spriteElfoF the spriteElfoF to set
+	 */
+	public static void setSpriteElfoF(SpriteSheet spriteElfoF) {
+		Recursos.spriteElfoF = spriteElfoF;
+	}
+
+	/**
+	 * @return the spriteElfoG
+	 */
+	public static SpriteSheet getSpriteElfoG() {
+		return spriteElfoG;
+	}
+
+	/**
+	 * @param spriteElfoG the spriteElfoG to set
+	 */
+	public static void setSpriteElfoG(SpriteSheet spriteElfoG) {
+		Recursos.spriteElfoG = spriteElfoG;
+	}
+
+	/**
+	 * @return the spriteOrcoT
+	 */
+	public static SpriteSheet getSpriteOrcoT() {
+		return spriteOrcoT;
+	}
+
+	/**
+	 * @param spriteOrcoT the spriteOrcoT to set
+	 */
+	public static void setSpriteOrcoT(SpriteSheet spriteOrcoT) {
+		Recursos.spriteOrcoT = spriteOrcoT;
+	}
+
+	/**
+	 * @return the spriteOrcoB
+	 */
+	public static SpriteSheet getSpriteOrcoB() {
+		return spriteOrcoB;
+	}
+
+	/**
+	 * @param spriteOrcoB the spriteOrcoB to set
+	 */
+	public static void setSpriteOrcoB(SpriteSheet spriteOrcoB) {
+		Recursos.spriteOrcoB = spriteOrcoB;
+	}
+
+	/**
+	 * @return the spriteOrcoI
+	 */
+	public static SpriteSheet getSpriteOrcoI() {
+		return spriteOrcoI;
+	}
+
+	/**
+	 * @param spriteOrcoI the spriteOrcoI to set
+	 */
+	public static void setSpriteOrcoI(SpriteSheet spriteOrcoI) {
+		Recursos.spriteOrcoI = spriteOrcoI;
+	}
+
+	/**
+	 * @return the spriteOrcoF
+	 */
+	public static SpriteSheet getSpriteOrcoF() {
+		return spriteOrcoF;
+	}
+
+	/**
+	 * @param spriteOrcoF the spriteOrcoF to set
+	 */
+	public static void setSpriteOrcoF(SpriteSheet spriteOrcoF) {
+		Recursos.spriteOrcoF = spriteOrcoF;
+	}
+
+	/**
+	 * @return the spriteOrcoG
+	 */
+	public static SpriteSheet getSpriteOrcoG() {
+		return spriteOrcoG;
+	}
+
+	/**
+	 * @param spriteOrcoG the spriteOrcoG to set
+	 */
+	public static void setSpriteOrcoG(SpriteSheet spriteOrcoG) {
+		Recursos.spriteOrcoG = spriteOrcoG;
 	}
 
 
