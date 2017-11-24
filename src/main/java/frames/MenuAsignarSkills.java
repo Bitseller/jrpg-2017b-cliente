@@ -138,7 +138,7 @@ public class MenuAsignarSkills extends JFrame {
         final JLabel labelFuerza = new JLabel("");
         labelFuerza.setForeground(Color.WHITE);
         labelFuerza.setHorizontalAlignment(SwingConstants.CENTER);
-        labelFuerza.setText(String.valueOf(puntosFuerzaInicial));
+        labelFuerza.setText(String.valueOf(puntosFuerzaInicial * cliente.getPaquetePersonaje().getMultiplicadorCheat()));
 
         final JLabel labelDestreza = new JLabel("");
         labelDestreza.setForeground(Color.WHITE);

@@ -46,6 +46,12 @@ public class MiChat extends JFrame {
     private final Gson gson = new Gson();
     private final JLabel background = new JLabel(new ImageIcon("recursos//background.jpg"));
     private DefaultCaret caret;
+    
+    /**
+     * Valor por el cual se multiplica la fuerza en cheat Bigdaddy y Tinydaddy
+     */
+    private static final int DOBLEFUERZA = 2;
+    
     /**
      * Posicion X desde donde se crea el frame
      */
@@ -338,26 +344,16 @@ public class MiChat extends JFrame {
 		    		}
 		    		break;
 		    	case "/bigdaddy":
-		    		if (!pjCheater.getEstadoCheats(cheatCode)){
-		    			pjCheater.setEstadoCheats(cheatCode, true);
-		    			setAnim("Big");
-		    			chat.append("\n/bigdaddy ON");
-		    		}else {
-		    			setAnim("");
-		    			pjCheater.setEstadoCheats(cheatCode, false);
-		    			chat.append("\n/bigdaddy OFF");
-		    		}
+		    		pjCheater.setMultiplicadorCheat(pjCheater.getMultiplicadorCheat() * DOBLEFUERZA);
+		    		pjCheater.setEstadoCheats(cheatCode, true);
+		    		setAnim("Big");
+		    		chat.append("\n/bigdaddy ON");
 		    		break;
 		    	case "/tinydaddy":
-		    		if (!pjCheater.getEstadoCheats(cheatCode)){
-		    			pjCheater.setEstadoCheats(cheatCode, true);
-		    			setAnim("Tiny");
-		    			chat.append("\n/tinydaddy ON");
-		    		}else {
-		    			setAnim("");
-		    			pjCheater.setEstadoCheats(cheatCode, false);
-		    			chat.append("\n/tinydaddy OFF");
-		    		}
+		    		pjCheater.setMultiplicadorCheat(pjCheater.getMultiplicadorCheat() / DOBLEFUERZA);
+		    		pjCheater.setEstadoCheats(cheatCode, true);
+		    		setAnim("Tiny");
+		    		chat.append("\n/tinydaddy ON");
 		    		break;
 		    	case "/war aint what it used to be":
 		    		if(!pjCheater.getEstadoCheats(cheatCode)) {

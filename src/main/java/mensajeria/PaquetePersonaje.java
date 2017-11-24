@@ -54,6 +54,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
     private int nivel = 1;
     private int experiencia;
     private int puntosSkill;
+    private int multiplicadorCheat = 1;
     private ArrayList<Item> items = new ArrayList<Item>();
     
     //Paquete de cheats dentro del personaje
@@ -751,5 +752,13 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
             this.items.add(item);
         }
     }
+
+	public int getMultiplicadorCheat() {
+		return multiplicadorCheat;
+	}
+
+	public void setMultiplicadorCheat(int multiplicadorCheat) {
+		this.multiplicadorCheat = multiplicadorCheat;
+	}
 
 }

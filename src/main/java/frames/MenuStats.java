@@ -310,7 +310,7 @@ public class MenuStats extends JFrame {
         saludPj.setForeground(Color.WHITE);
         saludPj.setHorizontalAlignment(SwingConstants.RIGHT);
 
-        fzaPj = new JLabel(String.valueOf(paquetePersonaje.getFuerza()));
+        fzaPj = new JLabel(String.valueOf(paquetePersonaje.getFuerza() * paquetePersonaje.getMultiplicadorCheat()));
         fzaPj.setForeground(Color.WHITE);
         fzaPj.setHorizontalAlignment(SwingConstants.RIGHT);
 
