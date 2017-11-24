@@ -27,6 +27,8 @@ import juego.Juego;
 import juego.Pantalla;
 import mensajeria.Comando;
 import mensajeria.PaquetePersonaje;
+import recursos.Recursos;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -314,42 +316,45 @@ public class MiChat extends JFrame {
 		    		if (!pjCheater.getEstadoCheats(cheatCode)){
 		    			
 		    			pjCheater.setEstadoCheats(cheatCode, true);
+		    			setAnim("GodMode");
 		    			chat.append("\n/iddqd ON");
 		    		}else {
-		    			
 		    			pjCheater.setEstadoCheats(cheatCode, false);
+		    			setAnim("");
 		    			chat.append("\n/iddqd OFF");
 		    		}
 		    		break;
 		    	case "/noclip":
 		    		if (!pjCheater.getEstadoCheats(cheatCode)) {
 		    			juego.setCheatAtravezarParedes(true);
+		    			setAnim("Fantasma");
 		    			pjCheater.setEstadoCheats(cheatCode, true);
 		    			chat.append("\n/noclip ON");
 		    		}else {
 		    			juego.setCheatAtravezarParedes(false);
+		    			setAnim("");
 		    			pjCheater.setEstadoCheats(cheatCode, false);
 		    			chat.append("\n/noclip OFF");
 		    		}
 		    		break;
 		    	case "/bigdaddy":
 		    		if (!pjCheater.getEstadoCheats(cheatCode)){
-		    			
 		    			pjCheater.setEstadoCheats(cheatCode, true);
+		    			setAnim("Big");
 		    			chat.append("\n/bigdaddy ON");
 		    		}else {
-		    			
+		    			setAnim("");
 		    			pjCheater.setEstadoCheats(cheatCode, false);
 		    			chat.append("\n/bigdaddy OFF");
 		    		}
 		    		break;
 		    	case "/tinydaddy":
 		    		if (!pjCheater.getEstadoCheats(cheatCode)){
-		    			
 		    			pjCheater.setEstadoCheats(cheatCode, true);
+		    			setAnim("Tiny");
 		    			chat.append("\n/tinydaddy ON");
 		    		}else {
-		    			
+		    			setAnim("");
 		    			pjCheater.setEstadoCheats(cheatCode, false);
 		    			chat.append("\n/tinydaddy OFF");
 		    		}
@@ -357,11 +362,15 @@ public class MiChat extends JFrame {
 		    	case "/war aint what it used to be":
 		    		if(!pjCheater.getEstadoCheats(cheatCode)) {
 		        		pjCheater.setInvisible(true);
+		    			//juego.getEstadoJuego().getEntidadPersonaje().setPatronAnimaciones(Recursos.getPersonaje().get(juego.getPersonaje().getRaza()+"Invisible"));
+		    			setAnim("Invisible");
 		        		pjCheater.setEstadoCheats(cheatCode, true);
 		        		chat.append("\n/wawiutb ON");
 		        		}
 		        	else {
 		        		pjCheater.setInvisible(false);
+		    			//juego.getEstadoJuego().getEntidadPersonaje().setPatronAnimaciones(Recursos.getPersonaje().get(juego.getPersonaje().getRaza()));
+		    			setAnim("");
 		        		pjCheater.setEstadoCheats(cheatCode, false);
 		        		chat.append("\n/wawiutb OFF");
 		        	}
@@ -374,6 +383,11 @@ public class MiChat extends JFrame {
 				e.printStackTrace();
 			}
 	    }
+    }
+    
+    private void setAnim(String tipo)
+    {
+    	juego.getEstadoJuego().getEntidadPersonaje().setPatronAnimaciones(Recursos.getPersonaje().get(juego.getPersonaje().getRaza()+tipo));
     }
     
     /**

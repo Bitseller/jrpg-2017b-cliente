@@ -99,9 +99,9 @@ public class EstadoJuego extends Estado {
         super(client.getJuego());
         mundo = new Mundo(client.getJuego(), "recursos/" + getMundo() + ".txt", "recursos/" + getMundo() + ".txt");
         paquetePersonaje = client.getJuego().getPersonaje();
-        entidadPersonaje = new Entidad(client, mundo, ANCHO_ENTIDAD_PER, ALTO_ENTIDAD_PER,
+        setEntidadPersonaje(new Entidad(client, mundo, ANCHO_ENTIDAD_PER, ALTO_ENTIDAD_PER,
         		client.getJuego().getPersonaje().getNombre(), 0, 0,
-        		Recursos.getPersonaje().get(client.getJuego().getPersonaje().getRaza()), VEL_ANIMACION);
+        		Recursos.getPersonaje().get(client.getJuego().getPersonaje().getRaza()), VEL_ANIMACION));
         miniaturaPersonaje = Recursos.getPersonaje().get(paquetePersonaje.getRaza()).get(POS_LISTA)[0];
 
         try {
@@ -119,7 +119,7 @@ public class EstadoJuego extends Estado {
     @Override
     public void actualizar() {
         mundo.actualizar();
-        entidadPersonaje.actualizar();
+        getEntidadPersonaje().actualizar();
     }
 
     @Override
@@ -130,7 +130,7 @@ public class EstadoJuego extends Estado {
         graficarPersonajes(g);
         graficarNPCs(g);
         mundo.graficarObstaculos(g);
-        entidadPersonaje.graficarNombre(g, pj);
+        getEntidadPersonaje().graficarNombre(g, pj);
         g.drawImage(Recursos.getMarco(), 0, 0, getJuego().getAncho(), getJuego().getAlto(), null);
         EstadoDePersonaje.dibujarEstadoDePersonaje(g, POS_X_PER, POS_Y_PER, paquetePersonaje, miniaturaPersonaje);
         g.drawImage(Recursos.getMochila(), POS_X_MOCHILA, POS_Y_MOCHILA, ANCHO_MOCHILA, ALTO_MOCHILA, null);
@@ -228,7 +228,7 @@ public class EstadoJuego extends Estado {
      * @return the personaje
      */
     public Entidad getPersonaje() {
-        return entidadPersonaje;
+        return getEntidadPersonaje();
     }
 
     /**
@@ -295,4 +295,18 @@ public class EstadoJuego extends Estado {
     public boolean esEstadoDeJuego() {
         return true;
     }
+
+	/**
+	 * @return the entidadPersonaje
+	 */
+	public Entidad getEntidadPersonaje() {
+		return entidadPersonaje;
+	}
+
+	/**
+	 * @param entidadPersonaje the entidadPersonaje to set
+	 */
+	public void setEntidadPersonaje(Entidad entidadPersonaje) {
+		this.entidadPersonaje = entidadPersonaje;
+	}
 }

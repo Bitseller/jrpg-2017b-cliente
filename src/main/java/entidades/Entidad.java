@@ -113,16 +113,16 @@ public class Entidad {
     private static final int REFERENCIA_Y = 32;
 
     // Animaciones
-    private final LinkedList<Animacion> patronAnimaciones;
-    private final Animacion moverIzq;
-    private final Animacion moverDer;
-    private final Animacion moverArriba;
-    private final Animacion moverArribaIzq;
-    private final Animacion moverAbajoDer;
-    private final Animacion moverAbajo;
-    private final Animacion moverAbajoIzq;
-    private final Animacion moverArribaDer;
-
+    private LinkedList<Animacion> patronAnimaciones;
+    private Animacion moverIzq;
+    private Animacion moverDer;
+    private Animacion moverArriba;
+    private Animacion moverArribaIzq;
+    private Animacion moverAbajoDer;
+    private Animacion moverAbajo;
+    private Animacion moverAbajoIzq;
+    private Animacion moverArribaDer;
+    private int velAnimacion;
     private final Gson gson = new Gson();
     private int intervaloEnvio = 0;
 
@@ -179,6 +179,7 @@ public class Entidad {
         this.alto = alto;
         this.nombre = nombre;
         this.mundo = mundo;
+        this.velAnimacion = velAnimacion;
         xOffset = ancho / 2;
         yOffset = alto / 2;
         x = (int) (spawnX / REFERENCIA_X) * REFERENCIA_X;
@@ -223,14 +224,14 @@ public class Entidad {
         moverAbajoIzq = new Animacion(velAnimacion, animaciones.get(SEVENTH_TILE));
 
         // Cargo una lista con las animaciones.
-        patronAnimaciones.add(moverIzq);
-        patronAnimaciones.add(moverDer);
-        patronAnimaciones.add(moverArriba);
-        patronAnimaciones.add(moverArribaIzq);
-        patronAnimaciones.add(moverArribaDer);
-        patronAnimaciones.add(moverAbajo);
-        patronAnimaciones.add(moverAbajoIzq);
-        patronAnimaciones.add(moverAbajoDer);
+        getPatronAnimaciones().add(moverIzq);
+        getPatronAnimaciones().add(moverDer);
+        getPatronAnimaciones().add(moverArriba);
+        getPatronAnimaciones().add(moverArribaIzq);
+        getPatronAnimaciones().add(moverArribaDer);
+        getPatronAnimaciones().add(moverAbajo);
+        getPatronAnimaciones().add(moverAbajoIzq);
+        getPatronAnimaciones().add(moverAbajoDer);
 
         // Cargo una lista con los movimientos patrones.
         movimientos.add(HORIZONTAL_IZQ);
@@ -255,11 +256,11 @@ public class Entidad {
     public void actualizar() {
 
         if (enMovimiento) {
-            for (Animacion patron : patronAnimaciones) {
+            for (Animacion patron : getPatronAnimaciones()) {
                 patron.actualizar();
             }
         } else {
-            for (Animacion patron : patronAnimaciones) {
+            for (Animacion patron : getPatronAnimaciones()) {
                 patron.reset();
             }
         }
@@ -638,7 +639,7 @@ public class Entidad {
         // Ambas listas entan sincronizadas según sus valores, por lo que el
         // indice i es el mismo para ambas.
         if (i < movimientos.size()) {
-            return patronAnimaciones.get(i).getFrameActual();
+            return getPatronAnimaciones().get(i).getFrameActual();
         }
 
         return Recursos.getOrco().get(SIXTH_TILE)[0];
@@ -666,7 +667,7 @@ public class Entidad {
         // Ambas listas entan sincronizadas según sus valores, por lo que el
         // indice i es el mismo para ambas.
         if (i < movimientos.size()) {
-            return patronAnimaciones.get(i).getFrame();
+            return getPatronAnimaciones().get(i).getFrame();
         }
 
         return 0;
@@ -930,4 +931,35 @@ public class Entidad {
     public int getYOffset() {
         return yOffset;
     }
+
+	/**
+	 * @return the patronAnimaciones
+	 */
+	public LinkedList<Animacion> getPatronAnimaciones() {
+		return patronAnimaciones;
+	}
+	
+	public void setPatronAnimaciones(LinkedList<BufferedImage[]> animaciones) {
+        patronAnimaciones = new LinkedList<Animacion>();
+
+        moverIzq = new Animacion(velAnimacion, animaciones.get(0));
+        moverArribaIzq = new Animacion(velAnimacion, animaciones.get(1));
+        moverArriba = new Animacion(velAnimacion, animaciones.get(2));
+        moverArribaDer = new Animacion(velAnimacion, animaciones.get(THIRD_TILE));
+        moverDer = new Animacion(velAnimacion, animaciones.get(FOURTH_TILE));
+        moverAbajoDer = new Animacion(velAnimacion, animaciones.get(FIFTH_TILE));
+        moverAbajo = new Animacion(velAnimacion, animaciones.get(SIXTH_TILE));
+        moverAbajoIzq = new Animacion(velAnimacion, animaciones.get(SEVENTH_TILE));
+
+        // Cargo una lista con las animaciones.
+        patronAnimaciones.add(moverIzq);
+        patronAnimaciones.add(moverDer);
+        patronAnimaciones.add(moverArriba);
+        patronAnimaciones.add(moverArribaIzq);
+        patronAnimaciones.add(moverArribaDer);
+        patronAnimaciones.add(moverAbajo);
+        patronAnimaciones.add(moverAbajoIzq);
+        patronAnimaciones.add(moverAbajoDer);
+	}
+	
 }

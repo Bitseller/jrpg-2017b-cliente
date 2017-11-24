@@ -94,7 +94,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
         cheatMap.put("/iddqd", CODE_IDDQD);
         cheatMap.put("/noclip", CODE_NOCLIP);
         cheatMap.put("/bigdaddy", CODE_BIGDADDY);
-        cheatMap.put("/tinnydaddy", CODE_TINYDADDY);
+        cheatMap.put("/tinydaddy", CODE_TINYDADDY);
         cheatMap.put("/war aint what it used to be", CODE_WAWIUTB);
 
         //Todos los cheats se inicializan en false.
