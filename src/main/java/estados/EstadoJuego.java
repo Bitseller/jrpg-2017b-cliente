@@ -181,11 +181,21 @@ public class EstadoJuego extends Estado {
                         + DESPL_X_RECT_PER), (int) (actual.getPosY() - getJuego().getCamara().getyOffset()
                         - DESPL_Y_RECT_PER), 0, ALTO_RECT_PER),
                     	personajesConectados.get(actual.getIdPersonaje()).getNombre());
-                    g.drawImage(Recursos.getPersonaje().get(personajesConectados.get(actual.getIdPersonaje())
-                    		.getRaza()).get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX()
-                    		  - getJuego().getCamara().getxOffset()), (int) (actual.getPosY()
-                    				- getJuego().getCamara().getyOffset()), ANCHO_PERSONAJE,
-                              ALTO_PERSONAJE, null);
+                    if(!personajesConectados.get(key).isInvisible()) {
+                    	g.drawImage(Recursos.getPersonaje().get(personajesConectados.get(actual.getIdPersonaje())
+                        		.getRaza()).get(actual.getDireccion())[actual.getFrame()], (int) (actual.getPosX()
+                        		  - getJuego().getCamara().getxOffset()), (int) (actual.getPosY()
+                        				- getJuego().getCamara().getyOffset()), ANCHO_PERSONAJE,
+                                  ALTO_PERSONAJE, null);
+                    }
+                    else {
+                    	g.drawImage(Recursos.getPersonaje().get(personajesConectados.get(actual.getIdPersonaje())
+                        		.getRaza()+"Invisible").get(actual.getDireccion())[actual.getFrame()],
+                    			(int) (actual.getPosX() - getJuego().getCamara().getxOffset()), (int) (actual.getPosY()
+                        				- getJuego().getCamara().getyOffset()), ANCHO_PERSONAJE,
+                                  ALTO_PERSONAJE, null);
+                    }
+                    
                 }
             }
         }
