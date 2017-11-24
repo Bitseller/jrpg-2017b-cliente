@@ -237,8 +237,8 @@ public class MiChat extends JFrame {
             public void actionPerformed(final ActionEvent e) {
                 if (!texto.getText().equals("")) {
                 	if( texto.getText().charAt(0) == '/' ){
-                		chat.append("HOLA MUNDO");
-                		texto.setText("");
+                		//chat.append("HOLA MUNDO");
+                		//texto.setText("");
                 		ponerCheat(texto.getText());
                 	}
                 	else{

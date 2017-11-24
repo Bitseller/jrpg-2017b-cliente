@@ -30,7 +30,7 @@ public final class Recursos {
 	private static final int BIG_THREE = 3;
 	private static final int FRAMES = 4;
     //private static final int ELEMENTOS = 65;
-	private static final int ELEMENTOS = 100;
+	private static final int ELEMENTOS = 190;
     private static final int ANCHOBARRA = 345;
 
     private static final int ANCHO = 256; // Ancho del frame a obtener
