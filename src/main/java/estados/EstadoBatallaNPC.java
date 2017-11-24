@@ -189,8 +189,10 @@ public class EstadoBatallaNPC extends Estado {
                         getJuego().getPersonaje().setEstado(Estado.getEstadoJuego());
                         Estado.setEstado(getJuego().getEstadoJuego());
                     } else {
-                        enemigo.atacar(personaje);
-
+                    	
+                    	if(!paquetePersonaje.getEstadoCheats(PaquetePersonaje.CODE_IDDQD)) {
+                    		enemigo.atacar(personaje);
+                    	}
                         if (!personaje.estaVivo()) {
                             getJuego().getEstadoJuego().setHaySolicitud(true, getJuego().getPersonaje(),
                                 MenuInfoPersonaje.MENU_PERDER_BATALLA);

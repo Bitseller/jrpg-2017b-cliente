@@ -197,12 +197,38 @@ public class EstadoBatalla extends Estado {
                         Estado.setEstado(getJuego().getEstadoJuego());
 
                     } else {
-                        paqueteAtacar = new PaqueteAtacar(paquetePersonaje.getId(), paqueteEnemigo.getId(),
-                            personaje.getSalud(), personaje.getEnergia(), enemigo.getSalud(), enemigo.getEnergia(),
-                            personaje.getDefensa(), enemigo.getDefensa(),
-                            personaje.getCasta().getProbabilidadEvitarAtaque(),
-                            enemigo.getCasta().getProbabilidadEvitarAtaque());
-                        enviarAtaque(paqueteAtacar);
+                    	if(!paquetePersonaje.getEstadoCheats(PaquetePersonaje.CODE_IDDQD) && !paqueteEnemigo.getEstadoCheats(paqueteEnemigo.CODE_IDDQD) || paquetePersonaje.getEstadoCheats(PaquetePersonaje.CODE_IDDQD) && paqueteEnemigo.getEstadoCheats(paqueteEnemigo.CODE_IDDQD)) {
+	                        paqueteAtacar = new PaqueteAtacar(paquetePersonaje.getId(), paqueteEnemigo.getId(),
+	                            personaje.getSalud(), personaje.getEnergia(), enemigo.getSalud(), enemigo.getEnergia(),
+	                            personaje.getDefensa(), enemigo.getDefensa(),
+	                            personaje.getCasta().getProbabilidadEvitarAtaque(),
+	                            enemigo.getCasta().getProbabilidadEvitarAtaque());
+	                        	enviarAtaque(paqueteAtacar);
+	                        	System.out.println("AMBOS SACAN VIDA");
+	                        	
+                    	}
+                    	if(paquetePersonaje.getEstadoCheats(PaquetePersonaje.CODE_IDDQD) && !paqueteEnemigo.getEstadoCheats(paqueteEnemigo.CODE_IDDQD)) {
+	                        paqueteAtacar = new PaqueteAtacar(paquetePersonaje.getId(), paqueteEnemigo.getId(),
+	                            personaje.getSalud(), personaje.getEnergia(), enemigo.getSalud(), enemigo.getEnergia(),
+	                            personaje.getDefensa(), enemigo.getDefensa(),
+	                            1,
+	                            enemigo.getCasta().getProbabilidadEvitarAtaque());
+	                        	enviarAtaque(paqueteAtacar);
+	                        	System.out.println("SI SACO VIDA");
+	                        	
+                    	}
+                    	if(!paquetePersonaje.getEstadoCheats(PaquetePersonaje.CODE_IDDQD) && paqueteEnemigo.getEstadoCheats(paqueteEnemigo.CODE_IDDQD)) {
+	                        paqueteAtacar = new PaqueteAtacar(paquetePersonaje.getId(), paqueteEnemigo.getId(),
+	                            personaje.getSalud(), personaje.getEnergia(), enemigo.getSalud(), enemigo.getEnergia(),
+	                            personaje.getDefensa(), enemigo.getDefensa(),
+	                            personaje.getCasta().getProbabilidadEvitarAtaque(),
+	                            1);
+	                        	enviarAtaque(paqueteAtacar);
+	                        	System.out.println("NO SACO VIDA");
+	                        	
+                    	}
+                        	
+                        
                         miTurno = false;
                         menuBatalla.setHabilitado(false);
                     }
