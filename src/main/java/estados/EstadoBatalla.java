@@ -81,6 +81,8 @@ public class EstadoBatalla extends Estado {
     private BufferedImage miniaturaEnemigo;
 
     private MenuBatalla menuBatalla;
+	private String razaEnemigo;
+	private String razaPersonaje;
 
     /**
      * Instantiates a new estado batalla.
@@ -102,8 +104,21 @@ public class EstadoBatalla extends Estado {
 
         menuBatalla = new MenuBatalla(miTurno, personaje);
 
-        miniaturaEnemigo = Recursos.getPersonaje().get(enemigo.getNombreRaza()).get(ENEMIGOBUFFERED)[0];
-        miniaturaPersonaje = Recursos.getPersonaje().get(personaje.getNombreRaza()).get(PERSONAJEBUFFERED)[0];
+        razaEnemigo = enemigo.getNombreRaza();
+		if (paqueteEnemigo.getEstadoCheats(PaquetePersonaje.CODE_IDDQD).equals(true)) {
+			razaEnemigo += "GodMode";
+		} else if (paqueteEnemigo.getEstadoCheats(PaquetePersonaje.CODE_TINYDADDY).equals(true)) {
+			razaEnemigo += "TinyDaddy";
+		}
+		miniaturaEnemigo = Recursos.getPersonaje().get(razaEnemigo).get(ENEMIGOBUFFERED)[0];
+
+		razaPersonaje = personaje.getNombreRaza();
+		if (paquetePersonaje.getEstadoCheats(PaquetePersonaje.CODE_IDDQD).equals(true)) {
+			razaPersonaje += "GodMode";
+		} else if (paquetePersonaje.getEstadoCheats(PaquetePersonaje.CODE_TINYDADDY).equals(true)) {
+			razaPersonaje += "TinyDaddy";
+		}
+		miniaturaPersonaje = Recursos.getPersonaje().get(razaPersonaje).get(PERSONAJEBUFFERED)[0];
 
         paqueteFinalizarBatalla = new PaqueteFinalizarBatalla();
         paqueteFinalizarBatalla.setId(personaje.getIdPersonaje());
@@ -244,25 +259,23 @@ public class EstadoBatalla extends Estado {
     }
 
     @Override
-    public void graficar(final Graphics g, PaquetePersonaje pj) {
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, getJuego().getAncho(), getJuego().getAlto());
-        mundo.graficar(g);
+	public void graficar(final Graphics g, PaquetePersonaje pj) {
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, getJuego().getAncho(), getJuego().getAlto());
+		mundo.graficar(g);
 
-        g.drawImage(Recursos.getPersonaje().get(paquetePersonaje.getRaza()).get(PERSONAJEBUFFERESPALDA)[0]
-        		, X_PERSONAJE, Y_PERSONAJE, W_PERSONAJE, H_PERSONAJE, null);
-        g.drawImage(Recursos.getPersonaje().get(paqueteEnemigo.getRaza()).get(ENEMIGOBUFFERFRENTE)[0]
-        		, X_ENEMIGO, Y_ENEMIGO, W_ENEMIGO, H_ENEMIGO, null);
+		g.drawImage(Recursos.getPersonaje().get(razaPersonaje).get(PERSONAJEBUFFERESPALDA)[0], X_PERSONAJE, Y_PERSONAJE,
+				W_PERSONAJE, H_PERSONAJE, null);
+		g.drawImage(Recursos.getPersonaje().get(razaEnemigo).get(ENEMIGOBUFFERFRENTE)[0], X_ENEMIGO, Y_ENEMIGO,
+				W_ENEMIGO, H_ENEMIGO, null);
 
-        mundo.graficarObstaculos(g);
-        menuBatalla.graficar(g);
+		mundo.graficarObstaculos(g);
+		menuBatalla.graficar(g);
 
-        g.setColor(Color.GREEN);
+		g.setColor(Color.GREEN);
 
-        EstadoDePersonaje.dibujarEstadoDePersonaje(g, X_ESTADO_PJ, Y_ESTADO_PJ
-        		, personaje, miniaturaPersonaje);
-        EstadoDePersonaje.dibujarEstadoDePersonaje(g, X_ESTADO_ENEMIGO, Y_ESTADO_ENEMIGO
-        		, enemigo, miniaturaEnemigo);
+		EstadoDePersonaje.dibujarEstadoDePersonaje(g, X_ESTADO_PJ, Y_ESTADO_PJ, personaje, miniaturaPersonaje);
+		EstadoDePersonaje.dibujarEstadoDePersonaje(g, X_ESTADO_ENEMIGO, Y_ESTADO_ENEMIGO, enemigo, miniaturaEnemigo);
 
     }
 

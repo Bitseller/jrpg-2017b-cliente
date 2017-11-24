@@ -76,6 +76,7 @@ public class EstadoBatallaNPC extends Estado {
     private BufferedImage miniaturaNPC;
 
     private MenuBatalla menuBatalla;
+	private String razaPersonaje;
 	/**
      * Instantiates a new estado batalla NPC.
      *
@@ -97,8 +98,16 @@ public class EstadoBatallaNPC extends Estado {
         menuBatalla = new MenuBatalla(miTurno, personaje);
 
         miniaturaNPC = Recursos.getMonstruo();
-        miniaturaPersonaje = Recursos.getPersonaje().get(personaje.getNombreRaza()).get(PERSONAJEBUFFERED)[0];
-
+        //miniaturaPersonaje = Recursos.getPersonaje().get(personaje.getNombreRaza()).get(PERSONAJEBUFFERED)[0];
+    	razaPersonaje = personaje.getNombreRaza();
+		if (paquetePersonaje.getEstadoCheats(PaquetePersonaje.CODE_IDDQD).equals(true)) {
+			razaPersonaje += "GodMode";
+		} else if (paquetePersonaje.getEstadoCheats(PaquetePersonaje.CODE_TINYDADDY).equals(true)) {
+			razaPersonaje += "TinyDaddy";
+		}
+		miniaturaPersonaje = Recursos.getPersonaje().get(razaPersonaje).get(PERSONAJEBUFFERED)[0];
+        
+        
         paqueteFinalizarBatalla = new PaqueteFinalizarBatalla();
         paqueteFinalizarBatalla.setId(personaje.getIdPersonaje());
         paqueteFinalizarBatalla.setIdEnemigo(paqueteEnemigo.getId());
@@ -219,24 +228,24 @@ public class EstadoBatallaNPC extends Estado {
     }
 
     @Override
-    public void graficar(final Graphics g, PaquetePersonaje pj) {
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, getJuego().getAncho(), getJuego().getAlto());
-        mundo.graficar(g);
+	public void graficar(final Graphics g, PaquetePersonaje pj) {
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, getJuego().getAncho(), getJuego().getAlto());
+		mundo.graficar(g);
 
-        g.drawImage(Recursos.getPersonaje().get(paquetePersonaje.getRaza())
-        		.get(PERSONAJEBUFFERESPALDA)[0], X_PERSONAJE, Y_PERSONAJE
-        		, W_PERSONAJE, H_PERSONAJE, null);
-        g.drawImage(Recursos.getMonstruo(), X_ENEMIGO, Y_ENEMIGO, H_ENEMIGO, W_ENEMIGO, null);
+		g.drawImage(Recursos.getPersonaje().get(razaPersonaje).get(PERSONAJEBUFFERESPALDA)[0], X_PERSONAJE,
+				Y_PERSONAJE, W_PERSONAJE, H_PERSONAJE, null);
+		g.drawImage(Recursos.getMonstruo(), X_ENEMIGO, Y_ENEMIGO, H_ENEMIGO, W_ENEMIGO, null);
 
-        mundo.graficarObstaculos(g);
-        menuBatalla.graficar(g);
+		mundo.graficarObstaculos(g);
+		menuBatalla.graficar(g);
 
-        g.setColor(Color.GREEN);
+		g.setColor(Color.GREEN);
 
-        EstadoDePersonaje.dibujarEstadoDePersonaje(g, X_ESTADO_PJ, Y_ESTADO_PJ, personaje, miniaturaPersonaje);
-        EstadoDeNPC.dibujarEstadoDeNPC(g, X_ESTADO_ENEMIGO, Y_ESTADO_ENEMIGO, enemigo, miniaturaNPC);
-    }
+		EstadoDePersonaje.dibujarEstadoDePersonaje(g, X_ESTADO_PJ, Y_ESTADO_PJ, personaje, miniaturaPersonaje);
+		EstadoDeNPC.dibujarEstadoDeNPC(g, X_ESTADO_ENEMIGO, Y_ESTADO_ENEMIGO, enemigo, miniaturaNPC);
+	}
+
 
     /**
      * Crear personajes.
