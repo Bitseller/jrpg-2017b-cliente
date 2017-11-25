@@ -25,7 +25,7 @@ public class Trueque extends ComandosEscucha {
         paqueteComerciar = getGson().fromJson(getCadenaLeida(), PaqueteComerciar.class);
         Personaje pj = null;
 
-        juego.getCliente().getPaquetePersonaje().removerBonus();
+        //juego.getCliente().getPaquetePersonaje().removerBonus();
 
         String nombre = juego.getCliente().getPaquetePersonaje().getNombre();
         int salud = juego.getCliente().getPaquetePersonaje().getSaludTope();

@@ -19,7 +19,9 @@ public class InicioSesion extends ComandosCliente {
             cliente.getPaqueteUsuario().setInicioSesion(true);
 
             // Recibo el paquete personaje con los datos
-            cliente.setPaquetePersonaje(getGson().fromJson(getCadenaLeida(), PaquetePersonaje.class));
+            PaquetePersonaje p = getGson().fromJson(getCadenaLeida(), PaquetePersonaje.class);
+            //p.ponerBonus();
+            cliente.setPaquetePersonaje(p);
 
         } else {
             if (paquete.getMensaje().equals(Paquete.msjFracaso)) {
