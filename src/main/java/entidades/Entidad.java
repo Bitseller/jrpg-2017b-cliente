@@ -385,16 +385,16 @@ public class Entidad {
                     key = it.next();
                     actual = juego.getUbicacionPersonajes().get(key);
                     tilePersonajes = Mundo.mouseATile(actual.getPosX(), actual.getPosY());
-                    if ( 	   actual != null 
+                    if (actual != null
                     		&& actual.getIdPersonaje() != juego.getPersonaje().getId()
                     		&& juego.getPersonajesConectados().get(actual.getIdPersonaje()) != null
                     		&& juego.getPersonajesConectados().get(actual.getIdPersonaje()).getEstado() == Estado.getEstadoJuego()) {
                     	//Si quiero clickear un personaje invisible, y yo no lo soy (no puedo verlo), no lo puedo atacar
-                    	if(juego.getPersonajesConectados().get(key).isInvisible() && !juego.getPersonaje().isInvisible())
+                    	if(juego.getPersonajesConectados().get(key).isInvisible() && !juego.getPersonaje().isInvisible()) {
                     		continue;
-                    	//if (   tileMoverme[0] == tilePersonajes[0] && (tileMoverme[1] == tilePersonajes[1] || tileMoverme[1] == (tilePersonajes[1] - 1) ) ) {
-                    	 if (tileMov[0] == tilePersonajes[0] && tileMov[1] == tilePersonajes[1]) {	
-                    		
+                    	}
+                    	
+                    	 if (tileMov[0] == tilePersonajes[0] && tileMov[1] == tilePersonajes[1]) {
                             idEnemigo = actual.getIdPersonaje();
                             float [] xy = Mundo.isoA2D(x, y);
                             // Controlo la posicion para no moverme hasta el
@@ -417,25 +417,20 @@ public class Entidad {
                     }
                 }
             }
-
         }
 
         if (juego.getHandlerMouse().getNuevoRecorrido() && !juego.getEstadoJuego().getHaySolicitud()) {
-
             tileMoverme = Mundo.mouseATile(posMouseRecorrido[0] + juego.getCamara().getxOffset() - xOffset,
                 posMouseRecorrido[1] + juego.getCamara().getyOffset() - yOffset);
 
             juego.getHandlerMouse().setNuevoRecorrido(false);
-
             pilaMovimiento = null;
-
             juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.MENU_BATALLAR);
         }
 
         if (!enMovimiento && tileMoverme != null) {
-
             enMovimiento = false;
-
+           
             tileActual = Mundo.mouseATile(x, y);
 
             if (tileMoverme[0] < 0 || tileMoverme[1] < 0 || tileMoverme[0] >= mundo.obtenerAncho()
@@ -465,7 +460,6 @@ public class Entidad {
             	else{
                     pilaMovimiento = caminoMasCorto(tileActual[0], tileActual[1], tileMoverme[0], tileMoverme[1]);
             	}
-
             }
 
             // Me muevo al primero de la pila
@@ -817,7 +811,6 @@ public class Entidad {
             		grafoLibres.obtenerNodos()[nodoFinal].obtenerY()));
             nodoFinal = vecPredecesores[nodoFinal];
         }
-
         return camino;
     }
 
@@ -831,9 +824,8 @@ public class Entidad {
      * @return true or false
      */
     private boolean estanEnDiagonal(final Nodo nodoUno, final Nodo nodoDos) {
-
-        return (nodoUno.obtenerX() == nodoDos.obtenerX() || nodoUno.obtenerY() == nodoDos.obtenerY());
-
+        return (nodoUno.obtenerX() == nodoDos.obtenerX() 
+        		|| nodoUno.obtenerY() == nodoDos.obtenerY());
     }
 
     /**
