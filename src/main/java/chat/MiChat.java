@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Stack;
 
 import javax.swing.ImageIcon;
@@ -39,19 +38,19 @@ public class MiChat extends JFrame {
 
     private JPanel contentPane;
     private JTextField texto;
-    private Stack<String> StackTextoPrevio;
-    private Stack<String> StackTextoPosterior;
+    private Stack<String> stackTextoPrevio;
+    private Stack<String> stackTextoPosterior;
     private JTextArea chat;
     private Juego juego;
     private final Gson gson = new Gson();
     private final JLabel background = new JLabel(new ImageIcon("recursos//background.jpg"));
     private DefaultCaret caret;
-    
+
     /**
      * Valor por el cual se multiplica la fuerza en cheat Bigdaddy y Tinydaddy
      */
     private static final int DOBLEFUERZA = 2;
-    
+
     /**
      * Posicion X desde donde se crea el frame
      */
@@ -174,7 +173,7 @@ public class MiChat extends JFrame {
                 }
     		}
     	});
-    	
+
         this.juego = juego;
         setTitle("Mi Chat");
 
@@ -197,9 +196,9 @@ public class MiChat extends JFrame {
         caret = (DefaultCaret) chat.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
-        StackTextoPrevio = new Stack<String>();
-        StackTextoPrevio.push("");
-        StackTextoPosterior = new Stack<String>();
+        stackTextoPrevio = new Stack<String>();
+        stackTextoPrevio.push("");
+        stackTextoPosterior = new Stack<String>();
         texto = new JTextField();
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -223,11 +222,11 @@ public class MiChat extends JFrame {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (!texto.getText().equals("")) {
-                		if( texto.getText().charAt(0) == '/' ){
+                		if(texto.getText().charAt(0) == '/'){
                 		ponerCheat(texto.getText());
                 	}
-                	else{
-                		StackTextoPrevio.push(texto.getText());
+                	else {
+                		stackTextoPrevio.push(texto.getText());
                 		mandarMensaje();
                 	}
                     texto.setText("");       
@@ -242,13 +241,13 @@ public class MiChat extends JFrame {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (!texto.getText().equals("")) {
-                	if( texto.getText().charAt(0) == '/' ){
+                	if (texto.getText().charAt(0) == '/') {
                 		//chat.append("HOLA MUNDO");
                 		//texto.setText("");
                 		ponerCheat(texto.getText());
                 	}
-                	else{
-                		StackTextoPrevio.push(texto.getText());
+                	else {
+                		stackTextoPrevio.push(texto.getText());
                 		mandarMensaje();
                 	}
                     texto.setText("");       
@@ -263,29 +262,29 @@ public class MiChat extends JFrame {
         background.setBounds(COORD_X_SUP_IZQ_LABEL_FONDO, COORD_Y_SUP_IZQ_LABEL_FONDO, ANCHO_LABEL_FONDO,
             ALTO_LABEL_FONDO);
         contentPane.add(background);
-        
+
         //Si pulso la flecha de arriba o abajo, me carga entradas anteriores que realice.
         texto.addKeyListener(new KeyAdapter() {
         	@Override
         	public void keyPressed(KeyEvent e) {
-        		if (e.getKeyCode() == KeyEvent.VK_UP && !StackTextoPrevio.empty()) {
-        			StackTextoPosterior.push(texto.getText());
-        			texto.setText(StackTextoPrevio.pop());
-        		} else if (e.getKeyCode() == KeyEvent.VK_DOWN && !StackTextoPosterior.empty()) {
-        			StackTextoPrevio.push(texto.getText());
-        			texto.setText(StackTextoPosterior.pop());
+        		if (e.getKeyCode() == KeyEvent.VK_UP && !stackTextoPrevio.empty()) {
+        			stackTextoPosterior.push(texto.getText());
+        			texto.setText(stackTextoPrevio.pop());
+        		} else if (e.getKeyCode() == KeyEvent.VK_DOWN && !stackTextoPosterior.empty()) {
+        			stackTextoPrevio.push(texto.getText());
+        			texto.setText(stackTextoPosterior.pop());
         		}
         	}
         });
     }
 
-    
+
     /**
      * manda el mensaje a el/los usuarios correspondientes.
      *
      * @return void
      */
-    public void mandarMensaje(){
+    public void mandarMensaje() {
         chat.append( juego.getPersonaje().getNombre() + ": " + texto.getText() + "\n");
 
         juego.getCliente().getPaqueteMensaje().setUserEmisor(juego.getPersonaje().getNombre());
@@ -307,20 +306,20 @@ public class MiChat extends JFrame {
         }
 
     }
-    
+
     public void ponerCheat(String cheat){
     	PaquetePersonaje pjCheater = juego.getPersonaje();
     	int cheatCode;
-    	
+
     	if (pjCheater.getCheats().containsKey(cheat)) {
     		cheatCode  = pjCheater.getCheats().get(cheat);
     		System.out.println("ENTRE A LOS CHEATS " + cheatCode);
     		//pjCheater.getCheatAction().get(cheatCode).run();
-	    	
+
     		switch(cheat) {
 		    	case "/iddqd":
-		    		if (!pjCheater.getEstadoCheats(cheatCode)){
-		    			
+		    		if (!pjCheater.getEstadoCheats(cheatCode)) {
+
 		    			pjCheater.setEstadoCheats(cheatCode, true);
 		    			setAnim("GodMode");
 		    			chat.append("\n/iddqd ON");
@@ -336,7 +335,7 @@ public class MiChat extends JFrame {
 		    			setAnim("Fantasma");
 		    			pjCheater.setEstadoCheats(cheatCode, true);
 		    			chat.append("\n/noclip ON");
-		    		}else {
+		    		} else {
 		    			juego.setCheatAtravezarParedes(false);
 		    			setAnim("");
 		    			pjCheater.setEstadoCheats(cheatCode, false);
@@ -356,16 +355,17 @@ public class MiChat extends JFrame {
 		    		chat.append("\n/tinydaddy ON");
 		    		break;
 		    	case "/war aint what it used to be":
-		    		if(!pjCheater.getEstadoCheats(cheatCode)) {
+		    		if (!pjCheater.getEstadoCheats(cheatCode)) {
 		        		pjCheater.setInvisible(true);
-		    			//juego.getEstadoJuego().getEntidadPersonaje().setPatronAnimaciones(Recursos.getPersonaje().get(juego.getPersonaje().getRaza()+"Invisible"));
+		    			//juego.getEstadoJuego().getEntidadPersonaje().setPatronAnimaciones(Recursos.getPersonaje()
+		        		//.get(juego.getPersonaje().getRaza()+"Invisible"));
 		    			setAnim("Invisible");
 		        		pjCheater.setEstadoCheats(cheatCode, true);
-		        		chat.append("\n/wawiutb ON");
-		        		}
+		        		chat.append("\n/wawiutb ON"); }
 		        	else {
 		        		pjCheater.setInvisible(false);
-		    			//juego.getEstadoJuego().getEntidadPersonaje().setPatronAnimaciones(Recursos.getPersonaje().get(juego.getPersonaje().getRaza()));
+		    			//juego.getEstadoJuego().getEntidadPersonaje().setPatronAnimaciones(Recursos.getPersonaje()
+		        		//.get(juego.getPersonaje().getRaza()));
 		    			setAnim("");
 		        		pjCheater.setEstadoCheats(cheatCode, false);
 		        		chat.append("\n/wawiutb OFF");
@@ -380,12 +380,13 @@ public class MiChat extends JFrame {
 			}
 	    }
     }
-    
-    private void setAnim(String tipo)
+
+    private void setAnim(final String tipo)
     {
-    	juego.getEstadoJuego().getEntidadPersonaje().setPatronAnimaciones(Recursos.getPersonaje().get(juego.getPersonaje().getRaza()+tipo));
+    	juego.getEstadoJuego().getEntidadPersonaje().setPatronAnimaciones(Recursos.getPersonaje()
+    			.get(juego.getPersonaje().getRaza() + tipo));
     }
-    
+
     /**
      * Gets the chat.
      *

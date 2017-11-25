@@ -50,7 +50,7 @@ public final class Recursos {
     private static BufferedImage[] humanoAbajoDer;
     private static BufferedImage[] humanoAbajo;
     private static BufferedImage[] humanoAbajoIzq;
-	
+
     //CheatsSprite Humano
     //God Mode
     private static SpriteSheet spriteHumanoG;
@@ -107,7 +107,7 @@ public final class Recursos {
     private static BufferedImage[] humanoAbajoDerT;
     private static BufferedImage[] humanoAbajoT;
     private static BufferedImage[] humanoAbajoIzqT;
-    
+
     private static SpriteSheet spriteOgro;
     private static LinkedList<BufferedImage[]> orco = new LinkedList<>();
 
@@ -119,7 +119,7 @@ public final class Recursos {
     private static BufferedImage[] orcoAbajoDer;
     private static BufferedImage[] orcoAbajo;
     private static BufferedImage[] orcoAbajoIzq;
-    
+
     //CheatsSprite orco
     //God Mode
     private static SpriteSheet spriteOrcoG;
@@ -176,7 +176,7 @@ public final class Recursos {
     private static BufferedImage[] orcoAbajoDerT;
     private static BufferedImage[] orcoAbajoT;
     private static BufferedImage[] orcoAbajoIzqT;
-    
+
     private static SpriteSheet spriteElfo;
     private static LinkedList<BufferedImage[]> elfo = new LinkedList<>();
     private static BufferedImage[] elfoIzq;
@@ -187,7 +187,7 @@ public final class Recursos {
     private static BufferedImage[] elfoAbajoDer;
     private static BufferedImage[] elfoAbajo;
     private static BufferedImage[] elfoAbajoIzq;
-  
+
     //CheatsSprite elfo
     //God Mode
     private static SpriteSheet spriteElfoG;
@@ -244,7 +244,7 @@ public final class Recursos {
     private static BufferedImage[] elfoAbajoDerT;
     private static BufferedImage[] elfoAbajoT;
     private static BufferedImage[] elfoAbajoIzqT;
-    
+
     ///NPC
     private static BufferedImage monstruo;
 
@@ -378,12 +378,12 @@ public final class Recursos {
         humano.add(humanoAbajo);
         humano.add(humanoAbajoIzq);
         // Fin humano
-        
+
      // Inicio humano God Mode
         setSpriteHumanoG(new SpriteSheet(ImageIO.read(new File("recursos//HumanoGodMode.png"))));
-        
+
         actualizarBarraDeCarga(++elementosCargados, menuCarga);
-        
+
         humanoIzqG = new BufferedImage[FRAMES];
         humanoArribaIzqG = new BufferedImage[FRAMES];
         humanoArribaG = new BufferedImage[FRAMES];
@@ -450,12 +450,12 @@ public final class Recursos {
         humanoG.add(humanoAbajoG);
         humanoG.add(humanoAbajoIzqG);
         // Fin humano God Mode
-        
+
         // Inicio humano Fantasma
         setSpriteHumanoF(new SpriteSheet(ImageIO.read(new File("recursos//HumanoFantasma.png"))));
-        
+
         actualizarBarraDeCarga(++elementosCargados, menuCarga);
-        
+
         humanoIzqF = new BufferedImage[FRAMES];
         humanoArribaIzqF = new BufferedImage[FRAMES];
         humanoArribaF = new BufferedImage[FRAMES];
@@ -522,12 +522,12 @@ public final class Recursos {
         humanoF.add(humanoAbajoF);
         humanoF.add(humanoAbajoIzqF);
         // Fin humano fantasma
-        
+
         // Inicio humano Invisible
         setSpriteHumanoI(new SpriteSheet(ImageIO.read(new File("recursos//HumanoInvisible.png"))));
-        
+
         actualizarBarraDeCarga(++elementosCargados, menuCarga);
-        
+
         humanoIzqI = new BufferedImage[FRAMES];
         humanoArribaIzqI = new BufferedImage[FRAMES];
         humanoArribaI = new BufferedImage[FRAMES];
@@ -594,12 +594,12 @@ public final class Recursos {
         humanoI.add(humanoAbajoI);
         humanoI.add(humanoAbajoIzqI);
         // Fin humano Invisible
-        
+
         // Inicio humano PowerUp
         setSpriteHumanoB(new SpriteSheet(ImageIO.read(new File("recursos//HumanoBig.png"))));
-        
+
         actualizarBarraDeCarga(++elementosCargados, menuCarga);
-        
+
         humanoIzqB = new BufferedImage[FRAMES];
         humanoArribaIzqB = new BufferedImage[FRAMES];
         humanoArribaB = new BufferedImage[FRAMES];
@@ -666,12 +666,12 @@ public final class Recursos {
         humanoB.add(humanoAbajoB);
         humanoB.add(humanoAbajoIzqB);
         // Fin humano PowerUp
-        
+
         // Inicio humano PowerDown
         setSpriteHumanoT(new SpriteSheet(ImageIO.read(new File("recursos//HumanoTiny.png"))));
-        
+
         actualizarBarraDeCarga(++elementosCargados, menuCarga);
-        
+
         humanoIzqT = new BufferedImage[FRAMES];
         humanoArribaIzqT = new BufferedImage[FRAMES];
         humanoArribaT = new BufferedImage[FRAMES];
@@ -738,8 +738,8 @@ public final class Recursos {
         humanoT.add(humanoAbajoT);
         humanoT.add(humanoAbajoIzqT);
         // Fin humano PowerDown
-        
-        
+
+
         // Inicio Ogro
         spriteOgro = new SpriteSheet(CargadorImagen.cargarImagen("/Ogro.png"));
 
@@ -812,12 +812,12 @@ public final class Recursos {
         orco.add(orcoAbajoIzq);
 
         // Fin Ogro
-        
+
      // Inicio orco God Mode
         setSpriteOrcoG(new SpriteSheet(ImageIO.read(new File("recursos//OgroGodMode.png"))));
-        
+
         actualizarBarraDeCarga(++elementosCargados, menuCarga);
-        
+
         orcoIzqG = new BufferedImage[FRAMES];
         orcoArribaIzqG = new BufferedImage[FRAMES];
         orcoArribaG = new BufferedImage[FRAMES];
@@ -884,12 +884,12 @@ public final class Recursos {
         orcoG.add(orcoAbajoG);
         orcoG.add(orcoAbajoIzqG);
         // Fin orco God Mode
-        
+
         // Inicio orco Fantasma
         setSpriteOrcoF(new SpriteSheet(ImageIO.read(new File("recursos//OgroFantasma.png"))));
-        
+
         actualizarBarraDeCarga(++elementosCargados, menuCarga);
-        
+
         orcoIzqF = new BufferedImage[FRAMES];
         orcoArribaIzqF = new BufferedImage[FRAMES];
         orcoArribaF = new BufferedImage[FRAMES];
@@ -956,12 +956,12 @@ public final class Recursos {
         orcoF.add(orcoAbajoF);
         orcoF.add(orcoAbajoIzqF);
         // Fin orco fantasma
-        
+
         // Inicio orco Invisible
         setSpriteOrcoI(new SpriteSheet(ImageIO.read(new File("recursos//OgroInvisible.png"))));
-        
+
         actualizarBarraDeCarga(++elementosCargados, menuCarga);
-        
+
         orcoIzqI = new BufferedImage[FRAMES];
         orcoArribaIzqI = new BufferedImage[FRAMES];
         orcoArribaI = new BufferedImage[FRAMES];
@@ -1028,12 +1028,12 @@ public final class Recursos {
         orcoI.add(orcoAbajoI);
         orcoI.add(orcoAbajoIzqI);
         // Fin orco Invisible
-        
+
         // Inicio orco PowerUp
         setSpriteOrcoB(new SpriteSheet(ImageIO.read(new File("recursos//OgroBig.png"))));
-        
+
         actualizarBarraDeCarga(++elementosCargados, menuCarga);
-        
+
         orcoIzqB = new BufferedImage[FRAMES];
         orcoArribaIzqB = new BufferedImage[FRAMES];
         orcoArribaB = new BufferedImage[FRAMES];
@@ -1100,12 +1100,12 @@ public final class Recursos {
         orcoB.add(orcoAbajoB);
         orcoB.add(orcoAbajoIzqB);
         // Fin orco PowerUp
-        
+
         // Inicio orco PowerDown
         setSpriteOrcoT(new SpriteSheet(ImageIO.read(new File("recursos//OgroTiny.png"))));
-        
+
         actualizarBarraDeCarga(++elementosCargados, menuCarga);
-        
+
         orcoIzqT = new BufferedImage[FRAMES];
         orcoArribaIzqT = new BufferedImage[FRAMES];
         orcoArribaT = new BufferedImage[FRAMES];
@@ -1172,7 +1172,7 @@ public final class Recursos {
         orcoT.add(orcoAbajoT);
         orcoT.add(orcoAbajoIzqT);
         // Fin orco PowerDown
-        
+
         // Inicio Elfo
         spriteElfo = new SpriteSheet(CargadorImagen.cargarImagen("/elfo2.png"));
 
@@ -1245,13 +1245,13 @@ public final class Recursos {
         elfo.add(elfoAbajoIzq);
 
         // Fin Elfo
-        
-        
+
+
      // Inicio elfo God Mode
         setSpriteElfoG(new SpriteSheet(ImageIO.read(new File("recursos//elfo2GodMode.png"))));
-        
+
         actualizarBarraDeCarga(++elementosCargados, menuCarga);
-        
+
         elfoIzqG = new BufferedImage[FRAMES];
         elfoArribaIzqG = new BufferedImage[FRAMES];
         elfoArribaG = new BufferedImage[FRAMES];
@@ -1318,12 +1318,12 @@ public final class Recursos {
         elfoG.add(elfoAbajoG);
         elfoG.add(elfoAbajoIzqG);
         // Fin elfo God Mode
-        
+
         // Inicio elfo Fantasma
         setSpriteElfoF(new SpriteSheet(ImageIO.read(new File("recursos//elfo2Fantasma.png"))));
-        
+
         actualizarBarraDeCarga(++elementosCargados, menuCarga);
-        
+
         elfoIzqF = new BufferedImage[FRAMES];
         elfoArribaIzqF = new BufferedImage[FRAMES];
         elfoArribaF = new BufferedImage[FRAMES];
@@ -1390,12 +1390,12 @@ public final class Recursos {
         elfoF.add(elfoAbajoF);
         elfoF.add(elfoAbajoIzqF);
         // Fin elfo fantasma
-        
+
         // Inicio elfo Invisible
         setSpriteElfoI(new SpriteSheet(ImageIO.read(new File("recursos//elfo2Invisible.png"))));
-        
+
         actualizarBarraDeCarga(++elementosCargados, menuCarga);
-        
+
         elfoIzqI = new BufferedImage[FRAMES];
         elfoArribaIzqI = new BufferedImage[FRAMES];
         elfoArribaI = new BufferedImage[FRAMES];
@@ -1462,12 +1462,9 @@ public final class Recursos {
         elfoI.add(elfoAbajoI);
         elfoI.add(elfoAbajoIzqI);
         // Fin elfo Invisible
-        
         // Inicio elfo PowerUp
         setSpriteElfoB(new SpriteSheet(ImageIO.read(new File("recursos//elfo2Big.png"))));
-        
         actualizarBarraDeCarga(++elementosCargados, menuCarga);
-        
         elfoIzqB = new BufferedImage[FRAMES];
         elfoArribaIzqB = new BufferedImage[FRAMES];
         elfoArribaB = new BufferedImage[FRAMES];
@@ -1537,9 +1534,7 @@ public final class Recursos {
         
         // Inicio elfo PowerDown
         setSpriteElfoT(new SpriteSheet(ImageIO.read(new File("recursos//elfo2Tiny.png"))));
-        
         actualizarBarraDeCarga(++elementosCargados, menuCarga);
-        
         elfoIzqT = new BufferedImage[FRAMES];
         elfoArribaIzqT = new BufferedImage[FRAMES];
         elfoArribaT = new BufferedImage[FRAMES];
@@ -1606,12 +1601,10 @@ public final class Recursos {
         elfoT.add(elfoAbajoT);
         elfoT.add(elfoAbajoIzqT);
         // Fin elfo PowerDown
-        
         // Agrego los pj al hash
         personaje.put("Humano", humano);
         personaje.put("Orco", orco);
         personaje.put("Elfo", elfo);
-        
         //cheats
         personaje.put("HumanoGodMode", humanoG);
         personaje.put("HumanoFantasma", humanoF);
@@ -1628,7 +1621,6 @@ public final class Recursos {
         personaje.put("ElfoInvisible", elfoI);
         personaje.put("ElfoBig", elfoB);
         personaje.put("ElfoTiny", elfoT);
-        
         // Inicio Entorno
         setCesped(CargadorImagen.cargarImagen("/Cesped.png"));
         actualizarBarraDeCarga(++elementosCargados, menuCarga);
@@ -2592,7 +2584,7 @@ public final class Recursos {
 	/**
 	 * @param spriteHumanoG the spriteHumanoG to set
 	 */
-	public static void setSpriteHumanoG(SpriteSheet spriteHumanoG) {
+	public static void setSpriteHumanoG(final SpriteSheet spriteHumanoG) {
 		Recursos.spriteHumanoG = spriteHumanoG;
 	}
 
@@ -2606,7 +2598,7 @@ public final class Recursos {
 	/**
 	 * @param spriteHumanoF the spriteHumanoF to set
 	 */
-	public static void setSpriteHumanoF(SpriteSheet spriteHumanoF) {
+	public static void setSpriteHumanoF(final SpriteSheet spriteHumanoF) {
 		Recursos.spriteHumanoF = spriteHumanoF;
 	}
 
@@ -2620,7 +2612,7 @@ public final class Recursos {
 	/**
 	 * @param spriteHumanoI the spriteHumanoI to set
 	 */
-	public static void setSpriteHumanoI(SpriteSheet spriteHumanoI) {
+	public static void setSpriteHumanoI(final SpriteSheet spriteHumanoI) {
 		Recursos.spriteHumanoI = spriteHumanoI;
 	}
 
@@ -2634,7 +2626,7 @@ public final class Recursos {
 	/**
 	 * @param spriteHumanoT the spriteHumanoT to set
 	 */
-	public static void setSpriteHumanoT(SpriteSheet spriteHumanoT) {
+	public static void setSpriteHumanoT(final SpriteSheet spriteHumanoT) {
 		Recursos.spriteHumanoT = spriteHumanoT;
 	}
 
@@ -2648,7 +2640,7 @@ public final class Recursos {
 	/**
 	 * @param humanoB the humanoB to set
 	 */
-	public static void setHumanoB(LinkedList<BufferedImage[]> humanoB) {
+	public static void setHumanoB(final LinkedList<BufferedImage[]> humanoB) {
 		Recursos.humanoB = humanoB;
 	}
 
@@ -2662,7 +2654,7 @@ public final class Recursos {
 	/**
 	 * @param spriteHumanoB the spriteHumanoB to set
 	 */
-	public static void setSpriteHumanoB(SpriteSheet spriteHumanoB) {
+	public static void setSpriteHumanoB(final SpriteSheet spriteHumanoB) {
 		Recursos.spriteHumanoB = spriteHumanoB;
 	}
 
@@ -2676,7 +2668,7 @@ public final class Recursos {
 	/**
 	 * @param humanoT the humanoT to set
 	 */
-	public static void setHumanoT(LinkedList<BufferedImage[]> humanoT) {
+	public static void setHumanoT(final LinkedList<BufferedImage[]> humanoT) {
 		Recursos.humanoT = humanoT;
 	}
 
@@ -2690,7 +2682,7 @@ public final class Recursos {
 	/**
 	 * @param spriteElfoT the spriteElfoT to set
 	 */
-	public static void setSpriteElfoT(SpriteSheet spriteElfoT) {
+	public static void setSpriteElfoT(final SpriteSheet spriteElfoT) {
 		Recursos.spriteElfoT = spriteElfoT;
 	}
 
@@ -2704,7 +2696,7 @@ public final class Recursos {
 	/**
 	 * @param spriteElfoB the spriteElfoB to set
 	 */
-	public static void setSpriteElfoB(SpriteSheet spriteElfoB) {
+	public static void setSpriteElfoB(final SpriteSheet spriteElfoB) {
 		Recursos.spriteElfoB = spriteElfoB;
 	}
 
@@ -2718,7 +2710,7 @@ public final class Recursos {
 	/**
 	 * @param spriteElfoI the spriteElfoI to set
 	 */
-	public static void setSpriteElfoI(SpriteSheet spriteElfoI) {
+	public static void setSpriteElfoI(final SpriteSheet spriteElfoI) {
 		Recursos.spriteElfoI = spriteElfoI;
 	}
 
@@ -2732,7 +2724,7 @@ public final class Recursos {
 	/**
 	 * @param spriteElfoF the spriteElfoF to set
 	 */
-	public static void setSpriteElfoF(SpriteSheet spriteElfoF) {
+	public static void setSpriteElfoF(final SpriteSheet spriteElfoF) {
 		Recursos.spriteElfoF = spriteElfoF;
 	}
 
@@ -2746,7 +2738,7 @@ public final class Recursos {
 	/**
 	 * @param spriteElfoG the spriteElfoG to set
 	 */
-	public static void setSpriteElfoG(SpriteSheet spriteElfoG) {
+	public static void setSpriteElfoG(final SpriteSheet spriteElfoG) {
 		Recursos.spriteElfoG = spriteElfoG;
 	}
 
@@ -2760,7 +2752,7 @@ public final class Recursos {
 	/**
 	 * @param spriteOrcoT the spriteOrcoT to set
 	 */
-	public static void setSpriteOrcoT(SpriteSheet spriteOrcoT) {
+	public static void setSpriteOrcoT(final SpriteSheet spriteOrcoT) {
 		Recursos.spriteOrcoT = spriteOrcoT;
 	}
 
@@ -2774,7 +2766,7 @@ public final class Recursos {
 	/**
 	 * @param spriteOrcoB the spriteOrcoB to set
 	 */
-	public static void setSpriteOrcoB(SpriteSheet spriteOrcoB) {
+	public static void setSpriteOrcoB(final SpriteSheet spriteOrcoB) {
 		Recursos.spriteOrcoB = spriteOrcoB;
 	}
 
@@ -2788,7 +2780,7 @@ public final class Recursos {
 	/**
 	 * @param spriteOrcoI the spriteOrcoI to set
 	 */
-	public static void setSpriteOrcoI(SpriteSheet spriteOrcoI) {
+	public static void setSpriteOrcoI(final SpriteSheet spriteOrcoI) {
 		Recursos.spriteOrcoI = spriteOrcoI;
 	}
 
@@ -2802,7 +2794,7 @@ public final class Recursos {
 	/**
 	 * @param spriteOrcoF the spriteOrcoF to set
 	 */
-	public static void setSpriteOrcoF(SpriteSheet spriteOrcoF) {
+	public static void setSpriteOrcoF(final SpriteSheet spriteOrcoF) {
 		Recursos.spriteOrcoF = spriteOrcoF;
 	}
 
@@ -2816,7 +2808,7 @@ public final class Recursos {
 	/**
 	 * @param spriteOrcoG the spriteOrcoG to set
 	 */
-	public static void setSpriteOrcoG(SpriteSheet spriteOrcoG) {
+	public static void setSpriteOrcoG(final SpriteSheet spriteOrcoG) {
 		Recursos.spriteOrcoG = spriteOrcoG;
 	}
 

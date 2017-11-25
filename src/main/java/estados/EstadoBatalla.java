@@ -212,7 +212,8 @@ public class EstadoBatalla extends Estado {
                         Estado.setEstado(getJuego().getEstadoJuego());
 
                     } else {
-                    	if(!paquetePersonaje.getEstadoCheats(PaquetePersonaje.CODE_IDDQD) && !paqueteEnemigo.getEstadoCheats(paqueteEnemigo.CODE_IDDQD) || paquetePersonaje.getEstadoCheats(PaquetePersonaje.CODE_IDDQD) && paqueteEnemigo.getEstadoCheats(paqueteEnemigo.CODE_IDDQD)) {
+                    	if(!paquetePersonaje.getEstadoCheats(PaquetePersonaje.CODE_IDDQD) && !paqueteEnemigo.getEstadoCheats(paqueteEnemigo.CODE_IDDQD)
+                    			|| paquetePersonaje.getEstadoCheats(PaquetePersonaje.CODE_IDDQD) && paqueteEnemigo.getEstadoCheats(paqueteEnemigo.CODE_IDDQD)) {
 	                        paqueteAtacar = new PaqueteAtacar(paquetePersonaje.getId(), paqueteEnemigo.getId(),
 	                            personaje.getSalud(), personaje.getEnergia(), enemigo.getSalud(), enemigo.getEnergia(),
 	                            personaje.getDefensa(), enemigo.getDefensa(),

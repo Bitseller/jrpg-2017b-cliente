@@ -20,17 +20,17 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	 * Codigo de modo dios
 	 */
 	public static final int CODE_IDDQD = 1; 
-	
+
 	/**
 	 * Codigo de modo espectro
 	 */
 	public static final int CODE_NOCLIP = 2; 
-	
+
 	/**
 	 * Codigo de modo Hulk
 	 */
 	public static final int CODE_BIGDADDY = 3;
-	
+
 	/**
 	 * Codigo de modo KickAss
 	 */
@@ -39,7 +39,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	 * Codigo de modo fantasma
 	 */
 	public static final int CODE_WAWIUTB = 5; 
-	
+
     private int id;
     private String idMapa;
     private int estado;
@@ -56,17 +56,17 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
     private int puntosSkill;
     private double multiplicadorCheat = 1;
     private ArrayList<Item> items = new ArrayList<Item>();
-    
+
     //Paquete de cheats dentro del personaje
     private ArrayList<Boolean> estadoCheats;
     private final HashMap<String, Integer> cheatMap;
     private final HashMap<Integer,Runnable> cheatAction;
-    
+
     //Agrego un estado invisible
     private boolean invisible = false;
-    
+
     public void getCheatsPersonaje() {
-    	
+
     }
 
     public boolean isInvisible() {
@@ -85,7 +85,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
      */
     public PaquetePersonaje() throws IOException {
         estado = Estado.getEstadoOffline();
-        
+
         //Se instancia vector y Mapa de cheats del personaje.
         cheatMap = new HashMap<String, Integer>();
         estadoCheats = new ArrayList<Boolean>();
@@ -104,7 +104,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
         estadoCheats.add(false);
         estadoCheats.add(false);
         estadoCheats.add(false);
-        
+
         //Todos los cheats poseen su metodo.
         //cheatAction.put(CODE_IDDQD, ()-> setIddqd());
         //cheatAction.put(CODE_NOCLIP, ()-> setNoClip());
@@ -112,71 +112,71 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
         //cheatAction.put(CODE_TINYDADDY, ()-> setTinyDaddy());
         //cheatAction.put(CODE_WAWIUTB, ()-> setWawiutb());
     }
-    
+
 //    /**
 //     * Aplica el cheat iddqd
 //     */
 //	private void setIddqd() {
 //    	System.out.println("ACTIVAR CHEAT");
 //    }
-//    
+//
 //	/**
 //     * Aplica el cheat noclip
 //     */
 //    private void setNoClip() {
-//    	
+//
 //    }
-//    
+//
 //    /**
 //     * Aplica el cheat bigdaddy
 //     */
 //    private void setBigDaddy() {
-//    	
+//
 //    }
-//    
+//
 //    /**
 //     * Aplica el cheat tinydaddy
 //     */
 //    private void setTinyDaddy() {
-//    	
+//
 //    }
-//    
+//
 //    /**
 //     * Aplica el cheat war aint what it used to be
 //     */
 //    private void setWawiutb() {
-//		
+//
 //	}
-//    
+//
 	/**
      * Get el valor de la key del mapa de cheats.
-     * 
+     *
      * @return el mapa de cheats
      */
-    public HashMap<String, Integer> getCheats(){
+    public HashMap<String, Integer> getCheats() {
     	return this.cheatMap;
     }
-    
+
     /**
      * Get el estado de los cheats.
-     * 
+     *
      * @return el array de estado de los cheats
      */
-    public Boolean getEstadoCheats(int index){
-    	return this.estadoCheats.get(index-1);
+    public Boolean getEstadoCheats(int index) {
+    	return this.estadoCheats.get(index - 1);
     }
-    
+
     /**
      * Set el estado de los cheats.
-     * 
+     *
      * @param index
      * @param valor
      */
-    public void setEstadoCheats(int index, boolean valor){
-    	this.estadoCheats.remove(index-1);
-    	this.estadoCheats.add(index-1, valor);
+    public void setEstadoCheats(final int index, final boolean valor) {
+    	this.estadoCheats.remove(index - 1);
+    	this.estadoCheats.add(index - 1, valor);
     }
-    
+
     public HashMap<Integer, Runnable> getCheatAction() {
     	return this.cheatAction;
     }
@@ -752,12 +752,18 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
             this.items.add(item);
         }
     }
-
+    /**
+     * 
+     * @return Multiplicador de fuerza para los cheats
+     */
 	public double getMultiplicadorCheat() {
 		return multiplicadorCheat;
 	}
-
-	public void setMultiplicadorCheat(double d) {
+	/**
+	 * Setea el multiplicador para fuerza
+	 * @param d
+	 */
+	public void setMultiplicadorCheat(final double d) {
 		this.multiplicadorCheat = d;
 	}
 

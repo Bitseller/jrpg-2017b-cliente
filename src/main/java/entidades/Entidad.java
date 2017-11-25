@@ -73,7 +73,7 @@ public class Entidad {
 	//General
 	private Juego juego;
 	private Cliente client;
-	
+
     // Tamaño de la entidad
     private int ancho;
     private int alto;
@@ -107,7 +107,7 @@ public class Entidad {
     private static final int DIAGONAL_INF_DER = 5;
     private int movimientoHacia = MOVIMIENTOS;
     private boolean enMovimiento;
-    
+
     // Referencias del mapa
     private static final int REFERENCIA_X = 64;
     private static final int REFERENCIA_Y = 32;
@@ -142,7 +142,7 @@ public class Entidad {
     private float yComercio;
     private float[] comercio;
     private static final int TOLERANCIA_DISTANCIA_NPC = 30;
-    
+
 
 
     /**
@@ -186,7 +186,7 @@ public class Entidad {
         y = (int) (spawnY / REFERENCIA_Y) * REFERENCIA_Y;
 
         double paso = 1;
-        
+
 
         movX = new LinkedList<Double>();
         movY = new LinkedList<Double>();
@@ -451,9 +451,9 @@ public class Entidad {
                 return;
             }
 
-            if (   tileMoverme[0] == tileActual[0] && tileMoverme[1] == tileActual[1]
-            		|| !juego.isCheatAtravezarParedes() && mundo.getTile(tileMoverme[0], tileMoverme[1]).esSolido()   ) {
-                
+            if (tileMoverme[0] == tileActual[0] && tileMoverme[1] == tileActual[1]
+            		|| !juego.isCheatAtravezarParedes() && mundo.getTile(tileMoverme[0], tileMoverme[1]).esSolido() ) {
+
             	tileMoverme = null;
                 enMovimiento = false;
                 juego.getHandlerMouse().setNuevoRecorrido(false);
@@ -462,8 +462,8 @@ public class Entidad {
             }
 
             if (pilaMovimiento == null) {
-            	
-            	if( juego.isCheatAtravezarParedes() ){
+
+            	if(juego.isCheatAtravezarParedes()) {
                     pilaMovimiento = caminoMasCortoCheat(tileActual[0], tileActual[1], tileMoverme[0], tileMoverme[1]);
             	}
             	else{
@@ -471,7 +471,7 @@ public class Entidad {
             	}
 
             }
-            
+
             // Me muevo al primero de la pila
             NodoDePila nodoActualTile = pilaMovimiento.pop();
 
@@ -622,7 +622,7 @@ public class Entidad {
     		g.setColor(Color.WHITE);
     		g.setFont(new Font("Book Antiqua", Font.BOLD, FONT_SIZE));
     	}
-    	
+
     	Pantalla.centerString(g, new java.awt.Rectangle(drawX
         		+ BIG_TREINTAYDOS, drawY - BIG_TWENTY, 0, BIG_TEN), nombre);
     }
@@ -689,10 +689,10 @@ public class Entidad {
             JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor");
         }
     }
-    
+
     /**
-     * Busca el camino más corto a recorrer para llegar a una posición si el mapa esta vacio. (se usa para el cheat de atravezar paredes)
-     *
+     * Busca el camino más corto a recorrer para llegar a una posición si el mapa esta vacio.
+     *	(se usa para el cheat de atravezar paredes)
      * @param xIni
      *            ubicacion en X inicial
      * @param yIni
@@ -703,29 +703,29 @@ public class Entidad {
      *            ubicacion en Y final
      * @return la pila de tiles a recorrer
      */
-    private PilaDeTiles caminoMasCortoCheat( int xIni, int yIni, final int xFin, final int yFin) {
+    private PilaDeTiles caminoMasCortoCheat(int xIni, int yIni, final int xFin, final int yFin) {
         PilaDeTiles camino = new PilaDeTiles();
         int dirX, dirY, xAct = xFin, yAct = yFin;
-        
+
         dirX = xAct < xIni ? 1 : -1 ; // definis si vas a tener q ir para la izquierda(-1) o derecha(1)
         dirY = yAct < yIni ? 1 : -1 ; // definis si vas a tener q ir para arriba(-1) o abajo(1)
-       
+
         camino.push( new NodoDePila(xFin, yFin)); // pones el nodo final abajo de todo de la pila
-    	while( xAct != xIni && yAct != yIni){ // avanzas lo mas que puedas en diagonal
+    	while(xAct != xIni && yAct != yIni) { // avanzas lo mas que puedas en diagonal
     		xAct = xAct + dirX;
     		yAct = yAct + dirY;
-    		
+
+    		camino.push(new NodoDePila(xAct, yAct));
+    	}
+
+    	while(xAct != xIni) { // avanzas lo q te queda de x todo recto
+    		xAct = xAct + dirX;
     		camino.push( new NodoDePila(xAct, yAct));
     	}
     	
-    	while( xAct != xIni ){ // avanzas lo q te queda de x todo recto
-    		xAct = xAct + dirX;
-    		camino.push( new NodoDePila(xAct, yAct));
-    	}
-    	
-    	while( yAct != yIni ) { // avanzas lo que te queda de y todo recto
+    	while(yAct != yIni) { // avanzas lo que te queda de y todo recto
     		yAct = yAct + dirY;
-    		camino.push( new NodoDePila(xAct, yAct));
+    		camino.push(new NodoDePila(xAct, yAct));
     	}
     	
     	camino.pop(); // sacas el de arriba de todo q seria en el q ya estas parado ahora
@@ -761,12 +761,12 @@ public class Entidad {
         int[] vecPredecesores = new int[grafoLibres.obtenerCantidadDeNodosTotal()];
         boolean[] conjSolucion = new boolean[grafoLibres.obtenerCantidadDeNodosTotal()];
         int cantSolucion = 0;
-        
+
         // Lleno la matriz de costos de numeros grandes
         for (int i = 0; i < grafoLibres.obtenerCantidadDeNodosTotal(); i++) {
             vecCostos[i] = Double.MAX_VALUE;
         }
-        
+
         // Adyacentes al nodo inicial
         conjSolucion[nodoInicial] = true;
         cantSolucion++;
@@ -781,7 +781,7 @@ public class Entidad {
             }
             vecPredecesores[adyacentes[i].obtenerIndice()] = nodoInicial;
         }
-        
+
         // Aplico Dijkstra
         while (cantSolucion < grafoLibres.obtenerCantidadDeNodosTotal()) {
             // Elijo W perteneciente al conjunto restante tal que el costo de W
@@ -817,7 +817,8 @@ public class Entidad {
         // Creo el vector de nodos hasta donde quiere llegar
         PilaDeTiles camino = new PilaDeTiles();
         while (nodoFinal != nodoInicial) {
-            camino.push(new NodoDePila(grafoLibres.obtenerNodos()[nodoFinal].obtenerX(), grafoLibres.obtenerNodos()[nodoFinal].obtenerY()));
+            camino.push(new NodoDePila(grafoLibres.obtenerNodos()[nodoFinal].obtenerX(),
+            		grafoLibres.obtenerNodos()[nodoFinal].obtenerY()));
             nodoFinal = vecPredecesores[nodoFinal];
         }
 
@@ -939,8 +940,11 @@ public class Entidad {
 	public LinkedList<Animacion> getPatronAnimaciones() {
 		return patronAnimaciones;
 	}
-	
-	public void setPatronAnimaciones(LinkedList<BufferedImage[]> animaciones) {
+	/**
+	 * El patron de animaciones
+	 * @param animaciones
+	 */
+	public void setPatronAnimaciones(final LinkedList<BufferedImage[]> animaciones) {
         patronAnimaciones = new LinkedList<Animacion>();
 
         moverIzq = new Animacion(velAnimacion, animaciones.get(0));
@@ -962,5 +966,5 @@ public class Entidad {
         patronAnimaciones.add(moverAbajoIzq);
         patronAnimaciones.add(moverAbajoDer);
 	}
-	
+
 }
