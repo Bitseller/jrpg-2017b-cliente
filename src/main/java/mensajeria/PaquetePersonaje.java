@@ -122,50 +122,8 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
         estadoCheats.add(false);
         estadoCheats.add(false);
         estadoCheats.add(false);
-        
-        //Todos los cheats poseen su metodo.
-        //cheatAction.put(CODE_IDDQD, ()-> setIddqd());
-        //cheatAction.put(CODE_NOCLIP, ()-> setNoClip());
-        //cheatAction.put(CODE_BIGDADDY, ()-> setBigDaddy());
-        //cheatAction.put(CODE_TINYDADDY, ()-> setTinyDaddy());
-        //cheatAction.put(CODE_WAWIUTB, ()-> setWawiutb());
     }
     
-//    /**
-//     * Aplica el cheat iddqd
-//     */
-//	private void setIddqd() {
-//    	System.out.println("ACTIVAR CHEAT");
-//    }
-//    
-//	/**
-//     * Aplica el cheat noclip
-//     */
-//    private void setNoClip() {
-//    	
-//    }
-//    
-//    /**
-//     * Aplica el cheat bigdaddy
-//     */
-//    private void setBigDaddy() {
-//    	
-//    }
-//    
-//    /**
-//     * Aplica el cheat tinydaddy
-//     */
-//    private void setTinyDaddy() {
-//    	
-//    }
-//    
-//    /**
-//     * Aplica el cheat war aint what it used to be
-//     */
-//    private void setWawiutb() {
-//		
-//	}
-//    
 	/**
      * Get el valor de la key del mapa de cheats.
      * 

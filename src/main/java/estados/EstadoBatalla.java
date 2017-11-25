@@ -220,7 +220,6 @@ public class EstadoBatalla extends Estado {
 	                            personaje.getCasta().getProbabilidadEvitarAtaque(),
 	                            enemigo.getCasta().getProbabilidadEvitarAtaque());
 	                        	enviarAtaque(paqueteAtacar);
-	                        	System.out.println("AMBOS SACAN VIDA");
 	                        	
                     	}
                     	if(paquetePersonaje.getEstadoCheats(PaquetePersonaje.CODE_IDDQD) && !paqueteEnemigo.getEstadoCheats(paqueteEnemigo.CODE_IDDQD)) {
@@ -230,7 +229,6 @@ public class EstadoBatalla extends Estado {
 	                            1,
 	                            enemigo.getCasta().getProbabilidadEvitarAtaque());
 	                        	enviarAtaque(paqueteAtacar);
-	                        	System.out.println("SI SACO VIDA");
 	                        	
                     	}
                     	if(!paquetePersonaje.getEstadoCheats(PaquetePersonaje.CODE_IDDQD) && paqueteEnemigo.getEstadoCheats(paqueteEnemigo.CODE_IDDQD)) {
@@ -240,7 +238,6 @@ public class EstadoBatalla extends Estado {
 	                            personaje.getCasta().getProbabilidadEvitarAtaque(),
 	                            1);
 	                        	enviarAtaque(paqueteAtacar);
-	                        	System.out.println("NO SACO VIDA");
 	                        	
                     	}
                         	

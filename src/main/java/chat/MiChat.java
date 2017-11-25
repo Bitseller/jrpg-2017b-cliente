@@ -6,7 +6,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Stack;
 
 import javax.sound.sampled.AudioSystem;
@@ -44,8 +43,8 @@ public class MiChat extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField texto;
-	private Stack<String> StackTextoPrevio;
-	private Stack<String> StackTextoPosterior;
+	private Stack<String> stackTextoPrevio;
+	private Stack<String> stackTextoPosterior;
 	private JTextArea chat;
 	private Juego juego;
 	private final Gson gson = new Gson();
@@ -59,102 +58,126 @@ public class MiChat extends JFrame {
 	 */
 	private static final int DOBLEFUERZA = 2;
 
-	/**
-	 * Posicion X desde donde se crea el frame
-	 */
-	private static final int COORD_X_SUP_IZQ_JFRAME = 100;
-	/**
-	 * Posicion Y desde donde se crea el frame
-	 */
-	private static final int COORD_Y_SUP_IZQ_JFRAME = 100;
-	/**
+    /**
+     * Posicion X desde donde se crea el frame
+     */
+    private static final int COORD_X_SUP_IZQ_JFRAME = 100;
+    
+    /**
+     * Posicion Y desde donde se crea el frame
+     */
+    private static final int COORD_Y_SUP_IZQ_JFRAME = 100;
+    
+    /**
 	 * Ancho del frame
 	 */
-	private static final int ANCHO_JFRAME = 450;
-	/**
+    private static final int ANCHO_JFRAME = 450;
+    
+    /**
 	 * Alto del frame
 	 */
 	private static final int ALTO_JFRAME = 300;
+	
 	/**
 	 * Borde superior del frame
 	 */
 	private static final int BORDE_ARRIBA_JFRAME = 5;
+	
 	/**
 	 * Borde izquierdo del frame
 	 */
 	private static final int BORDE_IZQ_JFRAME = 5;
+	
 	/**
 	 * Borde inferior del frame
 	 */
 	private static final int BORDE_ABAJO_JFRAME = 5;
+	
 	/**
 	 * Borde derecho del frame
 	 */
 	private static final int BORDE_DER_JFRAME = 5;
+	
 	/**
 	 * Posicion X desde donde se crea el ScrollPane
 	 */
 	private static final int COORD_X_SUP_IZQ_SCROLLPANE = 10;
+	
 	/**
 	 * Posicion Y desde donde se crea el ScrollPane
 	 */
 	private static final int COORD_Y_SUP_IZQ_SCROLLPANE = 11;
+	
 	/**
 	 * Ancho del ScrollPane
 	 */
 	private static final int ANCHO_SCROLLPANE = 414;
+	
 	/**
 	 * Alto del ScrollPane
 	 */
 	private static final int ALTO_SCROLLPANE = 201;
+	
 	/**
 	 * Posicion X desde donde se crea el boton enviar
 	 */
 	private static final int COORD_X_SUP_IZQ_BOT_ENVIAR = 334;
+	
 	/**
 	 * Posicion Y desde donde se crea el boton enviar
 	 */
 	private static final int COORD_Y_SUP_IZQ_BOT_ENVIAR = 225;
+	
 	/**
 	 * Ancho del boton enviar
 	 */
 	private static final int ANCHO_BOT_ENVIAR = 81;
+	
 	/**
 	 * Alto del boton enviar
 	 */
 	private static final int ALTO_BOT_ENVIAR = 23;
+	
 	/**
 	 * Posicion X desde donde se crea el TextField
 	 */
 	private static final int COORD_X_SUP_IZQ_TEXTFIELD = 10;
+	
 	/**
 	 * Posicion Y desde donde se crea el TextField
 	 */
 	private static final int COORD_Y_SUP_IZQ_TEXTFIELD = 223;
+	
 	/**
 	 * Ancho del TextField
 	 */
 	private static final int ANCHO_TEXTFIELD = 314;
+	
 	/**
 	 * Alto del TextField
 	 */
 	private static final int ALTO_TEXTFIELD = 27;
+	
 	/**
 	 * Cantidad de columnas del TextField del chat
 	 */
 	private static final int COLUMNAS_TEXTFIELD = 10;
+	
 	/**
 	 * Posicion X desde donde se crea el label para el fondo del chat
 	 */
 	private static final int COORD_X_SUP_IZQ_LABEL_FONDO = -20;
+	
 	/**
 	 * Posicion Y desde donde se crea el label para el fondo del chat
 	 */
 	private static final int COORD_Y_SUP_IZQ_LABEL_FONDO = 0;
+	
 	/**
 	 * Ancho del label para el fondo del chat
 	 */
 	private static final int ANCHO_LABEL_FONDO = 480;
+	
 	/**
 	 * Alto del label para el fondo del chat
 	 */
@@ -205,9 +228,9 @@ public class MiChat extends JFrame {
 		caret = (DefaultCaret) chat.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
-		StackTextoPrevio = new Stack<String>();
-		StackTextoPrevio.push("");
-		StackTextoPosterior = new Stack<String>();
+		stackTextoPrevio = new Stack<String>();
+		stackTextoPrevio.push("");
+		stackTextoPosterior = new Stack<String>();
 		texto = new JTextField();
 		this.addWindowListener(new WindowAdapter() {
 			@Override
@@ -226,68 +249,70 @@ public class MiChat extends JFrame {
 			}
 		});
 
-		// Si se presiona la tecla enter
-		texto.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent e) {
-				if (!texto.getText().equals("")) {
-					if (texto.getText().charAt(0) == '/') {
-						ponerCheat(texto.getText());
-					} else {
-						StackTextoPrevio.push(texto.getText());
-						mandarMensaje();
-					}
-					texto.setText("");
-				}
-			}
-		});
+        //Si se presiona la tecla enter
+        texto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!texto.getText().equals("")) {
+                		if(texto.getText().charAt(0) == '/'){
+                		ponerCheat(texto.getText());
+                	}
+                	else {
+                		stackTextoPrevio.push(texto.getText());
+                		mandarMensaje();
+                	}
+                	stackTextoPrevio.push(texto.getText());
+                    texto.setText("");       
+                }
+            }
+        });
 
-		// Si presiono el boton Enviar
-		JButton enviar = new JButton("ENVIAR");
-		enviar.setIcon(new ImageIcon("recursos//enviarButton.png"));
-		enviar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent e) {
-				if (!texto.getText().equals("")) {
-					if (texto.getText().charAt(0) == '/') {
-						// chat.append("HOLA MUNDO");
-						// texto.setText("");
-						ponerCheat(texto.getText());
-					} else {
-						StackTextoPrevio.push(texto.getText());
-						mandarMensaje();
-					}
-					texto.setText("");
-				}
-			}
-		});
-		enviar.setBounds(COORD_X_SUP_IZQ_BOT_ENVIAR, COORD_Y_SUP_IZQ_BOT_ENVIAR, ANCHO_BOT_ENVIAR, ALTO_BOT_ENVIAR);
-		contentPane.add(enviar);
-		texto.setBounds(COORD_X_SUP_IZQ_TEXTFIELD, COORD_Y_SUP_IZQ_TEXTFIELD, ANCHO_TEXTFIELD, ALTO_TEXTFIELD);
-		contentPane.add(texto);
-		texto.setColumns(COLUMNAS_TEXTFIELD);
-		background.setBounds(COORD_X_SUP_IZQ_LABEL_FONDO, COORD_Y_SUP_IZQ_LABEL_FONDO, ANCHO_LABEL_FONDO,
-				ALTO_LABEL_FONDO);
-		contentPane.add(background);
+        //Si presiono el boton Enviar
+        JButton enviar = new JButton("ENVIAR");
+        enviar.setIcon(new ImageIcon("recursos//enviarButton.png"));
+        enviar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!texto.getText().equals("")) {
+                	if (texto.getText().charAt(0) == '/') {
+                		ponerCheat(texto.getText());
+                	}
+                	else {
+                		stackTextoPrevio.push(texto.getText());
+                		mandarMensaje();
+                	}
+                	stackTextoPrevio.push(texto.getText());
+                    texto.setText("");       
+                }
+            }
+        });
+        
+        enviar.setBounds(COORD_X_SUP_IZQ_BOT_ENVIAR, COORD_Y_SUP_IZQ_BOT_ENVIAR, ANCHO_BOT_ENVIAR, ALTO_BOT_ENVIAR);
+        contentPane.add(enviar);
+        texto.setBounds(COORD_X_SUP_IZQ_TEXTFIELD, COORD_Y_SUP_IZQ_TEXTFIELD, ANCHO_TEXTFIELD, ALTO_TEXTFIELD);
+        contentPane.add(texto);
+        texto.setColumns(COLUMNAS_TEXTFIELD);
+        background.setBounds(COORD_X_SUP_IZQ_LABEL_FONDO, COORD_Y_SUP_IZQ_LABEL_FONDO, ANCHO_LABEL_FONDO,
+            ALTO_LABEL_FONDO);
+        contentPane.add(background);
 
 		// Si pulso la flecha de arriba o abajo, me carga entradas anteriores
 		// que realice.
 		texto.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_UP && !StackTextoPrevio.empty()) {
-					StackTextoPosterior.push(texto.getText());
-					texto.setText(StackTextoPrevio.pop());
-				} else if (e.getKeyCode() == KeyEvent.VK_DOWN && !StackTextoPosterior.empty()) {
-					StackTextoPrevio.push(texto.getText());
-					texto.setText(StackTextoPosterior.pop());
+				if (e.getKeyCode() == KeyEvent.VK_UP && !stackTextoPrevio.empty()) {
+					stackTextoPosterior.push(texto.getText());
+					texto.setText(stackTextoPrevio.pop());
+				} else if (e.getKeyCode() == KeyEvent.VK_DOWN && !stackTextoPosterior.empty()) {
+					stackTextoPrevio.push(texto.getText());
+					texto.setText(stackTextoPosterior.pop());
 				}
 			}
 		});
 		try {
 			sonido = AudioSystem.getClip();
 		} catch (LineUnavailableException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
