@@ -94,12 +94,12 @@ public class EstadoBatalla extends Estado {
      */
     public EstadoBatalla(final Juego juego, final PaqueteBatalla paqueteBatalla) {
         super(juego);
+        
         mundo = new Mundo(juego, "recursos/mundoBatalla.txt", "recursos/mundoBatallaCapaDos.txt");
         miTurno = paqueteBatalla.isMiTurno();
 
         paquetePersonaje = juego.getPersonajesConectados().get(paqueteBatalla.getId());
         paqueteEnemigo = juego.getPersonajesConectados().get(paqueteBatalla.getIdEnemigo());
-
         crearPersonajes();
 
         menuBatalla = new MenuBatalla(miTurno, personaje);

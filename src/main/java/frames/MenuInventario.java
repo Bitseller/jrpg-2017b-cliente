@@ -66,7 +66,6 @@ public class MenuInventario extends JFrame {
             getContentPane().add(cancelar, BorderLayout.AFTER_LAST_LINE);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Falló al iniciar el inventario");
-
         }
         this.setSize(FRAME_SIZE, FRAME_SIZE);
         this.pack();

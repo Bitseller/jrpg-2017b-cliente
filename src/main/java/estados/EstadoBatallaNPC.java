@@ -277,7 +277,6 @@ public class EstadoBatallaNPC extends Estado {
         enemigo = new NonPlayableCharacter(paqueteEnemigo.getNombre(), paqueteEnemigo.getNivel(), paqueteEnemigo
             .getNivel());
     }
-
     /**
      * Finalizar batalla.
      */
@@ -290,14 +289,10 @@ public class EstadoBatallaNPC extends Estado {
             paquetePersonaje.setDestreza(personaje.getDestreza());
             paquetePersonaje.setFuerza((int)(personaje.getFuerza() / paquetePersonaje.getMultiplicadorCheat()));
             paquetePersonaje.setInteligencia(personaje.getInteligencia());
-
             paquetePersonaje.setPuntosSkill(personaje.getPuntosSkill());
-            //paquetePersonaje.removerBonus();
-
             paquetePersonaje.setComando(Comando.ACTUALIZARPERSONAJE);
             getJuego().getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
-            
-            
+                        
             paqueteFinalizarBatalla.setComando(Comando.FINALIZARBATALLANPC);
             getJuego().getCliente().getSalida().writeObject(gson.toJson(paqueteFinalizarBatalla));
 
@@ -305,7 +300,6 @@ public class EstadoBatallaNPC extends Estado {
             JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor :C");
         }
     }
-
     /**
      * Gets the paquete personaje.
      *
