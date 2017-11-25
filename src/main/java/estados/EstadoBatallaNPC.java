@@ -192,9 +192,9 @@ public class EstadoBatallaNPC extends Estado {
                             getJuego().getEstadoJuego().setHaySolicitud(true, getJuego().getPersonaje(),
                                 MenuInfoPersonaje.MENU_SUBIR_NIVEL);
                         }
-
+                        
                         finalizarBatalla();
-
+                        paquetePersonaje.ponerBonus();
                         getJuego().getPersonaje().setEstado(Estado.getEstadoJuego());
                         Estado.setEstado(getJuego().getEstadoJuego());
                     } else {
@@ -254,7 +254,7 @@ public class EstadoBatallaNPC extends Estado {
         String nombre = paquetePersonaje.getNombre();
         int salud = paquetePersonaje.getSaludTope();
         int energia = paquetePersonaje.getEnergiaTope();
-        int fuerza = paquetePersonaje.getFuerza();
+        int fuerza = (int) (paquetePersonaje.getFuerza() * paquetePersonaje.getMultiplicadorCheat());
         int destreza = paquetePersonaje.getDestreza();
         int inteligencia = paquetePersonaje.getInteligencia();
         int experiencia = paquetePersonaje.getExperiencia();
@@ -283,21 +283,23 @@ public class EstadoBatallaNPC extends Estado {
      */
     private void finalizarBatalla() {
         try {
-            paqueteFinalizarBatalla.setComando(Comando.FINALIZARBATALLANPC);
-            getJuego().getCliente().getSalida().writeObject(gson.toJson(paqueteFinalizarBatalla));
-
-            paquetePersonaje.setSaludTope(personaje.getSaludTope());
+        	paquetePersonaje.setSaludTope(personaje.getSaludTope());
             paquetePersonaje.setEnergiaTope(personaje.getEnergiaTope());
             paquetePersonaje.setNivel(personaje.getNivel());
             paquetePersonaje.setExperiencia(personaje.getExperiencia());
             paquetePersonaje.setDestreza(personaje.getDestreza());
-            paquetePersonaje.setFuerza(personaje.getFuerza());
+            paquetePersonaje.setFuerza((int)(personaje.getFuerza() / paquetePersonaje.getMultiplicadorCheat()));
             paquetePersonaje.setInteligencia(personaje.getInteligencia());
 
             paquetePersonaje.setPuntosSkill(personaje.getPuntosSkill());
+            //paquetePersonaje.removerBonus();
 
             paquetePersonaje.setComando(Comando.ACTUALIZARPERSONAJE);
             getJuego().getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
+            
+            
+            paqueteFinalizarBatalla.setComando(Comando.FINALIZARBATALLANPC);
+            getJuego().getCliente().getSalida().writeObject(gson.toJson(paqueteFinalizarBatalla));
 
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor :C");

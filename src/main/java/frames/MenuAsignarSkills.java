@@ -138,7 +138,7 @@ public class MenuAsignarSkills extends JFrame {
         final JLabel labelFuerza = new JLabel("");
         labelFuerza.setForeground(Color.WHITE);
         labelFuerza.setHorizontalAlignment(SwingConstants.CENTER);
-        labelFuerza.setText(String.valueOf(puntosFuerzaInicial * cliente.getPaquetePersonaje().getMultiplicadorCheat()));
+        labelFuerza.setText(String.valueOf((int) (puntosFuerzaInicial * cliente.getPaquetePersonaje().getMultiplicadorCheat())));
 
         final JLabel labelDestreza = new JLabel("");
         labelDestreza.setForeground(Color.WHITE);
@@ -189,6 +189,7 @@ public class MenuAsignarSkills extends JFrame {
                 cliente.getPaquetePersonaje().setComando(Comando.ACTUALIZARPERSONAJE);
                 try {
                     cliente.getSalida().writeObject(gson.toJson(cliente.getPaquetePersonaje()));
+                    cliente.getPaquetePersonaje().ponerBonus(); 
                 } catch (IOException e1) {
                     JOptionPane.showMessageDialog(null, "Error al actualizar stats");
 

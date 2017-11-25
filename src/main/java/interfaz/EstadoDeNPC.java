@@ -207,9 +207,6 @@ public final class EstadoDeNPC {
         g.drawString(String.valueOf(npc.getSalud()) + " / " + String.valueOf(npc.getSaludTope()),
         		x + DESPL_X_SALUD_VAL, y + DESPL_Y_SALUD_VAL);
 
-        g.setFont(new Font("Tahoma", Font.PLAIN, TAM_FONT_EXP));
-        g.drawImage(Recursos.getBarraExperiencia(), x + DESPL_X_BAR_EXP, y + DESPL_Y_BAR_EXP, drawBarra,
-        		ALTOEXPERIENCIA, null);
         /*g.drawString(String.valueOf(personaje.getExperiencia()) + " / "
         + String.valueOf(Personaje.getTablaDeNiveles()[personaje.getNivel() + 1]), x + 132, y + 70); */
         g.setFont(new Font("Tahoma", Font.PLAIN, TAM_FONT_NIVEL));
