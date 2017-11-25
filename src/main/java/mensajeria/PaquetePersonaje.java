@@ -17,14 +17,14 @@ import estados.Estado;
 public class PaquetePersonaje extends Paquete implements Serializable, Cloneable {
 
 	/**
-	 * Codigo de modo dios
+	* Codigo de modo dios
 	 */
-	public static final int CODE_IDDQD = 1; 
+	public static final int CODE_IDDQD = 1;
 	
 	/**
 	 * Codigo de modo espectro
 	 */
-	public static final int CODE_NOCLIP = 2; 
+	public static final int CODE_NOCLIP = 2;
 	
 	/**
 	 * Codigo de modo Hulk
@@ -35,22 +35,26 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	 * Codigo de modo KickAss
 	 */
 	public static final int CODE_TINYDADDY = 4;
+	
 	/**
 	 * Codigo de modo fantasma
 	 */
-	public static final int CODE_WAWIUTB = 5; 
+	public static final int CODE_WAWIUTB = 5;
+	
 	/**
 	 * Codigo de cancion tomfoolery
 	 */
-	public static final int CODE_TOMFOOLERY = 6; 
+	public static final int CODE_TOMFOOLERY = 6;
+	
 	/**
 	 * Codigo de cancion starfox
 	 */
-	public static final int CODE_STARFOX = 7; 
+	public static final int CODE_STARFOX = 7;
+
 	/**
 	 * Codigo de cancion vaporwave
 	 */
-	public static final int CODE_VAPORWAVE = 8; 
+	public static final int CODE_VAPORWAVE = 8;
 	
     private int id;
     private String idMapa;
@@ -76,15 +80,19 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
     
     //Agrego un estado invisible
     private boolean invisible = false;
-    
-    public void getCheatsPersonaje() {
-    	
-    }
 
+    /**
+     * Informa si el personaje es invisible o no
+     * @return invisible
+     */
     public boolean isInvisible() {
 		return invisible;
 	}
 
+    /**
+     * Setea el estado de invisibilidad
+     * @param invisible
+     */
 	public void setInvisible(boolean invisible) {
 		this.invisible = invisible;
 	}
@@ -129,7 +137,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
      * 
      * @return el mapa de cheats
      */
-    public HashMap<String, Integer> getCheats(){
+    public HashMap<String, Integer> getCheats() {
     	return this.cheatMap;
     }
     
@@ -138,8 +146,8 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
      * 
      * @return el array de estado de los cheats
      */
-    public Boolean getEstadoCheats(int index){
-    	return this.estadoCheats.get(index-1);
+    public Boolean getEstadoCheats(int index) {
+    	return this.estadoCheats.get(index - 1);
     }
     
     /**
@@ -148,11 +156,15 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
      * @param index
      * @param valor
      */
-    public void setEstadoCheats(int index, boolean valor){
+    public void setEstadoCheats(final int index, boolean valor) {
     	this.estadoCheats.remove(index-1);
-    	this.estadoCheats.add(index-1, valor);
+    	this.estadoCheats.add(index - 1, valor);
     }
     
+    /**
+     * 
+     * @return cheatAction
+     */
     public HashMap<Integer, Runnable> getCheatAction() {
     	return this.cheatAction;
     }
@@ -504,16 +516,14 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
      *            the foto equipado
      */
     public final void anadirItem(final int idItem, final String nombre, final int wearLocation, final int bonusSalud,
-        final int bonusEnergia,
-        final int bonusAtaque, final int bonusDefensa, final int bonusMagia, final String foto,
-        final String fotoEquipado) {
+        final int bonusEnergia, final int bonusAtaque, final int bonusDefensa,
+        final int bonusMagia, final String foto, final String fotoEquipado) {
         try {
             items.add(new Item(idItem, nombre, wearLocation, bonusSalud, bonusEnergia, bonusAtaque, bonusDefensa,
                 bonusMagia, foto, fotoEquipado));
             useBonus(bonusSalud, bonusEnergia, bonusAtaque, bonusDefensa, bonusMagia);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Falló al añadir item");
-
         }
     }
 
@@ -525,7 +535,6 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
      *            the skill
      * @return Retorna el skill base dependiendo de los items.
      */
-
     public final int getStatSkill(final String skill) {
         int skillBase = 0;
 
@@ -733,8 +742,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 		return multiplicadorCheat;
 	}
 
-	public void setMultiplicadorCheat(double d) {
+	public void setMultiplicadorCheat(final double d) {
 		this.multiplicadorCheat = d;
 	}
-
 }

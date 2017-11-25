@@ -140,7 +140,10 @@ public class EstadoBatalla extends Estado {
 
         seRealizoAccion = false;
         haySpellSeleccionada = false;
-
+        
+        boolean enemigoDios = paqueteEnemigo.getEstadoCheats(paqueteEnemigo.CODE_IDDQD);
+        boolean personajeDios = paquetePersonaje.getEstadoCheats(paquetePersonaje.CODE_IDDQD);
+     
         if (miTurno) {
 
             if (getJuego().getHandlerMouse().getNuevoClick()) {
@@ -212,35 +215,20 @@ public class EstadoBatalla extends Estado {
                         Estado.setEstado(getJuego().getEstadoJuego());
 
                     } else {
-                    	if(!paquetePersonaje.getEstadoCheats(PaquetePersonaje.CODE_IDDQD) && !paqueteEnemigo.getEstadoCheats(paqueteEnemigo.CODE_IDDQD)
-                    			|| paquetePersonaje.getEstadoCheats(PaquetePersonaje.CODE_IDDQD) && paqueteEnemigo.getEstadoCheats(paqueteEnemigo.CODE_IDDQD)) {
-	                        paqueteAtacar = new PaqueteAtacar(paquetePersonaje.getId(), paqueteEnemigo.getId(),
-	                            personaje.getSalud(), personaje.getEnergia(), enemigo.getSalud(), enemigo.getEnergia(),
-	                            personaje.getDefensa(), enemigo.getDefensa(),
-	                            personaje.getCasta().getProbabilidadEvitarAtaque(),
-	                            enemigo.getCasta().getProbabilidadEvitarAtaque());
-	                        	enviarAtaque(paqueteAtacar);
-	                        	
+                    	if(!personajeDios && enemigoDios) {
+                            enemigo.restablecerSalud();
                     	}
-                    	if(paquetePersonaje.getEstadoCheats(PaquetePersonaje.CODE_IDDQD) && !paqueteEnemigo.getEstadoCheats(paqueteEnemigo.CODE_IDDQD)) {
-	                        paqueteAtacar = new PaqueteAtacar(paquetePersonaje.getId(), paqueteEnemigo.getId(),
-	                            personaje.getSalud(), personaje.getEnergia(), enemigo.getSalud(), enemigo.getEnergia(),
-	                            personaje.getDefensa(), enemigo.getDefensa(),
-	                            1,
-	                            enemigo.getCasta().getProbabilidadEvitarAtaque());
-	                        	enviarAtaque(paqueteAtacar);
-	                        	
-                    	}
-                    	if(!paquetePersonaje.getEstadoCheats(PaquetePersonaje.CODE_IDDQD) && paqueteEnemigo.getEstadoCheats(paqueteEnemigo.CODE_IDDQD)) {
-	                        paqueteAtacar = new PaqueteAtacar(paquetePersonaje.getId(), paqueteEnemigo.getId(),
-	                            personaje.getSalud(), personaje.getEnergia(), enemigo.getSalud(), enemigo.getEnergia(),
-	                            personaje.getDefensa(), enemigo.getDefensa(),
-	                            personaje.getCasta().getProbabilidadEvitarAtaque(),
-	                            1);
-	                        	enviarAtaque(paqueteAtacar);
-	                        	
-                    	}
-                        	
+                    	
+                          if(personajeDios && !enemigoDios) {
+                        	  personaje.restablecerEnergia();
+                          }
+                          
+                          paqueteAtacar = new PaqueteAtacar(paquetePersonaje.getId(), paqueteEnemigo.getId(),
+                        		  personaje.getSalud(), personaje.getEnergia(), enemigo.getSalud(),
+                        		  enemigo.getEnergia(), personaje.getDefensa(), enemigo.getDefensa(),
+                        		  personaje.getCasta().getProbabilidadEvitarAtaque(),
+                        		  enemigo.getCasta().getProbabilidadEvitarAtaque());
+                        enviarAtaque(paqueteAtacar);
                         
                         miTurno = false;
                         menuBatalla.setHabilitado(false);
@@ -249,11 +237,9 @@ public class EstadoBatalla extends Estado {
                     JOptionPane.showMessageDialog(null,
                         "No posees la energía suficiente para realizar esta habilidad.");
                 }
-
                 getJuego().getHandlerMouse().setNuevoClick(false);
             }
         }
-
     }
 
     @Override
@@ -274,7 +260,6 @@ public class EstadoBatalla extends Estado {
 
 		EstadoDePersonaje.dibujarEstadoDePersonaje(g, X_ESTADO_PJ, Y_ESTADO_PJ, personaje, miniaturaPersonaje);
 		EstadoDePersonaje.dibujarEstadoDePersonaje(g, X_ESTADO_ENEMIGO, Y_ESTADO_ENEMIGO, enemigo, miniaturaEnemigo);
-
     }
 
     /**

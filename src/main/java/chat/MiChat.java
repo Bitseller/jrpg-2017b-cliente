@@ -50,14 +50,18 @@ public class MiChat extends JFrame {
 	private final Gson gson = new Gson();
 	private final JLabel background = new JLabel(new ImageIcon("recursos//background.jpg"));
 	private DefaultCaret caret;
-	Clip sonido = null;
-	String cancion = "";
-
+	private File tom;
+	private File vap;
+	private File star;
+	private File doom;
+	private Clip sonido;
+	private String cancion = "";
+	
 	/**
 	 * Valor por el cual se multiplica la fuerza en cheat Bigdaddy y Tinydaddy
 	 */
 	private static final int DOBLEFUERZA = 2;
-
+	
     /**
      * Posicion X desde donde se crea el frame
      */
@@ -182,7 +186,7 @@ public class MiChat extends JFrame {
 	 * Alto del label para el fondo del chat
 	 */
 	private static final int ALTO_LABEL_FONDO = 283;
-
+	
 	/**
 	 * Create the frame.
 	 *
@@ -193,7 +197,7 @@ public class MiChat extends JFrame {
 		addKeyListener(new KeyAdapter() {
 			// Si se presiona la tecla escape
 			@Override
-			public void keyPressed(KeyEvent e) {
+			public void keyPressed(final KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 					if (getTitle() == "Sala") {
 						if (Pantalla.getVentContac() != null) {
@@ -213,13 +217,15 @@ public class MiChat extends JFrame {
 		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(
-				new EmptyBorder(BORDE_ARRIBA_JFRAME, BORDE_IZQ_JFRAME, BORDE_ABAJO_JFRAME, BORDE_DER_JFRAME));
+				new EmptyBorder(BORDE_ARRIBA_JFRAME, BORDE_IZQ_JFRAME,
+						BORDE_ABAJO_JFRAME, BORDE_DER_JFRAME));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(COORD_X_SUP_IZQ_SCROLLPANE, COORD_Y_SUP_IZQ_SCROLLPANE, ANCHO_SCROLLPANE, ALTO_SCROLLPANE);
+		scrollPane.setBounds(COORD_X_SUP_IZQ_SCROLLPANE, COORD_Y_SUP_IZQ_SCROLLPANE,
+				ANCHO_SCROLLPANE, ALTO_SCROLLPANE);
 		contentPane.add(scrollPane);
 
 		chat = new JTextArea();
@@ -228,6 +234,14 @@ public class MiChat extends JFrame {
 		caret = (DefaultCaret) chat.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
+		//Se inicializan los recursos de musica
+		sonido = null;
+		tom = new File("recursos\\tomfoolery.wav");
+		vap = new File("recursos\\vaporwave.wav");
+		star = new File("recursos\\starfox.wav");
+		doom = new File("recursos\\doom.wav");
+		
+		//Se inicializa las pilas de texto
 		stackTextoPrevio = new Stack<String>();
 		stackTextoPrevio.push("");
 		stackTextoPosterior = new Stack<String>();
@@ -254,7 +268,7 @@ public class MiChat extends JFrame {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (!texto.getText().equals("")) {
-                		if(texto.getText().charAt(0) == '/'){
+                		if(texto.getText().charAt(0) == '/') {
                 		ponerCheat(texto.getText());
                 	}
                 	else {
@@ -345,18 +359,14 @@ public class MiChat extends JFrame {
 
 	}
 
+	/**
+	 * Carga el cheat
+	 * @param cheat
+	 */
 	public void ponerCheat(String cheat) {
 		PaquetePersonaje pjCheater = juego.getPersonaje();
 		int cheatCode;
-		File tom = null;
-		File vap = null;
-		File star = null;
-		File doom = null;
-		tom = new File("recursos\\tomfoolery.wav");
-		vap = new File("recursos\\vaporwave.wav");
-		star = new File("recursos\\starfox.wav");
-		doom = new File("recursos\\doom.wav");
-
+		
 		if (pjCheater.getCheats().containsKey(cheat)) {
 			cheatCode = pjCheater.getCheats().get(cheat);
 

@@ -12,8 +12,6 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 
-import org.omg.CORBA.CODESET_INCOMPATIBLE;
-
 import com.google.gson.Gson;
 
 import chat.VentanaContactos;
@@ -148,9 +146,7 @@ public class Entidad {
     /**
      * Constructor de la clase Entidad.
      *
-     * @param juego
-     *            juego con el que se instancia Entidad
-     * @param client
+     * @param client2
      * 			  cliente con el que se instancia Entidad
      * @param mundo
      *            mundo con el que se instancia Entidad
@@ -169,8 +165,8 @@ public class Entidad {
      * @param velAnimacion
      *            velocidad de animacion del personaje
      */
-    //public Entidad(final Juego juego, final Mundo mundo, final int ancho, final int alto, final String nombre,
-    public Entidad(final Cliente client2, final Mundo mundo, final int ancho, final int alto, final String nombre,
+    public Entidad(final Cliente client2, final Mundo mundo,
+    		final int ancho, final int alto, final String nombre,
         final float spawnX, final float spawnY, final LinkedList<BufferedImage[]> animaciones,
         final int velAnimacion) {
     	this.client = client2;
